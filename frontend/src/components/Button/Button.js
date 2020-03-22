@@ -1,6 +1,23 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import './Button.scss'
 
-export default function Button({ type = 'fill', message }) {
-  return <button className={`button-${type}`}>{message}</button>
+import { ButtonTypes } from './ButtonTypes'
+
+export default function Button({ type, message }) {
+  return (
+    <button type="submit" className={`button-${type}`}>
+      {message}
+    </button>
+  )
+}
+
+Button.propTypes = {
+  type: PropTypes.string,
+  message: PropTypes.string,
+}
+
+Button.defaultProps = {
+  type: ButtonTypes.FILL,
+  message: '',
 }

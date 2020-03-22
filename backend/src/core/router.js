@@ -1,5 +1,6 @@
 import { Router } from 'express'
 import { healthCheck, signin, signup, donate } from '../rules'
+import { authRequired, roleRequired } from '../middlewares'
 
 export const router = Router()
 
@@ -21,7 +22,7 @@ router.post('/sign-in', (req, res) =>
     }))
 
 // entregar p/ familia
-router.post('/donations/:donationId/donate', (req, res) =>
+router.post('/donations/:donationId/donate', authRequired, roleRequired('leader'), (req, res) =>
   donate(req.body, req.file)
     .then(donationData => res.status(200).json(donationData))
     .catch(err => {

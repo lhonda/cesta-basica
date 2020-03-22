@@ -6,9 +6,9 @@ import { Register } from '../pages/Register'
 export const Routes = () => (
   <HashRouter>
     <Switch>
-      <Route path="/" component={() => <div>bu</div>} />
-      <Route path="/login" component={Register} />
-      <Route path="/register" component={Register} />
+      <Route path="/" exact component={() => <div>bu</div>} />
+      <Route path="/login" exact component={Register} />
+      <Route path="/register" exact component={Register} />
     </Switch>
   </HashRouter>
 )

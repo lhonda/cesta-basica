@@ -70,11 +70,11 @@ const eventSchema = new Schema({
     required: [true, 'Timestamp is required']
   },
   receivedCpf: {
-    String,
+    type: String,
     required: [true, 'receivedCpf is required']
   },
   receivedName: {
-    String,
+    type: String,
     required: [true, 'receivedName is required']
   },
   location: pointSchema

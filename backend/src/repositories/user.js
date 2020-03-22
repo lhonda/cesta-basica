@@ -1,5 +1,5 @@
 import { model, Schema } from 'mongoose'
-import md5 from 'md5'
+import { encrypt } from '../services'
 
 const schema = new Schema({
   login: {
@@ -17,13 +17,13 @@ const schema = new Schema({
   },
   role: {
     type: String,
-    enum: ['user', 'admin'],
+    enum: ['leader', 'admin'],
     required: [true, 'role is required']
   }
 })
 
 schema.pre('save', function (next) {
-  this.password = md5(this.password)
+  this.password = encrypt(this.password)
   next()
 })
 

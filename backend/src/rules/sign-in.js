@@ -1,10 +1,9 @@
 import jwt from 'jsonwebtoken'
-import md5 from 'md5'
-import { User } from '../repositories/user'
+import { encrypt } from '../services'
+import { User } from '../repositories'
 
 export async function signin ({ login, password }) {
-  const user = await User.findOne({ login, password: md5(password) })
-  console.log(user)
+  const user = await User.findOne({ login, password: encrypt(password) })
   if (user) {
     const { _id: id, login, role, email } = user
     const token = jwt.sign({ id, login, role }, process.env.SECRET)

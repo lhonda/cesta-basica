@@ -29,3 +29,11 @@ router.post('/donations/:donationId/donate', authRequired('leader'), (req, res) 
       console.log(err)
       res.status(401).json({ message: err.message })
     }))
+
+router.post('/admin/sign-in', (req, res) =>
+  signin(req.body)
+    .then(signinData => res.status(200).json(signinData))
+    .catch(err => {
+      console.log(err)
+      res.status(401).json({ message: err.message })
+    }))

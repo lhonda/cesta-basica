@@ -1,0 +1,22 @@
+@import "../../styles/_commons";
+
+.containerLogin {
+  background-color: $commonBackgroundColor;
+  padding: 4rem 1.7rem 0 1.7rem;
+  display: flex;
+  font-family: Rubik-Regular;
+  flex-direction: column;
+
+  &--textCenter {
+    text-align: center;
+  }
+
+  &__subtitle {
+    font-family: Rubik-Light;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+  }
+}

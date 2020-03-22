@@ -5,6 +5,7 @@ import Route from './routeWrapper'
 
 import { Login } from '../pages/Login'
 import { Register } from '../pages/Register'
+import { Terms } from '../pages/Terms'
 
 export const Routes = () => (
   <BrowserRouter>
@@ -12,6 +13,8 @@ export const Routes = () => (
       <Route path="/" exact component={() => <div>root</div>} />
       <Route path="/login" exact component={Login} />
       <Route path="/register" exact component={Register} isPrivate />
+      <Route path="/register" exact component={Register} />
+      <Route path="/terms" exact component={Terms} />
     </Switch>
   </BrowserRouter>
 )

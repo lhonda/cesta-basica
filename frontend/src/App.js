@@ -1,5 +1,5 @@
 import React, { useReducer } from 'react'
-import * as Store from './store/store'
+import * as Store from './store'
 
 import { Routes } from './routes'
 

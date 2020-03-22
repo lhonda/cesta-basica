@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Route, Redirect } from 'react-router-dom'
-import { connect } from '../store/store'
+import { connect } from '../store'
 
 function RouteWrapper({ component: Component, isPrivate, store, ...rest }) {
   const { auth } = store

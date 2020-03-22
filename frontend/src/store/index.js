@@ -1,20 +1,23 @@
 import React, { useContext } from 'react'
+import { types } from './types'
+
+export { types }
 
 export const initialState = {
   user: {},
   auth: {
     token: null,
-  },
+  }
 }
 
 export const Context = React.createContext()
 
 const actionMap = {
-  SET_USER: (state, payload) => ({
+  [types.SET_USER]: (state, payload) => ({
     ...state,
     user: payload,
   }),
-  SET_TOKEN: (state, { token }) => ({
+  [types.SET_TOKEN]: (state, { token }) => ({
     ...state,
     auth: {
       ...state.auth,

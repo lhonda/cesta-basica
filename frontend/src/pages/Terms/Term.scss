@@ -1,22 +1,22 @@
-.container {
+.container-terms {
   display: flex;
   flex-direction: column;
   height: 100%;
   overflow: hidden;
 }
-.header {
+.header-terms {
   height: 20%;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   padding: 20px 44px 10px 38px;
 }
-.main {
+.main-terms {
   overflow: scroll;
   height: 80%;
   padding: 20px 44px 15vh 38px;
 }
-.footer{
+.footer-terms {
   height: 8%;
   position: fixed;
   bottom: 0;

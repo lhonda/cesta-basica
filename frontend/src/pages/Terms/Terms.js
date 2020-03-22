@@ -13,11 +13,11 @@ import { handleCheckedDeclararion } from '../../services/handles'
 
 function TermsPage({ store, dispatch }) {
   return (
-    <div className="container">
-      <div className="header">
+    <div className="container-terms">
+      <div className="header-terms">
         <Title message={titleTerms} />
       </div>
-      <div className="main">
+      <div className="main-terms">
         <SubTitle message="1.1 Introducao" />
         <Terms content="introductionCompromise" />
         <SubTitle message="1.2 Target" />
@@ -34,7 +34,7 @@ function TermsPage({ store, dispatch }) {
           message={declareTermUse}
         />
       </div>
-      <div className="footer">
+      <div className="footer-terms">
         <Button type={ButtonTypes.OUTLINE} message={cancel} />
         <Button disable={!store.declaration} message={singin} />
       </div>

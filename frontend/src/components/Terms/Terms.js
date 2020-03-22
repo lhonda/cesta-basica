@@ -1,13 +1,23 @@
 import React from 'react'
-import PropPypes from 'prop-types'
+import { SubTitle } from '../SubTitle'
+import { Paragraph } from '../Paragraph'
 import './Terms.scss'
-import * as terms from '../../utils/strings'
 
-function Terms({ content }) {
-  return <p className="terms">{terms[content]}</p>
+function Terms() {
+  return (
+    <>
+      <SubTitle message="1.1 Introducao" />
+      <Paragraph content="introductionCompromise" />
+      <SubTitle message="1.2 Target" />
+      <Paragraph content="tartargetCompromiseget" />
+      <SubTitle message="2 Conclusion" />
+      <Paragraph content="conclusionCompromise" />
+      <SubTitle message="2 Conclusion" />
+      <Paragraph content="conclusionCompromise" />
+      <SubTitle message="2 Conclusion" />
+      <Paragraph content="conclusionCompromise" />
+    </>
+  )
 }
 
-Terms.propTypes = {
-  content: PropPypes.string.isRequired,
-}
 export default Terms

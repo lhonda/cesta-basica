@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from '../../store'
 import { Title } from '../../components/Title'
-import { SubTitle } from '../../components/SubTitle'
 import { Terms } from '../../components/Terms'
 import { Button, ButtonTypes } from '../../components/Button'
 import { Checkbox } from '../../components/Checkbox'
@@ -18,16 +17,7 @@ function TermsPage({ store, dispatch }) {
         <Title message={titleTerms} />
       </div>
       <div className="main-terms">
-        <SubTitle message="1.1 Introducao" />
-        <Terms content="introductionCompromise" />
-        <SubTitle message="1.2 Target" />
-        <Terms content="tartargetCompromiseget" />
-        <SubTitle message="2 Conclusion" />
-        <Terms content="conclusionCompromise" />
-        <SubTitle message="2 Conclusion" />
-        <Terms content="conclusionCompromise" />
-        <SubTitle message="2 Conclusion" />
-        <Terms content="conclusionCompromise" />
+        <Terms />
         <Checkbox
           handleChecked={() => handleCheckedDeclararion(store, dispatch)}
           checked={store.declaration}

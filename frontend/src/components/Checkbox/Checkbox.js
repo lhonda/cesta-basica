@@ -9,10 +9,17 @@ function Checkbox({ message, handleChecked, checked }) {
   }
   return (
     <>
-      <label htmlFor="checkbox" className="container-checkbox">
+      <label htmlFor="checkbox-terms" className="container-checkbox">
         {message}
-        <input name="checkbox" checked={checked} className="checkbox" id="checkbox-terms" type="checkbox" />
-        <span onClick={handleCheckbox} className="checkmark" />
+        <input
+          name="checkbox"
+          onChange={handleCheckbox}
+          checked={checked}
+          className="checkbox"
+          id="checkbox-terms"
+          type="checkbox"
+        />
+        <span className="checkmark" />
       </label>
     </>
   )

@@ -35,6 +35,9 @@ const donationSchema = new Schema({
     enum: ['Esperando recebimento', 'Entregue para líder', 'Completo', 'Devolvido', 'Extraviado'],
     required: [true, 'status is required'],
     default: 'Esperando recebimento'
+  },
+  s3_key: {
+    type: String
   }
 })
 

@@ -13,22 +13,6 @@ export async function donate ({ donationId, leaderId, geolocation, quantity, rec
     await donation.save()
 
     var utcNow = new Date()
-    var event = new DonationEvent({
-      donationId: donationId,
-      quantity: quantity,
-      leaderId: leaderId,
-      status: donation.status,
-      donor: donation.donor,
-      receivedCpf: receivedCpf,
-      receivedName: receivedName,
-      timeStamp: utcNow.toISOString(),
-      location: geolocation
-    })
-
-    console.log(event)
-
-    await event.save()
-
     var key = `entrega-${donationId}-${utcNow.toISOString()}.jpg`
 
     const params = {
@@ -44,6 +28,23 @@ export async function donate ({ donationId, leaderId, geolocation, quantity, rec
       }
       console.log(`File uploaded successfully.Key:${key}`)
     })
+
+    var event = new DonationEvent({
+      donationId: donationId,
+      quantity: quantity,
+      leaderId: leaderId,
+      status: donation.status,
+      donor: donation.donor,
+      receivedCpf: receivedCpf,
+      receivedName: receivedName,
+      timeStamp: utcNow.toISOString(),
+      location: geolocation,
+      s3_key: key
+    })
+
+    console.log(event)
+
+    await event.save()
 
     return {
       donation: donation

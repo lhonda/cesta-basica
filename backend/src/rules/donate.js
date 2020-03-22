@@ -39,7 +39,7 @@ export async function donate ({ donationId, leaderId, geolocation, quantity, rec
       receivedName: receivedName,
       timeStamp: utcNow.toISOString(),
       location: geolocation,
-      s3_key: key
+      s3Key: key
     })
 
     console.log(event)

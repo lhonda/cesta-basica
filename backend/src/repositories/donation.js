@@ -36,7 +36,7 @@ const donationSchema = new Schema({
     required: [true, 'status is required'],
     default: 'Esperando recebimento'
   },
-  s3_key: {
+  s3Key: {
     type: String
   }
 })

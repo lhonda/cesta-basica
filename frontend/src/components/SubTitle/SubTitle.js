@@ -1,6 +1,6 @@
 import React from 'react'
-import './SubTitle.scss';
+import './SubTitle.scss'
 
-export default function SubTitle( {message} ) {
-  return (<h3 className="subtitle" >{message}</h3>)
+export default function SubTitle({ message }) {
+  return <h3 className="subtitle">{message}</h3>
 }

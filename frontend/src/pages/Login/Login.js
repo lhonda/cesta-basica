@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { connect } from '../../store/store'
+import PropTypes from 'prop-types'
+import { connect, types } from '../../store'
 import './Login.scss'
 
 import { titleLoginScreen, subTitleLoginScreen, placeholderCPF, typeYourPassword } from '../../utils/strings'
@@ -7,7 +8,7 @@ import { titleLoginScreen, subTitleLoginScreen, placeholderCPF, typeYourPassword
 import { Input, inputTypes } from '../../components/Input'
 import { Button } from '../../components/Button'
 
-function Login({store, dispatch}) {
+function Login({ store, dispatch }) {
   const [CPF, setCPF] = useState('')
   const [password, setPassword] = useState('')
 
@@ -15,11 +16,11 @@ function Login({store, dispatch}) {
     e.preventDefault()
 
     dispatch({
-      type: 'SET_USER',
+      type: types.SET_USER,
       payload: {
-        name: 'Iran',
-        lastname: 'Glaucio',
-      }
+        login: CPF,
+        password,
+      },
     })
   }
 
@@ -27,7 +28,7 @@ function Login({store, dispatch}) {
     <div className="containerLogin">
       <h2 className="containerLogin--textCenter">{titleLoginScreen}</h2>
       <h5 className="containerLogin--textCenter containerLogin__subtitle">{subTitleLoginScreen}</h5>
-
+      {JSON.stringify(store)}
       <form onSubmit={handleSubmit} className="containerLogin__form">
         <div style={{ marginTop: '1.8rem' }} />
         <Input
@@ -49,10 +50,17 @@ function Login({store, dispatch}) {
           handleOnChange={setPassword}
         />
 
-        <Button message="Enviar" />
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <Button message="Enviar" />
+        </div>
       </form>
     </div>
   )
+}
+
+Login.propTypes = {
+  store: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
 }
 
 export default connect(Login)

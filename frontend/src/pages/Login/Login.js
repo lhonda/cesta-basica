@@ -7,7 +7,7 @@ import { titleLoginScreen, subTitleLoginScreen, placeholderCPF, typeYourPassword
 import { Input, inputTypes } from '../../components/Input'
 import { Button } from '../../components/Button'
 
-function Login({ store, dispatch }) {
+function Login({store, dispatch}) {
   const [CPF, setCPF] = useState('')
   const [password, setPassword] = useState('')
 
@@ -49,7 +49,7 @@ function Login({ store, dispatch }) {
           handleOnChange={setPassword}
         />
 
-        <Button>Entrar</Button>
+        <Button message="Enviar" />
       </form>
     </div>
   )

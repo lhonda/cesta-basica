@@ -7,7 +7,7 @@ export const initialState = {
   user: {},
   auth: {
     token: null,
-  }
+  },
 }
 
 export const Context = React.createContext()

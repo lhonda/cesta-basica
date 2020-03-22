@@ -50,7 +50,9 @@ function Login({ store, dispatch }) {
           handleOnChange={setPassword}
         />
 
-        <Button message="Enviar" />
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <Button message="Enviar" />
+        </div>
       </form>
     </div>
   )

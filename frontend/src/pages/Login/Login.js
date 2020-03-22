@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import PropTypes from 'prop-types';
 import { connect } from '../../store/store'
 import './Login.scss'
 
@@ -19,7 +20,7 @@ function Login({ store, dispatch }) {
       payload: {
         name: 'Iran',
         lastname: 'Glaucio',
-      }
+      },
     })
   }
 
@@ -54,6 +55,11 @@ function Login({ store, dispatch }) {
       </form>
     </div>
   )
+}
+
+Login.propTypes = {
+  store: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
 }
 
 export default connect(Login)

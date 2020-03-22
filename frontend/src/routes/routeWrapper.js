@@ -1,22 +1,24 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Route, Redirect } from 'react-router-dom'
+import { connect } from '../store/store'
 
-function RouteWrapper({ component: Component, isPrivate, ...rest }) {
-  // const signed = true
-  console.log(store)
-  // if (!signed && isPrivate) {
-  //   return <Redirect to="/login" />
-  // }
+function RouteWrapper({ component: Component, isPrivate, store, ...rest }) {
+  const { auth } = store
 
-  // if (signed && !isPrivate) {
-  //   return <Redirect to="/logged" />
-  // }
+  if (!auth.token && isPrivate) {
+    return <Redirect to="/" />
+  }
+
+  if (auth.token && !isPrivate) {
+    return <Redirect to="/logged" />
+  }
 
   return <Route {...rest} component={Component} />
 }
 
 RouteWrapper.propTypes = {
+  store: PropTypes.object.isRequired,
   isPrivate: PropTypes.bool,
   component: PropTypes.oneOfType([PropTypes.element, PropTypes.func]).isRequired,
 }
@@ -25,4 +27,4 @@ RouteWrapper.defaultProps = {
   isPrivate: false,
 }
 
-export { RouteWrapper }
+export default connect(RouteWrapper)

@@ -1,4 +1,4 @@
-import { User } from '../repositories/user'
+import { User } from '../repositories'
 
 export async function signup ({ login, password, email }) {
   const user = await User.create({

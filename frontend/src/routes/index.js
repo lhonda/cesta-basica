@@ -1,5 +1,7 @@
 import React from 'react'
-import { Switch, Route, BrowserRouter } from 'react-router-dom'
+import { Switch, BrowserRouter } from 'react-router-dom'
+
+import { RouteWrapper as Route } from './routeWrapper'
 
 import { Login } from '../pages/Login'
 import { Register } from '../pages/Register'

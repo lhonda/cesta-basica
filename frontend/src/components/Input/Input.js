@@ -64,7 +64,7 @@ Input.defaultProps = {
   inputType: inputTypes.TEXT,
   maxLength: '120',
   minLength: '2',
-  isRequired: false,
+  isRequired: true,
 }
 
 export default Input

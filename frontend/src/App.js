@@ -1,7 +1,14 @@
-import React from 'react'
+import React, { useReducer } from 'react'
+import * as Store from './store/store'
 
 import { Routes } from './routes'
 
-const App = () => <Routes />
+export default function App() {
+  const [store, dispatch] = useReducer(Store.reducer, Store.initialState)
 
-export default App
+  return (
+    <Store.Context.Provider value={{ store, dispatch }}>
+      <Routes />
+    </Store.Context.Provider>
+  )
+}

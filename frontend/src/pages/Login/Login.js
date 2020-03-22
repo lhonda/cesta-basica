@@ -1,16 +1,28 @@
 import React, { useState } from 'react'
+import { connect } from '../../store/store'
 import './Login.scss'
 
 import { titleLoginScreen, subTitleLoginScreen, placeholderCPF, typeYourPassword } from '../../utils/strings'
 
 import { Input, inputTypes } from '../../components/Input'
+import { Button } from '../../components/Button'
 
-function Login() {
+function Login({ store, dispatch }) {
   const [CPF, setCPF] = useState('')
   const [password, setPassword] = useState('')
+
   function handleSubmit(e) {
     e.preventDefault()
+
+    dispatch({
+      type: 'SET_USER',
+      payload: {
+        name: 'Iran',
+        lastname: 'Glaucio',
+      }
+    })
   }
+
   return (
     <div className="containerLogin">
       <h2 className="containerLogin--textCenter">{titleLoginScreen}</h2>
@@ -36,9 +48,11 @@ function Login() {
           value={password}
           handleOnChange={setPassword}
         />
+
+        <Button>Entrar</Button>
       </form>
     </div>
   )
 }
 
-export default Login
+export default connect(Login)

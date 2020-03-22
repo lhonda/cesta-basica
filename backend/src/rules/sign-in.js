@@ -7,7 +7,7 @@ export async function signin ({ login, password }) {
   console.log(user)
   if (user) {
     const { _id: id, login, role, email } = user
-    const token = jwt.sign({ login, role }, process.env.SECRET)
+    const token = jwt.sign({ id, login, role }, process.env.SECRET)
 
     return {
       user: { id, login, role, email },

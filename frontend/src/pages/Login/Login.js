@@ -25,6 +25,7 @@ function Login({ store, dispatch }) {
 
   return (
     <div className="containerLogin">
+      {JSON.stringify(store)}
       <h2 className="containerLogin--textCenter">{titleLoginScreen}</h2>
       <h5 className="containerLogin--textCenter containerLogin__subtitle">{subTitleLoginScreen}</h5>
 

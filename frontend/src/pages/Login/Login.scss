@@ -1,8 +1,15 @@
 @import "../../styles/_commons";
 
+.containerLogo {
+  display: flex;
+  justify-content: center;
+  background-color: #F5F5F5;
+  padding: 1.5rem 0;
+}
+
 .containerLogin {
   background-color: $commonBackgroundColor;
-  padding: 4rem 1.7rem 0 1.7rem;
+  padding: 0 1.7rem 0 1.7rem;
   display: flex;
   font-family: Rubik-Regular;
   flex-direction: column;
@@ -18,5 +25,10 @@
   &__form {
     display: flex;
     flex-direction: column;
+
+    &__button {
+      display: flex;
+      justify-content: center;
+    }
   }
 }

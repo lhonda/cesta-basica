@@ -5,14 +5,17 @@ import './SubTitle.scss'
 import { SubTitleTypes } from './SubTitleTypes'
 
 function SubTitle({ type, message }) {
-  if (type === SubTitleTypes.STRONG) return <h3 className="subtitle">{message}</h3>
-  if (type === SubTitleTypes.NORMAL) return <span className="subtitle-normal">{message}</span>
+  const component = {
+    [SubTitleTypes.STRONG]: <h3 className="subtitle">{message}</h3>,
+    [SubTitleTypes.NORMAL]: <span className="subtitle-normal">{message}</span>,
+  }
+  return component[type]
 }
 SubTitle.propTypes = {
   message: PropTypes.string.isRequired,
   type: PropTypes.string,
 }
-SubTitle.defaultProp = {
+SubTitle.defaultProps = {
   type: SubTitleTypes.STRONG,
 }
 

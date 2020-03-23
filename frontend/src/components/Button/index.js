@@ -1,4 +1,4 @@
 import Button from './Button'
-import {ButtonTypes} from './ButtonTypes'
+import { ButtonTypes } from './ButtonTypes'
 
-export { Button , ButtonTypes}
+export { Button, ButtonTypes }

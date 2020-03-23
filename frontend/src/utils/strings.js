@@ -24,3 +24,8 @@ export const descriptionChecklist = 'Sintomas do Coronavirus (COVID-19)'
 export const declareChecklist = 'Declaro que li e não estou apresentando nenhum sintoma relacionado ao COVID-19.'
 export const LegendChecklist = '*O vírus também é transmitido por pessoas assintomáticas.'
 export const linkChecklist = 'Estou com sintomas, o que fazer?'
+
+// Donation screen
+
+export const titleDonation = 'Doação'
+export const statusDonationWait = 'Esperando recebimento'

@@ -20,7 +20,7 @@ const schema = new Schema({
   }
 })
 
-schema.pre('save', next => {
+schema.pre('save', function (next) {
   this.timestamp = new Date()
   next()
 })

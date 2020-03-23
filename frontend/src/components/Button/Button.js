@@ -4,9 +4,9 @@ import './Button.scss'
 
 import { ButtonTypes } from './ButtonTypes'
 
-export default function Button({ type, message }) {
+function Button({ type, message, disable, handleClick }) {
   return (
-    <button type="submit" className={`button-${type}`}>
+    <button type="submit" disabled={disable} onClick={handleClick} className={`button-${type}`}>
       {message}
     </button>
   )
@@ -15,9 +15,14 @@ export default function Button({ type, message }) {
 Button.propTypes = {
   type: PropTypes.string,
   message: PropTypes.string,
+  disable: PropTypes.bool,
+  handleClick: PropTypes.func,
 }
 
 Button.defaultProps = {
   type: ButtonTypes.FILL,
   message: '',
+  disable: false,
+  handleClick: () => {},
 }
+export default Button

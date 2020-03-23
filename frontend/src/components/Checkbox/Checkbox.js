@@ -1,17 +1,28 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import './Checkbox.scss'
 
-export default function Checkbox({ message }) {
-  const handleCheckbox = () => {
-    document.getElementById('checkbox-terms').checked = !document.getElementById('checkbox-terms').checked
-  }
+function Checkbox({ message, handleChecked, checked }) {
   return (
     <>
-      <label htmlFor="checkbox" className="container-checkbox">
+      <label className="container-checkbox">
         {message}
-        <input name="checkbox" className="checkbox" id="checkbox-terms" type="checkbox" />
-        <span onClick={handleCheckbox} className="checkmark" />
+        <input name="checkbox" onChange={handleChecked} checked={checked} className="checkbox" type="checkbox" />
+        <span className="checkmark" />
       </label>
     </>
   )
 }
+Checkbox.propTypes = {
+  message: PropTypes.string,
+  handleChecked: PropTypes.func,
+  checked: PropTypes.bool,
+}
+
+Checkbox.defaultProps = {
+  message: '',
+  handleChecked: () => {},
+  checked: false,
+}
+
+export default Checkbox

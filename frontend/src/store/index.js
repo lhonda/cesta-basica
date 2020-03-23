@@ -8,6 +8,8 @@ export const initialState = {
   auth: {
     token: null,
   },
+  declaration: false,
+  health: false,
 }
 
 export const Context = React.createContext()
@@ -23,6 +25,14 @@ const actionMap = {
       ...state.auth,
       token,
     },
+  }),
+  [types.SET_DECLARATION]: (state, payload) => ({
+    ...state,
+    declaration: payload,
+  }),
+  [types.SET_HEALTHCHECK]: (state, payload) => ({
+    ...state,
+    health: payload,
   }),
 }
 

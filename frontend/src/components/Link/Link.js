@@ -4,9 +4,9 @@ import './Link.scss'
 
 function Link({ action, message }) {
   return (
-    <a onClick={action} className="link">
-      {message}
-    </a>
+    <div className="container-link">
+      <a onClick={action}>{message}</a>
+    </div>
   )
 }
 Link.propTypes = {

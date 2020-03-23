@@ -6,7 +6,14 @@ import { ButtonTypes } from './ButtonTypes'
 
 function Button({ type, message, disable, handleClick }) {
   return (
-    <button type="submit" disabled={disable} onClick={handleClick} className={`button-${type}`}>
+    <button
+      type="submit"
+      tabIndex={0}
+      aria-label={message}
+      disabled={disable}
+      onClick={handleClick}
+      className={`button-${type}`}
+    >
       {message}
     </button>
   )

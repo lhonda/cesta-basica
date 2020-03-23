@@ -115,6 +115,6 @@ dist
 .pnp.*
 
 # load inital data folder
-load/*
-!load/.gitkeep
+load/*.csv
+
 

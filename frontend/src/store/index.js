@@ -9,6 +9,7 @@ export const initialState = {
     token: null,
   },
   declaration: false,
+  health: false,
 }
 
 export const Context = React.createContext()
@@ -27,7 +28,11 @@ const actionMap = {
   }),
   [types.SET_DECLARATION]: (state, payload) => ({
     ...state,
-    declaration: payload
+    declaration: payload,
+  }),
+  [types.SET_HEALTHCHECK]: (state, payload) => ({
+    ...state,
+    health: payload,
   }),
 }
 

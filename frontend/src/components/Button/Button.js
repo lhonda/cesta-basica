@@ -23,6 +23,6 @@ Button.defaultProps = {
   type: ButtonTypes.FILL,
   message: '',
   disable: false,
-  handleClick: () => {}
+  handleClick: () => {},
 }
 export default Button

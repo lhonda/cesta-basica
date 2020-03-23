@@ -1,3 +1,4 @@
 import SubTitle from './SubTitle'
+import { SubTitleTypes } from './SubTitleTypes'
 
-export { SubTitle }
+export { SubTitle, SubTitleTypes }

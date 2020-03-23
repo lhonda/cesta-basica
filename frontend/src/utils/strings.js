@@ -17,3 +17,8 @@ export const declareTermUse = 'Declaro que li e estou de acordo com os Termos de
 export const cancel = 'Cancelar'
 export const singin = 'Entrar'
 export const titleTerms = 'Termos de compromisso'
+
+// Checklist screen
+export const titleChecklist = 'Checklist de Saúde'
+export const descriptionChecklist = 'Sintomas do Coronavirus (COVID-19)'
+export const declareChecklist = 'Declaro que li e não estou apresentando nenhum sintoma relacionado ao COVID-19.'

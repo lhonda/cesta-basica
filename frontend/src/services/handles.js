@@ -6,3 +6,9 @@ export const handleCheckedDeclararion = (store, dispatch) => {
     payload: !store.declaration,
   })
 }
+export const handleCheckedHealth = (store, dispatch) => {
+  dispatch({
+    type: types.SET_HEALTHCHECK,
+    payload: !store.health,
+  })
+}

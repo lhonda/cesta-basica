@@ -37,7 +37,7 @@ export async function donate ({ donationId, leaderId, geolocation, quantity, rec
       donor: donation.donor,
       receivedCpf: receivedCpf,
       receivedName: receivedName,
-      timeStamp: utcNow.toISOString(),
+      timeStamp: utcNow,
       location: geolocation,
       s3Key: key
     })

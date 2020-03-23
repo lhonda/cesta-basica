@@ -14,10 +14,12 @@ function ModalComponent({ children, title, show, onHide }) {
         <Modal.Title>{title}</Modal.Title>
       </Modal.Header>
 
-      <Modal.Body ref={wrapper}>{children}</Modal.Body>
+      <Modal.Body>
+        <section ref={wrapper}>{children}</section>
+      </Modal.Body>
 
       <Modal.Footer>
-        <Button message="Ok" onHide={onHide} />
+        <Button message="Ok" handleClick={onHide} />
       </Modal.Footer>
     </Modal>
   )

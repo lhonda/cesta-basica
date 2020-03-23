@@ -1,6 +1,5 @@
 import React, { useReducer } from 'react'
 import * as Store from './store'
-
 import { Routes } from './routes'
 
 export default function App() {

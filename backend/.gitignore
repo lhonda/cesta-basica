@@ -115,6 +115,7 @@ dist
 .pnp.*
 
 # load inital data folder
-load/*.csv
+load/*
+!load/*.example
 
 

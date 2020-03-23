@@ -66,7 +66,7 @@ const eventSchema = new Schema({
     default: 'Esperando recebimento'
   },
   timeStamp: {
-    type: String,
+    type: Date,
     required: [true, 'Timestamp is required']
   },
   receivedCpf: {

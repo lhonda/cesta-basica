@@ -3,17 +3,17 @@ import { Donation, DonationEvent } from '../repositories/donation'
 var AWS = require('aws-sdk')
 const BUCKET_NAME = 'cesta-basica-sp'
 
-export async function donate ({ donationId, leaderId, geolocation, quantity, receivedCpf, receivedName, fileContent }) {
+export async function receive ({ donationId, leaderId, geolocation, quantity, receivedCpf, receivedName, fileContent }) {
   const donation = await Donation.findOne({ donationId: donationId })
 
   console.log(donation)
 
   if (donation) {
-    donation.status = donation.status[2]
+    donation.status = donation.status[1]
     await donation.save()
 
     var utcNow = new Date()
-    var key = `/provas/entregas/entrega-${donationId}-${utcNow.toISOString()}.jpg`
+    var key = `/provas/recebimentos/entrega-${donationId}-${utcNow.toISOString()}.jpg`
 
     const params = {
       Bucket: BUCKET_NAME,
@@ -37,7 +37,7 @@ export async function donate ({ donationId, leaderId, geolocation, quantity, rec
       donor: donation.donor,
       receivedCpf: receivedCpf,
       receivedName: receivedName,
-      timeStamp: utcNow,
+      timeStamp: utcNow.toISOString(),
       location: geolocation,
       s3Key: key
     })

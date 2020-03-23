@@ -1,13 +1,26 @@
-import React, { useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import './Input.scss'
 
 import { inputTypes } from './InputTypes'
 import { maskToCpf, maskToTelephone } from './masksInput'
-import { icEye } from '../../assets/icons'
+import { icWarning, icSuccess } from '../../assets/icons'
 
-function Input({ placeholder, inputType, maxLength, minLength, value, handleOnChange, isRequired }) {
-  const [type, setType] = useState(inputType)
+function Input({
+  placeholder,
+  inputType,
+  maxLength,
+  minLength,
+  value,
+  handleOnChange,
+  isRequired,
+  withError,
+  messageError,
+}) {
+  // eslint-disable-next-line eqeqeq
+  const isValid = value.length > 0 && (value.length >= minLength || value.length == maxLength)
+  const currentStyleInput = isValid ? 'customInput--success' : ''
+
   function formatValue(inputValue) {
     switch (inputType) {
       case inputTypes.CPF:
@@ -19,31 +32,41 @@ function Input({ placeholder, inputType, maxLength, minLength, value, handleOnCh
     }
   }
 
-  function hideUnhidePassword() {
-    if (type === inputTypes.PASSWORD) {
-      return setType(inputTypes.TEXT)
-    }
-    return setType(inputTypes.PASSWORD)
-  }
-
   return (
     <>
       <input
-        className="customInput"
+        className={`customInput ${currentStyleInput} ${withError && 'customInput--error'}`}
         maxLength={maxLength}
         minLength={minLength}
         placeholder={placeholder}
         title={placeholder}
-        type={type}
+        type={inputType}
         value={formatValue(value)}
         onChange={(e) => handleOnChange(e.target.value)}
         required={isRequired}
       />
 
-      {inputType === inputTypes.PASSWORD && (
-        <span className="containerHideUnhidePassword" onClick={hideUnhidePassword}>
-          <img className="containerHideUnhidePassword__icon" src={icEye} alt="icon of eye" height={14} />
+      {withError ? (
+        <span style={{ zIndex: '1000' }}>
+          <img
+            className="customInput__icon"
+            src={icWarning}
+            alt="icon for information warning or success"
+            height={18}
+          />
+          {withError && <span className="customInput__messageError">{messageError}</span>}
         </span>
+      ) : (
+        isValid && (
+          <span>
+            <img
+              className="customInput__icon"
+              src={icSuccess}
+              alt="icon for information warning or success"
+              height={18}
+            />
+          </span>
+        )
       )}
     </>
   )
@@ -57,6 +80,8 @@ Input.propTypes = {
   value: PropTypes.string.isRequired,
   handleOnChange: PropTypes.func.isRequired,
   isRequired: PropTypes.bool,
+  withError: PropTypes.bool,
+  messageError: PropTypes.string,
 }
 
 Input.defaultProps = {
@@ -65,6 +90,8 @@ Input.defaultProps = {
   maxLength: '120',
   minLength: '2',
   isRequired: true,
+  withError: false,
+  messageError: 'Senha incorreta. Tente novamente.',
 }
 
 export default Input

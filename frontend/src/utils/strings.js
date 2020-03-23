@@ -1,9 +1,9 @@
 // login screen
-export const titleLoginScreen = 'Login'
-export const subTitleLoginScreen =
-  'solamento e rhoncus ac eleifend nec, vestibulum nec lorem. In hac habitasse platea dictumst. Quisque varius convallis mattis. Quisque tempor vestibulum nunc ut pretium'
+export const titleLoginScreen = 'Entre na plataforma'
 export const placeholderCPF = 'Digite seu CPF'
 export const typeYourPassword = 'Digite sua senha'
+export const errorMessageInvalidLogin = 'Cpf não cadastrado. Corrija o número do CPF.'
+export const errorMessageInvalidPassword = 'Senha incorreta. Tente novamente.'
 
 // Terms screen
 export const introductionCompromise =

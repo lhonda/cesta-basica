@@ -27,3 +27,16 @@ nome: cesta-basica-sp-api-gateway-restapis-allow
     }
   ]
 }
+
+## DocumentDB
+
+arn: arn:aws:rds:us-east-1:336461205468:cluster:cesta-basica-sp-documentdb
+
+cluster: cesta-basica-sp-documentdb
+
+endpoint: cesta-basica-sp-documentdb.cluster-cuvqdex8zrqv.us-east-1.docdb.amazonaws.com
+
+reader endpoint: cesta-basica-sp-documentdb.cluster-ro-cuvqdex8zrqv.us-east-1.docdb.amazonaws.com
+
+master username: cestaBasicaDocdbAdmin
+senha: configurado no env var dos devs.

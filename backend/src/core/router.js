@@ -1,16 +1,18 @@
 import { Router } from 'express'
-import { healthCheck, signin, signup, donate, receive, commitment, checklist, listDonations } from '../rules'
+import { healthCheck, signin, createUser, donate, receive, commitment, checklist, listDonations } from '../rules'
 import { authRequired } from '../middlewares'
 
 export const router = Router()
 
 router.get('/health-check', (req, res) => res.status(200).json(healthCheck()))
 
-router.post('/sign-up', (req, res) => signup(req.body)
+router.post('/users', authRequired('admin'), (req, res) => createUser(req.body)
   .then(user => res.status(201).json(user))
   .catch(err => {
     console.log(err)
-    res.status(500).json({ message: err.message })
+    err.name === 'ValidationError'
+      ? res.status(400).json({ message: err.message })
+      : res.status(500).json({ message: 'Internal' })
   }))
 
 router.post('/sign-in', (req, res) =>

@@ -11,6 +11,9 @@ export const getConnectionState = () => ({ ...status })
 export const connect = () =>
   mongoose.connect(process.env.DBURL)
 
+export const disconnect = () =>
+  mongoose.disconnect()
+
 mongoose.connection.on('connected', () => {
   status.connected = true
 })

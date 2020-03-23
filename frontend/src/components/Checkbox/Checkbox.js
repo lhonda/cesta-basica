@@ -7,7 +7,14 @@ function Checkbox({ message, handleChecked, checked }) {
     <>
       <label className="container-checkbox">
         {message}
-        <input name="checkbox" onChange={handleChecked} checked={checked} className="checkbox" type="checkbox" />
+        <input
+          name="checkbox"
+          onChange={handleChecked}
+          tabIndex={0}
+          checked={checked}
+          className="checkbox"
+          type="checkbox"
+        />
         <span className="checkmark" />
       </label>
     </>

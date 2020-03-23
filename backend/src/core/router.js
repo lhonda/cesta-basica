@@ -30,6 +30,14 @@ router.post('/donations/:donationId/donate', authRequired('leader'), (req, res) 
       res.status(401).json({ message: err.message })
     }))
 
+router.post('/admin/sign-in', (req, res) =>
+  signin(req.body)
+    .then(signinData => res.status(200).json(signinData))
+    .catch(err => {
+      console.log(err)
+      res.status(401).json({ message: err.message })
+    }))
+
 // recebimento de doacoes do lider
 router.post('/donations/:donationId/receive', authRequired('leader'), (req, res) =>
   receive(req.body, req.file)

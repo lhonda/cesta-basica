@@ -31,30 +31,29 @@ plugins:
 provider:
   name: aws
   runtime: nodejs12.x
-  iamManagedPolicies:
-    - 'arn:aws:s3:::cesta-basica-sp'
-    - 'arn:aws:rds:us-east-1:336461205468:cluster:cesta-basica-sp-documentdb'
+  profile: profile-cesta-basica-aws
+  # iamManagedPolicies:
+  #   - 'arn:aws:s3:::cesta-basica-sp'
+  #   - 'arn:aws:rds:us-east-1:336461205468:cluster:cesta-basica-sp-documentdb'
 
 # you can overwrite defaults here
 #  stage: dev
 #  region: us-east-1
 
 # you can add statements to the Lambda function's IAM Role here
-#  iamRoleStatements:
-#    - Effect: "Allow"
-#      Action:
-#        - "s3:ListBucket"
-#      Resource: { "Fn::Join" : ["", ["arn:aws:s3:::", { "Ref" : "ServerlessDeploymentBucket" } ] ]  }
-#    - Effect: "Allow"
-#      Action:
-#        - "s3:PutObject"
-#      Resource:
-#        Fn::Join:
-#          - ""
-#          - - "arn:aws:s3:::"
-#            - "Ref" : "ServerlessDeploymentBucket"
-#            - "/*"
+iamRoleStatements:
+  - Effect: "Allow"
+    Action:
+      - "s3:PutObject"
+    Resource:
+      Fn::Join:
+        - ""
+        - - "arn:aws:s3:::" 
+          - "Ref" : "ServerlessDeploymentBucket"
+          - "/*"
 
+environment:
+  DBURL: mongodb://cestaBasicaDocdbAdmin:$DBPASWORD@cesta-basica-sp-documentdb.cluster-cuvqdex8zrqv.us-east-1.docdb.amazonaws.com:27017/?ssl=true&ssl_ca_certs=rds-combined-ca-bundle.pem&replicaSet=rs0&readPreference=secondaryPreferred&retryWrites=false
 # you can define service wide environment variables here
 #  environment:
 #    variable1: value1

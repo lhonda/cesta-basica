@@ -13,6 +13,24 @@
             ],
             "program": "${workspaceFolder}/main.js",
             "runtimeArgs": ["-r","esm"]
-        }
+        },
+        {
+        "type": "node",
+        "request": "launch",
+        "name": "Serverless Offline",
+        "program": "${workspaceRoot}/node_modules/serverless/bin/serverless",
+        "stopOnEntry": false,
+        "args": [
+            "offline",
+            "start"
+        ],
+        "cwd": "${workspaceRoot}",
+        "preLaunchTask": null,
+        "runtimeExecutable": "node",
+        "runtimeArgs": [
+            "--nolazy"
+        ],
+        "sourceMaps": false
+    },
     ]
 }

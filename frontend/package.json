@@ -16,7 +16,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy-dev": "source ./.env && aws s3 sync build/ s3://${S3_BUCKET} --delete",
+    "deploy-dev": "source ./.env && aws s3 sync build/ s3://${S3_BUCKET} --delete"
   },
   "eslintConfig": {
     "extends": "react-app"

@@ -17,6 +17,7 @@
     "esm": "^3.2.25",
     "express": "^4.17.1",
     "helmet": "^3.21.3",
+    "js-yaml": "^3.13.1",
     "json2csv": "^5.0.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.5",

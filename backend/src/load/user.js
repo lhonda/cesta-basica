@@ -5,6 +5,7 @@ import { Parser } from 'json2csv'
 import { load } from './generic'
 import { config } from 'dotenv'
 import csvtojson from 'csvtojson'
+import yaml from 'js-yaml'
 import path from 'path'
 import fs from 'fs'
 
@@ -18,10 +19,14 @@ export async function loadUser (csvName) {
   rows = rows.map(row => {
     return {
       login: row.cpf,
-      password: random.password(),
-      email: row.email,
-      role: 'leader',
       name: row.name,
+      password: random.password(),
+      role: 'leader',
+      email: row.email,
+      cpf: row.cpf,
+      rg: row.rg,
+      phone: row.phone,
+      birthdate: row.birthdate,
       site: row.site,
       city: row.city,
       state: row.state
@@ -30,10 +35,9 @@ export async function loadUser (csvName) {
 
   await load(User, rows)
 
-  const resultsPath = `${csvPath}.results.csv`
-
-  const resultsContents = (new Parser()).parse(rows)
-  fs.writeFileSync(resultsPath, resultsContents)
+  fs.writeFileSync(`${csvPath}.results.json`, JSON.stringify(rows, null, 2))
+  fs.writeFileSync(`${csvPath}.results.csv`, (new Parser()).parse(rows))
+  fs.writeFileSync(`${csvPath}.results.yml`, yaml.dump(rows))
 }
 
 if (require.main === module) {

@@ -6,10 +6,21 @@ import { SubTitle, SubTitleTypes } from '../../components/SubTitle'
 import { Button, ButtonTypes } from '../../components/Button'
 import { Checkbox } from '../../components/Checkbox'
 import { Symptoms } from '../../components/Symptoms'
+import { Legend } from '../../components/Legend'
+import { Link } from '../../components/Link'
+
 import './Checklist.scss'
 
-import { declareChecklist, descriptionChecklist, cancel, singin, titleChecklist } from '../../utils/strings'
-import { handleCheckedHealth } from '../../services/handles'
+import {
+  declareChecklist,
+  LegendChecklist,
+  linkChecklist,
+  descriptionChecklist,
+  cancel,
+  singin,
+  titleChecklist,
+} from '../../utils/strings'
+import { handleCheckedHealth, handleRedirectSymptoms } from '../../services/handles'
 
 function ChecklistPage({ store, dispatch }) {
   return (
@@ -20,6 +31,8 @@ function ChecklistPage({ store, dispatch }) {
       </div>
       <div className="main-checklist">
         <Symptoms />
+        <Legend message={LegendChecklist} />
+        <Link action={() => handleRedirectSymptoms('https://google.com.br')} message={linkChecklist} />
         <Checkbox
           handleChecked={() => handleCheckedHealth(store, dispatch)}
           checked={store.health}

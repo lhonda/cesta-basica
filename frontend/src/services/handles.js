@@ -12,3 +12,6 @@ export const handleCheckedHealth = (store, dispatch) => {
     payload: !store.health,
   })
 }
+export const handleRedirectSymptoms = (url) => {
+  window.open(url, '_blank')
+}

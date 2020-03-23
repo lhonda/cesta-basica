@@ -19,6 +19,19 @@ const schema = new Schema({
     type: String,
     enum: ['leader', 'admin'],
     required: [true, 'role is required']
+  },
+  name: {
+    type: String
+  },
+  site: {
+    type: String,
+    lowercase: true
+  },
+  city: {
+    type: String
+  },
+  state: {
+    type: String
   }
 })
 

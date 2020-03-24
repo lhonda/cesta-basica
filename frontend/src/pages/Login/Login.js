@@ -15,18 +15,22 @@ import {
   errorMessageInvalidPassword,
 } from '../../utils/strings'
 
+import { Loader } from '../../components/Loader'
 import { LogoHorizontal } from '../../components/Logo'
 import { Input, inputTypes } from '../../components/Input'
 import { Button, ButtonTypes } from '../../components/Button'
 
 function Login({ dispatch }) {
   const history = useHistory()
+  const [loading, setLoading] = useState(false)
   const [login, setLogin] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState(false)
   async function handleSubmit(e) {
     e.preventDefault()
+    setLoading(true)
     await Auth({ login, password }, dispatch, history)
+    setLoading(false)
     setError(true)
   }
   useEffect(() => {
@@ -34,6 +38,7 @@ function Login({ dispatch }) {
   }, [login, password])
   return (
     <>
+      {loading && <Loader />}
       <div className="containerLogo">
         <LogoHorizontal />
       </div>

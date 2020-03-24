@@ -6,6 +6,7 @@ import { Title } from '../../components/Title'
 import { Status } from '../../components/Status'
 import { Sidebar } from '../../components/Sidebar'
 import { Legend, LegendTypes } from '../../components/Legend'
+import { Items, ItemsTypes } from '../../components/Items'
 import { Paragraph, ParagraphTypes } from '../../components/Paragraph'
 import { SubTitle, SubTitleTypes } from '../../components/SubTitle'
 import { Button, ButtonTypes } from '../../components/Button'
@@ -27,7 +28,7 @@ import {
 } from '../../utils/strings'
 import { handleDonationReceived, handleBackButton } from '../../services/handles'
 
-function ReceivedPage({ store, dispatch }) {
+function ReceivedCurrentPage({ store, dispatch }) {
   const { id } = useParams()
 
   return (
@@ -58,8 +59,13 @@ function ReceivedPage({ store, dispatch }) {
         </div>
       </div>
       <hr />
-      <div className="main-received-prof">
-        <Paragraph size={ParagraphTypes.MEDIUM} content="descriptionDonationReceived" />
+      <div className="main-received-current-prof">
+        <Items type={ItemsTypes.BASKET} complete title="#JKKS5LSLA8" />
+        <Items type={ItemsTypes.BASKET} title="#JKKS5LSLA8" />
+        <Items type={ItemsTypes.BASKET} title="#JKKS5LSLA8" />
+        <Items type={ItemsTypes.BASKET} title="#JKKS5LSLA8" />
+        <Items type={ItemsTypes.BASKET} title="#JKKS5LSLA8" />
+        <Items type={ItemsTypes.BASKET} title="#JKKS5LSLA8" />
       </div>
       <div className="footer-received-prof">
         <Button
@@ -71,7 +77,7 @@ function ReceivedPage({ store, dispatch }) {
     </div>
   )
 }
-ReceivedPage.propTypes = {
+ReceivedCurrentPage.propTypes = {
   store: PropTypes.shape({
     donation: PropTypes.shape({
       received: PropTypes.shape({
@@ -83,4 +89,4 @@ ReceivedPage.propTypes = {
   dispatch: PropTypes.func.isRequired,
 }
 
-export default connect(ReceivedPage)
+export default connect(ReceivedCurrentPage)

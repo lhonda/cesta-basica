@@ -29,8 +29,9 @@ hr {
   border: .5px solid #EFEFEF;
   width: 100%;
 }
-.main-received-prof {
-  height: 25%;
+.main-received-current-prof {
+  height: 250px;
+  overflow-y: scroll;
 
 }
 .footer-received-prof {

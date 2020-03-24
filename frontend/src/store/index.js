@@ -18,7 +18,7 @@ const cleanState = {
       deadline: '27/03/2020 12h03',
     },
     gived: {
-      amount: 10,
+      amount: 50,
     },
   },
   declaration: false,

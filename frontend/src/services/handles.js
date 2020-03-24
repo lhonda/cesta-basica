@@ -34,3 +34,6 @@ export const handleDonationReceived = (url) => {
 export const handleDonationReceivedVoucher = (voucher) => {
   window.location.pathname += `/${voucher}/prof`
 }
+export const handleToggleModal = (setModal) => {
+  setModal((value) => !value)
+}

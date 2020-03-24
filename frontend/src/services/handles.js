@@ -21,3 +21,7 @@ export const handleBackButton = () => {
   paths.pop()
   window.location.pathname = paths.join('/')
 }
+export const handleDonationReceived = (url) => {
+  console.log(url)
+  window.location.pathname += `/${url}`
+}

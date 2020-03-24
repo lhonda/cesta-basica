@@ -62,7 +62,7 @@ function Login({ dispatch }) {
           <Input
             placeholder={typeYourPassword}
             inputType={inputTypes.PASSWORD}
-            minLength="8"
+            minLength="6"
             maxLength="14"
             value={password}
             handleOnChange={setPassword}

@@ -16,7 +16,7 @@ const mock = {
 
 export async function Auth(dataRequest, dispatch, history) {
   try {
-    const response = mock || await Api.post(route, dataRequest)
+    const response = await Api.post(route, dataRequest)
     const { user, token } = response.data
     dispatch({ type: types.SET_USER, payload: user })
     dispatch({ type: types.SET_TOKEN, payload: { token } })

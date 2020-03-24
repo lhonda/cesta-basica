@@ -12,13 +12,11 @@ import { DonationList } from '../pages/DonationList'
 export const Routes = () => (
   <BrowserRouter>
     <Switch>
-      <Route path="/" exact component={() => <div>root</div>} />
       <Route path="/login" exact component={Login} />
       <Route path="/register" exact component={Register} />
       <Route path="/terms" exact component={Terms} />
       <Route path="/checklist" exact component={Checklist} />
       <Route path="/donation-list" exact component={DonationList} isPrivate />
-      <Route path="/donation-list/historic" exact component={() => <div>oi</div>} />
     </Switch>
   </BrowserRouter>
 )

@@ -26,3 +26,21 @@ border-radius: 4px;
     }
 
 }
+.item-basket {
+  height: 45px;
+
+  border: 1px solid #909090;
+  box-sizing: border-box;
+  border-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 10px;
+  color: #909090;
+  margin: 10px 0px;
+
+  &.complete {
+    color: #93278F;
+    border: 1px solid #93278F;
+  }
+}

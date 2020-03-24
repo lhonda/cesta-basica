@@ -1,2 +1,1 @@
-require('backend/dist/main')
-
+require('backend')

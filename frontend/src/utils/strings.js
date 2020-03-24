@@ -27,3 +27,5 @@ export const linkChecklist = 'Estou com sintomas, o que fazer?'
 
 // donation list
 export const donationListVoidText = 'Você está sem pedidos \nde doações no momento'
+export const donationTitlePage = 'Lista de doações'
+export const exitText = 'Sair'

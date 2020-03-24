@@ -6,6 +6,8 @@ import './DonationHeader.scss'
 import { icExit } from '../../../assets/icons'
 import { connect, types } from '../../../store'
 
+import { donationTitlePage, exitText } from '../../../utils/strings'
+
 function DonationHeader({ dispatch }) {
   const history = useHistory()
   function exit() {
@@ -14,12 +16,12 @@ function DonationHeader({ dispatch }) {
   }
   return (
     <header className="containerHeader">
-      <h2>Title</h2>
+      <h2>{donationTitlePage}</h2>
       <div>
         <a onClick={exit}>
           <img src={icExit} alt="alo" />
-        Sair
-      </a>
+          {exitText}
+        </a>
       </div>
     </header>
   )

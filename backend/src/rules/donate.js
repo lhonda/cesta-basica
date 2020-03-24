@@ -3,7 +3,7 @@ import { Donation, DonationEvent } from '../repositories/donation'
 var AWS = require('aws-sdk')
 const BUCKET_NAME = 'cesta-basica-sp'
 
-export async function donate ({ donationId, leaderId, geolocation, quantity, receivedCpf, receivedName, fileContent }) {
+export async function donate ({ donationId, leaderLogin, geolocation, quantity, receivedCpf, receivedName, fileContent }) {
   const donation = await Donation.findOne({ donationId: donationId })
 
   console.log(donation)
@@ -32,7 +32,7 @@ export async function donate ({ donationId, leaderId, geolocation, quantity, rec
     var event = new DonationEvent({
       donationId: donationId,
       quantity: quantity,
-      leaderId: leaderId,
+      leaderLogin: leaderLogin,
       status: donation.status,
       donor: donation.donor,
       receivedCpf: receivedCpf,

@@ -4,9 +4,11 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "node -r esm main.js",
-    "dev": "nodemon -r esm main.js",
-    "lint": "eslint ."
+    "start": "node dist/main.js",
+    "dev": "nodemon -r esm src/main.js",
+    "lint": "eslint .",
+    "build": "sucrase ./src -d ./dist -t imports",
+    "prestart": "npm run build"
   },
   "dependencies": {
     "aws-sdk": "^2.643.0",
@@ -17,6 +19,7 @@
     "helmet": "^3.21.3",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.5",
+    "serverless-http": "^2.3.2",
     "uuid": "^7.0.2"
   },
   "devDependencies": {
@@ -26,6 +29,7 @@
     "eslint-plugin-node": "^11.0.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
-    "nodemon": "^2.0.2"
+    "nodemon": "^2.0.2",
+    "sucrase": "^3.12.1"
   }
 }

@@ -1,8 +1,8 @@
-import { connect, disconnect } from '../core/database'
-import { random } from '../services'
-import { User } from '../repositories'
+import { connect, disconnect } from '../../core/database'
+import { random } from '../../services'
+import { User } from '../../repositories'
 import { config } from 'dotenv'
-import { genericProcess } from './genericProcess'
+import { genericProcess } from '../genericProcess'
 
 export async function process () {
   return genericProcess(User, 'user-data.csv', row => {

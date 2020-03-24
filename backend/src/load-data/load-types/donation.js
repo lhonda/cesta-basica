@@ -1,7 +1,7 @@
-import { connect, disconnect } from '../core/database'
-import { Donation } from '../repositories'
+import { connect, disconnect } from '../../core/database'
+import { Donation } from '../../repositories'
 import { config } from 'dotenv'
-import { genericProcess } from './genericProcess'
+import { genericProcess } from '../genericProcess'
 
 export async function process () {
   return genericProcess(Donation, 'donation-data.csv', row => {

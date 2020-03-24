@@ -1,7 +1,6 @@
 import { config } from 'dotenv'
 import { connect, disconnect } from '../core/database'
-import { process as processUser } from './user'
-import { process as processDonation } from './donation'
+import { processUser, processDonation, processSite } from './load-types'
 
 if (require.main === module) {
   (async function () {
@@ -11,6 +10,7 @@ if (require.main === module) {
 
       await processUser()
       await processDonation()
+      await processSite()
 
       await disconnect()
     } catch (err) {

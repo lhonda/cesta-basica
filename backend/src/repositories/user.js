@@ -38,8 +38,7 @@ const schema = new Schema({
     type: Date
   },
   site: {
-    type: String,
-    lowercase: true
+    type: String
   },
   city: {
     type: String

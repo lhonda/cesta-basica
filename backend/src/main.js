@@ -1,13 +1,11 @@
-import * as dotenv from 'dotenv'
-import * as server from './core/server'
-import * as database from './core/database'
+import 'dotenv/config'
+import { start } from './core/server'
 
 (async function main () {
+  console.log(new Date(), 'Initializing...')
   try {
-    dotenv.config()
-    await database.connect()
-    await server.start()
-    console.log(`Server up at port ${process.env.PORT}`)
+    await start()
+    console.log(new Date(), `Server up at port ${process.env.PORT}`)
   } catch (error) {
     console.error('Failed to start application', error)
   }

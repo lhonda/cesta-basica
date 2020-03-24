@@ -5,10 +5,10 @@
   "license": "MIT",
   "scripts": {
     "start": "node dist/main.js",
-    "prestart": "npm run build",
     "dev": "nodemon -r esm src/main.js",
     "lint": "eslint .",
-    "build": "sucrase ./src -d ./dist --transforms imports"
+    "build": "sucrase ./src -d ./dist -t imports",
+    "prestart": "npm run build"
   },
   "dependencies": {
     "aws-sdk": "^2.643.0",
@@ -21,6 +21,7 @@
     "mongoose": "^5.9.5",
     "serverless": "^1.67.0",
     "serverless-offline": "^6.0.0",
+    "serverless-http": "^2.3.2",
     "uuid": "^7.0.2"
   },
   "devDependencies": {

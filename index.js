@@ -1,0 +1,2 @@
+require('backend/dist/main')
+

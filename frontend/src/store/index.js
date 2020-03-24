@@ -18,7 +18,6 @@ const cleanState = {
   },
   declaration: false,
   health: false,
-  donation: {},
 }
 
 function saveState(newState) {

@@ -1,3 +1,9 @@
+// Home screen
+export const homeContentTitle = 'Apoie uma comunidade contra a fome.'
+export const homeContentSubTitle = 'O que estamos fazendo'
+export const homeContent =
+  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean porttitor ipsum eu quam pharetra fringilla. Curabitur feugiat odio sapien, sed tempor lectus lobortis et. Fusce sit amet fringilla neque.'
+
 // login screen
 export const titleLoginScreen = 'Entre na plataforma'
 export const placeholderCPF = 'Digite seu CPF'

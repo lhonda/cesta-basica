@@ -4,9 +4,7 @@ import PropTypes from 'prop-types'
 import './Login.scss'
 
 import { connect, types } from '../../store'
-
 import { Auth } from '../../services/API/Login'
-import * as Storage from '../../services/storage'
 
 import {
   titleLoginScreen,
@@ -26,16 +24,21 @@ function Login({ store, dispatch }) {
   const [error, setError] = useState(false)
   async function handleSubmit(e) {
     e.preventDefault()
-    const auth = await Auth({ login, password })
-    if (auth) {
-      const { user, token } = auth
-      dispatch({ type: types.SET_USER, payload: user })
-      dispatch({ type: types.SET_TOKEN, payload: token })
-      Storage.user(user)
-      Storage.token(token)
-    } else {
-      setError(true)
-    }
+    dispatch({
+      type: types.SET_USER, payload: {
+        name: login
+      }
+    })
+    dispatch({ type: types.SET_TOKEN, payload: { token: 'token' } })
+
+    // const auth = await Auth({ login, password })
+    // if (auth) {
+    //   const { user, token } = auth
+    //   dispatch({ type: types.SET_USER, payload: user })
+    //   dispatch({ type: types.SET_TOKEN, payload: token })
+    // } else {
+    //   setError(true)
+    // }
   }
   useEffect(() => {
     error && setError(false)
@@ -45,7 +48,7 @@ function Login({ store, dispatch }) {
       <div className="containerLogo">
         <LogoHorizontal />
       </div>
-
+      {JSON.stringify(store)}
       <div className="containerLogin">
         <h2 className="containerLogin--textCenter">{titleLoginScreen}</h2>
         <form onSubmit={handleSubmit} className="containerLogin__form">

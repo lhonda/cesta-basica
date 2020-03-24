@@ -7,11 +7,7 @@ function RouteWrapper({ component: Component, isPrivate, store, ...rest }) {
   const { auth } = store
 
   if (!auth.token && isPrivate) {
-    return <Redirect to="/" />
-  }
-
-  if (auth.token && !isPrivate) {
-    return <Redirect to="/logged" />
+    return <Redirect to="/login" />
   }
 
   return <Route {...rest} component={Component} />

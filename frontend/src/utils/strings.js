@@ -17,6 +17,8 @@ export const declareTermUse = 'Declaro que li e estou de acordo com os Termos de
 export const cancel = 'Cancelar'
 export const singin = 'Entrar'
 export const contate = 'Contato'
+export const confirm = 'Confirmar'
+export const back = 'Voltar'
 export const titleTerms = 'Termos de compromisso'
 
 // Checklist screen
@@ -42,3 +44,13 @@ export const contateNumber = '(11) 99999-9999'
 export const legendDonationWaitInformationButton =
   'Ao clicar em "Doação recebida" você estará confirmando que recebeu e preencherá algumas informações de detalhe da entrega.'
 export const legendDonationWaitButton = 'Doação recebida'
+
+// Donation Prof screen
+
+export const titleDonationProf = 'Evidência do Recebimento'
+export const descriptionDonationProf =
+  'Precisamos que você confirme as algumas informações sobre a doação para que lore ipsum ipsum ipsum ipsum lore lore lore ipsum ipsum ipsum ipsum lore lore.'
+export const legendInputAmountDonation = 'Quantidade de doações recebidas'
+export const legendPicDonation = 'Foto      da doação'
+export const legendPicFiscalNode = 'Foto da nota fiscal'
+export const legendInputAddPic = 'adicionar foto da galeria'

@@ -15,3 +15,9 @@ export const handleCheckedHealth = (store, dispatch) => {
 export const handleRedirectSymptoms = (url) => {
   window.open(url, '_blank')
 }
+export const handleBackButton = () => {
+  // console.log(window.location.pathname)
+  const paths = window.location.pathname.split('/')
+  paths.pop()
+  window.location.pathname = paths.join('/')
+}

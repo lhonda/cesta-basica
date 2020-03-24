@@ -5,4 +5,7 @@ export const SubTitleTypes = {
   STRONG: 'strong',
   NORMAL: 'normal',
   LIGHT: 'light',
+  SIZE_LARGE: 'size-large',
+  SIZE_MEDIUM: 'size-medium',
+  SIZE_SMALL: 'size-small',
 }

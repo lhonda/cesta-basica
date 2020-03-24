@@ -19,10 +19,9 @@ import {
   statusDonationWait,
   legendDonationWaitDate,
   legendDonationWaitAmount,
-  legendDonationWaitInformationButton,
   legendDonationWaitButton,
 } from '../../utils/strings'
-import {} from '../../services/handles'
+import { handleDonationReceived } from '../../services/handles'
 
 function DonationPage({ store, dispatch }) {
   const { id } = useParams()
@@ -53,7 +52,11 @@ function DonationPage({ store, dispatch }) {
       <hr />
       <div className="footer-donation">
         <Paragraph content="legendDonationWaitInformationButton" />
-        <Button size={ButtonTypes.LARGE} message={legendDonationWaitButton} />
+        <Button
+          handleClick={() => handleDonationReceived('prof')}
+          size={ButtonTypes.LARGE}
+          message={legendDonationWaitButton}
+        />
       </div>
     </div>
   )
@@ -63,7 +66,7 @@ DonationPage.propTypes = {
     donation: PropTypes.shape({
       received: PropTypes.shape({
         date: PropTypes.string,
-        amount: PropTypes.string,
+        amount: PropTypes.number,
       }).isRequired,
     }).isRequired,
   }).isRequired,

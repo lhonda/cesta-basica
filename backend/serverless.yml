@@ -1,59 +1,54 @@
 # For full config options, check the docs:
 #    docs.serverless.com
 
-service: backend
+service: cesta-basica-sp-backend
+
+plugins:
+  - serverless-offline
+
+
 stage: ${opt:stage, 'dev'}
 region: 'us-east-1'
 deploymentBucket:
 name: cesta-basica-sp-estaticos
 maxPreviousDeploymentArtifacts: 10 # On every deployment the framework prunes the bucket to remove artifacts older than this limit. The default is 5
-blockPublicAccess: true # Prevents public access via ACLs or bucket policies. Default is false
+blockPublicAccess: false # Prevents public access via ACLs or bucket policies. Default is false
 serverSideEncryption: AES256 # server-side encryption method
-# sseKMSKeyId: arn:aws:kms:us-east-1:xxxxxxxxxxxx:key/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa # when using server-side encryption
-# sseCustomerAlgorithim: AES256 # when using server-side encryption and custom keys
-# sseCustomerKey: string # when using server-side encryption and custom keys
-# sseCustomerKeyMD5: md5sum # when using server-side encryption and custom keys
-# tags: # Tags that will be added to each of the deployment resources
-#   key1: value1
-#   key2: value2
-deploymentPrefix: serverless # The S3 prefix under which deployed artifacts should be stored. Default is serverless
+
+environmentVariables:
+  DBPASSWORD: ${env:DBPASSWORD}
+provider:
+  name: aws
+  runtime: nodejs8.10
+  stage: dev
+  region: us-east-1
+  profile: profile-cesta-basica-aws
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - s3:*
+      Resource: "arn:aws:s3:::cesta-basica-sp"
+  environment:
+    DBURL: mongodb://cestaBasicaDocdbAdmin:${DBPASWORD}@cesta-basica-sp-documentdb.cluster-cuvqdex8zrqv.us-east-1.docdb.amazonaws.com:27017/?ssl=true&ssl_ca_certs=rds-combined-ca-bundle.pem&replicaSet=rs0&readPreference=secondaryPreferred&retryWrites=false
+
+functions:
+  concrete-cesta-basica-api:
+    handler: dist/core/server.app
+    description: registra o fluxo de entrega de cestas básicas
+    events:
+      - http: ANY /
+      - http: 'ANY {proxy+}'
+
+deploymentPrefix: cesta-basia-api-serverless # The S3 prefix under which deployed artifacts should be stored. Default is serverless
 role:
 # app and org for use with dashboard.serverless.com
-#app: your-app-name
-#org: your-org-name
+app: concrete-cesta-basica-sp
+org: concrete
 
 # You can pin your service to only deploy with a specific Serverless version
 # Check out our docs for more details
 # frameworkVersion: "=X.X.X"
-plugins:
-  - serverless-offline
 
-provider:
-  name: aws
-  runtime: nodejs12.x
-  profile: profile-cesta-basica-aws
-  # iamManagedPolicies:
-  #   - 'arn:aws:s3:::cesta-basica-sp'
-  #   - 'arn:aws:rds:us-east-1:336461205468:cluster:cesta-basica-sp-documentdb'
-
-# you can overwrite defaults here
-#  stage: dev
-#  region: us-east-1
-
-# you can add statements to the Lambda function's IAM Role here
-# iamRoleStatements:
-#   - Effect: "Allow"
-#     Action:
-#       - "s3:PutObject"
-#     Resource:
-#       Fn::Join:
-#         - ""
-#         - - "arn:aws:s3:::" 
-#           - "Ref" : "ServerlessDeploymentBucket"
-#           - "/*"
-
-environment:
-  DBURL: mongodb://cestaBasicaDocdbAdmin:${env:DBPASWORD}@cesta-basica-sp-documentdb.cluster-cuvqdex8zrqv.us-east-1.docdb.amazonaws.com:27017/?ssl=true&ssl_ca_certs=rds-combined-ca-bundle.pem&replicaSet=rs0&readPreference=secondaryPreferred&retryWrites=false
 # you can define service wide environment variables here
 #  environment:
 #    variable1: value1
@@ -67,16 +62,6 @@ environment:
 #    - exclude-me.js
 #    - exclude-me-dir/**
 
-functions:
-  cesta-basica:
-    handler: dist/core/server.app
-    description: registra o fluxo de entrega de cestas básicas
-#    The following are a few example events you can configure
-#    NOTE: Please make sure to change your handler code to work with those events
-#    Check the event documentation for details
-    events:
-      - http: ANY /
-      - http: 'ANY {proxy+}'
 #      - websocket: $connect
 #      - s3: ${env:BUCKET}
 #      - schedule: rate(10 minutes)

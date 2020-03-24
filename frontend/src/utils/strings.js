@@ -66,3 +66,8 @@ export const legendInputAddPic = 'adicionar foto da galeria'
 export const legendAddPicPersonReceivedDonation = 'Tirar uma foto da pessoa recebendo a doação.'
 export const legendAddPicPersonReceivedDonationWithDocument =
   'Tirar uma foto da pessoa segurando documento ao lado do rosto.'
+
+// Modal
+export const completeDeliveryTitle = 'Entrega de doação completa!'
+export const completeDeliveryThanks = 'Obrigada por ajudar lore lore lore ipsum lore ispum lore ipsum ipsum.'
+export const completeDeliveryInformationContate = 'Caso tenha ocorrido algum problema na entrega, entre em contato com:'

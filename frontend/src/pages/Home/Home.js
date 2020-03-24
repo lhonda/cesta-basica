@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { Link } from 'react-router-dom'
 import './Home.scss'
 
 import { LogoHorizontal } from '../../components/Logo'
@@ -9,22 +9,22 @@ import { homeContentTitle, homeContentSubTitle, homeContent } from '../../utils/
 
 const Home = () => {
   return (
-    <>
+    <div style={{ width: '100vw' }}>
       <div className="headerHome">
         <LogoHorizontal />
-        <span className="teste">
+        <Link to="/login" className="headerHome__button">
           <Button className="headerHome--button" type={ButtonTypes.FILLHOME} message="Entrar" />
-        </span>
+        </Link>
       </div>
       <div className="contentHome">
-        <h2>{homeContentTitle}</h2>
+        <h3>{homeContentTitle}</h3>
         <GroupIcons />
       </div>
       <div className="footerHome">
         <h3 className="footerHome--subtitle">{homeContentSubTitle}</h3>
         <p>{homeContent}</p>
       </div>
-    </>
+    </div>
   )
 }
 

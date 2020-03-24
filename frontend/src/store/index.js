@@ -8,6 +8,12 @@ export const initialState = {
   auth: {
     token: null,
   },
+  donation: {
+    received: {
+      date: '26/03/20',
+      amount: '50',
+    },
+  },
   declaration: false,
   health: false,
 }
@@ -33,6 +39,10 @@ const actionMap = {
   [types.SET_HEALTHCHECK]: (state, payload) => ({
     ...state,
     health: payload,
+  }),
+  [types.SET_DONATION]: (state, payload) => ({
+    ...state,
+    donation: payload,
   }),
 }
 

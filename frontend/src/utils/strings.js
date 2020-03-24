@@ -16,6 +16,7 @@ export const conclusionCompromise =
 export const declareTermUse = 'Declaro que li e estou de acordo com os Termos de Uso da aplicacao'
 export const cancel = 'Cancelar'
 export const singin = 'Entrar'
+export const contate = 'Contato'
 export const titleTerms = 'Termos de compromisso'
 
 // Checklist screen
@@ -24,3 +25,16 @@ export const descriptionChecklist = 'Sintomas do Coronavirus (COVID-19)'
 export const declareChecklist = 'Declaro que li e não estou apresentando nenhum sintoma relacionado ao COVID-19.'
 export const LegendChecklist = '*O vírus também é transmitido por pessoas assintomáticas.'
 export const linkChecklist = 'Estou com sintomas, o que fazer?'
+
+// Donation screen
+
+export const titleDonation = 'Doação'
+export const statusDonationWait = 'Esperando recebimento'
+export const legendDonationWaitDate = 'Dia de recebimento'
+export const legendDonationWaitAmount = 'Quantidade de doações'
+export const legendDonationWaitInformation =
+  'Para mais informações sobre o horário de recebimento, entrar em contato com a equipe da Gerando Falcões.'
+export const contateNumber = '(11) 99999-9999'
+export const legendDonationWaitInformationButton =
+  'Ao clicar em "Doação recebida" você estará confirmando que recebeu e preencherá algumas informações de detalhe da entrega.'
+export const legendDonationWaitButton = 'Doação recebida'

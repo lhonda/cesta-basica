@@ -7,6 +7,7 @@ import { Login } from '../pages/Login'
 import { Register } from '../pages/Register'
 import { Terms } from '../pages/Terms'
 import { Checklist } from '../pages/Checklist'
+import { Donation } from '../pages/Donation'
 
 export const Routes = () => (
   <BrowserRouter>
@@ -16,6 +17,7 @@ export const Routes = () => (
       <Route path="/register" exact component={Register} />
       <Route path="/terms" exact component={Terms} />
       <Route path="/checklist" exact component={Checklist} />
+      <Route path="/donation/:id/wait" exact component={Donation} />
     </Switch>
   </BrowserRouter>
 )

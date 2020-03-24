@@ -8,7 +8,8 @@
     "dev": "nodemon -r esm src/main.js",
     "lint": "eslint .",
     "build": "sucrase ./src -d ./dist -t imports",
-    "prestart": "npm run build"
+    "prestart": "npm run build",
+    "postinstall": "npm run build"
   },
   "dependencies": {
     "aws-sdk": "^2.643.0",
@@ -20,7 +21,8 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.5",
     "serverless-http": "^2.3.2",
-    "uuid": "^7.0.2"
+    "uuid": "^7.0.2",
+    "sucrase": "^3.12.1"
   },
   "devDependencies": {
     "eslint": "^6.8.0",
@@ -29,7 +31,6 @@
     "eslint-plugin-node": "^11.0.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
-    "nodemon": "^2.0.2",
-    "sucrase": "^3.12.1"
+    "nodemon": "^2.0.2"
   }
 }

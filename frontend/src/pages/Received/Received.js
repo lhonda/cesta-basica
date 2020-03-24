@@ -10,58 +10,64 @@ import { Paragraph, ParagraphTypes } from '../../components/Paragraph'
 import { SubTitle, SubTitleTypes } from '../../components/SubTitle'
 import { Button, ButtonTypes } from '../../components/Button'
 
-import './Donation.scss'
+import './Received.scss'
 
 import {
-  contate,
-  contateNumber,
   titleDonation,
+  legendDonationType,
   statusDonationWait,
   legendDonationWaitDate,
   legendDonationWaitAmount,
-  legendDonationWaitButton,
+  legendDonationReceivedButton,
+  legendDonationDateFinal,
 } from '../../utils/strings'
 import { handleDonationReceived } from '../../services/handles'
 
-function DonationPage({ store, dispatch }) {
+function ReceivedPage({ store, dispatch }) {
   const { id } = useParams()
 
   return (
-    <div className="container-donation">
-      <div className="header-donation">
+    <div className="container-received">
+      <div className="header-received">
         <Title message={`${titleDonation} ${id}`} />
         <Status message={statusDonationWait} />
-        <Sidebar />
+        <Sidebar current={2} />
       </div>
-      <div className="details-donation">
+      <div className="details-received">
         <div className="details-date">
-          <Legend type={LegendTypes.LIGHT} orientation={LegendTypes.START} message={legendDonationWaitDate} />
-          <Legend type={LegendTypes.STRONG} orientation={LegendTypes.START} message={store.donation.received.date} />
+          <Legend type={LegendTypes.LIGHT} orientation={LegendTypes.START} message={legendDonationType} />
+          <Legend type={LegendTypes.STRONG} orientation={LegendTypes.START} message={store.donation.received.type} />
         </div>
         <div className="details-amount">
           <Legend type={LegendTypes.LIGHT} orientation={LegendTypes.END} message={legendDonationWaitAmount} />
           <Legend type={LegendTypes.STRONG} orientation={LegendTypes.END} message={store.donation.received.amount} />
         </div>
       </div>
-      <hr />
-      <div className="main-donation">
-        <Paragraph size={ParagraphTypes.MEDIUM} content="legendDonationWaitInformation" />
-        <SubTitle size={SubTitleTypes.MEDIUM} type={SubTitleTypes.STRONG} message={contate} />
-        <SubTitle size={SubTitleTypes.MEDIUM} type={SubTitleTypes.NORMAL} message={contateNumber} />
+      <div className="details-received">
+        <div className="details-date">
+          <Legend type={LegendTypes.LIGHT} orientation={LegendTypes.START} message={legendDonationWaitDate} />
+          <Legend type={LegendTypes.STRONG} orientation={LegendTypes.START} message={store.donation.received.date} />
+        </div>
+        <div className="details-amount">
+          <Legend type={LegendTypes.LIGHT} orientation={LegendTypes.END} message={legendDonationDateFinal} />
+          <Legend type={LegendTypes.STRONG} orientation={LegendTypes.END} message={store.donation.received.deadline} />
+        </div>
       </div>
       <hr />
-      <div className="footer-donation">
-        <Paragraph content="legendDonationWaitInformationButton" />
+      <div className="main-received">
+        <Paragraph size={ParagraphTypes.MEDIUM} content="descriptionDonationReceived" />
+      </div>
+      <div className="footer-received">
         <Button
           handleClick={() => handleDonationReceived('prof')}
           size={ButtonTypes.LARGE}
-          message={legendDonationWaitButton}
+          message={legendDonationReceivedButton}
         />
       </div>
     </div>
   )
 }
-DonationPage.propTypes = {
+ReceivedPage.propTypes = {
   store: PropTypes.shape({
     donation: PropTypes.shape({
       received: PropTypes.shape({
@@ -73,4 +79,4 @@ DonationPage.propTypes = {
   dispatch: PropTypes.func.isRequired,
 }
 
-export default connect(DonationPage)
+export default connect(ReceivedPage)

@@ -1,4 +1,4 @@
-export const inputTypes = {
+export const FileTypes = {
   TEXT: 'text',
   PASSWORD: 'password',
   CPF: 'cpf',

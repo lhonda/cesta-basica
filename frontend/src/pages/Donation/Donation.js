@@ -66,7 +66,7 @@ DonationPage.propTypes = {
     donation: PropTypes.shape({
       received: PropTypes.shape({
         date: PropTypes.string,
-        amount: PropTypes.string,
+        amount: PropTypes.number,
       }).isRequired,
     }).isRequired,
   }).isRequired,

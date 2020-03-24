@@ -1,40 +1,36 @@
 .legend {
+  font-style: normal;
+  letter-spacing: 0.2px;
+  line-height: 18px;
 
-
-  &__strong {
+  &.strong {
     margin: 10px 0px;
-    font-style: normal;
     font-weight: 500;
     font-size: 14px;
-    line-height: 18px;
-    /* or 129% */
 
-    letter-spacing: 0.2px;
 
     color: #202228;
   }
 
-  &__normal {
+  &.normal {
 
-    font-style: normal;
     font-weight: normal;
     font-size: 12px;
-    line-height: 18px;
-
-    letter-spacing: 0.2px;
-  }
-  &__light {
+}
+  &.light {
 
     font-style: normal;
     font-weight: normal;
     font-size: 14px;
-    line-height: 18px;
-    /* or 129% */
-
-    letter-spacing: 0.2px;
 
     color: #909090;
   }
+  &.large {
+    width: 100%;
+    font-size: 16px;
+    margin: 0px;
+  }
+
 }
 .center {
   text-align: center;

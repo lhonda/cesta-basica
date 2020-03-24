@@ -62,3 +62,7 @@ export const legendInputAmountDonation = 'Quantidade de doações recebidas'
 export const legendPicDonation = 'Foto da doação'
 export const legendPicFiscalNode = 'Foto da nota fiscal'
 export const legendInputAddPic = 'adicionar foto da galeria'
+
+export const legendAddPicPersonReceivedDonation = 'Tirar uma foto da pessoa recebendo a doação.'
+export const legendAddPicPersonReceivedDonationWithDocument =
+  'Tirar uma foto da pessoa segurando documento ao lado do rosto.'

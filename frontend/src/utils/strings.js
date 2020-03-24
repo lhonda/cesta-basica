@@ -33,6 +33,7 @@ export const linkChecklist = 'Estou com sintomas, o que fazer?'
 export const titleDonation = 'Doação'
 export const statusDonationWait = 'Esperando recebimento'
 export const statusDonationReceived = 'Doação Recebida'
+export const statusDonationReceivedCurrent = 'Entregando'
 export const legendDonationWaitDate = 'Dia de recebimento'
 export const legendDonationDateFinal = 'Prazo final para entrega'
 export const legendDonationType = 'Tipo da doação'
@@ -44,6 +45,7 @@ export const legendDonationWaitInformationButton =
   'Ao clicar em "Doação recebida" você estará confirmando que recebeu e preencherá algumas informações de detalhe da entrega.'
 export const legendDonationWaitButton = 'Doação recebida'
 export const legendDonationReceivedButton = 'Iniciar Entrega'
+export const legendDonationReceivedFinishButton = 'Encerrar Entrega'
 
 // Donation Prof screen
 

@@ -10,6 +10,7 @@ import { Checklist } from '../pages/Checklist'
 import { Donation } from '../pages/Donation'
 import { DonationProf } from '../pages/DonationProf'
 import { Received } from '../pages/Received'
+import { ReceivedCurrent } from '../pages/ReceivedCurrent'
 
 export const Routes = () => (
   <BrowserRouter>
@@ -22,6 +23,7 @@ export const Routes = () => (
       <Route path="/donation/:id/wait" exact component={Donation} />
       <Route path="/donation/:id/wait/prof" exact component={DonationProf} />
       <Route path="/donation/:id/received" exact component={Received} />
+      <Route path="/donation/:id/received/current" exact component={ReceivedCurrent} />
     </Switch>
   </BrowserRouter>
 )

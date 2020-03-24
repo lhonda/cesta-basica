@@ -12,6 +12,8 @@ export const initialState = {
     received: {
       date: '26/03/20',
       amount: '50',
+      type: 'Cesta básica',
+      deadline: '27/03/2020 12h03',
     },
   },
   declaration: false,

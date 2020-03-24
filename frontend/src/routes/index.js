@@ -9,6 +9,7 @@ import { Terms } from '../pages/Terms'
 import { Checklist } from '../pages/Checklist'
 import { Donation } from '../pages/Donation'
 import { DonationProf } from '../pages/DonationProf'
+import { Received } from '../pages/Received'
 
 export const Routes = () => (
   <BrowserRouter>
@@ -20,6 +21,7 @@ export const Routes = () => (
       <Route path="/checklist" exact component={Checklist} />
       <Route path="/donation/:id/wait" exact component={Donation} />
       <Route path="/donation/:id/wait/prof" exact component={DonationProf} />
+      <Route path="/donation/:id/received" exact component={Received} />
     </Switch>
   </BrowserRouter>
 )

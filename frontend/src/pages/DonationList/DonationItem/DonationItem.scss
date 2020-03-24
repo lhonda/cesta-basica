@@ -2,6 +2,7 @@
   font-size: 12px;
   position: relative;
   float: right;
+  color: #c7c7c7;
 }
 .donationItem {
   padding: 0.56rem;
@@ -26,7 +27,6 @@
     }
 
     &__state {
-      color: #c7c7c7;
       &--complete {
         color: #328b21;
       }

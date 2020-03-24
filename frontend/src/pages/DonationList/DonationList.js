@@ -26,6 +26,55 @@ const mock = [
     state: 'Completo',
     isComplete: true,
   },
+  {
+    title: 'Doação D',
+    quantity: '110 unidades',
+    state: 'Esperando Recebimento',
+  },
+  {
+    title: 'Doação E',
+    quantity: '1100 unidades',
+    state: 'Entregue',
+    isComplete: true,
+  },
+  {
+    title: 'Doação F',
+    quantity: '1355 unidades',
+    state: 'Completo',
+  },
+  {
+    title: 'Doação A',
+    quantity: '110 unidades',
+    state: 'Esperando Recebimento',
+  },
+  {
+    title: 'Doação B',
+    quantity: '1100 unidades',
+    state: 'Entregue',
+  },
+  {
+    title: 'Doação C',
+    quantity: '1355 unidades',
+    state: 'Completo',
+    isComplete: true,
+  },
+  {
+    title: 'Doação D',
+    quantity: '110 unidades',
+    state: 'Esperando Recebimento',
+  },
+  {
+    title: 'Doação E',
+    quantity: '1100 unidades',
+    state: 'Entregue',
+    isComplete: true,
+  },
+  {
+    title: 'Doação ultima',
+    quantity: '1355 unidades',
+    state: 'Completo',
+    isComplete: true,
+  },
 ]
 
 function DonationList({ store, dispatch }) {
@@ -35,21 +84,29 @@ function DonationList({ store, dispatch }) {
     setLoading(false)
   }, [])
   return (
-    <>
+    <div className="containerDonation">
       {loading && <Loader />}
       <DonationHeader />
       {true ? (
-        <div className="donationList">
-          {mock.map((item) => {
+        <div className="containerDonation__list">
+          {mock.map((item, index) => {
             const { title, quantity, state, isComplete } = item
-            return <DonationItem title={title} quantity={quantity} stateDonation={state} isComplete={isComplete} />
+            return (
+              <DonationItem
+                title={title}
+                quantity={quantity}
+                key={`${title}-${index * index}`}
+                stateDonation={state}
+                isComplete={isComplete}
+              />
+            )
           })}
         </div>
       ) : (
-          <DonationIsEmpty />
-        )}
+        <DonationIsEmpty />
+      )}
       <BottomMenu />
-    </>
+    </div>
   )
 }
 

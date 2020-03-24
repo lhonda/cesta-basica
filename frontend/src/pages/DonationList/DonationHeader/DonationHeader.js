@@ -15,15 +15,17 @@ function DonationHeader({ dispatch }) {
     history.push('/login')
   }
   return (
-    <header className="containerHeader">
-      <h2>{donationTitlePage}</h2>
-      <div>
-        <a onClick={exit}>
-          <img src={icExit} alt="alo" />
-          {exitText}
-        </a>
-      </div>
-    </header>
+    <div className="fixedHeader">
+      <header className="containerHeader">
+        <h2>{donationTitlePage}</h2>
+        <span>
+          <a onClick={exit}>
+            <img src={icExit} alt="alo" />
+            {exitText}
+          </a>
+        </span>
+      </header>
+    </div>
   )
 }
 

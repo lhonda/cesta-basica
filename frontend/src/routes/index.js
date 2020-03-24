@@ -7,7 +7,9 @@ import { Login } from '../pages/Login'
 import { Register } from '../pages/Register'
 import { Terms } from '../pages/Terms'
 import { Checklist } from '../pages/Checklist'
+
 import { DonationList } from '../pages/DonationList'
+import { Donation } from '../pages/Donation'
 
 export const Routes = () => (
   <BrowserRouter>
@@ -17,6 +19,7 @@ export const Routes = () => (
       <Route path="/terms" exact component={Terms} />
       <Route path="/checklist" exact component={Checklist} />
       <Route path="/donation-list" exact component={DonationList} isPrivate />
+      <Route path="/donation/:id/wait" exact component={Donation} />
     </Switch>
   </BrowserRouter>
 )

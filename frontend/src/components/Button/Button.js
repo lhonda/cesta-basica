@@ -4,9 +4,16 @@ import './Button.scss'
 
 import { ButtonTypes } from './ButtonTypes'
 
-function Button({ type, message, disable, handleClick }) {
+function Button({ type, size, message, disable, handleClick }) {
   return (
-    <button type="submit" disabled={disable} onClick={handleClick} className={`button-${type}`}>
+    <button
+      type="submit"
+      tabIndex={0}
+      aria-label={message}
+      disabled={disable}
+      onClick={handleClick}
+      className={`button ${type} ${size}`}
+    >
       {message}
     </button>
   )
@@ -17,10 +24,12 @@ Button.propTypes = {
   message: PropTypes.string,
   disable: PropTypes.bool,
   handleClick: PropTypes.func,
+  size: PropTypes.string,
 }
 
 Button.defaultProps = {
   type: ButtonTypes.FILL,
+  size: ButtonTypes.MEDIUM,
   message: '',
   disable: false,
   handleClick: () => {},

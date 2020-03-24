@@ -10,8 +10,15 @@ const cleanState = {
   auth: {
     token: null,
   },
+  donation: {
+    received: {
+      date: '26/03/20',
+      amount: '50',
+    },
+  },
   declaration: false,
   health: false,
+  donation: {},
 }
 
 function saveState(newState) {
@@ -34,6 +41,10 @@ const actionMap = {
   [types.SET_DECLARATION]: (state, payload) => saveState({ ...state, declaration: payload }),
   [types.SET_HEALTHCHECK]: (state, payload) => saveState({ ...state, health: payload }),
   [types.SET_LOGOUT]: () => logout(),
+  [types.SET_DONATION]: (state, payload) => ({
+    ...state,
+    donation: payload,
+  }),
 }
 
 export function reducer(state, action) {

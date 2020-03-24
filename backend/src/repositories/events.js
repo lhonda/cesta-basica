@@ -3,7 +3,7 @@ import { model, Schema } from 'mongoose'
 const schema = new Schema({
   login: {
     type: String,
-    required: [true, 'leaderId is required']
+    required: [true, 'login is required']
   },
   role: {
     type: String,

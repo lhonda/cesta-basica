@@ -115,7 +115,7 @@ dist
 .pnp.*
 
 # load inital data folder
-load/*
-!load/*.example
+data-to-load/*
+!data-to-load/*.example
 
 

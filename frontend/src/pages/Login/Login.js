@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
+import { useHistory } from 'react-router-dom'
 
 import './Login.scss'
 
-import { connect, types } from '../../store'
-import { Auth } from '../../services/API/Login'
+import { connect } from '../../store'
+import { Auth } from '../../services/login'
 
 import {
   titleLoginScreen,
@@ -18,27 +19,15 @@ import { LogoHorizontal } from '../../components/Logo'
 import { Input, inputTypes } from '../../components/Input'
 import { Button, ButtonTypes } from '../../components/Button'
 
-function Login({ store, dispatch }) {
+function Login({ dispatch }) {
+  const history = useHistory()
   const [login, setLogin] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState(false)
   async function handleSubmit(e) {
     e.preventDefault()
-    dispatch({
-      type: types.SET_USER, payload: {
-        name: login
-      }
-    })
-    dispatch({ type: types.SET_TOKEN, payload: { token: 'token' } })
-
-    // const auth = await Auth({ login, password })
-    // if (auth) {
-    //   const { user, token } = auth
-    //   dispatch({ type: types.SET_USER, payload: user })
-    //   dispatch({ type: types.SET_TOKEN, payload: token })
-    // } else {
-    //   setError(true)
-    // }
+    await Auth({ login, password }, dispatch, history)
+    setError(true)
   }
   useEffect(() => {
     error && setError(false)
@@ -48,7 +37,7 @@ function Login({ store, dispatch }) {
       <div className="containerLogo">
         <LogoHorizontal />
       </div>
-      {JSON.stringify(store)}
+
       <div className="containerLogin">
         <h2 className="containerLogin--textCenter">{titleLoginScreen}</h2>
         <form onSubmit={handleSubmit} className="containerLogin__form">

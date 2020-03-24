@@ -3,4 +3,5 @@ export const inputTypes = {
   PASSWORD: 'password',
   CPF: 'cpf',
   CELPHONE: 'celphone',
+  SIZE_LARGE: 'large',
 }

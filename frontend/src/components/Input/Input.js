@@ -8,6 +8,7 @@ import { icWarning, icSuccess } from '../../assets/icons'
 
 function Input({
   placeholder,
+  size,
   inputType,
   maxLength,
   minLength,
@@ -16,6 +17,7 @@ function Input({
   isRequired,
   withError,
   messageError,
+  ignoreValidate,
 }) {
   // eslint-disable-next-line eqeqeq
   const isValid = value.length > 0 && (value.length >= minLength || value.length == maxLength)
@@ -35,7 +37,7 @@ function Input({
   return (
     <>
       <input
-        className={`customInput ${currentStyleInput} ${withError && 'customInput--error'}`}
+        className={`customInput ${currentStyleInput} ${size} ${withError && 'customInput--error'}`}
         maxLength={maxLength}
         minLength={minLength}
         placeholder={placeholder}
@@ -46,7 +48,7 @@ function Input({
         required={isRequired}
       />
 
-      {withError ? (
+      {withError && !ignoreValidate ? (
         <span style={{ zIndex: '1000' }}>
           <img
             className="customInput__icon"
@@ -57,7 +59,8 @@ function Input({
           {withError && <span className="customInput__messageError">{messageError}</span>}
         </span>
       ) : (
-        isValid && (
+        isValid &&
+        !ignoreValidate && (
           <span>
             <img
               className="customInput__icon"
@@ -81,7 +84,9 @@ Input.propTypes = {
   handleOnChange: PropTypes.func.isRequired,
   isRequired: PropTypes.bool,
   withError: PropTypes.bool,
+  ignoreValidate: PropTypes.bool,
   messageError: PropTypes.string,
+  size: PropTypes.string,
 }
 
 Input.defaultProps = {
@@ -91,6 +96,8 @@ Input.defaultProps = {
   minLength: '2',
   isRequired: true,
   withError: false,
+  ignoreValidate: false,
+  size: '',
   messageError: 'Senha incorreta. Tente novamente.',
 }
 

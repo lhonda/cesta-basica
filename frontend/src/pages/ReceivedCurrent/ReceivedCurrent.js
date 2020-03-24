@@ -7,12 +7,7 @@ import { Status } from '../../components/Status'
 import { Sidebar } from '../../components/Sidebar'
 import { Legend, LegendTypes } from '../../components/Legend'
 import { Items, ItemsTypes } from '../../components/Items'
-import { Paragraph, ParagraphTypes } from '../../components/Paragraph'
-import { SubTitle, SubTitleTypes } from '../../components/SubTitle'
 import { Button, ButtonTypes } from '../../components/Button'
-import { ButtonIcon, ButtonIconTypes } from '../../components/ButtonIcon'
-
-import { LogoBack } from '../../components/Logo'
 
 import './ReceivedCurrent.scss'
 
@@ -20,13 +15,12 @@ import {
   statusDonationReceivedCurrent,
   titleDonation,
   legendDonationType,
-  statusDonationWait,
   legendDonationWaitDate,
   legendDonationWaitAmount,
-  legendDonationReceivedButton,
+  legendDonationReceivedFinishButton,
   legendDonationDateFinal,
 } from '../../utils/strings'
-import { handleDonationReceived, handleBackButton } from '../../services/handles'
+import { handleDonationReceived, handleDonationReceivedVoucher } from '../../services/handles'
 
 function ReceivedCurrentPage({ store, dispatch }) {
   const { id } = useParams()
@@ -60,18 +54,50 @@ function ReceivedCurrentPage({ store, dispatch }) {
       </div>
       <hr />
       <div className="main-received-current-prof">
-        <Items type={ItemsTypes.BASKET} complete title="#JKKS5LSLA8" />
-        <Items type={ItemsTypes.BASKET} title="#JKKS5LSLA8" />
-        <Items type={ItemsTypes.BASKET} title="#JKKS5LSLA8" />
-        <Items type={ItemsTypes.BASKET} title="#JKKS5LSLA8" />
-        <Items type={ItemsTypes.BASKET} title="#JKKS5LSLA8" />
-        <Items type={ItemsTypes.BASKET} title="#JKKS5LSLA8" />
+        <Items
+          type={ItemsTypes.BASKET}
+          size={ItemsTypes.LARGE}
+          handleClick={handleDonationReceivedVoucher}
+          complete
+          title="#JKKS5LSLA8"
+        />
+        <Items
+          type={ItemsTypes.BASKET}
+          size={ItemsTypes.LARGE}
+          handleClick={handleDonationReceivedVoucher}
+          title="#JKKS5LSLA8"
+        />
+        <Items
+          type={ItemsTypes.BASKET}
+          size={ItemsTypes.LARGE}
+          handleClick={handleDonationReceivedVoucher}
+          title="#JKKS5LSLA8"
+        />
+        <Items
+          type={ItemsTypes.BASKET}
+          size={ItemsTypes.LARGE}
+          handleClick={handleDonationReceivedVoucher}
+          title="#JKKS5LSLA8"
+        />
+        <Items
+          type={ItemsTypes.BASKET}
+          size={ItemsTypes.LARGE}
+          handleClick={handleDonationReceivedVoucher}
+          title="#JKKS5LSLA8"
+        />
+        <Items
+          type={ItemsTypes.BASKET}
+          size={ItemsTypes.LARGE}
+          handleClick={handleDonationReceivedVoucher}
+          title="#JKKS5LSLA8"
+        />
       </div>
       <div className="footer-received-prof">
         <Button
           handleClick={() => handleDonationReceived('prof')}
           size={ButtonTypes.LARGE}
-          message={legendDonationReceivedButton}
+          disable={store.donation.received.amount !== store.donation.gived}
+          message={legendDonationReceivedFinishButton}
         />
       </div>
     </div>
@@ -82,7 +108,10 @@ ReceivedCurrentPage.propTypes = {
     donation: PropTypes.shape({
       received: PropTypes.shape({
         date: PropTypes.string,
-        amount: PropTypes.string,
+        amount: PropTypes.number,
+      }).isRequired,
+      gived: PropTypes.shape({
+        amount: PropTypes.number,
       }).isRequired,
     }).isRequired,
   }).isRequired,

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { useParams } from 'react-router-dom'
 import { connect } from '../../store'
 import { Title } from '../../components/Title'
+import { Items, ItemsTypes } from '../../components/Items'
 import { LogoBack } from '../../components/Logo'
 import { Input, inputTypes } from '../../components/Input'
 import { File, FileTypes } from '../../components/File'
@@ -14,58 +15,55 @@ import { SubTitle, SubTitleTypes } from '../../components/SubTitle'
 import { Button, ButtonTypes } from '../../components/Button'
 import { ButtonIcon, ButtonIconTypes } from '../../components/ButtonIcon'
 
-import './DonationProf.scss'
+import './ReceivedCurrentProf.scss'
 
 import {
   confirm,
   back,
   titleDonationProf,
-  legendInputAmountDonation,
+  legendAddPicPersonReceivedDonation,
+  legendAddPicPersonReceivedDonationWithDocument,
   legendPicDonation,
   legendInputAddPic,
   legendPicFiscalNode,
 } from '../../utils/strings'
-import { handleBackButton } from '../../services/handles'
+import { handleBackCurrentReceivedButton } from '../../services/handles'
 
-function DonationPage({ store, dispatch }) {
-  const [numberDonation, setNumberDonation] = useState('')
+function ReceivedCurrentProfPage({ store, dispatch }) {
+  const { voucher } = useParams()
   return (
-    <div className="container-donation-prof">
-      <div className="sidebar-donation-prof">
-        <ButtonIcon handleClick={handleBackButton}>
+    <div className="container-donation-received-current-prof">
+      <div className="sidebar-donation-received-current-prof">
+        <ButtonIcon handleClick={handleBackCurrentReceivedButton}>
           <LogoBack height={10} />
         </ButtonIcon>
         <Legend type={LegendTypes.STRONG} message={back} />
       </div>
-      <div className="header-donation-prof">
+      <div className="header-donation-received-current-prof">
         <Title message={`${titleDonationProf}`} />
         <Paragraph size={ParagraphTypes.MEDIUM} content="descriptionDonationProf" />
-        <Input
-          ignoreValidate
-          inputType={inputTypes.TEXT}
-          size={inputTypes.SIZE_LARGE}
-          handleOnChange={setNumberDonation}
-          value={numberDonation}
-          placeholder={legendInputAmountDonation}
-        />
+        <Items size={ItemsTypes.LARGE} align={ItemsTypes.START} title={`Cesta ${voucher}`} />
+        <Items size={ItemsTypes.LARGE} type={ItemsTypes.SELECT} align={ItemsTypes.START} title={`Cesta ${voucher}`} />
       </div>
-      <div className="details-donation-prof" />
-      <div className="main-donation-prof">
+      <div className="details-donation-received-current-prof" />
+      <div className="main-donation-received-current-prof">
+        <Legend size={LegendTypes.SIZE_LARGE} message={legendAddPicPersonReceivedDonation} />
         <SubTitle type={SubTitleTypes.MEDIUM} width={SubTitleTypes.SIZE_SMALL} message={legendPicDonation} />
         <File placeholder={legendInputAddPic} />
       </div>
-      <div className="main-donation-prof">
+      <div className="main-donation-received-current-prof">
+        <Legend size={LegendTypes.SIZE_LARGE} message={legendAddPicPersonReceivedDonationWithDocument} />
         <SubTitle type={SubTitleTypes.MEDIUM} width={SubTitleTypes.SIZE_SMALL} message={legendPicFiscalNode} />
         <File placeholder={legendInputAddPic} />
       </div>
 
-      <div className="footer-donation-prof">
+      <div className="footer-donation-received-current-prof">
         <Button size={ButtonTypes.LARGE} message={confirm} />
       </div>
     </div>
   )
 }
-DonationPage.propTypes = {
+ReceivedCurrentProfPage.propTypes = {
   store: PropTypes.shape({
     donation: PropTypes.shape({
       received: PropTypes.shape({
@@ -77,4 +75,4 @@ DonationPage.propTypes = {
   dispatch: PropTypes.func.isRequired,
 }
 
-export default connect(DonationPage)
+export default connect(ReceivedCurrentProfPage)

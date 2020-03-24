@@ -5,4 +5,5 @@ export const LegendTypes = {
   CENTER: 'center',
   START: 'start',
   END: 'end',
+  SIZE_LARGE: 'large',
 }

@@ -59,7 +59,7 @@ function ReceivedPage({ store, dispatch }) {
       </div>
       <div className="footer-received">
         <Button
-          handleClick={() => handleDonationReceived('prof')}
+          handleClick={() => handleDonationReceived('current')}
           size={ButtonTypes.LARGE}
           message={legendDonationReceivedButton}
         />
@@ -72,7 +72,7 @@ ReceivedPage.propTypes = {
     donation: PropTypes.shape({
       received: PropTypes.shape({
         date: PropTypes.string,
-        amount: PropTypes.string,
+        amount: PropTypes.number,
       }).isRequired,
     }).isRequired,
   }).isRequired,

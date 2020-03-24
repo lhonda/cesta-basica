@@ -1,6 +1,6 @@
 # Data-load
 
-## Como suar
+## Como usar
 1. Criar arquivos .csv em /data-to-load
 Nesta pasta existem arquivos de exemplos como user-data.csv.example
 

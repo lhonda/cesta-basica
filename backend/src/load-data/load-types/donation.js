@@ -11,7 +11,14 @@ export async function process () {
       quantity: row.quantity,
       donor: row.donor,
       status: 'Esperando recebimento',
-      s3Key: null
+      s3Key: null,
+      created: null,
+      received: null,
+      lastDelivery: null,
+      completed: null,
+      strayed: null,
+      lat: null,
+      lon: null
     }
   })
 }

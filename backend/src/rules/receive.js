@@ -29,8 +29,10 @@ export async function receive ({ login, role }, { donationId }, { lat, lon }, fi
     //   console.log(`File uploaded successfully.Key:${key}`)
     // })
 
-    donation.lat = lat
-    donation.lon = lon
+    donation.location = {
+      coordinates: [lon, lat]
+    }
+
     donation.status = 'Entregue para líder'
     donation.received = timestamp
     donation.s3Key = s3Key

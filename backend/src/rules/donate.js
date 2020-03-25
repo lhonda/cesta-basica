@@ -57,15 +57,16 @@ export async function donate ({
     //   console.log(`File uploaded successfully.Key:${key}`)
     // })
 
-    var voucher = new Voucher({
+    const voucher = new Voucher({
       donationId,
       quantity,
       leaderLogin,
       receivedCpf,
       receivedName,
       timestamp,
-      lat,
-      lon,
+      location: {
+        coordinates: [lon, lat]
+      },
       s3Key
     })
 

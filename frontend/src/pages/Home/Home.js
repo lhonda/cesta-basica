@@ -1,5 +1,6 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
+
 import './Home.scss'
 
 import { LogoHorizontal } from '../../components/Logo'
@@ -7,14 +8,16 @@ import { Button, ButtonTypes } from '../../components/Button'
 import { GroupIcons } from '../../components/HomeIcons'
 import { homeContentTitle, homeContentSubTitle, homeContent } from '../../utils/strings'
 
-const Home = () => {
+const Home = ({ history }) => {
+  const goToLogin = () => {
+    history.push('login')
+  }
+
   return (
     <div style={{ width: '100vw' }}>
       <div className="headerHome">
         <LogoHorizontal />
-        <Link to="/login" className="headerHome__button">
-          <Button className="headerHome--button" type={ButtonTypes.FILLHOME} message="Entrar" />
-        </Link>
+        <Button handleClick={goToLogin} type={ButtonTypes.FILL} size={ButtonTypes.THIN} message="Entrar" />
       </div>
       <div className="contentHome">
         <h3>{homeContentTitle}</h3>
@@ -26,6 +29,12 @@ const Home = () => {
       </div>
     </div>
   )
+}
+
+Home.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
 }
 
 export default Home

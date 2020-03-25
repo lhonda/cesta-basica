@@ -13,6 +13,11 @@ export const connect = () => {
   return mongoose.connect(process.env.DBURL)
 }
 
+export const disconnect = () => {
+  console.log(new Date(), 'Database disconnect')
+  return mongoose.disconnect(process.env.DBURL)
+}
+
 mongoose.connection.on('connected', () => {
   status.connected = true
 })

@@ -3,9 +3,11 @@ import { useHistory } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import './DonationItem.scss'
 
+import { donationItemTypes } from './donationItemTypes'
+
 function DonationItem({ title, quantity, stateDonation, donationId }) {
   const history = useHistory()
-  const handleClick = () => history.push(`/${donationId}/`)
+  const handleClick = () => history.push(`/donation/${donationId}/${donationItemTypes[stateDonation]}`)
   const isComplete = stateDonation === 'Completo'
   return (
     <div className="donationItem" onClick={handleClick}>

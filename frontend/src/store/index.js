@@ -23,16 +23,7 @@ const cleanState = {
   },
   declaration: false,
   health: false,
-  donationList: [
-    {
-      id: 'fdsfdfdssd',
-      status: 'Completo',
-      donationId: 1,
-      leaderLogin: 11,
-      quantity: 150,
-      donor: 'Teste do glaucio',
-    },
-  ],
+  donationList: null,
 }
 
 function saveState(newState) {

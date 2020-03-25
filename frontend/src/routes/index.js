@@ -20,7 +20,7 @@ export const Routes = () => (
     <Switch>
       <Route path="/login" exact component={Login} />
       <Route path="/register" exact component={Register} />
-      <Route path="/terms" exact component={Terms} />
+      <Route path="/terms" exact component={Terms} isPrivate />
       <Route path="/checklist" exact component={Checklist} isPrivate />
       <Route path="/donation-list" exact component={DonationList} isPrivate />
       <Route path="/donation/:id/wait" exact component={Donation} isPrivate />

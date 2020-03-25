@@ -31,8 +31,8 @@ function DonationList({ store, dispatch }) {
       <DonationHeader />
       {donationList ? (
         <div className="containerDonation__list">
-          {donationList.map((item) => {
-            const { donor, quantity, status, donationId, id } = item
+          {donationList?.map((item) => {
+            const { donor, quantity, status, donationId, id ,receivedDate} = item
             return (
               <DonationItem title={donor} quantity={quantity} key={id} stateDonation={status} donationId={donationId} />
             )

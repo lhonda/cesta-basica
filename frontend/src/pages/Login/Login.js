@@ -74,7 +74,7 @@ function Login({ dispatch }) {
           <div style={{ marginTop: '2.3rem' }} />
 
           <div className="containerLogin__form__button">
-            <Button type={ButtonTypes.FILL} message="Enviar" />
+            <Button type={ButtonTypes.FILL} message="Entrar" />
           </div>
         </form>
       </div>

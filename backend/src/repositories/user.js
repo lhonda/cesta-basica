@@ -12,15 +12,14 @@ const schema = new Schema({
     required: [true, 'password is required']
   },
   initialPassword: {
-    type: String,
-    required: [true, 'initialPassword is required']
+    type: String
   },
   name: {
     type: String
   },
   role: {
     type: String,
-    enum: ['leader', 'admin', 'user'],
+    enum: ['leader', 'admin'],
     required: [true, 'role is required']
   },
   email: {

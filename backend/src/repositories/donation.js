@@ -1,5 +1,4 @@
 import { model, Schema } from 'mongoose'
-import { pointSchema } from './pointSchema'
 
 const donationSchema = new Schema({
   donationId: {
@@ -30,9 +29,11 @@ const donationSchema = new Schema({
   },
   created: { type: Date },
   received: { type: Date },
-  finished: { type: Date },
+  lastDelivery: { type: Date },
+  completed: { type: Date },
   strayed: { type: Date },
-  location: pointSchema
+  lat: { type: Number },
+  lon: { type: Number }
 })
 
 donationSchema.pre('save', function (next) {

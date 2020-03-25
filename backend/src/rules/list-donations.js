@@ -1,12 +1,12 @@
 import { Donation } from '../repositories/donation'
 
-export async function listDonations (leaderLogin) {
+export async function listDonations ({ login, role }) {
   const donations = (
-    await Donation.find({ leaderLogin })
-  ).map(({ status, donationId, leaderLogin, quantity, donor, timestamp }) => ({
+    await Donation.find({ login })
+  ).map(({ status, donationId, login, quantity, donor, timestamp }) => ({
     status,
     donationId,
-    leaderLogin,
+    login,
     quantity,
     donor,
     timestamp

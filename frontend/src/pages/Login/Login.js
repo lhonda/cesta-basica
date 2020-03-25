@@ -13,6 +13,7 @@ import {
   typeYourPassword,
   errorMessageInvalidLogin,
   errorMessageInvalidPassword,
+  textButtonForLogin
 } from '../../utils/strings'
 
 import { Loader } from '../../components/Loader'
@@ -74,7 +75,7 @@ function Login({ dispatch }) {
           <div style={{ marginTop: '2.3rem' }} />
 
           <div className="containerLogin__form__button">
-            <Button type={ButtonTypes.FILL} message="Enviar" />
+            <Button type={ButtonTypes.FILL} message={textButtonForLogin} />
           </div>
         </form>
       </div>

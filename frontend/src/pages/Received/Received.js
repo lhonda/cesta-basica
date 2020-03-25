@@ -55,7 +55,8 @@ function ReceivedPage({ store, dispatch }) {
       </div>
       <hr />
       <div className="main-received">
-        <Paragraph size={ParagraphTypes.MEDIUM} content="descriptionDonationReceived" />
+        <Paragraph size={ParagraphTypes.LIGHT} content="descriptionDonationReceived" />
+        <Paragraph size={ParagraphTypes.LIGHT} content="descriptionDonationReceivedSecondparagraph" />
       </div>
       <div className="footer-received">
         <Button

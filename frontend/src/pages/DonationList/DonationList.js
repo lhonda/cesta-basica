@@ -32,9 +32,9 @@ function DonationList({ store, dispatch }) {
       {donationList ? (
         <div className="containerDonation__list">
           {donationList?.map((item) => {
-            const { donor, quantity, status, donationId, id ,receivedDate} = item
+            const { donor, quantity, status, donationId, leaderLogin ,receivedDate} = item
             return (
-              <DonationItem title={donor} quantity={quantity} key={id} stateDonation={status} donationId={donationId} />
+              <DonationItem title={donor} quantity={quantity} key={leaderLogin} stateDonation={status} donationId={donationId} />
             )
           })}
         </div>

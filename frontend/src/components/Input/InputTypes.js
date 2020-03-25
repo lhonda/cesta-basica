@@ -4,4 +4,5 @@ export const inputTypes = {
   CPF: 'cpf',
   CELPHONE: 'celphone',
   SIZE_LARGE: 'large',
+  NUMBER: 'number',
 }

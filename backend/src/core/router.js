@@ -46,7 +46,7 @@ router.get('/donations', authRequired('leader'), (req, res) =>
 
 // recebimento de doacoes SUPERMERCADO > LIDER
 router.post('/donations/:donationId/receive', authRequired('leader'), (req, res) =>
-  receive(req.auth, req.params, req.body, req.file)
+  receive(req.auth, req.params, req.body, req.files)
     .then(() => res.status(204).end())
     .catch(err => {
       console.log(err)

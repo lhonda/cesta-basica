@@ -1,43 +1,47 @@
-import { Donation } from '../repositories/donation'
+import { Donation, donationSchema } from '../repositories/donation'
 
-// var AWS = require('aws-sdk')
-// const BUCKET_NAME = 'cesta-basica-sp'
+var AWS = require('aws-sdk')
+const BUCKET_NAME = 'cesta-basica-sp'
 
-export async function receive ({ login, role }, { donationId }, { geolocation }, fileContent) {
+export async function receive({ login }, { donationId }, { geolocation }, { cpf }) {
+
   const donation = await Donation.findOne({ donationId: donationId })
+  const status = donationSchema.obj.status.enum[0]
+  const [, ext] = cpf.mimetype.split('/');
 
-  console.log(donation)
-
-  if (donation) {
+  if (donation && (donation.status === status) && (donation.leaderLogin === login)) {
     const utcNow = new Date()
-    let s3Key
+    const key = `provas/recebimentos/entrega-${login}-${donationId}-${utcNow.toISOString()}.${ext}`
 
-    // var key = `/provas/recebimentos/entrega-${donationId}-${utcNow.toISOString()}.jpg`
+    const params = {
+      Bucket: BUCKET_NAME,
+      Key: key,
+      Body: cpf.data
+    }
 
-    // const params = {
-    //   Bucket: BUCKET_NAME,
-    //   Key: key,
-    //   Body: fileContent
-    // }
+    console.log("HERE");
 
-    // var s3 = new AWS.S3()
+    let s3 = new AWS.S3()
+    s3.upload(params, function (err, data) {
+      if (err) {
+        throw err
+      }
+      console.log(`File uploaded successfully.Key:${key}`)
+    })
 
-    // s3.upload(params, function (err, data) {
-    //   if (err) {
-    //     throw err
-    //   }
-    //   console.log(`File uploaded successfully.Key:${key}`)
-    // })
+    console.log("sr3 2 ->", s3);
 
-    donation.status = 'Entregue para líder'
-    donation.received = utcNow
-    donation.s3Key = s3Key
-    await donation.save()
+    const payload = {
+      status: donation.status[1],
+      location: geolocation,
+      s3Key: 'Teste',
+      // timeStamp: utcNow.toISOString()
+    }
 
-    console.log(donation)
+    return payload
+    // return donation.update(payload)
 
-    return
   }
 
-  return Promise.reject(new Error(`Receiving donation ${donationId} failed.`))
+  return Promise.reject(new Error(`Donation ${donationId} save failed.`))
 }

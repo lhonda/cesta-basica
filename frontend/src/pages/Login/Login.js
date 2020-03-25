@@ -29,7 +29,8 @@ function Login({ dispatch }) {
   async function handleSubmit(e) {
     e.preventDefault()
     setLoading(true)
-    await Auth({ login, password }, dispatch, history)
+    const clearLogin = login.replace(/\./g, '').replace(/-/g, '')
+    await Auth({ login: clearLogin, password }, dispatch, history)
     setLoading(false)
     setError(true)
   }

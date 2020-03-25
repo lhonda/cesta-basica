@@ -3,17 +3,6 @@ import { types } from '../store'
 
 const route = '/sign-in'
 
-const mock = {
-  data: {
-    user: {
-      id: 'lorem',
-      login: 'glaucio ricardo',
-      role: 'admin',
-    },
-    token: '_ihfusdhfbsdh.fjksdnfdsjf',
-  },
-}
-
 export async function Auth(dataRequest, dispatch, history) {
   try {
     const response = await Api.post(route, dataRequest)

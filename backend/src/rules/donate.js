@@ -64,7 +64,8 @@ export async function donate ({
       receivedCpf,
       receivedName,
       timestamp,
-      location: {
+      point: {
+        type: 'Point',
         coordinates: [lon, lat]
       },
       s3Key

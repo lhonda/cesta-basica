@@ -29,7 +29,8 @@ export async function receive ({ login, role }, { donationId }, { lat, lon }, fi
     //   console.log(`File uploaded successfully.Key:${key}`)
     // })
 
-    donation.location = {
+    donation.point = {
+      type: 'Point',
       coordinates: [lon, lat]
     }
 

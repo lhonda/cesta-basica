@@ -1,16 +1,5 @@
 import { model, Schema } from 'mongoose'
-
-const pointSchema = new Schema({
-  type: {
-    type: String,
-    enum: ['Point'],
-    required: true
-  },
-  coordinates: {
-    type: [Number],
-    required: true
-  }
-})
+import { pointSchema } from './pointSchema'
 
 const donationSchema = new Schema({
   donationId: {
@@ -32,53 +21,23 @@ const donationSchema = new Schema({
   },
   status: {
     type: String,
-    enum: ['Esperando recebimento', 'Entregue para líder', 'Completo', 'Devolvido', 'Extraviado'],
+    enum: ['Esperando recebimento', 'Entregue para líder', 'Entregando', 'Completo', 'Devolvido', 'Extraviado'],
     required: [true, 'status is required'],
     default: 'Esperando recebimento'
   },
   s3Key: {
     type: String
-  }
-})
-
-const eventSchema = new Schema({
-  donationId: {
-    type: String,
-    unique: true,
-    required: [true, 'DonationId is required']
   },
-  quantity: {
-    type: Number,
-    required: [true, 'Quantity is required']
-  },
-  leaderLogin: {
-    type: String,
-    required: [true, 'leaderLogin is required']
-  },
-  donor: {
-    type: String,
-    required: [true, 'Donor is required']
-  },
-  status: {
-    type: String,
-    enum: ['Esperando recebimento', 'Entregue para líder', 'Completo', 'Devolvido', 'Extraviado'],
-    required: [true, 'status is required'],
-    default: 'Esperando recebimento'
-  },
-  timeStamp: {
-    type: Date,
-    required: [true, 'Timestamp is required']
-  },
-  receivedCpf: {
-    type: String,
-    required: [true, 'receivedCpf is required']
-  },
-  receivedName: {
-    type: String,
-    required: [true, 'receivedName is required']
-  },
+  created: { type: Date },
+  received: { type: Date },
+  finished: { type: Date },
+  strayed: { type: Date },
   location: pointSchema
 })
 
+donationSchema.pre('save', function (next) {
+  this.created = new Date()
+  next()
+})
+
 export const Donation = model('Donation', donationSchema)
-export const DonationEvent = model('DonationEvent', eventSchema)

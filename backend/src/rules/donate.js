@@ -1,15 +1,23 @@
-import { Donation, DonationEvent } from '../repositories/donation'
+import { Donation, Voucher } from '../repositories'
 
 var AWS = require('aws-sdk')
 const BUCKET_NAME = 'cesta-basica-sp'
 
-export async function donate ({ donationId, leaderLogin, geolocation, quantity, receivedCpf, receivedName, fileContent }) {
+export async function donate ({
+  donationId,
+  leaderLogin,
+  geolocation,
+  quantity,
+  receivedCpf,
+  receivedName,
+  fileContent
+}) {
   const donation = await Donation.findOne({ donationId: donationId })
 
   console.log(donation)
 
   if (donation) {
-    donation.status = donation.status[2]
+    donation.status = 'Entregando'
     await donation.save()
 
     var utcNow = new Date()
@@ -29,7 +37,7 @@ export async function donate ({ donationId, leaderLogin, geolocation, quantity, 
       console.log(`File uploaded successfully.Key:${key}`)
     })
 
-    var event = new DonationEvent({
+    var voucher = new Voucher({
       donationId: donationId,
       quantity: quantity,
       leaderLogin: leaderLogin,
@@ -42,14 +50,12 @@ export async function donate ({ donationId, leaderLogin, geolocation, quantity, 
       s3Key: key
     })
 
-    console.log(event)
+    console.log(voucher)
 
-    await event.save()
+    await voucher.save()
 
-    return {
-      donation: donation
-    }
+    return
   }
 
-  return Promise.reject(new Error(`Donation ${donationId} save failed.`))
+  return Promise.reject(new Error(`Donating donation ${donationId} failed.`))
 }

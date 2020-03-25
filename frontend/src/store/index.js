@@ -23,6 +23,7 @@ const cleanState = {
   },
   declaration: false,
   health: false,
+  donationList: null,
 }
 
 function saveState(newState) {
@@ -49,6 +50,7 @@ const actionMap = {
     ...state,
     donation: payload,
   }),
+  [types.SET_DONATION_LIST]: (state, payload) => saveState({ ...state, donationList: payload }),
 }
 
 export function reducer(state, action) {

@@ -4,8 +4,10 @@ import { authRequired } from '../middlewares'
 
 export const router = Router()
 
+// verificacao de saude do back-end
 router.get('/health-check', (req, res) => res.status(200).json(healthCheck()))
 
+// criacao de novos usuparios
 router.post('/users', authRequired('admin'), (req, res) => createUser(req.body)
   .then(user => res.status(201).json(user))
   .catch(err => {
@@ -15,6 +17,7 @@ router.post('/users', authRequired('admin'), (req, res) => createUser(req.body)
       : res.status(500).json({ message: 'Internal' })
   }))
 
+// logind generico / lider
 router.post('/sign-in', (req, res) =>
   signin(req.body)
     .then(signinData => res.status(200).json(signinData))
@@ -23,15 +26,7 @@ router.post('/sign-in', (req, res) =>
       res.status(401).json({ message: err.message })
     }))
 
-// entregar p/ familia
-router.post('/donations/:donationId/donate', authRequired('leader'), (req, res) =>
-  donate(req.body, req.file)
-    .then(donationData => res.status(200).json(donationData))
-    .catch(err => {
-      console.log(err)
-      res.status(401).json({ message: err.message })
-    }))
-
+// login de admin
 router.post('/admin/sign-in', (req, res) =>
   signin(req.body)
     .then(signinData => res.status(200).json(signinData))
@@ -40,16 +35,7 @@ router.post('/admin/sign-in', (req, res) =>
       res.status(401).json({ message: err.message })
     }))
 
-// recebimento de doacoes do lider
-router.post('/donations/:donationId/receive', authRequired('leader'), (req, res) =>
-  receive(req.body, req.file)
-    .then(donationData => res.status(200).json(donationData))
-    .catch(err => {
-      console.log(err)
-      res.status(401).json({ message: err.message })
-    }))
-
-// listar doações
+// listar doações que foram pre carregadas no banco de dados
 router.get('/donations', authRequired('leader'), (req, res) =>
   listDonations(req.auth.login)
     .then(data => res.status(data.donations.length === 0 ? 404 : 200).json(data))
@@ -58,16 +44,36 @@ router.get('/donations', authRequired('leader'), (req, res) =>
       res.status(401).json({ message: err.message })
     }))
 
+// recebimento de doacoes SUPERMERCADO > LIDER
+router.post('/donations/:donationId/receive', authRequired('leader'), (req, res) =>
+  receive(req.auth, req.params, req.body, req.file)
+    .then(() => res.status(204).end())
+    .catch(err => {
+      console.log(err)
+      res.status(401).json({ message: err.message })
+    }))
+
+// entregar p/ familia LIDER > FAMILIA
+router.post('/donations/:donationId/donate', authRequired('leader'), (req, res) =>
+  donate(req.body, req.file)
+    .then(() => res.status(204).end())
+    .catch(err => {
+      console.log(err)
+      res.status(401).json({ message: err.message })
+    }))
+
+// guardar termo do lider, so retorna 201 sem conteudo
 router.post('/commitment', authRequired('leader'), (req, res) =>
-  commitment(req.body)
+  commitment(req.auth)
     .then(() => res.status(201).end())
     .catch(err => {
       console.log(err)
       res.status(401).json({ message: err.message })
     }))
 
+// guardar checklist, so retorna 201 sem conteudo
 router.post('/checklist', authRequired('leader'), (req, res) =>
-  checklist(req.body)
+  checklist(req.auth)
     .then(() => res.status(201).end())
     .catch(err => {
       console.log(err)

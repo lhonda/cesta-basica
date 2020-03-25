@@ -8,7 +8,8 @@
     "dev": "nodemon -r esm src/main.js",
     "lint": "eslint .",
     "postinstall": "npm run build",
-    "load-data": "node -r esm src/load-data/all.js"
+    "load-data": "node -r esm src/load-data/all.js",
+    "build": ""
   },
   "dependencies": {
     "aws-sdk": "^2.643.0",

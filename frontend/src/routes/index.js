@@ -21,13 +21,13 @@ export const Routes = () => (
       <Route path="/login" exact component={Login} />
       <Route path="/register" exact component={Register} />
       <Route path="/terms" exact component={Terms} />
-      <Route path="/checklist" exact component={Checklist} />
+      <Route path="/checklist" exact component={Checklist} isPrivate />
       <Route path="/donation-list" exact component={DonationList} isPrivate />
-      <Route path="/donation/:id/wait" exact component={Donation} />
-      <Route path="/donation/:id/wait/prof" exact component={DonationProf} />
-      <Route path="/donation/:id/received" exact component={Received} />
-      <Route path="/donation/:id/received/current" exact component={ReceivedCurrent} />
-      <Route path="/donation/:id/received/current/:voucher/prof" exact component={ReceivedCurrentProf} />
+      <Route path="/donation/:id/wait" exact component={Donation} isPrivate />
+      <Route path="/donation/:id/wait/prof" exact component={DonationProf} isPrivate />
+      <Route path="/donation/:id/received" exact component={Received} isPrivate />
+      <Route path="/donation/:id/received/current" exact component={ReceivedCurrent} isPrivate />
+      <Route path="/donation/:id/received/current/:voucher/prof" exact component={ReceivedCurrentProf} isPrivate />
     </Switch>
   </BrowserRouter>
 )

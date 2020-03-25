@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
 import './DonationList.scss'
 import { connect } from '../../store'
 
@@ -9,96 +10,31 @@ import { DonationIsEmpty } from './DonationIsEmpty'
 import { DonationItem } from './DonationItem'
 import { BottomMenu } from './BottomMenu'
 
-const mock = [
-  {
-    title: 'Doação A',
-    quantity: '110 unidades',
-    state: 'Esperando Recebimento',
-  },
-  {
-    title: 'Doação B',
-    quantity: '1100 unidades',
-    state: 'Entregue',
-  },
-  {
-    title: 'Doação C',
-    quantity: '1355 unidades',
-    state: 'Completo',
-    isComplete: true,
-  },
-  {
-    title: 'Doação D',
-    quantity: '110 unidades',
-    state: 'Esperando Recebimento',
-  },
-  {
-    title: 'Doação E',
-    quantity: '1100 unidades',
-    state: 'Entregue',
-    isComplete: true,
-  },
-  {
-    title: 'Doação F',
-    quantity: '1355 unidades',
-    state: 'Completo',
-  },
-  {
-    title: 'Doação A',
-    quantity: '110 unidades',
-    state: 'Esperando Recebimento',
-  },
-  {
-    title: 'Doação B',
-    quantity: '1100 unidades',
-    state: 'Entregue',
-  },
-  {
-    title: 'Doação C',
-    quantity: '1355 unidades',
-    state: 'Completo',
-    isComplete: true,
-  },
-  {
-    title: 'Doação D',
-    quantity: '110 unidades',
-    state: 'Esperando Recebimento',
-  },
-  {
-    title: 'Doação E',
-    quantity: '1100 unidades',
-    state: 'Entregue',
-    isComplete: true,
-  },
-  {
-    title: 'Doação ultima',
-    quantity: '1355 unidades',
-    state: 'Completo',
-    isComplete: true,
-  },
-]
+import { DonationsList } from '../../services/API/donationList'
 
 function DonationList({ store, dispatch }) {
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState()
+  const { donationList } = store
+
+  async function getDonationList() {
+    setLoading(true)
+    await DonationsList(dispatch)
+    setLoading(false)
+  }
 
   useEffect(() => {
-    setLoading(false)
+    getDonationList()
   }, [])
   return (
     <div className="containerDonation">
       {loading && <Loader />}
       <DonationHeader />
-      {true ? (
+      {donationList ? (
         <div className="containerDonation__list">
-          {mock.map((item, index) => {
-            const { title, quantity, state, isComplete } = item
+          {donationList.map((item) => {
+            const { donor, quantity, status, donationId, id } = item
             return (
-              <DonationItem
-                title={title}
-                quantity={quantity}
-                key={`${title}-${index * index}`}
-                stateDonation={state}
-                isComplete={isComplete}
-              />
+              <DonationItem title={donor} quantity={quantity} key={id} stateDonation={status} donationId={donationId} />
             )
           })}
         </div>
@@ -110,4 +46,8 @@ function DonationList({ store, dispatch }) {
   )
 }
 
+DonationList.propTypes = {
+  store: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
+}
 export default connect(DonationList)

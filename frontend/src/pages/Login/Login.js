@@ -83,7 +83,6 @@ function Login({ dispatch }) {
 }
 
 Login.propTypes = {
-  store: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
 }
 

@@ -23,6 +23,16 @@ const cleanState = {
   },
   declaration: false,
   health: false,
+  donationList: [
+    {
+      id: 'fdsfdfdssd',
+      status: 'Completo',
+      donationId: 1,
+      leaderLogin: 11,
+      quantity: 150,
+      donor: 'Teste do glaucio',
+    },
+  ],
 }
 
 function saveState(newState) {
@@ -49,6 +59,7 @@ const actionMap = {
     ...state,
     donation: payload,
   }),
+  [types.SET_DONATION_LIST]: (state, payload) => saveState({ ...state, donationList: payload }),
 }
 
 export function reducer(state, action) {

@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { useParams } from 'react-router-dom'
+import { Modal } from '../Modal'
 import { connect } from '../../store'
 import { Title } from '../../components/Title'
 import { Status } from '../../components/Status'
@@ -19,14 +20,17 @@ import {
   legendDonationWaitAmount,
   legendDonationReceivedFinishButton,
   legendDonationDateFinal,
+  completeDeliveryTitle,
 } from '../../utils/strings'
-import { handleDonationReceived, handleDonationReceivedVoucher } from '../../services/handles'
+import { handleDonationReceived, handleDonationReceivedVoucher, handleToggleModal } from '../../services/handles'
 
 function ReceivedCurrentPage({ store, dispatch }) {
   const { id } = useParams()
+  const [showModal, setShowModal] = useState(false)
 
   return (
     <div className="container-received-prof">
+      <Modal isOpenModal={showModal} actionExit={() => handleToggleModal(setShowModal)} title={completeDeliveryTitle} />
       <div className="header-received-prof">
         <Title message={`${titleDonation} ${id}`} />
         <Status message={statusDonationReceivedCurrent} />
@@ -94,9 +98,9 @@ function ReceivedCurrentPage({ store, dispatch }) {
       </div>
       <div className="footer-received-prof">
         <Button
-          handleClick={() => handleDonationReceived('prof')}
+          handleClick={() => handleToggleModal(setShowModal)}
           size={ButtonTypes.LARGE}
-          disable={store.donation.received.amount !== store.donation.gived}
+          disable={store.donation.received.amount !== store.donation.gived.amount}
           message={legendDonationReceivedFinishButton}
         />
       </div>

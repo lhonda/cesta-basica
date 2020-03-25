@@ -1,3 +1,9 @@
+// Home screen
+export const homeContentTitle = 'Apoie uma comunidade contra a fome.'
+export const homeContentSubTitle = 'O que estamos fazendo'
+export const homeContent =
+  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean porttitor ipsum eu quam pharetra fringilla. Curabitur feugiat odio sapien, sed tempor lectus lobortis et. Fusce sit amet fringilla neque.'
+
 // login screen
 export const titleLoginScreen = 'Entre na plataforma'
 export const placeholderCPF = 'Digite seu CPF'
@@ -66,3 +72,8 @@ export const legendInputAddPic = 'adicionar foto da galeria'
 export const legendAddPicPersonReceivedDonation = 'Tirar uma foto da pessoa recebendo a doação.'
 export const legendAddPicPersonReceivedDonationWithDocument =
   'Tirar uma foto da pessoa segurando documento ao lado do rosto.'
+
+// Modal
+export const completeDeliveryTitle = 'Entrega de doação completa!'
+export const completeDeliveryThanks = 'Obrigada por ajudar lore lore lore ipsum lore ispum lore ipsum ipsum.'
+export const completeDeliveryInformationContate = 'Caso tenha ocorrido algum problema na entrega, entre em contato com:'

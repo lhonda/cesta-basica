@@ -16,7 +16,7 @@ export async function genericLoad (schema, rows) {
   const keys = Object.keys(rows[0])
 
   if (!compareStringArrays(schemaKeys, keys)) {
-    throw new Error(`Columns names must be ${schemaKeys.join(', ')}`)
+    throw new Error(`Columns names must be at this order: ${schemaKeys.join(', ')}`)
   }
 
   return Promise.all(rows.map(async row => schema.create(row)))

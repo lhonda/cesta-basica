@@ -5,4 +5,5 @@ export const ButtonTypes = {
   LARGE: 'large',
   MEDIUM: 'medium',
   SMALL: 'small',
+  THIN: 'thin',
 }

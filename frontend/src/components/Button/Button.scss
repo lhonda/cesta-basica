@@ -15,6 +15,14 @@
     border: none;
   }
 
+  &.thin {
+    width: 120px;
+    height: 32px;
+    padding: 5px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
 }
 
 .button-fillhome {

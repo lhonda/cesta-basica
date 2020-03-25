@@ -1,11 +1,11 @@
 .headerHome {
   display: flex;
   justify-content: space-around;
+  align-items: flex-end;
   padding: 1.5rem 0;
 
-  &__button {
-    position: relative;
-    top: 0.5rem;
+  button {
+    margin-top: 0;
   }
 }
 
@@ -21,9 +21,8 @@
   color: #ffffff;
   box-sizing: border-box;
 
-  &__button {
-    display: flex;
-    justify-content: right;
+  h3 {
+    margin-top: 0;
   }
 }
 

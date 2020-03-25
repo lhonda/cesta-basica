@@ -28,14 +28,15 @@ const donationSchema = new Schema({
   s3Key: {
     type: String
   },
-  timestamp: {
-    type: Date
-  },
+  created: { type: Date },
+  received: { type: Date },
+  finished: { type: Date },
+  strayed: { type: Date },
   location: pointSchema
 })
 
 donationSchema.pre('save', function (next) {
-  this.timestamp = new Date()
+  this.created = new Date()
   next()
 })
 

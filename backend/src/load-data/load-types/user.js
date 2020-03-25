@@ -6,10 +6,13 @@ import { genericProcess } from '../genericProcess'
 
 export async function process () {
   return genericProcess(User, 'user-data.csv', row => {
+    const password = random.password()
+
     return {
       login: row.cpf,
+      password: password,
+      initialPassword: password,
       name: row.name,
-      password: random.password(),
       role: 'leader',
       email: row.email,
       cpf: row.cpf,

@@ -7,12 +7,16 @@ const schema = new Schema({
     unique: true,
     required: [true, 'login is required']
   },
-  name: {
-    type: String
-  },
   password: {
     type: String,
     required: [true, 'password is required']
+  },
+  initialPassword: {
+    type: String,
+    required: [true, 'initialPassword is required']
+  },
+  name: {
+    type: String
   },
   role: {
     type: String,

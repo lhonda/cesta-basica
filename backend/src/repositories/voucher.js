@@ -1,4 +1,5 @@
 import { model, Schema } from 'mongoose'
+import { pointSchema } from './pointSchema'
 
 const voucherSchema = new Schema({
   donationId: {
@@ -24,8 +25,7 @@ const voucherSchema = new Schema({
     type: String,
     required: [true, 'receivedName is required']
   },
-  lat: { type: Number },
-  lon: { type: Number }
+  point: pointSchema
 })
 
 voucherSchema.pre('save', function (next) {

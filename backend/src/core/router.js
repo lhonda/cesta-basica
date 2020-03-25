@@ -51,8 +51,8 @@ router.post('/donations/:donationId/receive', authRequired('leader'), (req, res)
 
 // listar doações
 router.get('/donations', authRequired('leader'), (req, res) =>
-  listDonations(req.body)
-    .then(donationData => res.status(200).json(donationData))
+  listDonations(req.auth.login)
+    .then(data => res.status(data.donations.length === 0 ? 404 : 200).json(data))
     .catch(err => {
       console.log(err)
       res.status(401).json({ message: err.message })

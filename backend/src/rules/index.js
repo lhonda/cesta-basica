@@ -1,3 +1,4 @@
+export { listDonations } from './list-donations'
 export { healthCheck } from './health-check'
 export { signin } from './sign-in'
 export { createUser } from './create-user'

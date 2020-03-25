@@ -7,7 +7,7 @@ export const router = Router()
 // verificacao de saude do back-end
 router.get('/health-check', (req, res) => res.status(200).json(healthCheck()))
 
-// criacao de novos usuparios
+// criacao de novos usuarios
 router.post('/users', authRequired('admin'), (req, res) => createUser(req.body)
   .then(user => res.status(201).json(user))
   .catch(err => {
@@ -17,7 +17,7 @@ router.post('/users', authRequired('admin'), (req, res) => createUser(req.body)
       : res.status(500).json({ message: 'Internal' })
   }))
 
-// logind generico / lider
+// login generico / lider
 router.post('/sign-in', (req, res) =>
   signin(req.body)
     .then(signinData => res.status(200).json(signinData))
@@ -37,7 +37,7 @@ router.post('/admin/sign-in', (req, res) =>
 
 // listar doações que foram pre carregadas no banco de dados
 router.get('/donations', authRequired('leader'), (req, res) =>
-  listDonations(req.auth.login)
+  listDonations(req.auth)
     .then(data => res.status(data.donations.length === 0 ? 404 : 200).json(data))
     .catch(err => {
       console.log(err)
@@ -55,7 +55,7 @@ router.post('/donations/:donationId/receive', authRequired('leader'), (req, res)
 
 // entregar p/ familia LIDER > FAMILIA
 router.post('/donations/:donationId/donate', authRequired('leader'), (req, res) =>
-  donate(req.body, req.file)
+  donate(req.auth, req.params, req.body, req.file)
     .then(() => res.status(204).end())
     .catch(err => {
       console.log(err)

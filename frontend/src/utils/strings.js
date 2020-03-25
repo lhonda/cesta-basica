@@ -70,6 +70,7 @@ export const legendInputAmountDonation = 'Quantidade de doações recebidas'
 export const legendPicDonation = 'Foto da doação'
 export const legendPicFiscalNode = 'Foto da nota fiscal'
 export const legendInputAddPic = 'adicionar foto da galeria'
+export const legendNFQuestion = 'Deseja adicionar Nota Fiscal?'
 
 export const legendAddPicPersonReceivedDonation = 'Tirar uma foto da pessoa recebendo a doação.'
 export const legendAddPicPersonReceivedDonationWithDocument =
@@ -79,3 +80,8 @@ export const legendAddPicPersonReceivedDonationWithDocument =
 export const completeDeliveryTitle = 'Entrega de doação completa!'
 export const completeDeliveryThanks = 'Líder, somos um time de heróis e heroínas! Obrigado por continuar agindo e salvando vidas diante das adversidades e do caos! Continue se cuidando para poder cuidar do próximo! Tamojunto! '
 export const completeDeliveryInformationContate = 'Caso tenha ocorrido algum problema na entrega, entre em contato com:'
+
+// Generic
+
+export const WORD_NO = 'Não'
+export const WORD_YES = 'Sim'

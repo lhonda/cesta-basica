@@ -1,39 +1,43 @@
 import { Donation } from '../repositories/donation'
 
-var AWS = require('aws-sdk')
-const BUCKET_NAME = 'cesta-basica-sp'
+// var AWS = require('aws-sdk')
+// const BUCKET_NAME = 'cesta-basica-sp'
 
-export async function receive ({ donationId, leaderLogin, geolocation, quantity, receivedCpf, receivedName, fileContent }) {
+export async function receive ({ login, role }, { donationId }, { geolocation }, fileContent) {
   const donation = await Donation.findOne({ donationId: donationId })
 
   console.log(donation)
 
   if (donation) {
-    donation.status = donation.status[1]
+    const utcNow = new Date()
+    let s3Key
+
+    // var key = `/provas/recebimentos/entrega-${donationId}-${utcNow.toISOString()}.jpg`
+
+    // const params = {
+    //   Bucket: BUCKET_NAME,
+    //   Key: key,
+    //   Body: fileContent
+    // }
+
+    // var s3 = new AWS.S3()
+
+    // s3.upload(params, function (err, data) {
+    //   if (err) {
+    //     throw err
+    //   }
+    //   console.log(`File uploaded successfully.Key:${key}`)
+    // })
+
+    donation.status = 'Entregue para líder'
+    donation.received = utcNow
+    donation.s3Key = s3Key
     await donation.save()
 
-    var utcNow = new Date()
-    var key = `/provas/recebimentos/entrega-${donationId}-${utcNow.toISOString()}.jpg`
+    console.log(donation)
 
-    const params = {
-      Bucket: BUCKET_NAME,
-      Key: key,
-      Body: fileContent
-    }
-
-    var s3 = new AWS.S3()
-
-    s3.upload(params, function (err, data) {
-      if (err) {
-        throw err
-      }
-      console.log(`File uploaded successfully.Key:${key}`)
-    })
-
-    return {
-      donation: donation
-    }
+    return
   }
 
-  return Promise.reject(new Error(`Donation ${donationId} save failed.`))
+  return Promise.reject(new Error(`Receiving donation ${donationId} failed.`))
 }

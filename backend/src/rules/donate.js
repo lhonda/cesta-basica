@@ -54,10 +54,8 @@ export async function donate ({
 
     await voucher.save()
 
-    return {
-      donation: donation
-    }
+    return
   }
 
-  return Promise.reject(new Error(`Donation ${donationId} save failed.`))
+  return Promise.reject(new Error(`Donating donation ${donationId} failed.`))
 }

@@ -46,8 +46,8 @@ router.get('/donations', authRequired('leader'), (req, res) =>
 
 // recebimento de doacoes SUPERMERCADO > LIDER
 router.post('/donations/:donationId/receive', authRequired('leader'), (req, res) =>
-  receive(req.body, req.file)
-    .then(donationData => res.status(200).json(donationData))
+  receive(req.auth, req.params, req.body, req.file)
+    .then(() => res.status(204).end())
     .catch(err => {
       console.log(err)
       res.status(401).json({ message: err.message })
@@ -56,7 +56,7 @@ router.post('/donations/:donationId/receive', authRequired('leader'), (req, res)
 // entregar p/ familia LIDER > FAMILIA
 router.post('/donations/:donationId/donate', authRequired('leader'), (req, res) =>
   donate(req.body, req.file)
-    .then(donationData => res.status(200).json(donationData))
+    .then(() => res.status(204).end())
     .catch(err => {
       console.log(err)
       res.status(401).json({ message: err.message })

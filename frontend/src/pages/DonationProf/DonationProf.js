@@ -14,6 +14,8 @@ import { SubTitle, SubTitleTypes } from '../../components/SubTitle'
 import { Button, ButtonTypes } from '../../components/Button'
 import { ButtonIcon, ButtonIconTypes } from '../../components/ButtonIcon'
 
+import { RadioButton } from '../../components/RadioButton'
+
 import './DonationProf.scss'
 
 import {
@@ -24,11 +26,16 @@ import {
   legendPicDonation,
   legendInputAddPic,
   legendPicFiscalNode,
+  legendNFQuestion,
+  WORD_YES,
+  WORD_NO,
 } from '../../utils/strings'
 import { handleBackButton } from '../../services/handles'
 
 function DonationPage({ store, dispatch }) {
   const [numberDonation, setNumberDonation] = useState('')
+  const [showNF, setShowNF] = useState('')
+
   return (
     <div className="container-donation-prof">
       <div className="sidebar-donation-prof">
@@ -42,22 +49,34 @@ function DonationPage({ store, dispatch }) {
         <Paragraph size={ParagraphTypes.MEDIUM} content="descriptionDonationProf" />
         <Input
           ignoreValidate
-          inputType={inputTypes.TEXT}
+          inputType={inputTypes.NUMBER}
           size={inputTypes.SIZE_LARGE}
           handleOnChange={setNumberDonation}
           value={numberDonation}
           placeholder={legendInputAmountDonation}
         />
       </div>
-      <div className="details-donation-prof" />
+
       <div className="main-donation-prof">
         <SubTitle type={SubTitleTypes.MEDIUM} width={SubTitleTypes.SIZE_SMALL} message={legendPicDonation} />
         <File placeholder={legendInputAddPic} />
       </div>
-      <div className="main-donation-prof">
-        <SubTitle type={SubTitleTypes.MEDIUM} width={SubTitleTypes.SIZE_SMALL} message={legendPicFiscalNode} />
-        <File placeholder={legendInputAddPic} />
+
+      <div className="main-donation-prof-radio">
+        <SubTitle type={SubTitleTypes.MEDIUM} width={SubTitleTypes.SIZE_SMALL} message={legendNFQuestion} />
+        <RadioButton
+          handleChecked={e => setShowNF(e.target.value)}
+          name="nf"
+          options={[WORD_YES, WORD_NO]}
+        />
       </div>
+
+      {showNF && showNF === 'Sim' && (
+        <div className="main-donation-prof">
+          <SubTitle type={SubTitleTypes.MEDIUM} width={SubTitleTypes.SIZE_SMALL} message={legendPicFiscalNode} />
+          <File placeholder={legendInputAddPic} />
+        </div>
+      )}
 
       <div className="footer-donation-prof">
         <Button size={ButtonTypes.LARGE} message={confirm} />

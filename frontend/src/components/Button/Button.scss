@@ -23,6 +23,15 @@
     font-weight: 500;
   }
 
+  &.medium {
+    width: 160px;
+  }
+  &.small {
+    width: 80px;
+  }
+  &.large {
+    width: 100%;
+  }
 }
 
 .button-fillhome {
@@ -55,13 +64,5 @@
 
     }
 
-    &.medium {
-      width: 160px;
-    }
-    &.small {
-      width: 80px;
-    }
-    &.large {
-      width: 100%;
-    }
+
 }

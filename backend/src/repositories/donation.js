@@ -30,9 +30,10 @@ export const donationSchema = new Schema({
   },
   created: { type: Date },
   received: { type: Date },
-  finished: { type: Date },
+  lastDelivery: { type: Date },
+  completed: { type: Date },
   strayed: { type: Date },
-  location: pointSchema
+  point: pointSchema
 })
 
 donationSchema.pre('save', function (next) {

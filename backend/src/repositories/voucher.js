@@ -4,7 +4,6 @@ import { pointSchema } from './pointSchema'
 const voucherSchema = new Schema({
   donationId: {
     type: String,
-    unique: true,
     required: [true, 'DonationId is required']
   },
   quantity: {
@@ -15,19 +14,8 @@ const voucherSchema = new Schema({
     type: String,
     required: [true, 'leaderLogin is required']
   },
-  donor: {
-    type: String,
-    required: [true, 'Donor is required']
-  },
-  status: {
-    type: String,
-    enum: ['Esperando recebimento', 'Entregue para líder', 'Completo', 'Devolvido', 'Extraviado'],
-    required: [true, 'status is required'],
-    default: 'Esperando recebimento'
-  },
   timestamp: {
-    type: Date,
-    required: [true, 'Timestamp is required']
+    type: Date
   },
   receivedCpf: {
     type: String,
@@ -37,7 +25,12 @@ const voucherSchema = new Schema({
     type: String,
     required: [true, 'receivedName is required']
   },
-  location: pointSchema
+  point: pointSchema
+})
+
+voucherSchema.pre('save', function (next) {
+  this.timestamp = new Date()
+  next()
 })
 
 export const Voucher = model('Voucher', voucherSchema)

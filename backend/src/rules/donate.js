@@ -1,53 +1,74 @@
 import { Donation, Voucher } from '../repositories'
 
-var AWS = require('aws-sdk')
-const BUCKET_NAME = 'cesta-basica-sp'
+// var AWS = require('aws-sdk')
+// const BUCKET_NAME = 'cesta-basica-sp'
 
 export async function donate ({
-  donationId,
+  login,
+  role
+}, {
+  donationId
+}, {
   leaderLogin,
-  geolocation,
+  lat,
+  lon,
   quantity,
   receivedCpf,
-  receivedName,
-  fileContent
-}) {
+  receivedName
+}, fileContent) {
   const donation = await Donation.findOne({ donationId: donationId })
 
   console.log(donation)
 
   if (donation) {
-    donation.status = 'Entregando'
-    await donation.save()
+    var timestamp = new Date()
 
-    var utcNow = new Date()
-    var key = `/provas/entregas/entrega-${donationId}-${utcNow.toISOString()}.jpg`
+    donation.quantity -= quantity
 
-    const params = {
-      Bucket: BUCKET_NAME,
-      Key: key,
-      Body: fileContent
+    if (donation.quantity < 0) {
+      throw new Error('The quantity specified isn\'t available')
+    } else if (donation.quantity === 0) {
+      donation.status = 'Completo'
+      donation.completed = timestamp
+      donation.quantity = 0
+    } else {
+      donation.status = 'Entregando'
+      donation.lastDelivery = timestamp
     }
 
-    var s3 = new AWS.S3()
-    s3.upload(params, function (err, data) {
-      if (err) {
-        throw err
-      }
-      console.log(`File uploaded successfully.Key:${key}`)
-    })
+    await donation.save()
 
-    var voucher = new Voucher({
-      donationId: donationId,
-      quantity: quantity,
-      leaderLogin: leaderLogin,
-      status: donation.status,
-      donor: donation.donor,
-      receivedCpf: receivedCpf,
-      receivedName: receivedName,
-      timeStamp: utcNow,
-      location: geolocation,
-      s3Key: key
+    let s3Key
+
+    // var key = `/provas/entregas/entrega-${donationId}-${utcNow.toISOString()}.jpg`
+
+    // const params = {
+    //   Bucket: BUCKET_NAME,
+    //   Key: key,
+    //   Body: fileContent
+    // }
+
+    // var s3 = new AWS.S3()
+
+    // s3.upload(params, function (err, data) {
+    //   if (err) {
+    //     throw err
+    //   }
+    //   console.log(`File uploaded successfully.Key:${key}`)
+    // })
+
+    const voucher = new Voucher({
+      donationId,
+      quantity,
+      leaderLogin,
+      receivedCpf,
+      receivedName,
+      timestamp,
+      point: {
+        type: 'Point',
+        coordinates: [lon, lat]
+      },
+      s3Key
     })
 
     console.log(voucher)

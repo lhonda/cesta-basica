@@ -3,13 +3,13 @@ import { Donation } from '../repositories/donation'
 // var AWS = require('aws-sdk')
 // const BUCKET_NAME = 'cesta-basica-sp'
 
-export async function receive ({ login, role }, { donationId }, { geolocation }, fileContent) {
+export async function receive ({ login, role }, { donationId }, { lat, lon }, fileContent) {
   const donation = await Donation.findOne({ donationId: donationId })
 
   console.log(donation)
 
   if (donation) {
-    const utcNow = new Date()
+    const timestamp = new Date()
     let s3Key
 
     // var key = `/provas/recebimentos/entrega-${donationId}-${utcNow.toISOString()}.jpg`
@@ -29,8 +29,10 @@ export async function receive ({ login, role }, { donationId }, { geolocation },
     //   console.log(`File uploaded successfully.Key:${key}`)
     // })
 
+    donation.lat = lat
+    donation.lon = lon
     donation.status = 'Entregue para líder'
-    donation.received = utcNow
+    donation.received = timestamp
     donation.s3Key = s3Key
     await donation.save()
 

@@ -1,7 +1,7 @@
 import { model, Schema } from 'mongoose'
 import { pointSchema } from './pointSchema'
 
-const donationSchema = new Schema({
+export const donationSchema = new Schema({
   donationId: {
     type: String,
     unique: true,

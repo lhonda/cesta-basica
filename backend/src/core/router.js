@@ -51,7 +51,7 @@ router.post('/donations/:donationId/receive', authRequired('leader'), (req, res)
     donationId: req.params.donationId,
     lat: req.body.lat,
     lon: req.body.lon,
-    fileDonation: req.files.fileDonation
+    receiveDonationFile: req.files.receiveDonationFile
   }).then(() => res.status(204).end())
     .catch(err => {
       console.log(err)
@@ -60,8 +60,18 @@ router.post('/donations/:donationId/receive', authRequired('leader'), (req, res)
 
 // entregar p/ familia LIDER > FAMILIA
 router.post('/donations/:donationId/donate', authRequired('leader'), (req, res) =>
-  donate(req.auth, req.params, req.body, req.file)
-    .then(() => res.status(204).end())
+  donate({
+    login: req.auth.login,
+    donationId: req.params.donationId,
+    voucherId: req.body.voucherId,
+    leaderLogin: req.body,
+    lat: req.body.lat,
+    lon: req.body.lon,
+    quantity: req.body.quantity,
+    receivedCpf: req.body.receivedCpf,
+    receivedName: req.body.receivedName,
+    donateDonationFile: req.files.donateDonationFile
+  }).then(() => res.status(204).end())
     .catch(err => {
       console.log(err)
       res.status(401).json({ message: err.message })

@@ -1,48 +1,50 @@
-import { Donation } from '../repositories/donation'
+import AWS from 'aws-sdk'
+import { Donation, donationSchema } from '../repositories/donation'
 
-// var AWS = require('aws-sdk')
-// const BUCKET_NAME = 'cesta-basica-sp'
+const { BUCKET_NAME } = process.env
 
-export async function receive ({ login, role }, { donationId }, { lat, lon }, fileContent) {
+export async function receive ({ login, donationId, lat, lon, donation }) {
   const donation = await Donation.findOne({ donationId: donationId })
+  const status = donationSchema.obj.status.enum[0]
 
-  console.log(donation)
+  if (donation && (donation.status === status) && (donation.leaderLogin === login)) {
+    const utcNow = new Date()
+    const [, ext] = donation.mimetype.split('/')
+    const key = `provas/recebimentos/recebimento-doacao-${login}-${donationId}-${utcNow.toISOString()}.${ext}`
 
-  if (donation) {
-    const timestamp = new Date()
-    let s3Key
+    const params = {
+      Bucket: BUCKET_NAME,
+      Key: key,
+      Body: donation.data
+    }
 
-    // var key = `/provas/recebimentos/entrega-${donationId}-${utcNow.toISOString()}.jpg`
+    const s3 = new AWS.S3()
+    s3.upload(params, function (err, data) {
+      if (err) {
+        throw err
+      }
+      console.log(`File uploaded successfully.Key:${key}`)
+    })
 
-    // const params = {
-    //   Bucket: BUCKET_NAME,
-    //   Key: key,
-    //   Body: fileContent
-    // }
-
-    // var s3 = new AWS.S3()
-
-    // s3.upload(params, function (err, data) {
-    //   if (err) {
-    //     throw err
-    //   }
-    //   console.log(`File uploaded successfully.Key:${key}`)
-    // })
-
-    donation.point = {
+    const point = {
       type: 'Point',
       coordinates: [lon, lat]
     }
 
-    donation.status = 'Entregue para líder'
-    donation.received = timestamp
-    donation.s3Key = s3Key
-    await donation.save()
+    if (!lat && !lon) {
+      point.coordinates[0] = null
+      point.coordinates[1] = null
+    }
 
-    console.log(donation)
+    const payload = {
+      status: donationSchema.obj.status.enum[1],
+      receivedCardsS3Key: key,
+      timeStamp: utcNow.toISOString(),
+      point: point
+    }
 
-    return
+    return donation.update(payload)
   }
 
-  return Promise.reject(new Error(`Receiving donation ${donationId} failed.`))
+  return Promise.reject(new Error(`Donation ${donationId} save failed.`))
 }

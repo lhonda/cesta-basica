@@ -7,7 +7,6 @@
   border-radius: 54px;
   margin-top: 20px;
 
-
   &.fill {
     background: #328B21;
     border-radius: 54px;
@@ -31,6 +30,10 @@
   }
   &.large {
     width: 100%;
+  }
+
+  &:disabled {
+    opacity: 0.3;
   }
 }
 

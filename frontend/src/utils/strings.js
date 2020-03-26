@@ -23,6 +23,7 @@ export const conclusionCompromise =
 export const declareTermUse = 'Declaro que li e estou de acordo com os Termos de Uso da aplicacao'
 export const cancel = 'Cancelar'
 export const singin = 'Entrar'
+export const send = 'Enviar'
 export const contate = 'Isadora Correa'
 export const confirm = 'Confirmar'
 export const back = 'Voltar'
@@ -59,7 +60,6 @@ export const legendDonationReceivedButton = 'Iniciar Entrega'
 export const legendDonationReceivedFinishButton = 'Encerrar Entrega'
 
 // Donation Prof screen
-
 export const titleDonationProf = 'Evidência de Entrega'
 export const descriptionDonationReceived =
   'Quando for iniciar as entregas das doações na comunidade, atualize seu status na plataforma para "Iniciar Entrega".'
@@ -82,6 +82,5 @@ export const completeDeliveryThanks = 'Líder, somos um time de heróis e heroí
 export const completeDeliveryInformationContate = 'Caso tenha ocorrido algum problema na entrega, entre em contato com:'
 
 // Generic
-
 export const WORD_NO = 'Não'
 export const WORD_YES = 'Sim'

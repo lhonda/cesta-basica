@@ -16,7 +16,7 @@ import {
   LegendChecklist,
   linkChecklist,
   descriptionChecklist,
-  singin,
+  send,
   titleChecklist,
 } from '../../utils/strings'
 import { handleCheckedHealth, handleRedirectSymptoms } from '../../services/handles'
@@ -39,7 +39,7 @@ function ChecklistPage({ store, dispatch }) {
         />
       </div>
       <div className="footer-checklist">
-        <Button disable={!store.health} message={singin} />
+        <Button disable={!store.health} message={send} />
       </div>
     </div>
   )

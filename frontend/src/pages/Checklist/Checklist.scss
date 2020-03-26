@@ -17,14 +17,10 @@
 }
 
 .main-checklist {
-  // overflow: scroll;
-  height: 85%;
-  padding: 12px 23px 25vh 23px;
+  padding: 12px 23px 0px 23px;
 }
 
 .footer-checklist {
-  height: 20%;
-  position: fixed;
   bottom: 0;
   z-index: 100;
   width: -webkit-fill-available;

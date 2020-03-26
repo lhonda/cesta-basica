@@ -7,7 +7,7 @@ import { ParagraphTypes } from './ParagraphTypes'
 import * as strings from '../../utils/strings'
 
 function Paragraph({ size, content }) {
-  return <p className={`paragraph font-${size} `}>{strings[content]}</p>
+  return <p className={`paragraph font-${size} `} dangerouslySetInnerHTML={{ __html: strings[content] }} />
 }
 
 Paragraph.propTypes = {

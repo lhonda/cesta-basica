@@ -1,11 +1,9 @@
 .button {
   width: 160px;
-  height: 52px;
   padding: 10px;
   font-weight: 500;
   font-size: 22px;
   border-radius: 54px;
-  margin-top: 20px;
 
 
   &.fill {
@@ -17,7 +15,6 @@
 
   &.thin {
     width: 120px;
-    height: 32px;
     padding: 5px;
     font-size: 14px;
     font-weight: 500;
@@ -36,7 +33,6 @@
 
 .button-fillhome {
   width: 120px;
-  height: 32px;
 
   background: #328B21;
   border-radius: 54px;
@@ -52,7 +48,6 @@
 
 .button-outline {
   width: 160px;
-  height: 52px;
 
     &:disabled {
       opacity: 0.3;

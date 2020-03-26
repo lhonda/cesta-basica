@@ -13,18 +13,3 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
-
-@font-face {
-  font-family: Rubik-Light;
-  src: local(Rubik-Light), url(./assets/fonts/Rubik-Light.ttf) format("truetype");
-}
-
-@font-face {
-  font-family: Rubik-Regular;
-  src: local(Rubik-Regular), url(./assets/fonts/Rubik-Regular.ttf) format("truetype");
-}
-
-@font-face {
-  font-family: Rubik-Medium;
-  src: local(Rubik-Medium), url(./assets/fonts/Rubik-Medium.ttf) format("truetype");
-}

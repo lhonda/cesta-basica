@@ -8,7 +8,7 @@ function Symptoms() {
     <div className="container-symptoms">
       <Items title="Febre" />
       <Items title="Tosse seca" />
-      <Items title="Tosse com Catarro" />
+      <Items title={'Tosse com\n Catarro'} />
       <Items title="Congestão Nasal" />
       <Items title="Corrimento no Nariz" />
       <Items title="Dificuldade para Respirar" />

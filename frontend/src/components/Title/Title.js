@@ -8,3 +8,7 @@ export default function Title({ message }) {
 Title.propTypes = {
   message: PropTypes.string.isRequired,
 }
+
+Title.propTypes = {
+  message: PropTypes.string.isRequired,
+}

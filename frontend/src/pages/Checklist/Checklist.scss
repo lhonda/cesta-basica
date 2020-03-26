@@ -5,28 +5,28 @@
   overflow: hidden;
 }
 .header-checklist {
-  height: 20%;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  padding: 20px 44px 10px 38px;
+  align-items: center;
+  padding: 44px 44px 4px 38px;
   h2 {
-    margin: 0.83em auto;
+    margin: 0px;
+    margin-bottom: 4px;
   }
 }
+
 .main-checklist {
-  // overflow: scroll;
-  height: 80%;
-  padding: 20px 44px 15vh 38px;
+  height: 85%;
+  padding: 12px 23px 10px 23px;
 }
+
 .footer-checklist {
-  height: 8%;
-  position: fixed;
   bottom: 0;
   z-index: 100;
   width: -webkit-fill-available;
   background-color: #fff;
   display: flex;
   justify-content: space-around;
-  padding: 10px 5px 20px;
+  padding: 5px 5px 20px;
 }

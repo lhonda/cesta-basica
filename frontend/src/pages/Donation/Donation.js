@@ -21,7 +21,7 @@ import {
   legendDonationWaitAmount,
   legendDonationWaitButton,
 } from '../../utils/strings'
-import { handleDonationReceived } from '../../services/handles'
+// import { handleDonationReceived } from '../../services/handles'
 
 function DonationPage({ store, dispatch }) {
   const { push, location } = useHistory()

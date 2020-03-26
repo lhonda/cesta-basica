@@ -1,7 +1,7 @@
 import { model, Schema } from 'mongoose'
 import { pointSchema } from './pointSchema'
 
-const donationSchema = new Schema({
+export const donationSchema = new Schema({
   donationId: {
     type: String,
     unique: true,
@@ -20,12 +20,12 @@ const donationSchema = new Schema({
     required: [true, 'Donor is required']
   },
   status: {
-    type: String,
-    enum: ['Esperando recebimento', 'Entregue para líder', 'Entregando', 'Completo', 'Devolvido', 'Extraviado'],
+    type: Number,
+    enum: [1, 2, 3, 4, 5, 6],
     required: [true, 'status is required'],
-    default: 'Esperando recebimento'
+    default: 1
   },
-  s3Key: {
+  receivedCardsS3Key: {
     type: String
   },
   created: { type: Date },

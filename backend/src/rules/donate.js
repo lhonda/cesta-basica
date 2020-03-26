@@ -21,18 +21,18 @@ export async function donate ({
   console.log(donation)
 
   if (donation) {
-    var timestamp = new Date()
+    const timestamp = new Date()
 
     donation.quantity -= quantity
 
     if (donation.quantity < 0) {
       throw new Error('The quantity specified isn\'t available')
     } else if (donation.quantity === 0) {
-      donation.status = 'Completo'
+      donation.status = 4
       donation.completed = timestamp
       donation.quantity = 0
     } else {
-      donation.status = 'Entregando'
+      donation.status = 3
       donation.lastDelivery = timestamp
     }
 

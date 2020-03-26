@@ -3,11 +3,31 @@ import { useHistory } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import './DonationItem.scss'
 
+import {
+  lostFirstLetterCapitalized,
+  returnedFirstLetterCapitalized,
+  completedFirstLetterCapitalized,
+} from '../../../utils/strings'
+
 import { donationItemTypes } from './donationItemTypes'
 
 function DonationItem({ title, quantity, stateDonation, donationId }) {
   const history = useHistory()
-  const handleClick = () => history.push(`/donation/${donationId}/${donationItemTypes[stateDonation]}`)
+  const verifyStateDonation = () => {
+    if (
+      !stateDonation ||
+      stateDonation === lostFirstLetterCapitalized ||
+      stateDonation === returnedFirstLetterCapitalized ||
+      stateDonation === returnedFirstLetterCapitalized ||
+      stateDonation === completedFirstLetterCapitalized
+    ) {
+      return false
+    }
+    return true
+  }
+  const handleClick = () => {
+    if (verifyStateDonation()) history.push(`/donation/${donationId}/${donationItemTypes[stateDonation]}`)
+  }
   const isComplete = stateDonation === 'Completo'
   return (
     <div className="donationItem" onClick={handleClick}>

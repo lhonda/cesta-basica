@@ -16,6 +16,11 @@ export const handleRedirectSymptoms = (url) => {
   window.open(url, '_blank')
 }
 
+export function handleClickCancelTerms(dispatch, history) {
+  dispatch({ type: types.SET_LOGOUT })
+  history.push('/')
+}
+
 export const handleDonationReceivedVoucher = (voucher) => {
   window.location.pathname += `/${voucher}/prof`
 }

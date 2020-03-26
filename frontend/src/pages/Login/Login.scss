@@ -11,7 +11,7 @@
   background-color: $commonBackgroundColor;
   padding: 0 1.7rem 0 1.7rem;
   display: flex;
-  font-family: Rubik-Regular;
+  font-family: Rubik;
   flex-direction: column;
 
   &--textCenter {
@@ -19,7 +19,7 @@
   }
 
   &__subtitle {
-    font-family: Rubik-Light;
+    font-family: Rubik;
   }
 
   &__form {

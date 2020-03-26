@@ -1,21 +1,21 @@
+import AWS from 'aws-sdk'
 import { Donation, donationSchema } from '../repositories/donation'
 
-const AWS = require('aws-sdk')
 const { BUCKET_NAME } = process.env
 
-export async function receive ({ login }, { donationId }, { lat, lon }, { doacao }) {
+export async function receive ({ login, donationId, lat, lon, donation }) {
   const donation = await Donation.findOne({ donationId: donationId })
   const status = donationSchema.obj.status.enum[0]
 
   if (donation && (donation.status === status) && (donation.leaderLogin === login)) {
     const utcNow = new Date()
-    const [, ext] = doacao.mimetype.split('/')
+    const [, ext] = donation.mimetype.split('/')
     const key = `provas/recebimentos/recebimento-doacao-${login}-${donationId}-${utcNow.toISOString()}.${ext}`
 
     const params = {
       Bucket: BUCKET_NAME,
       Key: key,
-      Body: doacao.data
+      Body: donation.data
     }
 
     const s3 = new AWS.S3()

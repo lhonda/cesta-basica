@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { useParams } from 'react-router-dom'
+import { useParams, useHistory } from 'react-router-dom'
 import { connect } from '../../store'
 import { Title } from '../../components/Title'
 import { Items, ItemsTypes } from '../../components/Items'
@@ -27,14 +27,14 @@ import {
   legendInputAddPic,
   legendPicFiscalNode,
 } from '../../utils/strings'
-import { handleBackCurrentReceivedButton } from '../../services/handles'
 
 function ReceivedCurrentProfPage({ store, dispatch }) {
   const { voucher } = useParams()
+  const { goBack } = useHistory()
   return (
     <div className="container-donation-received-current-prof">
       <div className="sidebar-donation-received-current-prof">
-        <ButtonIcon handleClick={handleBackCurrentReceivedButton}>
+        <ButtonIcon handleClick={goBack}>
           <LogoBack height={10} />
         </ButtonIcon>
         <Legend type={LegendTypes.STRONG} message={back} />

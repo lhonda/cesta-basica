@@ -5,12 +5,13 @@
   color: #c7c7c7;
 }
 .donationItem {
+  margin: 0.5rem;
   padding: 0.56rem;
   box-sizing: border-box;
   box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.15);
   border-radius: 4px;
   height: 4rem;
-  font-family: Rubik-Regular;
+  font-family: Rubik;
   &__content {
     display: flex;
     flex-direction: column;

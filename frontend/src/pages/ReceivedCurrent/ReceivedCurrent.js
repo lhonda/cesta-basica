@@ -22,7 +22,7 @@ import {
   legendDonationDateFinal,
   completeDeliveryTitle,
 } from '../../utils/strings'
-import { handleDonationReceived, handleDonationReceivedVoucher, handleToggleModal } from '../../services/handles'
+import { handleDonationReceivedVoucher, handleToggleModal } from '../../services/handles'
 
 function ReceivedCurrentPage({ store, dispatch }) {
   const { id } = useParams()
@@ -63,36 +63,6 @@ function ReceivedCurrentPage({ store, dispatch }) {
           size={ItemsTypes.LARGE}
           handleClick={handleDonationReceivedVoucher}
           complete
-          title="#JKKS5LSLA8"
-        />
-        <Items
-          type={ItemsTypes.BASKET}
-          size={ItemsTypes.LARGE}
-          handleClick={handleDonationReceivedVoucher}
-          title="#JKKS5LSLA8"
-        />
-        <Items
-          type={ItemsTypes.BASKET}
-          size={ItemsTypes.LARGE}
-          handleClick={handleDonationReceivedVoucher}
-          title="#JKKS5LSLA8"
-        />
-        <Items
-          type={ItemsTypes.BASKET}
-          size={ItemsTypes.LARGE}
-          handleClick={handleDonationReceivedVoucher}
-          title="#JKKS5LSLA8"
-        />
-        <Items
-          type={ItemsTypes.BASKET}
-          size={ItemsTypes.LARGE}
-          handleClick={handleDonationReceivedVoucher}
-          title="#JKKS5LSLA8"
-        />
-        <Items
-          type={ItemsTypes.BASKET}
-          size={ItemsTypes.LARGE}
-          handleClick={handleDonationReceivedVoucher}
           title="#JKKS5LSLA8"
         />
       </div>

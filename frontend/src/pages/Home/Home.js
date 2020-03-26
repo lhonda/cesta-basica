@@ -6,7 +6,7 @@ import './Home.scss'
 import { LogoHorizontal } from '../../components/Logo'
 import { Button, ButtonTypes } from '../../components/Button'
 import { GroupIcons } from '../../components/HomeIcons'
-import { homeContentTitle, homeContentSubTitle, homeContent } from '../../utils/strings'
+import { homeContentTitle, homeContentSubTitle, homeContent, homeSeparatedLine } from '../../utils/strings'
 
 const Home = ({ history }) => {
   const goToLogin = () => {
@@ -25,7 +25,10 @@ const Home = ({ history }) => {
       </div>
       <div className="footerHome">
         <h3 className="footerHome--subtitle">{homeContentSubTitle}</h3>
-        <p>{homeContent}</p>
+        <p>
+          {homeContent}
+          <span>{homeSeparatedLine}</span>
+        </p>
       </div>
     </div>
   )

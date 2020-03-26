@@ -48,6 +48,15 @@ const schema = new Schema({
   },
   state: {
     type: String
+  },
+  deliveryLocation: {
+    type: String
+  },
+  deliveryCep: {
+    type: String
+  },
+  slums: {
+    type: String
   }
 })
 

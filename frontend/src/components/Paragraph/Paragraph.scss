@@ -1,7 +1,11 @@
 .paragraph {
-
-  text-align: justify;
-
+  text-align: left;
+  a {
+    color: #93278f;
+  }
+  &--medium{
+    font-weight: 500;
+  }
 }
 
 .font-small {

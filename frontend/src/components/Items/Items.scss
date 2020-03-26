@@ -1,7 +1,7 @@
 .item {
 height: 52px;
 &.small {
-  width: 150px;
+  width: auto;
 }
 &.medium {
   width: 250px;
@@ -9,7 +9,6 @@ height: 52px;
 &.large {
   width: 100%;
 }
-margin-bottom: 10px;
 background: #EFEFEF;
 border-radius: 4px;
     display: flex;
@@ -28,19 +27,18 @@ border-radius: 4px;
     }
 
     h5 {
+      font-family: Rubik;
       font-style: normal;
       font-weight: normal;
       font-size: 16px;
       line-height: 18px;
       /* or 112% */
-      padding: 10px;
+      padding: 15px;
       display: flex;
       align-items: center;
       text-align: center;
       letter-spacing: 0.2px;
-
       color: #202228;
-
     }
  select {
   height: 100%;
@@ -51,7 +49,6 @@ border-radius: 4px;
 }
 .item-basket {
   height: 45px;
-
   border: 1px solid #909090;
   box-sizing: border-box;
   border-radius: 4px;

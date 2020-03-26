@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { useParams } from 'react-router-dom'
+import { useParams, useHistory } from 'react-router-dom'
 import { connect } from '../../store'
 import { Title } from '../../components/Title'
 import { Status } from '../../components/Status'
@@ -21,10 +21,10 @@ import {
   legendDonationReceivedButton,
   legendDonationDateFinal,
 } from '../../utils/strings'
-import { handleDonationReceived } from '../../services/handles'
 
 function ReceivedPage({ store, dispatch }) {
   const { id } = useParams()
+  const { push, location } = useHistory()
 
   return (
     <div className="container-received">
@@ -55,11 +55,12 @@ function ReceivedPage({ store, dispatch }) {
       </div>
       <hr />
       <div className="main-received">
-        <Paragraph size={ParagraphTypes.MEDIUM} content="descriptionDonationReceived" />
+        <Paragraph size={ParagraphTypes.LIGHT} content="descriptionDonationReceived" />
+        <Paragraph size={ParagraphTypes.LIGHT} content="descriptionDonationReceivedSecondparagraph" />
       </div>
       <div className="footer-received">
         <Button
-          handleClick={() => handleDonationReceived('current')}
+          handleClick={() => push(`${location.pathname}/current`)}
           size={ButtonTypes.LARGE}
           message={legendDonationReceivedButton}
         />

@@ -1,15 +1,35 @@
 import { Donation } from '../repositories/donation'
+import { statuses } from '../enums'
 
 export async function listDonations ({ login, role }) {
   const donations = (
     await Donation.find({ leaderLogin: login })
-  ).map(({ status, donationId, login, quantity, donor, timestamp }) => ({
+  ).map(({ 
+    donationId, 
+    login, 
+    quantity, 
+    donor, 
     status,
+    created,
+    received,
+    lastDelivery,
+    completed,
+    strayed,
+    point,
+
+  }) => ({
     donationId,
-    login,
+    leaderLogin: login,
     quantity,
     donor,
-    timestamp
+    status: status,
+    statusText: statuses[status],
+    created,
+    received,
+    lastDelivery,
+    completed,
+    strayed,
+    point
   }))
 
   return { donations }

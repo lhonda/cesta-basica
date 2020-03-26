@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { healthCheck, signin, createUser, donate, receive, commitment, checklist, listDonations } from '../rules'
+import { healthCheck, signin, createUser, donate, receive, commitment, checklist, listDonations, listVouchers } from '../rules'
 import { authRequired } from '../middlewares'
 
 export const router = Router()
@@ -36,6 +36,15 @@ router.post('/admin/sign-in', (req, res) =>
     }))
 
 // listar doações que foram pre carregadas no banco de dados
+router.get('/vouchers', authRequired('leader'), (req, res) =>
+  listVouchers(req.auth)
+    .then(data => res.status(data.length === 0 ? 404 : 200).json(data))
+    .catch(err => {
+      console.log(err)
+      res.status(401).json({ message: err.message })
+    }))
+
+// listar doações que foram pre carregadas no banco de dados
 router.get('/donations', authRequired('leader'), (req, res) =>
   listDonations(req.auth)
     .then(data => res.status(data.donations.length === 0 ? 404 : 200).json(data))
@@ -46,8 +55,13 @@ router.get('/donations', authRequired('leader'), (req, res) =>
 
 // recebimento de doacoes SUPERMERCADO > LIDER
 router.post('/donations/:donationId/receive', authRequired('leader'), (req, res) =>
-  receive(req.auth, req.params, req.body, req.file)
-    .then(() => res.status(204).end())
+  receive({
+    login: req.auth.login,
+    donationId: req.params.donationId,
+    lat: req.body.lat,
+    lon: req.body.lon,
+    receiveDonationFile: req.files.receiveDonationFile
+  }).then(() => res.status(204).end())
     .catch(err => {
       console.log(err)
       res.status(401).json({ message: err.message })
@@ -55,8 +69,18 @@ router.post('/donations/:donationId/receive', authRequired('leader'), (req, res)
 
 // entregar p/ familia LIDER > FAMILIA
 router.post('/donations/:donationId/donate', authRequired('leader'), (req, res) =>
-  donate(req.auth, req.params, req.body, req.file)
-    .then(() => res.status(204).end())
+  donate({
+    login: req.auth.login,
+    donationId: req.params.donationId,
+    voucherId: req.body.voucherId,
+    leaderLogin: req.body,
+    lat: req.body.lat,
+    lon: req.body.lon,
+    quantity: req.body.quantity,
+    receivedCpf: req.body.receivedCpf,
+    receivedName: req.body.receivedName,
+    donateDonationFile: req.files.donateDonationFile
+  }).then(() => res.status(204).end())
     .catch(err => {
       console.log(err)
       res.status(401).json({ message: err.message })

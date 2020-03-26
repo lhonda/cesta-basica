@@ -1,48 +1,74 @@
-import { Donation } from '../repositories/donation'
+import AWS from 'aws-sdk'
+import { Donation} from '../repositories/donation'
 
-// var AWS = require('aws-sdk')
-// const BUCKET_NAME = 'cesta-basica-sp'
+export async function receive({
+  login,
+  donationId,
+  lat,
+  lon,
+  receiveDonationFile
+}) {
+  if (!login) {
+    throw new Error("login is required")
+  }
 
-export async function receive ({ login, role }, { donationId }, { lat, lon }, fileContent) {
+  if (!donationId) {
+    throw new Error("donationId is required")
+  }
+
+  if (!lat) {
+    throw new Error("lat is required")
+  }
+
+  if (!lon) {
+    throw new Error("lon is required")
+  }
+
+  if (!receiveDonationFile) {
+    throw new Error("receiveDonationFile is required")
+  }
+
   const donation = await Donation.findOne({ donationId: donationId })
 
-  console.log(donation)
+  if (!donation) {
+    throw new Error(`Couldn\'t find the Donation with id: ${donationId}`)
+  }
+
+  if (donation.leaderLogin !== login) {
+    throw new Error('The leaderLogin of the donation isn\'t the same of the auth token')
+  }
 
   if (donation) {
     const timestamp = new Date()
-    let s3Key
+    const [, ext] = receiveDonationFile.mimetype.split('/')
+    const key = `provas/recebimentos/recebimento-doacao-${login}-${donationId}-${timestamp.toISOString()}.${ext}`
 
-    // var key = `/provas/recebimentos/entrega-${donationId}-${utcNow.toISOString()}.jpg`
+    const params = {
+      Bucket: process.env.BUCKET_NAME,
+      Key: key,
+      Body: receiveDonationFile.data
+    }
 
-    // const params = {
-    //   Bucket: BUCKET_NAME,
-    //   Key: key,
-    //   Body: fileContent
-    // }
+    const s3 = new AWS.S3()
 
-    // var s3 = new AWS.S3()
+    s3.upload(params, function (err, data) {
+      if (err) {
+        throw err
+      }
+      console.log(`File uploaded successfully.Key:${key}`)
+    })
 
-    // s3.upload(params, function (err, data) {
-    //   if (err) {
-    //     throw err
-    //   }
-    //   console.log(`File uploaded successfully.Key:${key}`)
-    // })
-
-    donation.point = {
+    const point = {
       type: 'Point',
       coordinates: [lon, lat]
     }
 
-    donation.status = 'Entregue para líder'
+    donation.status = 2
     donation.received = timestamp
-    donation.s3Key = s3Key
+    donation.receivedCardsS3Key = key
+    donation.point = point
     await donation.save()
 
-    console.log(donation)
-
-    return
+    return donation
   }
-
-  return Promise.reject(new Error(`Receiving donation ${donationId} failed.`))
 }

@@ -2,34 +2,38 @@ import { model, Schema } from 'mongoose'
 import { pointSchema } from './pointSchema'
 
 const voucherSchema = new Schema({
+  voucherId: {
+    type: String,
+    required: [true, 'voucherId is required']
+  },
   donationId: {
     type: String,
-    required: [true, 'DonationId is required']
-  },
-  quantity: {
-    type: Number,
-    required: [true, 'Quantity is required']
+    required: [true, 'donationId is required']
   },
   leaderLogin: {
     type: String,
     required: [true, 'leaderLogin is required']
   },
-  timestamp: {
+  created: {
+    type: Date
+  },
+  delivered: {
     type: Date
   },
   receivedCpf: {
     type: String,
-    required: [true, 'receivedCpf is required']
   },
   receivedName: {
     type: String,
-    required: [true, 'receivedName is required']
+  },
+  cardDonatedS3Key: {
+    type: String
   },
   point: pointSchema
 })
 
 voucherSchema.pre('save', function (next) {
-  this.timestamp = new Date()
+  this.created = new Date()
   next()
 })
 

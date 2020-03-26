@@ -1,7 +1,7 @@
 import { Donation, donationSchema } from '../repositories/donation'
 
 const AWS = require('aws-sdk')
-const BUCKET_NAME = 'cesta-basica-sp'
+const { BUCKET_NAME } = process.env
 
 export async function receive ({ login }, { donationId }, { lat, lon }, { doacao }) {
   const donation = await Donation.findOne({ donationId: donationId })

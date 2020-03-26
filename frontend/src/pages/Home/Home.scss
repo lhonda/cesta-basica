@@ -11,7 +11,7 @@
 
 .contentHome {
   background-color: #328b21;
-  font-family: Rubik-Regular;
+  font-family: Rubik;
   font-style: normal;
   font-weight: bold;
   font-size: 24px;
@@ -27,7 +27,7 @@
 }
 
 .footerHome {
-  font-family: Rubik-Light;
+  font-family: Rubik;
   padding: 1.5rem 1.5rem;
 
   &--subtitle {
@@ -37,12 +37,11 @@
     font-weight: bold;
     word-break: normal;
   }
-}
-
-span {
-  display: inline;
-}
-span:before {
-  content: "\a ";
-  white-space: pre;
+  span {
+    display: inline;
+  }
+  span:before {
+    content: "\a ";
+    white-space: pre;
+  }
 }

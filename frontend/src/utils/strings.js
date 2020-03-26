@@ -14,7 +14,30 @@ export const textButtonForLogin = 'Entrar'
 
 // Terms screen
 export const introductionCompromise =
-  'Nulla occaecat aute velit incididunt nisi. Magna veniam magna eu dolor aliqua id. Est cupidatat laboris duis voluptate voluptate id cillum enim eiusmod deserunt sunt tempor. Duis excepteur nulla cillum commodo veniam consectetur duis ipsum voluptate est. Id ullamco excepteur consectetur sit deserunt id mollit aute sunt fugiat. Nulla irure aliqua dolore magna ea deserunt non adipisicing cillum dolor pariatur ad.'
+  'Eu nesse momento passei ser chamado de VOLUNTÁRIO e INSTITUTO GERANDO FALCÕES, pessoa jurídica sem fins lucrativos, inscrito no CNPJ/MF sob o nº 18.463.148/0001-28, com sede na cidade de Poá – SP, na Avenida Niterói, n 96 – Kemel – Poá/SP, doravante chamada de INSTITUTO,'
+export const considerations1 =
+  'CONSIDERANDO a pandemia do vírus COVID 19 (Coranavirus) que assolou o mundo e o Brasil, e as orientações já emitidas pela Organização Mundial de Saúde, pelo Ministério da Saúde e demais autoridades públicas em todos os níveis da federação, que impõem medidas de isolamento e outras restrições ao convívio social;'
+export const considerations2 =
+  'CONSIDERANDO que as medidas de isolamento impactaram diretamente na atividade econômica do país, nos empregos, e em todas as atividades formais e informais, gerando a necessidade de manutenção e reforço das redes de proteção social;'
+export const considerations3 =
+  'CONSIDERANDO que o INSTITUTO através de centenas de parceiros e doações conseguirá cartões pré-pagos a serem distribuídas às comunidades para compra de cestas básicas e itens de higiene pessoal;'
+export const considerations4 =
+  'CONSIDERANDO que o VOLUNTÁRIO, <span class="paragraph--medium">completamente ciente dos riscos de circular pela cidade e pela comunidade</span>, resolveu se voluntariar para realizar a entrega dos cartões pré-pagos, e o fará com todos os cuidados estabelecidos pelos profissionais de saúde;'
+export const terms1 =
+  'O VOLUNTÁRIO fará o recebimento e entrega cartões pré-pagos para a comunidade registrados no site <a href="https://cestabasicadigital.com" target="blank">https://cestabasicadigital.com</a>;'
+
+export const terms2 =
+  'O VOLUNTÁRIO definirá o melhor horário e forma de distribuição dos cartões pré-pagos na Comunidade cadastradas no site <a href="https://cestabasicadigital.com" target="blank">https://cestabasicadigital.com</a>, mas assume a obrigação de entregá-las na regularidade em que as doações ocorrerem e a Comunidade necessite;'
+export const terms3 =
+  'O presente serviço voluntário emergencial será realizado de forma espontânea e sem percebimento de contraprestação financeira ou qualquer outro tipo de remuneração ou vínculo, traduzindo-se em ação humanitária coletiva para minimização dos impactos do estado de emergência;'
+export const terms4 =
+  'O VOLUNTÁRIO tomará todos os cuidados estabelecidos pelos profissionais de saúde e pelas orientações do INSTITUTO para minimizar os riscos de contrair e/ou disseminar o Coronavirus, bem como assumirá todos os riscos decorrentes de eventual contaminação pela decisão de ser voluntário para sua comunidade em parceria com o INSTITUTO;'
+export const terms5 =
+  'O presente termo tem validade da data de sua assinatura até a finalização da pandemia, ou manifestação de vontade de encerramento pelo VOLUNTÁRIO ou INSTITUTO a qualquer tempo.'
+export const terms6 =
+  'O instituto Gerando Falcões reconhece todos os voluntários que deram o aceite no termo de voluntariado.'
+export const terms7 =
+  'Esse termo passar a valer a partir do aceite realizado via aplicação acessível pelo endereço <a href="https://cestabasicadigital.com" target="blank">https://cestabasicadigital.com</a> responsável por registrar dia e hora o aceite.'
 export const targetCompromise =
   'Culpa est cillum aliqua reprehenderit veniam elit velit sunt excepteur esse. Cupidatat pariatur velit elit consequat sit et ad aute irure excepteur. Exercitation cupidatat sint qui ex culpa exercitation. Do culpa id ea ex aliquip deserunt ullamco aliqua incididunt sit id. Quis anim non consequat ad culpa duis aliquip dolore id dolor.'
 export const conclusionCompromise =
@@ -23,10 +46,11 @@ export const conclusionCompromise =
 export const declareTermUse = 'Declaro que li e estou de acordo com os Termos de Uso da aplicacao'
 export const cancel = 'Cancelar'
 export const singin = 'Entrar'
+
 export const contate = 'Isadora Correa'
 export const confirm = 'Confirmar'
 export const back = 'Voltar'
-export const titleTerms = 'Termos de compromisso'
+export const titleTerms = 'Termo de compromisso'
 
 // Checklist screen
 export const titleChecklist = 'Checklist de Saúde'
@@ -78,7 +102,8 @@ export const legendAddPicPersonReceivedDonationWithDocument =
 
 // Modal
 export const completeDeliveryTitle = 'Entrega de doação completa!'
-export const completeDeliveryThanks = 'Líder, somos um time de heróis e heroínas! Obrigado por continuar agindo e salvando vidas diante das adversidades e do caos! Continue se cuidando para poder cuidar do próximo! Tamojunto! '
+export const completeDeliveryThanks =
+  'Líder, somos um time de heróis e heroínas! Obrigado por continuar agindo e salvando vidas diante das adversidades e do caos! Continue se cuidando para poder cuidar do próximo! Tamojunto! '
 export const completeDeliveryInformationContate = 'Caso tenha ocorrido algum problema na entrega, entre em contato com:'
 
 // Generic

@@ -8,7 +8,7 @@
   margin-top: 20px;
 
 
-  &.fill {
+  &.fill:not(:disabled) {
     background: #328B21;
     border-radius: 54px;
     color: #ffffff;

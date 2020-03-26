@@ -46,7 +46,7 @@ function DonationPage({ store, dispatch }) {
       </div>
       <div className="header-donation-prof">
         <Title message={`${titleDonationProf}`} />
-        <Paragraph size={ParagraphTypes.MEDIUM} content="descriptionDonationProf" />
+        <Paragraph size={ParagraphTypes.LIGHT} content="descriptionDonationProf" />
         <Input
           ignoreValidate
           inputType={inputTypes.NUMBER}

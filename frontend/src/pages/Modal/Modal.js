@@ -12,7 +12,7 @@ import { contate, contateNumber } from '../../utils/strings'
 function ModalPage({ isOpenModal, title, actionExit }) {
   const customStyles = {
     overlay: {
-      height: '450px',
+      height: '70vh',
       top: '25%',
     },
   }

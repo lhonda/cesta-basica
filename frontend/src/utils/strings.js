@@ -10,6 +10,7 @@ export const placeholderCPF = 'Digite seu CPF'
 export const typeYourPassword = 'Digite sua senha'
 export const errorMessageInvalidLogin = 'Cpf não cadastrado. Corrija o número do CPF.'
 export const errorMessageInvalidPassword = 'Senha incorreta. Tente novamente.'
+export const textButtonForLogin = 'Entrar'
 
 // Terms screen
 export const introductionCompromise =
@@ -22,7 +23,7 @@ export const conclusionCompromise =
 export const declareTermUse = 'Declaro que li e estou de acordo com os Termos de Uso da aplicacao'
 export const cancel = 'Cancelar'
 export const singin = 'Entrar'
-export const contate = 'Contato'
+export const contate = 'Isadora Correa'
 export const confirm = 'Confirmar'
 export const back = 'Voltar'
 export const titleTerms = 'Termos de compromisso'
@@ -49,8 +50,8 @@ export const legendDonationDateFinal = 'Prazo final para entrega'
 export const legendDonationType = 'Tipo da doação'
 export const legendDonationWaitAmount = 'Quantidade de doações'
 export const legendDonationWaitInformation =
-  'Para mais informações sobre o horário de recebimento, entrar em contato com a equipe da Gerando Falcões.'
-export const contateNumber = '(11) 99999-9999'
+  'Se ainda não recebeu informações sobre local e horário de recebimento, favor entrar em contato com a equipe do Gerando Falcões, no telefone abaixo:'
+export const contateNumber = '(31) 98717-2222'
 export const legendDonationWaitInformationButton =
   'Ao clicar em "Doação recebida" você estará confirmando que recebeu e preencherá algumas informações de detalhe da entrega.'
 export const legendDonationWaitButton = 'Doação recebida'
@@ -59,11 +60,12 @@ export const legendDonationReceivedFinishButton = 'Encerrar Entrega'
 
 // Donation Prof screen
 
-export const titleDonationProf = 'Evidência do Recebimento'
+export const titleDonationProf = 'Evidência de Entrega'
 export const descriptionDonationReceived =
-  'Quando for iniciar as entregas das doações na comunidade, atualize seu status na plataforma para "Iniciar Entrega". Importante lembrar que você possui 24h para finalizar as entregas e precisa tirar uma foto para cada entrega de doação na comunidade. Excelente trabalho :)'
-export const descriptionDonationProf =
-  'Precisamos que você confirme as algumas informações sobre a doação para que lore ipsum ipsum ipsum ipsum lore lore lore ipsum ipsum ipsum ipsum lore lore.'
+  'Quando for iniciar as entregas das doações na comunidade, atualize seu status na plataforma para "Iniciar Entrega".'
+export const descriptionDonationReceivedSecondparagraph =
+  'Importante lembrar que você possui 24h para finalizar as entregas e precisa tirar uma foto para cada entrega de doação na comunidade. Excelente trabalho :)'
+export const descriptionDonationProf = 'Precisamos que você complete as informações sobre o recebimento da doação'
 export const legendInputAmountDonation = 'Quantidade de doações recebidas'
 export const legendPicDonation = 'Foto da doação'
 export const legendPicFiscalNode = 'Foto da nota fiscal'
@@ -76,7 +78,7 @@ export const legendAddPicPersonReceivedDonationWithDocument =
 
 // Modal
 export const completeDeliveryTitle = 'Entrega de doação completa!'
-export const completeDeliveryThanks = 'Obrigada por ajudar lore lore lore ipsum lore ispum lore ipsum ipsum.'
+export const completeDeliveryThanks = 'Líder, somos um time de heróis e heroínas! Obrigado por continuar agindo e salvando vidas diante das adversidades e do caos! Continue se cuidando para poder cuidar do próximo! Tamojunto! '
 export const completeDeliveryInformationContate = 'Caso tenha ocorrido algum problema na entrega, entre em contato com:'
 
 // Generic

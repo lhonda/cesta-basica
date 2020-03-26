@@ -8,9 +8,12 @@ export async function process () {
     return {
       donationId: row.donationId,
       leaderLogin: row.leaderLogin,
+      site: row.site,
+      city: row.city,
+      state: row.state,
       quantity: row.quantity,
       donor: null,
-      status: 'Esperando recebimento',
+      status: 1,
       receivedCardsS3Key: null,
       created: null,
       received: null,

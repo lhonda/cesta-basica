@@ -85,6 +85,7 @@ export const legendDonationReceivedFinishButton = 'Encerrar Entrega'
 export const completedFirstLetterCapitalized = 'Completo'
 export const returnedFirstLetterCapitalized = 'Devolvido'
 export const lostFirstLetterCapitalized = 'Extraviado'
+export const deliveredToLeader = 'Entregue para líder'
 
 // Donation Prof screen
 export const titleDonationProf = 'Evidência de Entrega'

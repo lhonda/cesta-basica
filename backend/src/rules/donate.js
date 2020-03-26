@@ -61,9 +61,9 @@ export async function donate ({
     const key = `provas/entregas/entrega-doacao-${login}-${donationId}-${timestamp.toISOString()}.${ext}`
 
     const params = {
-      Bucket: BUCKET_NAME,
+      Bucket: process.env.BUCKET_NAME,
       Key: key,
-      Body: donateDonationFile
+      Body: donateDonationFile.data
     }
 
     const s3 = new AWS.S3()

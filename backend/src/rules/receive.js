@@ -1,8 +1,6 @@
 import AWS from 'aws-sdk'
 import { Donation } from '../repositories'
 
-const { BUCKET_NAME } = process.env
-
 export async function receive({
   login,
   donationId,
@@ -46,9 +44,9 @@ export async function receive({
     const key = `provas/recebimentos/recebimento-doacao-${login}-${donationId}-${timestamp.toISOString()}.${ext}`
 
     const params = {
-      Bucket: BUCKET_NAME,
+      Bucket: process.env.BUCKET_NAME,
       Key: key,
-      Body: receiveDonationFile
+      Body: receiveDonationFile.data
     }
 
     const s3 = new AWS.S3()

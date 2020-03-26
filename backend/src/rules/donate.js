@@ -21,7 +21,7 @@ export async function donate ({
   console.log(donation)
 
   if (donation) {
-    var timestamp = new Date()
+    const timestamp = new Date()
 
     donation.quantity -= quantity
 

@@ -1,16 +1,15 @@
 import { Donation, donationSchema } from '../repositories/donation'
 
-var AWS = require('aws-sdk')
+const AWS = require('aws-sdk')
 const BUCKET_NAME = 'cesta-basica-sp'
 
-export async function receive({ login }, { donationId }, { lat, lon }, { doacao }) {
-
+export async function receive ({ login }, { donationId }, { lat, lon }, { doacao }) {
   const donation = await Donation.findOne({ donationId: donationId })
   const status = donationSchema.obj.status.enum[0]
 
   if (donation && (donation.status === status) && (donation.leaderLogin === login)) {
     const utcNow = new Date()
-    const [, ext] = doacao.mimetype.split('/');
+    const [, ext] = doacao.mimetype.split('/')
     const key = `provas/recebimentos/recebimento-doacao-${login}-${donationId}-${utcNow.toISOString()}.${ext}`
 
     const params = {
@@ -26,12 +25,12 @@ export async function receive({ login }, { donationId }, { lat, lon }, { doacao 
       }
       console.log(`File uploaded successfully.Key:${key}`)
     })
-    
-    let point = {
+
+    const point = {
       type: 'Point',
       coordinates: [lon, lat]
     }
-    
+
     if (!lat && !lon) {
       point.coordinates[0] = null
       point.coordinates[1] = null

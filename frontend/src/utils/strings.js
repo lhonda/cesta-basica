@@ -57,6 +57,9 @@ export const legendDonationWaitInformationButton =
 export const legendDonationWaitButton = 'Cartões recebidos'
 export const legendDonationReceivedButton = 'Iniciar Entrega'
 export const legendDonationReceivedFinishButton = 'Encerrar Entrega'
+export const completedFirstLetterCapitalized = 'Completo'
+export const returnedFirstLetterCapitalized = 'Devolvido'
+export const lostFirstLetterCapitalized = 'Extraviado'
 
 // Donation Prof screen
 

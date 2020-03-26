@@ -9,6 +9,7 @@
     "lint": "eslint .",
     "postinstall": "npm run build",
     "load-data": "node -r esm src/load-data/all.js",
+    "load-data-users": "node -r esm src/load-data/load-types/user.js",
     "build": ""
   },
   "dependencies": {

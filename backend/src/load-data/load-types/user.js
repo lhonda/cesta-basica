@@ -1,17 +1,14 @@
 import { connect, disconnect } from '../../core/database'
-import { random } from '../../services'
 import { User } from '../../repositories'
 import { config } from 'dotenv'
 import { genericProcess } from '../genericProcess'
 
 export async function process () {
   return genericProcess(User, 'user-data.csv', row => {
-    const password = random.password()
-
     return {
       login: row.cpf,
-      password: password,
-      initialPassword: password,
+      password: row.password,
+      initialPassword: row.password,
       name: row.name,
       role: 'leader',
       email: row.email,
@@ -21,7 +18,10 @@ export async function process () {
       birthdate: row.birthdate,
       site: row.site,
       city: row.city,
-      state: row.state
+      state: row.state,
+      deliveryLocation: row.deliveryLocation,
+      deliveryCep: row.deliveryCep,
+      slums: row.slums
     }
   })
 }

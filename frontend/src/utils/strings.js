@@ -2,7 +2,8 @@
 export const homeContentTitle = 'Apoie uma comunidade contra a fome.'
 export const homeContentSubTitle = 'O que estamos fazendo'
 export const homeContent =
-  'Temos um inimigo comum: o COVID-19. Estamos trabalhando como uma ponte, em rede com ONGs conveniadas, enviando cestas básicas e álcool em gel para que líderes socias distribuam as doações às famílias mais vulneráveis. Assim elas terão como manter o isolamento social e achatar a curva de disseminação do vírus. FAÇA A SUA PARTE!'
+  'Temos um inimigo comum: o COVID-19. Estamos trabalhando como uma ponte, em rede com ONGs conveniadas, enviando cestas básicas e álcool em gel para que líderes socias distribuam as doações às famílias mais vulneráveis. Assim elas terão como manter o isolamento social e achatar a curva de disseminação do vírus.'
+export const homeSeparatedLine = 'FAÇA A SUA PARTE!'
 
 // login screen
 export const titleLoginScreen = 'Entre na plataforma'

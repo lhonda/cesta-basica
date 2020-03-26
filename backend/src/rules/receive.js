@@ -3,7 +3,7 @@ import { Donation, donationSchema } from '../repositories/donation'
 
 const { BUCKET_NAME } = process.env
 
-export async function receive ({ login, donationId, lat, lon, donation }) {
+export async function receive ({ login, donationId, lat, lon, donationFiles }) {
   const donation = await Donation.findOne({ donationId: donationId })
   const status = donationSchema.obj.status.enum[0]
 
@@ -15,10 +15,11 @@ export async function receive ({ login, donationId, lat, lon, donation }) {
     const params = {
       Bucket: BUCKET_NAME,
       Key: key,
-      Body: donation.data
+      Body: donationFiles.data
     }
 
     const s3 = new AWS.S3()
+
     s3.upload(params, function (err, data) {
       if (err) {
         throw err
@@ -35,6 +36,11 @@ export async function receive ({ login, donationId, lat, lon, donation }) {
       point.coordinates[0] = null
       point.coordinates[1] = null
     }
+
+    donation.status = 2
+    donation.received = utcNow
+    donation.s3Key = key
+    await donation.save()
 
     const payload = {
       status: donationSchema.obj.status.enum[1],

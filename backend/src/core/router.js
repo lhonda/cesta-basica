@@ -51,7 +51,7 @@ router.post('/donations/:donationId/receive', authRequired('leader'), (req, res)
     donationId: req.params.donationId,
     lat: req.body.lat,
     lon: req.body.lon,
-    donation: req.files
+    donationFiles: req.files
   }).then(() => res.status(204).end())
     .catch(err => {
       console.log(err)

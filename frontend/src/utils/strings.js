@@ -48,13 +48,13 @@ export const statusDonationReceivedCurrent = 'Entregando'
 export const legendDonationWaitDate = 'Dia de recebimento'
 export const legendDonationDateFinal = 'Prazo final para entrega'
 export const legendDonationType = 'Tipo da doação'
-export const legendDonationWaitAmount = 'Quantidade de doações'
+export const legendDonationWaitAmount = 'Quantidade de cartões'
 export const legendDonationWaitInformation =
   'Se ainda não recebeu informações sobre local e horário de recebimento, favor entrar em contato com a equipe do Gerando Falcões, no telefone abaixo:'
 export const contateNumber = '(31) 98717-2222'
 export const legendDonationWaitInformationButton =
-  'Ao clicar em "Doação recebida" você estará confirmando que recebeu e preencherá algumas informações de detalhe da entrega.'
-export const legendDonationWaitButton = 'Doação recebida'
+  'Ao clicar em "Cartões recebidos" você estará confirmando que recebeu e preencherá algumas informações de detalhe da entrega.'
+export const legendDonationWaitButton = 'Cartões recebidos'
 export const legendDonationReceivedButton = 'Iniciar Entrega'
 export const legendDonationReceivedFinishButton = 'Encerrar Entrega'
 

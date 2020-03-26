@@ -1,27 +1,64 @@
 import { Donation, Voucher } from '../repositories'
+import AWS from 'aws-sdk'
 
-// var AWS = require('aws-sdk')
-// const BUCKET_NAME = 'cesta-basica-sp'
+const { BUCKET_NAME } = process.env
 
-export async function donate ({
+export async function donate({
   login,
-  role
-}, {
-  donationId
-}, {
+  donationId,
+  voucherId,
   leaderLogin,
   lat,
   lon,
-  quantity,
   receivedCpf,
-  receivedName
-}, fileContent) {
+  receivedName,
+  donateDonationFile
+}) {
+    
+  if (!donationId) {
+    throw new Error("donationId is required")
+  }
+    
+  if (!voucherId) {
+    throw new Error("voucherId is required")
+  }
+    
+  if (!leaderLogin) {
+    throw new Error("leaderLogin is required")
+  }
+
+  if (!lat) {
+    throw new Error("lat is required")
+  }
+
+  if (!lon) {
+    throw new Error("lon is required")
+  }
+
+  if (!receivedCpf) {
+    throw new Error("receivedCpf is required")
+  }
+  
+  if (!receivedName) {
+    throw new Error("receivedName is required")
+  }
+  
+  if (!donateDonationFile) {
+    throw new Error("donateDonationFile is required")
+  }
+  
   const donation = await Donation.findOne({ donationId: donationId })
+
+  if (!donation) {
+    throw new Error(`Couldn\'t find the Donation with id: ${donationId}`)
+  }
 
   console.log(donation)
 
   if (donation) {
     const timestamp = new Date()
+    const [, ext] = donateDonationFile.mimetype.split('/')
+    const key = `provas/entregas/entrega-doacao-${login}-${donationId}-${timestamp.toISOString()}.${ext}`
 
     donation.quantity -= quantity
 
@@ -37,39 +74,36 @@ export async function donate ({
     }
 
     await donation.save()
+    
+    const params = {
+      Bucket: BUCKET_NAME,
+      Key: key,
+      Body: donateDonationFile
+    }
 
-    let s3Key
+    const s3 = new AWS.S3()
 
-    // var key = `/provas/entregas/entrega-${donationId}-${utcNow.toISOString()}.jpg`
-
-    // const params = {
-    //   Bucket: BUCKET_NAME,
-    //   Key: key,
-    //   Body: fileContent
-    // }
-
-    // var s3 = new AWS.S3()
-
-    // s3.upload(params, function (err, data) {
-    //   if (err) {
-    //     throw err
-    //   }
-    //   console.log(`File uploaded successfully.Key:${key}`)
-    // })
-
-    const voucher = new Voucher({
-      donationId,
-      quantity,
-      leaderLogin,
-      receivedCpf,
-      receivedName,
-      timestamp,
-      point: {
-        type: 'Point',
-        coordinates: [lon, lat]
-      },
-      s3Key
+    s3.upload(params, function (err, data) {
+      if (err) {
+        throw err
+      }
+      console.log(`File uploaded successfully.Key:${key}`)
     })
+
+    const voucher = Voucher.findOne({ voucherId })
+    
+    if (!voucher) {
+      throw new Error(`Could not find the voucherId provided: ${voucherId}`)
+    }
+
+    voucher.receivedCpf = receivedCpf
+    voucher.receivedName = receivedName
+    voucher.delivered = timestamp
+    voucher.cardDonatedS3Key = key
+    voucher.point = {
+      type: 'Point',
+      coordinates: [lon, lat]
+    }
 
     console.log(voucher)
 

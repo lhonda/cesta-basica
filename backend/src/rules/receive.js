@@ -34,7 +34,7 @@ export async function receive ({ login, role }, { donationId }, { lat, lon }, fi
       coordinates: [lon, lat]
     }
 
-    donation.status = 'Entregue para líder'
+    donation.status = 2
     donation.received = timestamp
     donation.s3Key = s3Key
     await donation.save()

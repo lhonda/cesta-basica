@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { useParams } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { connect } from '../../store'
 import { Title } from '../../components/Title'
 import { LogoBack } from '../../components/Logo'
@@ -30,16 +30,16 @@ import {
   WORD_YES,
   WORD_NO,
 } from '../../utils/strings'
-import { handleBackButton } from '../../services/handles'
 
 function DonationPage({ store, dispatch }) {
+  const { goBack } = useHistory()
   const [numberDonation, setNumberDonation] = useState('')
   const [showNF, setShowNF] = useState('')
-
+  // const
   return (
     <div className="container-donation-prof">
       <div className="sidebar-donation-prof">
-        <ButtonIcon handleClick={handleBackButton}>
+        <ButtonIcon handleClick={goBack}>
           <LogoBack height={10} />
         </ButtonIcon>
         <Legend type={LegendTypes.STRONG} message={back} />

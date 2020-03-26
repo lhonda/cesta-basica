@@ -35,5 +35,14 @@
     font-size: 22px;
     letter-spacing: 0.2px;
     font-weight: bold;
+    word-break: normal;
   }
+}
+
+span {
+  display: inline;
+}
+span:before {
+  content: "\a ";
+  white-space: pre;
 }

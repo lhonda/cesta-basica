@@ -18,6 +18,7 @@ export async function receive({ login, donationId, lat, lon, fileDonation }) {
     }
 
     const s3 = new AWS.S3()
+
     s3.upload(params, function (err, data) {
       if (err) {
         throw err
@@ -34,6 +35,11 @@ export async function receive({ login, donationId, lat, lon, fileDonation }) {
       point.coordinates[0] = null
       point.coordinates[1] = null
     }
+
+    donation.status = 2
+    donation.received = utcNow
+    donation.s3Key = key
+    await donation.save()
 
     const payload = {
       status: donationSchema.obj.status.enum[1],

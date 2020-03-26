@@ -35,7 +35,6 @@ function DonationPage({ store, dispatch }) {
   const { goBack } = useHistory()
   const [numberDonation, setNumberDonation] = useState('')
   const [showNF, setShowNF] = useState('')
-  // const
   return (
     <div className="container-donation-prof">
       <div className="sidebar-donation-prof">

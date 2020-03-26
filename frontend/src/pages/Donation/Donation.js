@@ -26,7 +26,6 @@ import { handleDonationReceived } from '../../services/handles'
 function DonationPage({ store, dispatch }) {
   const { push, location } = useHistory()
   const { id } = useParams()
-  const { push, location } = useHistory()
   return (
     <div className="container-donation">
       <div className="header-donation">

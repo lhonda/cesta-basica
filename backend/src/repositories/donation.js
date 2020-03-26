@@ -25,7 +25,7 @@ export const donationSchema = new Schema({
     required: [true, 'status is required'],
     default: 1
   },
-  s3Key: {
+  receivedCardsS3Key: {
     type: String
   },
   created: { type: Date },

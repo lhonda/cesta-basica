@@ -3,19 +3,18 @@ import { Donation, donationSchema } from '../repositories/donation'
 
 const { BUCKET_NAME } = process.env
 
-export async function receive ({ login, donationId, lat, lon, donationFiles }) {
+export async function receive({ login, donationId, lat, lon, fileDonation }) {
   const donation = await Donation.findOne({ donationId: donationId })
   const status = donationSchema.obj.status.enum[0]
-
   if (donation && (donation.status === status) && (donation.leaderLogin === login)) {
     const utcNow = new Date()
-    const [, ext] = donation.mimetype.split('/')
+    const [, ext] = fileDonation.mimetype.split('/')
     const key = `provas/recebimentos/recebimento-doacao-${login}-${donationId}-${utcNow.toISOString()}.${ext}`
 
     const params = {
       Bucket: BUCKET_NAME,
       Key: key,
-      Body: donationFiles.data
+      Body: fileDonation
     }
 
     const s3 = new AWS.S3()
@@ -45,7 +44,7 @@ export async function receive ({ login, donationId, lat, lon, donationFiles }) {
     const payload = {
       status: donationSchema.obj.status.enum[1],
       receivedCardsS3Key: key,
-      timeStamp: utcNow.toISOString(),
+      received: utcNow.toISOString(),
       point: point
     }
 

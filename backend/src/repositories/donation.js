@@ -16,8 +16,7 @@ export const donationSchema = new Schema({
     required: [true, 'Quantity is required']
   },
   donor: {
-    type: String,
-    required: [true, 'Donor is required']
+    type: String
   },
   status: {
     type: Number,

@@ -1,15 +1,14 @@
 import AWS from 'aws-sdk'
-import { Donation, donationSchema } from '../repositories/donation'
-import { statuses } from '../enum'
+import { Donation } from '../repositories'
 
 const { BUCKET_NAME } = process.env
 
-export async function receive({ 
-  login, 
-  donationId, 
-  lat, 
-  lon, 
-  receiveDonationFile 
+export async function receive({
+  login,
+  donationId,
+  lat,
+  lon,
+  receiveDonationFile
 }) {
   if (!login) {
     throw new Error("login is required")
@@ -32,12 +31,12 @@ export async function receive({
   }
 
   const donation = await Donation.findOne({ donationId: donationId })
- 
+
   if (!donation) {
     throw new Error(`Couldn\'t find the Donation with id: ${donationId}`)
   }
 
-  if (donation.leaderLogin === login) {
+  if (donation.leaderLogin !== login) {
     throw new Error('The leaderLogin of the donation isn\'t the same of the auth token')
   }
 
@@ -45,22 +44,22 @@ export async function receive({
     const timestamp = new Date()
     const [, ext] = receiveDonationFile.mimetype.split('/')
     const key = `provas/recebimentos/recebimento-doacao-${login}-${donationId}-${timestamp.toISOString()}.${ext}`
-    
+
     const params = {
       Bucket: BUCKET_NAME,
       Key: key,
       Body: receiveDonationFile
     }
-    
+
     const s3 = new AWS.S3()
-    
+
     s3.upload(params, function (err, data) {
       if (err) {
         throw err
       }
       console.log(`File uploaded successfully.Key:${key}`)
     })
-    
+
     const point = {
       type: 'Point',
       coordinates: [lon, lat]
@@ -71,7 +70,7 @@ export async function receive({
     donation.receivedCardsS3Key = key
     donation.point = point
     await donation.save()
-    
-    return
+
+    return donation
   }
-    
+}

@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { healthCheck, signin, createUser, donate, receive, commitment, checklist, listDonations } from '../rules'
+import { healthCheck, signin, createUser, donate, receive, commitment, checklist, listDonations, listVouchers } from '../rules'
 import { authRequired } from '../middlewares'
 
 export const router = Router()
@@ -30,6 +30,15 @@ router.post('/sign-in', (req, res) =>
 router.post('/admin/sign-in', (req, res) =>
   signin(req.body)
     .then(signinData => res.status(200).json(signinData))
+    .catch(err => {
+      console.log(err)
+      res.status(401).json({ message: err.message })
+    }))
+
+// listar doações que foram pre carregadas no banco de dados
+router.get('/vouchers', authRequired('leader'), (req, res) =>
+  listVouchers(req.auth)
+    .then(data => res.status(data.length === 0 ? 404 : 200).json(data))
     .catch(err => {
       console.log(err)
       res.status(401).json({ message: err.message })

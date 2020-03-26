@@ -33,7 +33,7 @@ const voucherSchema = new Schema({
 })
 
 voucherSchema.pre('save', function (next) {
-  this.timestamp = new Date()
+  this.created = new Date()
   next()
 })
 

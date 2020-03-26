@@ -1,8 +1,5 @@
 import AWS from 'aws-sdk'
-import { Donation, donationSchema } from '../repositories/donation'
-import { statuses } from '../enums'
-
-const { BUCKET_NAME } = process.env
+import { Donation} from '../repositories/donation'
 
 export async function receive({
   login,
@@ -37,7 +34,7 @@ export async function receive({
     throw new Error(`Couldn\'t find the Donation with id: ${donationId}`)
   }
 
-  if (donation.leaderLogin === login) {
+  if (donation.leaderLogin !== login) {
     throw new Error('The leaderLogin of the donation isn\'t the same of the auth token')
   }
 
@@ -47,9 +44,9 @@ export async function receive({
     const key = `provas/recebimentos/recebimento-doacao-${login}-${donationId}-${timestamp.toISOString()}.${ext}`
 
     const params = {
-      Bucket: BUCKET_NAME,
+      Bucket: process.env.BUCKET_NAME,
       Key: key,
-      Body: receiveDonationFile
+      Body: receiveDonationFile.data
     }
 
     const s3 = new AWS.S3()
@@ -72,6 +69,6 @@ export async function receive({
     donation.point = point
     await donation.save()
 
-    return
+    return donation
   }
 }

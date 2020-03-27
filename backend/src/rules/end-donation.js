@@ -1,15 +1,15 @@
 import { Donation } from '../repositories'
 
 export async function endDonation ({ donationId }) {
-  const donate = await Donation.findOne({ donationId })
-
   if (!donationId) {
     throw new Error('donationId is required')
   }
 
-  donate.status = 4
+  const donation = await Donation.findOne({ donationId })
 
-  await donate.save()
+  donation.status = 4
+  donation.completed = new Date()
+  await donation.save()
 
-  return donate
+  return
 }

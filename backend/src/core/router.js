@@ -1,6 +1,18 @@
 import { Router } from 'express'
-import { healthCheck, createUser, signin, listVouchers, listDonations, endDonation, receive, donate, commitment, checklist } from '../rules'
 import { authRequired } from '../middlewares'
+import {
+  healthCheck,
+  createUser,
+  signin,
+  commitment,
+  checkCommitment,
+  checklist,
+  listVouchers,
+  listDonations,
+  receive,
+  donate,
+  endDonation
+} from "../rules";
 
 export const router = Router()
 
@@ -53,16 +65,6 @@ router.get('/donations', authRequired('leader'), (req, res) =>
       res.status(401).json({ message: err.message })
     }))
 
-// encerrar a doacao
-router.post('/donations/:donationId/end', authRequired('leader'), (req, res) =>
-  endDonation({
-    donationId: req.params.donationId
-  }).then(() => res.status(204).end())
-    .catch(err => {
-      console.log(err)
-      res.status(401).json({ message: err.message })
-    }))
-
 // recebimento de doacoes SUPERMERCADO > LIDER
 router.post('/donations/:donationId/receive', authRequired('leader'), (req, res) =>
   receive({
@@ -89,7 +91,17 @@ router.post('/donations/:donationId/donate', authRequired('leader'), (req, res) 
     quantity: req.body.quantity,
     receivedCpf: req.body.receivedCpf,
     receivedName: req.body.receivedName,
-    donateDonationFile: req.files.donateDonationFile
+    donateDonationFile: req.files ? req.files.donateDonationFile : undefined
+  }).then(() => res.status(204).end())
+    .catch(err => {
+      console.log(err)
+      res.status(401).json({ message: err.message })
+    }))
+
+// encerrar a doacao
+router.post('/donations/:donationId/end', authRequired('leader'), (req, res) =>
+  endDonation({
+    donationId: req.params.donationId
   }).then(() => res.status(204).end())
     .catch(err => {
       console.log(err)
@@ -100,6 +112,15 @@ router.post('/donations/:donationId/donate', authRequired('leader'), (req, res) 
 router.post('/commitment', authRequired('leader'), (req, res) =>
   commitment(req.auth)
     .then(() => res.status(201).end())
+    .catch(err => {
+      console.log(err)
+      res.status(401).json({ message: err.message })
+    }))
+
+// retornar check commitment
+router.get('/commitment/check', authRequired('leader'), (req, res) =>
+  checkCommitment(req.auth)
+    .then((data) => res.status(201).json(data))
     .catch(err => {
       console.log(err)
       res.status(401).json({ message: err.message })

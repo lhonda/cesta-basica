@@ -6,6 +6,7 @@ export async function receive ({
   donationId,
   lat,
   lon,
+  receivedQuantity,
   receiveDonationFile
 }) {
   if (!login) {
@@ -63,6 +64,7 @@ export async function receive ({
       coordinates: [lon, lat]
     }
 
+    donation.receivedQuantity = receivedQuantity
     donation.status = 2
     donation.received = timestamp
     donation.receivedCardsS3Key = key

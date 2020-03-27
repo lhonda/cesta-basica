@@ -25,6 +25,7 @@ function DonationList({ store, dispatch }) {
   useEffect(() => {
     getDonationList()
   }, [])
+
   return (
     <div className="containerDonation">
       {loading && <Loader />}

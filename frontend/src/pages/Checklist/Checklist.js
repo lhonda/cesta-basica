@@ -42,7 +42,7 @@ function ChecklistPage({ store, dispatch, history }) {
         <div className="main-checklist">
           <Symptoms />
           <Legend message={LegendChecklist} />
-          <Link action={() => handleRedirectSymptoms('https://google.com.br')} message={linkChecklist} />
+          <Link action={() => handleRedirectSymptoms('https://coronavirus.saude.gov.br/')} message={linkChecklist} />
           <Checkbox handleChecked={handleChecked} checked={checked} message={declareChecklist} />
         </div>
         <div className="footer-checklist">

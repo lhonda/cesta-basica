@@ -88,14 +88,14 @@ export const lostFirstLetterCapitalized = 'Extraviado'
 export const deliveredToLeader = 'Entregue para líder'
 
 // Donation Prof screen
-export const titleDonationProf = 'Evidência de Entrega'
+export const titleDonationProf = 'Evidência do Recebimento'
 export const descriptionDonationReceived =
   'Quando for iniciar as entregas das doações na comunidade, atualize seu status na plataforma para "Iniciar Entrega".'
 export const descriptionDonationReceivedSecondparagraph =
   'Importante lembrar que você possui 24h para finalizar as entregas e precisa tirar uma foto para cada entrega de doação na comunidade. Excelente trabalho :)'
-export const descriptionDonationProf = 'Precisamos que você complete as informações sobre o recebimento da doação'
-export const legendInputAmountDonation = 'Quantidade de doações recebidas'
-export const legendPicDonation = 'Foto da doação'
+export const descriptionDonationProf = 'Precisamos que você complete as informações sobre o recebimento do cartão.'
+export const legendInputAmountDonation = 'Quantidade de cartões recebidos'
+export const legendPicDonation = 'Foto do recebimento'
 export const legendPicFiscalNode = 'Foto da nota fiscal'
 export const legendInputAddPic = 'adicionar foto da galeria'
 export const legendNFQuestion = 'Deseja adicionar Nota Fiscal?'

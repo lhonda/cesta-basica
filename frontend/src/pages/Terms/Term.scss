@@ -32,3 +32,12 @@
     gap: 0.5rem;
   }
 }
+
+.alert {
+  font-size: 15px;
+  padding: 15px;
+  font-weight: 400;
+  &.warning {
+      background: lightgoldenrodyellow;
+  }
+}

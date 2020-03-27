@@ -43,7 +43,7 @@ function DonationPage({ store, dispatch }) {
 
 
 
-    await Upload({ donationId: 8, file: image })
+    await Upload({ donationId: 1, file: image })
     setLoading(false)
   }
   return (

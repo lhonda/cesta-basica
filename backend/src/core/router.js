@@ -1,3 +1,4 @@
+/* eslint-disable quotes */
 import { Router } from 'express'
 import { authRequired } from '../middlewares'
 import {
@@ -11,8 +12,9 @@ import {
   listDonations,
   receive,
   donate,
-  endDonation
-} from "../rules";
+  endDonation,
+  deleteEvents
+} from '../rules'
 
 export const router = Router()
 
@@ -53,7 +55,7 @@ router.get('/vouchers', authRequired('leader'), (req, res) =>
     .then(data => res.status(data.length === 0 ? 404 : 200).json(data))
     .catch(err => {
       console.log(err)
-      res.status(401).json({ message: err.message })
+      res.status(500).json({ message: err.message })
     }))
 
 // listar doações que foram pre carregadas no banco de dados
@@ -62,7 +64,7 @@ router.get('/donations', authRequired('leader'), (req, res) =>
     .then(data => res.status(data.donations.length === 0 ? 404 : 200).json(data))
     .catch(err => {
       console.log(err)
-      res.status(401).json({ message: err.message })
+      res.status(500).json({ message: err.message })
     }))
 
 // recebimento de doacoes SUPERMERCADO > LIDER
@@ -80,7 +82,7 @@ router.post('/donations/:donationId/receive', authRequired('leader'), (req, res)
     receiveDonationFile: req.files ? req.files.receiveDonationFile : undefined
   }).then(() => res.status(204).end()).catch(err => {
     console.log(err)
-    res.status(401).json({ message: err.message })
+    res.status(500).json({ message: err.message })
   })
 })
 
@@ -101,7 +103,7 @@ router.post('/donations/:donationId/donate', authRequired('leader'), (req, res) 
   }).then(() => res.status(204).end())
     .catch(err => {
       console.log(err)
-      res.status(401).json({ message: err.message })
+      res.status(500).json({ message: err.message })
     }))
 
 // encerrar a doacao
@@ -111,7 +113,7 @@ router.post('/donations/:donationId/end', authRequired('leader'), (req, res) =>
   }).then(() => res.status(204).end())
     .catch(err => {
       console.log(err)
-      res.status(401).json({ message: err.message })
+      res.status(500).json({ message: err.message })
     }))
 
 // guardar termo do lider, so retorna 201 sem conteudo
@@ -120,7 +122,17 @@ router.post('/commitment', authRequired('leader'), (req, res) =>
     .then(() => res.status(201).end())
     .catch(err => {
       console.log(err)
-      res.status(401).json({ message: err.message })
+      res.status(500).json({ message: err.message })
+    }))
+
+// deletar os eventos de determinando login, so retorna 204 sem conteudo
+router.delete('/events', authRequired('admin'), (req, res) =>
+  deleteEvents({
+    login: req.body.login
+  }).then(() => res.status(204).end())
+    .catch(err => {
+      console.log(err)
+      res.status(500).json({ message: err.message })
     }))
 
 // retornar check commitment
@@ -129,7 +141,7 @@ router.get('/commitment/check', authRequired('leader'), (req, res) =>
     .then((data) => res.status(201).json(data))
     .catch(err => {
       console.log(err)
-      res.status(401).json({ message: err.message })
+      res.status(500).json({ message: err.message })
     }))
 
 // guardar checklist, so retorna 201 sem conteudo
@@ -138,5 +150,5 @@ router.post('/checklist', authRequired('leader'), (req, res) =>
     .then(() => res.status(201).end())
     .catch(err => {
       console.log(err)
-      res.status(401).json({ message: err.message })
+      res.status(500).json({ message: err.message })
     }))

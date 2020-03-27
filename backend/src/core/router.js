@@ -66,7 +66,11 @@ router.get('/donations', authRequired('leader'), (req, res) =>
     }))
 
 // recebimento de doacoes SUPERMERCADO > LIDER
-router.post('/donations/:donationId/receive', authRequired('leader'), (req, res) =>
+router.post('/donations/:donationId/receive', authRequired('leader'), (req, res) => {
+  console.log(req.auth)
+  console.log(req.params)
+  console.log(req.body)
+  console.log(req.files)
   receive({
     login: req.auth.login,
     donationId: req.params.donationId,
@@ -74,11 +78,11 @@ router.post('/donations/:donationId/receive', authRequired('leader'), (req, res)
     lon: req.body.lon,
     receivedQuantity: req.body.receivedQuantity,
     receiveDonationFile: req.files ? req.files.receiveDonationFile : undefined
-  }).then(() => res.status(204).end())
-    .catch(err => {
-      console.log(err)
-      res.status(401).json({ message: err.message })
-    }))
+  }).then(() => res.status(204).end()).catch(err => {
+    console.log(err)
+    res.status(401).json({ message: err.message })
+  })
+})
 
 // entregar p/ familia LIDER > FAMILIA
 router.post('/donations/:donationId/donate', authRequired('leader'), (req, res) =>

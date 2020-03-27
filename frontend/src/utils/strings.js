@@ -52,6 +52,8 @@ export const contate = 'Isadora Correa'
 export const confirm = 'Confirmar'
 export const back = 'Voltar'
 export const titleTerms = 'Termo de compromisso'
+export const locationPermission =
+  'Para utilizar a aplicação é necessário sabermos a sua localização. Essa localização é somente usada durante a utilização da aplicação.'
 
 // Checklist screen
 export const titleChecklist = 'Checklist de Saúde'

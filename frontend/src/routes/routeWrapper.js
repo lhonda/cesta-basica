@@ -4,17 +4,26 @@ import { Route, Redirect } from 'react-router-dom'
 import { connect } from '../store'
 import { setToken } from '../services/API'
 
+import { checkExpiresCheckList } from '../services/storage'
+
 function RouteWrapper({ component: Component, isPrivate, store, ...rest }) {
   const { auth } = store
   const { path } = rest
+
+  const doneHealthCheck = checkExpiresCheckList()
 
   if (!auth.token && isPrivate) {
     return <Redirect to="/login" />
   }
 
   // verificar role do usuario para saber qual rota direcionar no futuro
-  if (auth.token && (path === '/login' || path === '/')) {
-    return <Redirect to="/donation-list" />
+  if (auth.token) {
+    if (path === '/login' || path === '/') {
+      return <Redirect to="/donation-list" />
+    }
+    if (!doneHealthCheck && path !== '/checklist') {
+      return <Redirect to="/checklist" />
+    }
   }
 
   setToken(auth.token)

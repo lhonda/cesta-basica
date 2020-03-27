@@ -9,3 +9,13 @@ export function get() {
     return undefined
   }
 }
+
+export function setExpiresCheckList() {
+  const twentyFourHoursInMs = 86400000
+  const timeOfExpires = new Date().getTime() + twentyFourHoursInMs
+  localStorage.setItem(keys.CHECK_LIST, timeOfExpires)
+}
+
+export function checkExpiresCheckList() {
+  return new Date().getTime() < localStorage.getItem(keys.CHECK_LIST)
+}

@@ -34,14 +34,12 @@ function DonationPage({ store, dispatch }) {
 
   const [loading, setLoading] = useState(false)
 
-  const handleImageFile = event => {
+  const handleImageFile = (event) => {
     setImage(event.target.files[0])
   }
 
   const handleClickButton = async () => {
     setLoading(true)
-
-
 
     await Upload({ donationId: 1, file: image })
     setLoading(false)
@@ -51,7 +49,7 @@ function DonationPage({ store, dispatch }) {
       {loading && <Loader />}
       <div className="sidebar-donation-prof">
         <ButtonIcon handleClick={goBack}>
-          <LogoBack height={'10'} />
+          <LogoBack height="10" />
         </ButtonIcon>
         <Legend type={LegendTypes.STRONG} message={back} />
       </div>
@@ -75,7 +73,12 @@ function DonationPage({ store, dispatch }) {
       </div>
 
       <div className="footer-donation-prof">
-        <Button handleClick={handleClickButton} disable={!image || !numberDonation.length} size={ButtonTypes.LARGE} message={confirm} />
+        <Button
+          handleClick={handleClickButton}
+          disable={!image || !numberDonation.length}
+          size={ButtonTypes.LARGE}
+          message={confirm}
+        />
       </div>
     </div>
   )

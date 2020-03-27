@@ -3,7 +3,7 @@
   flex-direction: column;
   height: 100%;
   overflow: hidden;
-  padding: 40px 16px 0px;
+  padding: 18px 16px 0px;
 }
 .sidebar-donation-prof {
   display: flex;
@@ -19,6 +19,12 @@
 
   h2 {
     margin-bottom: 0;
+  }
+}
+.container-inputs {
+  padding-top: 8px;
+  Input {
+    margin-bottom: 10px;
   }
 }
 .details-donation-prof {
@@ -39,12 +45,12 @@ hr {
   width: 100%;
 }
 .main-donation-prof {
-  height: 25%;
   display: flex;
+  height: 25%;
   justify-content: space-between;
 }
 .footer-donation-prof {
-  padding: 0 40px 20px 0;
+  padding: 0 35px 20px 0;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

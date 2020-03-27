@@ -5,16 +5,12 @@ import { connect } from '../../store'
 import { Title } from '../../components/Title'
 import { LogoBack } from '../../components/Logo'
 import { Input, inputTypes } from '../../components/Input'
-import { File, FileTypes } from '../../components/File'
-import { Status } from '../../components/Status'
-import { Sidebar } from '../../components/Sidebar'
+import { File } from '../../components/File'
 import { Legend, LegendTypes } from '../../components/Legend'
 import { Paragraph, ParagraphTypes } from '../../components/Paragraph'
 import { SubTitle, SubTitleTypes } from '../../components/SubTitle'
 import { Button, ButtonTypes } from '../../components/Button'
-import { ButtonIcon, ButtonIconTypes } from '../../components/ButtonIcon'
-
-import { RadioButton } from '../../components/RadioButton'
+import { ButtonIcon } from '../../components/ButtonIcon'
 
 import './DonationProf.scss'
 
@@ -22,19 +18,21 @@ import {
   confirm,
   back,
   titleDonationProf,
-  legendInputAmountDonation,
-  legendPicDonation,
+  legendInputCardNumber,
+  legendInputCardDeliveryStatus,
+  legendInputFullName,
+  legendInputCpf,
+  legendPicDelivery,
   legendInputAddPic,
-  legendPicFiscalNode,
-  legendNFQuestion,
-  WORD_YES,
-  WORD_NO,
+  legendAddPicPersonReceiveCard,
 } from '../../utils/strings'
 
 function DonationPage({ store, dispatch }) {
   const { goBack } = useHistory()
-  const [numberDonation, setNumberDonation] = useState('')
-  const [showNF, setShowNF] = useState('')
+  const [cardNumber, setcardNumber] = useState('')
+  const [deliveryStatus, setDeliveryStatus] = useState('')
+  const [fullName, setFullName] = useState('')
+  const [cpf, setCpf] = useState('')
   return (
     <div className="container-donation-prof">
       <div className="sidebar-donation-prof">
@@ -46,39 +44,54 @@ function DonationPage({ store, dispatch }) {
       <div className="header-donation-prof">
         <Title message={`${titleDonationProf}`} />
         <Paragraph size={ParagraphTypes.LIGHT} content="descriptionDonationProf" />
-        <Input
-          ignoreValidate
-          inputType={inputTypes.NUMBER}
-          size={inputTypes.SIZE_LARGE}
-          handleOnChange={setNumberDonation}
-          value={numberDonation}
-          placeholder={legendInputAmountDonation}
-        />
+        <div className="container-inputs">
+          <Input
+            ignoreValidate
+            inputType={inputTypes.NUMBER}
+            size={inputTypes.SIZE_LARGE}
+            handleOnChange={setcardNumber}
+            value={cardNumber}
+            placeholder={legendInputCardNumber}
+          />
+          <Input
+            ignoreValidate
+            inputType={inputTypes.NUMBER}
+            size={inputTypes.SIZE_LARGE}
+            handleOnChange={setDeliveryStatus}
+            value={deliveryStatus}
+            placeholder={legendInputCardDeliveryStatus}
+          />
+          <Input
+            ignoreValidate
+            inputType={inputTypes.NUMBER}
+            size={inputTypes.SIZE_LARGE}
+            handleOnChange={setFullName}
+            value={fullName}
+            placeholder={legendInputFullName}
+          />
+          <Input
+            ignoreValidate
+            inputType={inputTypes.NUMBER}
+            size={inputTypes.SIZE_LARGE}
+            handleOnChange={setCpf}
+            value={cpf}
+            placeholder={legendInputCpf}
+          />
+        </div>
       </div>
 
+      <Legend type={LegendTypes.NORMAL} message={legendAddPicPersonReceiveCard} />
       <div className="main-donation-prof">
-        <SubTitle type={SubTitleTypes.MEDIUM} width={SubTitleTypes.SIZE_SMALL} message={legendPicDonation} />
+        <SubTitle type={SubTitleTypes.MEDIUM} width={SubTitleTypes.SIZE_SMALL} message={legendPicDelivery} />
         <File placeholder={legendInputAddPic} />
       </div>
 
-      <div className="main-donation-prof-radio">
-        <SubTitle type={SubTitleTypes.MEDIUM} width={SubTitleTypes.SIZE_SMALL} message={legendNFQuestion} />
-        <RadioButton
-          handleChecked={e => setShowNF(e.target.value)}
-          name="nf"
-          options={[WORD_YES, WORD_NO]}
-        />
-      </div>
-
-      {showNF && showNF === 'Sim' && (
-        <div className="main-donation-prof">
-          <SubTitle type={SubTitleTypes.MEDIUM} width={SubTitleTypes.SIZE_SMALL} message={legendPicFiscalNode} />
-          <File placeholder={legendInputAddPic} />
-        </div>
-      )}
-
       <div className="footer-donation-prof">
-        <Button size={ButtonTypes.LARGE} message={confirm} />
+        <Button
+          size={ButtonTypes.LARGE}
+          message={confirm}
+          disable={!cardNumber || !deliveryStatus || !fullName || !cpf}
+        />
       </div>
     </div>
   )

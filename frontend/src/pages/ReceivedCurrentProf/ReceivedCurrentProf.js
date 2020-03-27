@@ -23,7 +23,7 @@ import {
   titleDonationProf,
   legendAddPicPersonReceivedDonation,
   legendAddPicPersonReceivedDonationWithDocument,
-  legendPicDonation,
+  legendPicDelivery,
   legendInputAddPic,
   legendPicFiscalNode,
 } from '../../utils/strings'
@@ -48,7 +48,7 @@ function ReceivedCurrentProfPage({ store, dispatch }) {
       <div className="details-donation-received-current-prof" />
       <div className="main-donation-received-current-prof">
         <Legend size={LegendTypes.SIZE_LARGE} message={legendAddPicPersonReceivedDonation} />
-        <SubTitle type={SubTitleTypes.MEDIUM} width={SubTitleTypes.SIZE_SMALL} message={legendPicDonation} />
+        <SubTitle type={SubTitleTypes.MEDIUM} width={SubTitleTypes.SIZE_SMALL} message={legendPicDelivery} />
         <File placeholder={legendInputAddPic} />
       </div>
       <div className="main-donation-received-current-prof">

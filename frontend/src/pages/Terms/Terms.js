@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from '../../store'
 import { Title } from '../../components/Title'
@@ -8,17 +8,30 @@ import { Checkbox } from '../../components/Checkbox'
 import './Term.scss'
 
 import { Loader } from '../../components/Loader'
-import { declareTermUse, cancel, singin, titleTerms } from '../../utils/strings'
+import { declareTermUse, cancel, singin, titleTerms, locationPermission } from '../../utils/strings'
 import { AcceptTerms } from '../../services/API/acceptTerms'
 import { handleCheckedDeclararion, handleClickCancelTerms } from '../../services/handles'
 
 function TermsPage({ store, dispatch, history }) {
   const [loading, setLoading] = useState(false)
+  const [latitude, setLatitude] = useState(null)
+  const [longitude, setLongitude] = useState(null)
   async function handleAcceptTerms() {
     setLoading(true)
     await AcceptTerms(history)
     setLoading(false)
   }
+  useEffect(() => {
+    getGeoLocation()
+  }, [])
+
+  function getGeoLocation() {
+    navigator.geolocation.getCurrentPosition((position) => {
+      setLatitude(position.coords.latitude)
+      setLongitude(position.coords.longitude)
+    })
+  }
+
   return (
     <>
       {loading && <Loader />}
@@ -27,12 +40,14 @@ function TermsPage({ store, dispatch, history }) {
           <Title message={titleTerms} />
         </div>
         <div className="main-terms">
+          {!latitude && !longitude && <div className="alert warning">{locationPermission}</div>}
           <Terms />
           <div style={{ margin: '1.2rem 0 0 0 ' }}>
             <Checkbox
               handleChecked={() => handleCheckedDeclararion(store, dispatch)}
               checked={store.declaration}
               message={declareTermUse}
+              disabled={!latitude && !longitude}
             />
           </div>
         </div>

@@ -18,7 +18,7 @@ import {
   back,
   titleDonation,
   legendDonationType,
-  statusDonationWait,
+  statusDonationReceived,
   legendDonationWaitDate,
   legendDonationWaitAmount,
   legendDonationReceivedButton,
@@ -39,7 +39,7 @@ function ReceivedPage({ store, dispatch }) {
       </div>
       <div className="header-received">
         <Title message={`${titleDonation} ${id}`} />
-        <Status message={statusDonationWait} />
+        <Status message={statusDonationReceived} />
         <Sidebar current={2} />
       </div>
       <div className="details-received">

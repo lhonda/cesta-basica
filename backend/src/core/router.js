@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { healthCheck, signin, createUser, donate, receive, commitment, checklist, listDonations, listVouchers } from '../rules'
+import { healthCheck, createUser, signin, listVouchers, listDonations, endDonation, receive, donate, commitment, checklist } from '../rules'
 import { authRequired } from '../middlewares'
 
 export const router = Router()
@@ -48,6 +48,16 @@ router.get('/vouchers', authRequired('leader'), (req, res) =>
 router.get('/donations', authRequired('leader'), (req, res) =>
   listDonations(req.auth)
     .then(data => res.status(data.donations.length === 0 ? 404 : 200).json(data))
+    .catch(err => {
+      console.log(err)
+      res.status(401).json({ message: err.message })
+    }))
+
+// encerrar a doacao
+router.post('/donations/:donationId/end', authRequired('leader'), (req, res) =>
+  endDonation({
+    donationId: req.params.donationId
+  }).then(() => res.status(204).end())
     .catch(err => {
       console.log(err)
       res.status(401).json({ message: err.message })

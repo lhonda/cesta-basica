@@ -14,5 +14,5 @@ export async function signin ({ login, password }) {
     }
   }
 
-  return Promise.reject(new Error('Login fail'))
+  return Promise.reject(new Error('Login have failed'))
 }

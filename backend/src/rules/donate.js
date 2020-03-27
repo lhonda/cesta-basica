@@ -8,10 +8,12 @@ export async function donate ({
   leaderLogin,
   lat,
   lon,
+  delivered,
   receivedCpf,
   receivedName,
   donateDonationFile
 }) {
+
   if (!donationId) {
     throw new Error('donationId is required')
   }
@@ -32,12 +34,25 @@ export async function donate ({
     throw new Error('lon is required')
   }
 
-  if (!receivedCpf) {
-    throw new Error('receivedCpf is required')
+  if (!delivered) {
+    throw new Error('delivered is required')
   }
 
-  if (!receivedName) {
-    throw new Error('receivedName is required')
+  if (delivered === false) {
+    const voucher = await Voucher.findOne({ voucherId })
+    
+    voucher.status = 3
+    voucher.delivered = new Date()
+    voucher.point = {
+      type: 'Point',
+      coordinates: [lon, lat]
+    }
+    voucher.save()
+
+    return
+  } else if (delivered !== true) {
+    // todo: implement joi validation
+    throw new Error('delivered must be a boolean value')
   }
 
   if (!donateDonationFile) {
@@ -49,8 +64,6 @@ export async function donate ({
   if (!donation) {
     throw new Error(`Could not find the Donation with id: ${donationId}`)
   }
-
-  console.log(donation)
 
   if (donation) {
     const timestamp = new Date()
@@ -78,9 +91,8 @@ export async function donate ({
       throw new Error(`Could not find the voucherId provided: ${voucherId}`)
     }
 
-    console.log(voucher)
-
     voucher.receivedCpf = receivedCpf
+    voucher.status = 2
     voucher.receivedName = receivedName
     voucher.delivered = timestamp
     voucher.cardDonatedS3Key = key

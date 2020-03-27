@@ -24,7 +24,6 @@ import {
   legendDonationWaitAmount,
   legendDonationWaitButton,
 } from '../../utils/strings'
-// import { handleDonationReceived } from '../../services/handles'
 
 function DonationPage({ store, dispatch }) {
   const { push, location, goBack } = useHistory()
@@ -60,8 +59,10 @@ function DonationPage({ store, dispatch }) {
         <SubTitle size={SubTitleTypes.MEDIUM} type={SubTitleTypes.NORMAL} message={contateNumber} />
       </div>
       <hr />
+
+      <Paragraph content="legendDonationWaitInformationButton" />
+
       <div className="footer-donation">
-        <Paragraph content="legendDonationWaitInformationButton" />
         <Button
           handleClick={() => push(`${location.pathname}/prof`)}
           size={ButtonTypes.LARGE}

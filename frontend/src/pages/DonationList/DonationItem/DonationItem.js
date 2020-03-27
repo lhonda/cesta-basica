@@ -21,7 +21,7 @@ function DonationItem({ title, quantity, stateDonation, donationId }) {
   const handleClick = () => {
     if (verifyStateDonation()) history.push(`/donation/${donationId}/${donationItemTypes[stateDonation].type}`)
   }
-  const isComplete = stateDonation === donationItemTypes[4].status
+  const isComplete = stateDonation === donationItemTypes[4].id
   return (
     <div className="donationItem" onClick={handleClick}>
       <div className="donationItem__content">

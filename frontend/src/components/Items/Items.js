@@ -31,7 +31,7 @@ function Item({ title, size, align, handleClick, type, complete }) {
     ),
     [ItemsTypes.BASKET]: (
       <div onClick={() => handleClick(title)} className={`item-basket ${size} ${align} ${complete ? 'complete' : ''}`}>
-        <span>{`Cesta ${title}`}</span>
+        <span>{`Cartão ${title}`}</span>
         <LogoBasket />
       </div>
     ),

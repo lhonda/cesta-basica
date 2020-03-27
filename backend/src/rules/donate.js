@@ -40,12 +40,12 @@ export async function donate ({
     throw new Error('delivered is required')
   }
 
-  //convertendo 'true' ou 'false' ou true ou false pra boolean
+  // convertendo 'true' ou 'false' ou true ou false pra boolean
   delivered = JSON.parse(delivered)
 
   if (delivered === false) {
     const voucher = await Voucher.findOne({ voucherId })
-    
+
     voucher.status = 3
     voucher.delivered = new Date()
     voucher.point = {

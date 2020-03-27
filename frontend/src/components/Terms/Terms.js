@@ -12,20 +12,35 @@ function Terms() {
       <Paragraph content="considerations3" />
       <Paragraph content="considerations4" />
 
-      <SubTitle size={SubTitleTypes.SMALL} type={SubTitleTypes.STRONG} message="1." />
-      <Paragraph content="terms1" />
-      <SubTitle size={SubTitleTypes.SMALL} type={SubTitleTypes.STRONG} message="2." />
-      <Paragraph content="terms2" />
-      <SubTitle size={SubTitleTypes.SMALL} type={SubTitleTypes.STRONG} message="3." />
-      <Paragraph content="terms3" />
-      <SubTitle size={SubTitleTypes.SMALL} type={SubTitleTypes.STRONG} message="4." />
-      <Paragraph content="terms4" />
-      <SubTitle size={SubTitleTypes.SMALL} type={SubTitleTypes.STRONG} message="5." />
-      <Paragraph content="terms5" />
-      <SubTitle size={SubTitleTypes.SMALL} type={SubTitleTypes.STRONG} message="6." />
-      <Paragraph content="terms6" />
-      <SubTitle size={SubTitleTypes.SMALL} type={SubTitleTypes.STRONG} message="7." />
-      <Paragraph content="terms7" />
+      <ol className="termsOrdenedList">
+        <li>
+          <Paragraph content="terms1" />
+        </li>
+
+        <li>
+          <Paragraph content="terms2" />
+        </li>
+
+        <li>
+          <Paragraph content="terms3" />
+        </li>
+
+        <li>
+          <Paragraph content="terms4" />
+        </li>
+
+        <li>
+          <Paragraph content="terms5" />
+        </li>
+
+        <li>
+          <Paragraph content="terms6" />
+        </li>
+
+        <li>
+          <Paragraph content="terms7" />
+        </li>
+      </ol>
     </>
   )
 }

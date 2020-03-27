@@ -9,10 +9,13 @@ import { Legend, LegendTypes } from '../../components/Legend'
 import { Paragraph, ParagraphTypes } from '../../components/Paragraph'
 import { SubTitle, SubTitleTypes } from '../../components/SubTitle'
 import { Button, ButtonTypes } from '../../components/Button'
+import { ButtonIcon } from '../../components/ButtonIcon'
+import { LogoBack } from '../../components/Logo'
 
 import './Donation.scss'
 
 import {
+  back,
   contate,
   contateNumber,
   titleDonation,
@@ -24,10 +27,17 @@ import {
 // import { handleDonationReceived } from '../../services/handles'
 
 function DonationPage({ store, dispatch }) {
-  const { push, location } = useHistory()
+  const { push, location, goBack } = useHistory()
   const { id } = useParams()
   return (
     <div className="container-donation">
+      <div className="sidebar-donation-prof">
+        <ButtonIcon handleClick={goBack}>
+          <LogoBack height={10} />
+        </ButtonIcon>
+        <Legend type={LegendTypes.STRONG} message={back} />
+      </div>
+
       <div className="header-donation">
         <Title message={`${titleDonation} ${id}`} />
         <Status message={statusDonationWait} />

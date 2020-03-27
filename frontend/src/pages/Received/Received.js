@@ -9,10 +9,13 @@ import { Legend, LegendTypes } from '../../components/Legend'
 import { Paragraph, ParagraphTypes } from '../../components/Paragraph'
 import { SubTitle, SubTitleTypes } from '../../components/SubTitle'
 import { Button, ButtonTypes } from '../../components/Button'
+import { ButtonIcon } from '../../components/ButtonIcon'
+import { LogoBack } from '../../components/Logo'
 
 import './Received.scss'
 
 import {
+  back,
   titleDonation,
   legendDonationType,
   statusDonationWait,
@@ -24,23 +27,25 @@ import {
 
 function ReceivedPage({ store, dispatch }) {
   const { id } = useParams()
-  const { push, location } = useHistory()
+  const { push, location, goBack } = useHistory()
 
   return (
     <div className="container-received">
+      <div className="sidebar-donation-prof">
+        <ButtonIcon handleClick={goBack}>
+          <LogoBack height={'10'} />
+        </ButtonIcon>
+        <Legend type={LegendTypes.STRONG} message={back} />
+      </div>
       <div className="header-received">
         <Title message={`${titleDonation} ${id}`} />
         <Status message={statusDonationWait} />
         <Sidebar current={2} />
       </div>
       <div className="details-received">
-        <div className="details-date">
-          <Legend type={LegendTypes.LIGHT} orientation={LegendTypes.START} message={legendDonationType} />
-          <Legend type={LegendTypes.STRONG} orientation={LegendTypes.START} message={store.donation.received.type} />
-        </div>
         <div className="details-amount">
-          <Legend type={LegendTypes.LIGHT} orientation={LegendTypes.END} message={legendDonationWaitAmount} />
-          <Legend type={LegendTypes.STRONG} orientation={LegendTypes.END} message={store.donation.received.amount} />
+          <Legend type={LegendTypes.LIGHT} orientation={LegendTypes.START} message={legendDonationWaitAmount} />
+          <Legend type={LegendTypes.STRONG} orientation={LegendTypes.START} message={store.donation.received.amount} />
         </div>
       </div>
       <div className="details-received">

@@ -8,7 +8,7 @@ function Legend({ type, size, orientation, message }) {
 }
 
 Legend.propTypes = {
-  message: PropTypes.string.isRequired,
+  message: PropTypes.any.isRequired,
   type: PropTypes.string,
   orientation: PropTypes.string,
   size: PropTypes.string,

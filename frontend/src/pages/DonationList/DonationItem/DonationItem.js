@@ -38,9 +38,9 @@ function DonationItem({ title, quantity, stateDonation, donationId }) {
 }
 
 DonationItem.propTypes = {
-  title: PropTypes.string.isRequired,
-  quantity: PropTypes.string.isRequired,
-  stateDonation: PropTypes.string.isRequired,
+  title: PropTypes.string,
+  quantity: PropTypes.number.isRequired,
+  stateDonation: PropTypes.number.isRequired,
   donationId: PropTypes.string.isRequired,
 }
 

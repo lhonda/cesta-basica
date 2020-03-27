@@ -14,6 +14,11 @@ const voucherSchema = new Schema({
     type: String,
     required: [true, 'leaderLogin is required']
   },
+  status: {
+    type: Number,
+    enum: [1, 2, 3],
+    default: 1
+  },
   created: {
     type: Date
   },
@@ -21,10 +26,10 @@ const voucherSchema = new Schema({
     type: Date
   },
   receivedCpf: {
-    type: String,
+    type: String
   },
   receivedName: {
-    type: String,
+    type: String
   },
   cardDonatedS3Key: {
     type: String

@@ -1,8 +1,6 @@
 import { Donation, Voucher } from '../repositories'
 import AWS from 'aws-sdk'
 
-const { BUCKET_NAME } = process.env
-
 export async function donate ({
   login,
   donationId,
@@ -10,50 +8,74 @@ export async function donate ({
   leaderLogin,
   lat,
   lon,
+  delivered,
   receivedCpf,
   receivedName,
   donateDonationFile
 }) {
 
   if (!donationId) {
-    throw new Error("donationId is required")
+    throw new Error('donationId is required')
   }
 
   if (!voucherId) {
-    throw new Error("voucherId is required")
+    throw new Error('voucherId is required')
   }
 
   if (!leaderLogin) {
-    throw new Error("leaderLogin is required")
+    throw new Error('leaderLogin is required')
   }
 
   if (!lat) {
-    throw new Error("lat is required")
+    throw new Error('lat is required')
   }
 
   if (!lon) {
-    throw new Error("lon is required")
+    throw new Error('lon is required')
+  }
+
+  // console.log(arguments)
+
+  if (delivered === undefined) {
+    throw new Error('delivered is required')
+  }
+
+  //convertendo 'true' ou 'false' ou true ou false pra boolean
+  delivered = JSON.parse(delivered)
+
+  if (delivered === false) {
+    const voucher = await Voucher.findOne({ voucherId })
+    
+    voucher.status = 3
+    voucher.delivered = new Date()
+    voucher.point = {
+      type: 'Point',
+      coordinates: [lon, lat]
+    }
+    voucher.save()
+    return
+  } else if (delivered !== true) {
+    // todo: implement joi validation
+    throw new Error('delivered must be a boolean value')
   }
 
   if (!receivedCpf) {
-    throw new Error("receivedCpf is required")
+    throw new Error('receivedCpf is required')
   }
 
   if (!receivedName) {
-    throw new Error("receivedName is required")
+    throw new Error('receivedName is required')
   }
 
   if (!donateDonationFile) {
-    throw new Error("donateDonationFile is required")
+    throw new Error('donateDonationFile is required')
   }
 
   const donation = await Donation.findOne({ donationId: donationId })
 
   if (!donation) {
-    throw new Error(`Couldn\'t find the Donation with id: ${donationId}`)
+    throw new Error(`Could not find the Donation with id: ${donationId}`)
   }
-
-  console.log(donation)
 
   if (donation) {
     const timestamp = new Date()
@@ -76,14 +98,15 @@ export async function donate ({
     })
 
     const voucher = await Voucher.findOne({ voucherId })
-  
+
     if (!voucher) {
       throw new Error(`Could not find the voucherId provided: ${voucherId}`)
     }
-    
-    console.log(voucher)
+
+    console.log(receivedCpf, receivedName)
 
     voucher.receivedCpf = receivedCpf
+    voucher.status = 2
     voucher.receivedName = receivedName
     voucher.delivered = timestamp
     voucher.cardDonatedS3Key = key
@@ -91,6 +114,8 @@ export async function donate ({
       type: 'Point',
       coordinates: [lon, lat]
     }
+
+    console.log(voucher)
 
     donation.quantity--
 
@@ -109,7 +134,6 @@ export async function donate ({
     await donation.save()
 
     return donation
-
   }
 
   return Promise.reject(new Error(`Donating donation ${donationId} failed.`))

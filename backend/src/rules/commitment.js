@@ -1,4 +1,4 @@
-import { Events } from '../repositories/events'
+import { Events } from '../repositories'
 
 export async function commitment ({ login, role }) {
   return Events.create({

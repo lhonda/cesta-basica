@@ -30,13 +30,13 @@ function ReceivedCurrentPage({ store, dispatch }) {
   const { id } = useParams()
   const [showModal, setShowModal] = useState(false)
 
-  const { goBack } = useHistory()
+  const { goBack, push } = useHistory()
 
   return (
     <div className="container-received-prof">
       <Modal
         isOpenModal={showModal}
-        actionExit={() => handleToggleModal(setShowModal)}
+        actionExit={() => push('/donation-list')}
         title={completeDeliveryTitle}
       />
       <div className="sidebar-donation-prof">

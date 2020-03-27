@@ -12,19 +12,23 @@ import { contate, contateNumber } from '../../utils/strings'
 ReactModal.setAppElement('#root')
 
 function ModalPage({ isOpenModal, title, actionExit }) {
-
   return (
     <ReactModal
-    style={{
-      overlay: {
-        backgroundColor: 'rgba(0, 0, 0, 0.4)',
-      },
-      content: {
-        height: '58vh',
-        top: '50%',
-        marginTop: '-29vh'
-      }
-    }} shouldCloseOnOverlayClick={false} isOpen={isOpenModal} contentLabel={title} onRequestClose={actionExit}>
+      style={{
+        overlay: {
+          backgroundColor: 'rgba(0, 0, 0, 0.4)',
+        },
+        content: {
+          height: '58vh',
+          top: '50%',
+          marginTop: '-29vh',
+        },
+      }}
+      shouldCloseOnOverlayClick={false}
+      isOpen={isOpenModal}
+      contentLabel={title}
+      onRequestClose={actionExit}
+    >
       <Title message={title} />
       <Paragraph content="completeDeliveryThanks" />
       <Paragraph content="completeDeliveryInformationContate" />
@@ -33,7 +37,6 @@ function ModalPage({ isOpenModal, title, actionExit }) {
       <div className="modal-button">
         <Button message="OK" handleClick={actionExit} />
       </div>
-
     </ReactModal>
   )
 }

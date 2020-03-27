@@ -1,6 +1,18 @@
 import { Router } from 'express'
-import { healthCheck, signin, createUser, donate, receive, commitment, checklist, listDonations, listVouchers } from '../rules'
 import { authRequired } from '../middlewares'
+import {
+  healthCheck,
+  createUser,
+  signin,
+  commitment,
+  checkCommitment,
+  checklist,
+  listVouchers,
+  listDonations,
+  receive,
+  donate,
+  endDonation
+} from "../rules";
 
 export const router = Router()
 
@@ -35,7 +47,7 @@ router.post('/admin/sign-in', (req, res) =>
       res.status(401).json({ message: err.message })
     }))
 
-// listar doações que foram pre carregadas no banco de dados
+// listar vouchers de uma doacao
 router.get('/vouchers', authRequired('leader'), (req, res) =>
   listVouchers(req.auth)
     .then(data => res.status(data.length === 0 ? 404 : 200).json(data))
@@ -60,6 +72,7 @@ router.post('/donations/:donationId/receive', authRequired('leader'), (req, res)
     donationId: req.params.donationId,
     lat: req.body.lat,
     lon: req.body.lon,
+    receivedQuantity: req.body.receivedQuantity,
     receiveDonationFile: req.files.receiveDonationFile
   }).then(() => res.status(204).end())
     .catch(err => {
@@ -76,10 +89,21 @@ router.post('/donations/:donationId/donate', authRequired('leader'), (req, res) 
     leaderLogin: req.body,
     lat: req.body.lat,
     lon: req.body.lon,
+    delivered: req.body.delivered,
     quantity: req.body.quantity,
     receivedCpf: req.body.receivedCpf,
     receivedName: req.body.receivedName,
-    donateDonationFile: req.files.donateDonationFile
+    donateDonationFile: req.files ? req.files.donateDonationFile : undefined
+  }).then(() => res.status(204).end())
+    .catch(err => {
+      console.log(err)
+      res.status(401).json({ message: err.message })
+    }))
+
+// encerrar a doacao
+router.post('/donations/:donationId/end', authRequired('leader'), (req, res) =>
+  endDonation({
+    donationId: req.params.donationId
   }).then(() => res.status(204).end())
     .catch(err => {
       console.log(err)
@@ -90,6 +114,15 @@ router.post('/donations/:donationId/donate', authRequired('leader'), (req, res) 
 router.post('/commitment', authRequired('leader'), (req, res) =>
   commitment(req.auth)
     .then(() => res.status(201).end())
+    .catch(err => {
+      console.log(err)
+      res.status(401).json({ message: err.message })
+    }))
+
+// retornar check commitment
+router.get('/commitment/check', authRequired('leader'), (req, res) =>
+  checkCommitment(req.auth)
+    .then((data) => res.status(201).json(data))
     .catch(err => {
       console.log(err)
       res.status(401).json({ message: err.message })

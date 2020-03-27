@@ -11,14 +11,16 @@ import { DonationItem } from './DonationItem'
 import { BottomMenu } from './BottomMenu'
 
 import { DonationsList } from '../../services/API/donationList'
+import { CommitmentCheck } from '../../services/API/terms'
 
-function DonationList({ store, dispatch }) {
+function DonationList({ store, dispatch, history }) {
   const [loading, setLoading] = useState()
   const { donationList } = store
 
   async function getDonationList() {
     setLoading(true)
     await DonationsList(dispatch)
+    await CommitmentCheck(history)
     setLoading(false)
   }
 
@@ -33,15 +35,15 @@ function DonationList({ store, dispatch }) {
       {donationList ? (
         <div className="containerDonation__list">
           {donationList?.map((item) => {
-            const { donor, quantity, status, donationId, leaderLogin ,receivedDate} = item
+            const { donor, quantity, status, donationId, leaderLogin, receivedDate } = item
             return (
               <DonationItem title={donor} quantity={quantity} key={donationId} stateDonation={status} donationId={donationId} />
             )
           })}
         </div>
       ) : (
-        <DonationIsEmpty />
-      )}
+          <DonationIsEmpty />
+        )}
       <BottomMenu />
     </div>
   )

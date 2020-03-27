@@ -9,7 +9,7 @@ import './Term.scss'
 
 import { Loader } from '../../components/Loader'
 import { declareTermUse, cancel, singin, titleTerms, locationPermission } from '../../utils/strings'
-import { AcceptTerms } from '../../services/API/acceptTerms'
+import { AcceptTerms } from '../../services/API/terms'
 import { handleCheckedDeclararion, handleClickCancelTerms } from '../../services/handles'
 
 function TermsPage({ store, dispatch, history }) {

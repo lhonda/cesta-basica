@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { types } from './types'
 
-import { set, get, clear } from '../services/storage'
+import { set, get, clear, checkExpiresCheckList } from '../services/storage'
 
 export { types }
 const dataStorage = get()
@@ -22,13 +22,13 @@ const cleanState = {
     },
   },
   declaration: false,
-  health: false,
+  doneHealthCheck: checkExpiresCheckList(),
   donationList: null,
 }
 
 function saveState(newState) {
   set(newState)
-  return newState
+  return get()
 }
 
 function logout() {
@@ -44,7 +44,7 @@ const actionMap = {
   [types.SET_USER]: (state, payload) => saveState({ ...state, user: payload }),
   [types.SET_TOKEN]: (state, { token }) => saveState({ ...state, auth: { ...state.auth, token } }),
   [types.SET_DECLARATION]: (state, payload) => saveState({ ...state, declaration: payload }),
-  [types.SET_HEALTHCHECK]: (state, payload) => saveState({ ...state, health: payload }),
+  [types.SET_HEALTHCHECK]: (state, payload) => saveState({ ...state, doneHealthCheck: payload }),
   [types.SET_LOGOUT]: () => logout(),
   [types.SET_DONATION]: (state, payload) => ({
     ...state,

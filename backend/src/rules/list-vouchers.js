@@ -1,6 +1,7 @@
 import { Voucher } from '../repositories'
 
 export async function listVouchers ({ login }) {
+  console.log(arguments)
   const vouchers = (
     await Voucher.find({ leaderLogin: login })
   ).map(({
@@ -24,6 +25,8 @@ export async function listVouchers ({ login }) {
     receivedName,
     point
   }))
+
+  console.log(vouchers)
 
   return vouchers
 }

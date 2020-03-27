@@ -47,7 +47,7 @@ router.post('/admin/sign-in', (req, res) =>
       res.status(401).json({ message: err.message })
     }))
 
-// listar doações que foram pre carregadas no banco de dados
+// listar vouchers de uma doacao
 router.get('/vouchers', authRequired('leader'), (req, res) =>
   listVouchers(req.auth)
     .then(data => res.status(data.length === 0 ? 404 : 200).json(data))
@@ -89,6 +89,7 @@ router.post('/donations/:donationId/donate', authRequired('leader'), (req, res) 
     leaderLogin: req.body,
     lat: req.body.lat,
     lon: req.body.lon,
+    delivered: req.body.delivered,
     quantity: req.body.quantity,
     receivedCpf: req.body.receivedCpf,
     receivedName: req.body.receivedName,

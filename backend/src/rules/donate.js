@@ -34,9 +34,14 @@ export async function donate ({
     throw new Error('lon is required')
   }
 
-  if (!delivered) {
+  // console.log(arguments)
+
+  if (delivered === undefined) {
     throw new Error('delivered is required')
   }
+
+  //convertendo 'true' ou 'false' ou true ou false pra boolean
+  delivered = JSON.parse(delivered)
 
   if (delivered === false) {
     const voucher = await Voucher.findOne({ voucherId })
@@ -48,11 +53,18 @@ export async function donate ({
       coordinates: [lon, lat]
     }
     voucher.save()
-
     return
   } else if (delivered !== true) {
     // todo: implement joi validation
     throw new Error('delivered must be a boolean value')
+  }
+
+  if (!receivedCpf) {
+    throw new Error('receivedCpf is required')
+  }
+
+  if (!receivedName) {
+    throw new Error('receivedName is required')
   }
 
   if (!donateDonationFile) {
@@ -91,6 +103,8 @@ export async function donate ({
       throw new Error(`Could not find the voucherId provided: ${voucherId}`)
     }
 
+    console.log(receivedCpf, receivedName)
+
     voucher.receivedCpf = receivedCpf
     voucher.status = 2
     voucher.receivedName = receivedName
@@ -100,6 +114,8 @@ export async function donate ({
       type: 'Point',
       coordinates: [lon, lat]
     }
+
+    console.log(voucher)
 
     donation.quantity--
 

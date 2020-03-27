@@ -5,7 +5,6 @@ export async function donate ({
   login,
   donationId,
   voucherId,
-  leaderLogin,
   lat,
   lon,
   delivered,
@@ -13,6 +12,7 @@ export async function donate ({
   receivedName,
   donateDonationFile
 }) {
+  console.log(arguments)
 
   if (!donationId) {
     throw new Error('donationId is required')
@@ -22,10 +22,6 @@ export async function donate ({
     throw new Error('voucherId is required')
   }
 
-  if (!leaderLogin) {
-    throw new Error('leaderLogin is required')
-  }
-
   if (!lat) {
     throw new Error('lat is required')
   }
@@ -33,8 +29,6 @@ export async function donate ({
   if (!lon) {
     throw new Error('lon is required')
   }
-
-  // console.log(arguments)
 
   if (delivered === undefined) {
     throw new Error('delivered is required')
@@ -103,8 +97,6 @@ export async function donate ({
       throw new Error(`Could not find the voucherId provided: ${voucherId}`)
     }
 
-    console.log(receivedCpf, receivedName)
-
     voucher.receivedCpf = receivedCpf
     voucher.status = 2
     voucher.receivedName = receivedName
@@ -114,8 +106,6 @@ export async function donate ({
       type: 'Point',
       coordinates: [lon, lat]
     }
-
-    console.log(voucher)
 
     donation.quantity--
 
@@ -129,6 +119,9 @@ export async function donate ({
       donation.status = 3
       donation.lastDelivery = timestamp
     }
+
+    console.log(voucher)
+    console.log(donation)
 
     await voucher.save()
     await donation.save()

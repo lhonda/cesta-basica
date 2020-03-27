@@ -1,13 +1,13 @@
 import { Voucher } from '../repositories'
 
-export async function listVouchers({ login }) {
+export async function listVouchers ({ login }) {
   const vouchers = (
     await Voucher.find({ leaderLogin: login })
-  ).map(({ 
-    voucherId, 
-    donationId, 
-    leaderLogin, 
-    voucherContent, 
+  ).map(({
+    voucherId,
+    donationId,
+    leaderLogin,
+    voucherContent,
     created,
     delivered,
     receivedCpf,

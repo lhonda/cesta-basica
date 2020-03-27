@@ -1,7 +1,7 @@
 import AWS from 'aws-sdk'
-import { Donation} from '../repositories/donation'
+import { Donation } from '../repositories/donation'
 
-export async function receive({
+export async function receive ({
   login,
   donationId,
   lat,
@@ -9,33 +9,33 @@ export async function receive({
   receiveDonationFile
 }) {
   if (!login) {
-    throw new Error("login is required")
+    throw new Error('login is required')
   }
 
   if (!donationId) {
-    throw new Error("donationId is required")
+    throw new Error('donationId is required')
   }
 
   if (!lat) {
-    throw new Error("lat is required")
+    throw new Error('lat is required')
   }
 
   if (!lon) {
-    throw new Error("lon is required")
+    throw new Error('lon is required')
   }
 
   if (!receiveDonationFile) {
-    throw new Error("receiveDonationFile is required")
+    throw new Error('receiveDonationFile is required')
   }
 
   const donation = await Donation.findOne({ donationId: donationId })
 
   if (!donation) {
-    throw new Error(`Couldn\'t find the Donation with id: ${donationId}`)
+    throw new Error(`Could not find the Donation with id: ${donationId}`)
   }
 
   if (donation.leaderLogin !== login) {
-    throw new Error('The leaderLogin of the donation isn\'t the same of the auth token')
+    throw new Error('The leaderLogin of the donation is not the same of the auth token')
   }
 
   if (donation) {

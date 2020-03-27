@@ -1,8 +1,6 @@
 import { Donation, Voucher } from '../repositories'
 import AWS from 'aws-sdk'
 
-const { BUCKET_NAME } = process.env
-
 export async function donate ({
   login,
   donationId,
@@ -14,43 +12,42 @@ export async function donate ({
   receivedName,
   donateDonationFile
 }) {
-
   if (!donationId) {
-    throw new Error("donationId is required")
+    throw new Error('donationId is required')
   }
 
   if (!voucherId) {
-    throw new Error("voucherId is required")
+    throw new Error('voucherId is required')
   }
 
   if (!leaderLogin) {
-    throw new Error("leaderLogin is required")
+    throw new Error('leaderLogin is required')
   }
 
   if (!lat) {
-    throw new Error("lat is required")
+    throw new Error('lat is required')
   }
 
   if (!lon) {
-    throw new Error("lon is required")
+    throw new Error('lon is required')
   }
 
   if (!receivedCpf) {
-    throw new Error("receivedCpf is required")
+    throw new Error('receivedCpf is required')
   }
 
   if (!receivedName) {
-    throw new Error("receivedName is required")
+    throw new Error('receivedName is required')
   }
 
   if (!donateDonationFile) {
-    throw new Error("donateDonationFile is required")
+    throw new Error('donateDonationFile is required')
   }
 
   const donation = await Donation.findOne({ donationId: donationId })
 
   if (!donation) {
-    throw new Error(`Couldn\'t find the Donation with id: ${donationId}`)
+    throw new Error(`Could not find the Donation with id: ${donationId}`)
   }
 
   console.log(donation)
@@ -76,11 +73,11 @@ export async function donate ({
     })
 
     const voucher = await Voucher.findOne({ voucherId })
-  
+
     if (!voucher) {
       throw new Error(`Could not find the voucherId provided: ${voucherId}`)
     }
-    
+
     console.log(voucher)
 
     voucher.receivedCpf = receivedCpf
@@ -109,7 +106,6 @@ export async function donate ({
     await donation.save()
 
     return donation
-
   }
 
   return Promise.reject(new Error(`Donating donation ${donationId} failed.`))

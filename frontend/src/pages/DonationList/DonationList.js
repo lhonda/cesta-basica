@@ -25,6 +25,7 @@ function DonationList({ store, dispatch }) {
   useEffect(() => {
     getDonationList()
   }, [])
+
   return (
     <div className="containerDonation">
       {loading && <Loader />}
@@ -34,7 +35,7 @@ function DonationList({ store, dispatch }) {
           {donationList?.map((item) => {
             const { donor, quantity, status, donationId, leaderLogin ,receivedDate} = item
             return (
-              <DonationItem title={donor} quantity={quantity} key={leaderLogin} stateDonation={status} donationId={donationId} />
+              <DonationItem title={donor} quantity={quantity} key={donationId} stateDonation={status} donationId={donationId} />
             )
           })}
         </div>

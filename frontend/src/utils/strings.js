@@ -85,13 +85,14 @@ export const legendDonationReceivedFinishButton = 'Encerrar Entrega'
 export const completedFirstLetterCapitalized = 'Completo'
 export const returnedFirstLetterCapitalized = 'Devolvido'
 export const lostFirstLetterCapitalized = 'Extraviado'
+export const deliveredToLeader = 'Entregue para líder'
 
 // Donation Prof screen
 export const titleDonationProf = 'Evidência de Entrega'
 export const descriptionDonationReceived =
-  'Quando for iniciar as entregas das doações na comunidade, atualize seu status na plataforma para "Iniciar Entrega".'
+  'Quando for iniciar as entregas dos cartões na comunidade, atualize seu status na plataforma para <span class="paragraph--medium">"Iniciar Entrega"<span>.'
 export const descriptionDonationReceivedSecondparagraph =
-  'Importante lembrar que você possui 24h para finalizar as entregas e precisa tirar uma foto para cada entrega de doação na comunidade. Excelente trabalho :)'
+  'Importante lembrar que você possui <span class="paragraph--medium">24h</span> para finalizar as entregas e precisa tirar uma foto para cada entrega de cartão na comunidade. E avise ao familiar para levar um documento com foto. Excelente trabalho :)'
 export const descriptionDonationProf = 'Precisamos que você complete as informações sobre o recebimento da doação'
 export const legendInputAmountDonation = 'Quantidade de doações recebidas'
 export const legendPicDonation = 'Foto da doação'

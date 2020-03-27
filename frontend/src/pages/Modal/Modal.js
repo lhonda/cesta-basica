@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Modal from 'react-modal'
+import ReactModal from 'react-modal'
 import { Title } from '../../components/Title'
 import { SubTitle, SubTitleTypes } from '../../components/SubTitle'
 import { Paragraph } from '../../components/Paragraph'
@@ -9,22 +9,35 @@ import './Modal.scss'
 
 import { contate, contateNumber } from '../../utils/strings'
 
+ReactModal.setAppElement('#root')
+
 function ModalPage({ isOpenModal, title, actionExit }) {
-  const customStyles = {
-    overlay: {
-      height: '70vh',
-      top: '25%',
-    },
-  }
   return (
-    <Modal isOpen={isOpenModal} style={customStyles} contentLabel={title} onRequestClose={actionExit}>
+    <ReactModal
+      style={{
+        overlay: {
+          backgroundColor: 'rgba(0, 0, 0, 0.4)',
+        },
+        content: {
+          height: '58vh',
+          top: '50%',
+          marginTop: '-29vh',
+        },
+      }}
+      shouldCloseOnOverlayClick={false}
+      isOpen={isOpenModal}
+      contentLabel={title}
+      onRequestClose={actionExit}
+    >
       <Title message={title} />
       <Paragraph content="completeDeliveryThanks" />
       <Paragraph content="completeDeliveryInformationContate" />
       <SubTitle size={SubTitleTypes.MEDIUM} type={SubTitleTypes.STRONG} message={contate} />
       <SubTitle size={SubTitleTypes.MEDIUM} type={SubTitleTypes.NORMAL} message={contateNumber} />
-      <Button size={ButtonTypes.LARGE} message="OK" handleClick={actionExit} />
-    </Modal>
+      <div className="modal-button">
+        <Button message="OK" handleClick={actionExit} />
+      </div>
+    </ReactModal>
   )
 }
 ModalPage.propTypes = {

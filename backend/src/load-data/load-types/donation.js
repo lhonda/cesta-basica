@@ -12,6 +12,7 @@ export async function process () {
       city: row.city,
       state: row.state,
       quantity: row.quantity,
+      receivedQuantity: null,
       donor: null,
       status: 1,
       receivedCardsS3Key: null,

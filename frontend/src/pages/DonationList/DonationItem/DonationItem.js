@@ -3,12 +3,6 @@ import { useHistory } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import './DonationItem.scss'
 
-import {
-  lostFirstLetterCapitalized,
-  returnedFirstLetterCapitalized,
-  completedFirstLetterCapitalized,
-} from '../../../utils/strings'
-
 import { donationItemTypes } from './donationItemTypes'
 
 function DonationItem({ title, quantity, stateDonation, donationId }) {
@@ -16,19 +10,18 @@ function DonationItem({ title, quantity, stateDonation, donationId }) {
   const verifyStateDonation = () => {
     if (
       !stateDonation ||
-      stateDonation === lostFirstLetterCapitalized ||
-      stateDonation === returnedFirstLetterCapitalized ||
-      stateDonation === returnedFirstLetterCapitalized ||
-      stateDonation === completedFirstLetterCapitalized
+      stateDonation === donationItemTypes[4].id ||
+      stateDonation === donationItemTypes[5].id ||
+      stateDonation === donationItemTypes[6].id
     ) {
       return false
     }
     return true
   }
   const handleClick = () => {
-    if (verifyStateDonation()) history.push(`/donation/${donationId}/${donationItemTypes[stateDonation]}`)
+    if (verifyStateDonation()) history.push(`/donation/${donationId}/${donationItemTypes[stateDonation].type}`)
   }
-  const isComplete = stateDonation === 'Completo'
+  const isComplete = stateDonation === donationItemTypes[4].status
   return (
     <div className="donationItem" onClick={handleClick}>
       <div className="donationItem__content">
@@ -36,7 +29,7 @@ function DonationItem({ title, quantity, stateDonation, donationId }) {
         <div>
           <span className="donationItem__content__quantity">{quantity} unidades</span>
           <span className={`floatRigth donationItem__content__state${isComplete && '--complete'}`}>
-            {stateDonation}
+            {donationItemTypes[stateDonation].status}
           </span>
         </div>
       </div>
@@ -45,9 +38,9 @@ function DonationItem({ title, quantity, stateDonation, donationId }) {
 }
 
 DonationItem.propTypes = {
-  title: PropTypes.string.isRequired,
-  quantity: PropTypes.string.isRequired,
-  stateDonation: PropTypes.string.isRequired,
+  title: PropTypes.string,
+  quantity: PropTypes.number.isRequired,
+  stateDonation: PropTypes.number.isRequired,
   donationId: PropTypes.string.isRequired,
 }
 

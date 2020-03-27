@@ -1,6 +1,7 @@
 .button {
   width: 160px;
   padding: 10px;
+  font-family: Rubik;
   font-weight: 500;
   font-size: 22px;
   border-radius: 54px;
@@ -31,6 +32,12 @@
 
   &:disabled {
     opacity: 0.3;
+  }
+
+  &.outline {
+    background: #ffffff;
+    border: 2px solid #328B21;
+    color: #328b21;
   }
 }
 

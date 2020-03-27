@@ -12,7 +12,7 @@ const cleanState = {
   },
   donation: {
     received: {
-      date: '26/03/20',
+      date: '26/03/2020 11h00',
       amount: 50,
       type: 'Cesta básica',
       deadline: '27/03/2020 12h03',

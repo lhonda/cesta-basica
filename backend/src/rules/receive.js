@@ -9,6 +9,8 @@ export async function receive ({
   receivedQuantity,
   receiveDonationFile
 }) {
+  console.log(arguments)
+
   if (!login) {
     throw new Error('login is required')
   }

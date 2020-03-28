@@ -26,6 +26,7 @@ import {
   legendDonationWaitButton,
 } from '../../utils/strings'
 
+import { findDonation } from '../../utils/findDonationByid'
 import { formatDate } from '../../utils/formatDateToptbr'
 
 function DonationPage({ store, dispatch }) {
@@ -34,7 +35,7 @@ function DonationPage({ store, dispatch }) {
   const { push, location, goBack } = useHistory()
   const { id } = useParams()
   useEffect(() => {
-    const donation = store.donationList.find((item) => item.donationId === id)
+    const donation = findDonation(store, id)
     setCurrentDonation(donation || {})
     setLoading(false)
   }, [])

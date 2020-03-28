@@ -35,8 +35,8 @@ export async function listVouchers ({ login, donationId }) {
     receivedCpf,
     receivedName,
     point,
-    status,
-    statusText: statusesVoucher[status]
+    status
+    // statusText: statusesVoucher[status]
   }))
 
   console.log(vouchers)

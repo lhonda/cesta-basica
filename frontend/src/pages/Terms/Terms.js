@@ -5,6 +5,7 @@ import { Title } from '../../components/Title'
 import { Terms } from '../../components/Terms'
 import { Button, ButtonTypes } from '../../components/Button'
 import { Checkbox } from '../../components/Checkbox'
+import { types } from '../../store'
 import './Term.scss'
 
 import { Loader } from '../../components/Loader'
@@ -26,9 +27,16 @@ function TermsPage({ store, dispatch, history }) {
   }, [])
 
   function getGeoLocation() {
-    navigator.geolocation.getCurrentPosition((position) => {
+    navigator.geolocation.getCurrentPosition(position => {
       setLatitude(position.coords.latitude)
       setLongitude(position.coords.longitude)
+
+      const userLocation = {
+        lat: position.coords.latitude,
+        lon: position.coords.longitude,
+      }
+
+      dispatch({ type: types.SET_USER_LOCATION, payload: userLocation })
     })
   }
 

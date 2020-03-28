@@ -4,7 +4,7 @@ import { config } from 'dotenv'
 import { genericProcess } from '../genericProcess'
 
 export async function process () {
-  return genericProcess(Site, 'site-data.csv', row => {
+  return genericProcess(Site, 'site-data.csv', 'name', row => {
     return {
       name: row.name,
       city: row.city,

@@ -71,6 +71,7 @@ export async function donate ({
     }
 
     await voucher.save()
+    return
   } else if (delivered !== true && delivered !== 'true') {
     throw new Error('delivered must be a boolean value')
   }
@@ -78,10 +79,6 @@ export async function donate ({
   /**
    * More validations when delivered = true
    */
-  if (!receivedCpf) {
-    throw new Error('receivedCpf is required when delivered = true')
-  }
-
   if (!receivedName) {
     throw new Error('receivedName is required when delivered = true')
   }

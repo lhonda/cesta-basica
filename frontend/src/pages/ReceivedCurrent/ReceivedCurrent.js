@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { useParams, useHistory } from 'react-router-dom'
 import { Modal } from '../Modal'
@@ -26,15 +26,23 @@ import {
 } from '../../utils/strings'
 import { handleDonationReceivedVoucher, handleToggleModal } from '../../services/handles'
 import { EndDonation } from '../../services/API/donationList'
+import { findDonation } from '../../utils/findDonationByid'
+import { formatDate } from '../../utils/formatDateToptbr'
 
 function ReceivedCurrentPage({ store, dispatch }) {
   const { id } = useParams()
   const [showModal, setShowModal] = useState(false)
+  const [currentDonation, setCurrentDonation] = useState({})
 
   const { goBack, push } = useHistory()
   function endDonations() {
     EndDonation(id, () => push('/donation-list'))
   }
+
+  useEffect(() => {
+    const donation = findDonation(store, id)
+    setCurrentDonation(donation || {})
+  }, [])
 
   return (
     <div className="container-received-prof">
@@ -53,17 +61,25 @@ function ReceivedCurrentPage({ store, dispatch }) {
       <div className="details-received">
         <div className="details-amount">
           <Legend type={LegendTypes.LIGHT} orientation={LegendTypes.START} message={legendDonationWaitAmount} />
-          <Legend type={LegendTypes.STRONG} orientation={LegendTypes.START} message={store.donation.received.amount} />
+          <Legend type={LegendTypes.STRONG} orientation={LegendTypes.START} message={currentDonation.quantity || 0} />
         </div>
       </div>
       <div className="details-received">
         <div className="details-date">
           <Legend type={LegendTypes.LIGHT} orientation={LegendTypes.START} message={legendDonationWaitDate} />
-          <Legend type={LegendTypes.STRONG} orientation={LegendTypes.START} message={store.donation.received.date} />
+          <Legend
+            type={LegendTypes.STRONG}
+            orientation={LegendTypes.START}
+            message={formatDate(currentDonation.received)}
+          />
         </div>
         <div className="details-amount">
           <Legend type={LegendTypes.LIGHT} orientation={LegendTypes.END} message={legendDonationDateFinal} />
-          <Legend type={LegendTypes.STRONG} orientation={LegendTypes.END} message={store.donation.received.deadline} />
+          <Legend
+            type={LegendTypes.STRONG}
+            orientation={LegendTypes.END}
+            message={formatDate(currentDonation.completed)}
+          />
         </div>
       </div>
       <hr />
@@ -80,7 +96,7 @@ function ReceivedCurrentPage({ store, dispatch }) {
         <Button
           handleClick={() => handleToggleModal(setShowModal)}
           size={ButtonTypes.LARGE}
-          disable={store.donation.received.amount !== store.donation.gived.amount}
+          disable
           message={legendDonationReceivedFinishButton}
         />
       </div>

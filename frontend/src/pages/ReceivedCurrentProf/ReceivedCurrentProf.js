@@ -60,7 +60,7 @@ function ReceivedCurrentProfPage({ store, dispatch }) {
     // await Upload({ donationId: 1, file: image })
     const clearCpf = CPF.replace(/\./g, '').replace(/-/g, '')
     const data = { id, voucher, delivered, CPF: clearCpf, fullName, image }
-    const goToDonateList = () => push('/donation-list')
+    const goToDonateList = () => push(`/donation/${id}/received/current`)
     await DonationVoucher(data, store, goToDonateList)
     setLoading(false)
   }
@@ -85,12 +85,6 @@ function ReceivedCurrentProfPage({ store, dispatch }) {
           getValue={setDelivered}
           optionsList={optionsList}
         />
-        {/* <Items
-          placeholder={legendInputCardDeliveryStatus}
-          size={ItemsTypes.LARGE}
-          type={ItemsTypes.SELECT}
-          align={ItemsTypes.START}
-        /> */}
         <div style={{ paddingBottom: '.7rem' }} />
         {delivered == 'true' ? (
           <>

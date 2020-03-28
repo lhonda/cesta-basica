@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { useParams, useHistory } from 'react-router-dom'
 import { connect } from '../../store'
@@ -7,17 +7,17 @@ import { Status } from '../../components/Status'
 import { Sidebar } from '../../components/Sidebar'
 import { Legend, LegendTypes } from '../../components/Legend'
 import { Paragraph, ParagraphTypes } from '../../components/Paragraph'
-import { SubTitle, SubTitleTypes } from '../../components/SubTitle'
 import { Button, ButtonTypes } from '../../components/Button'
 import { ButtonIcon } from '../../components/ButtonIcon'
 import { LogoBack } from '../../components/Logo'
 
 import './Received.scss'
 
+import { formatDate } from '../../utils/formatDateToptbr'
+import { findDonation } from '../../utils/findDonationByid'
 import {
   back,
   titleDonation,
-  legendDonationType,
   statusDonationReceived,
   legendDonationWaitDate,
   legendDonationWaitAmount,
@@ -28,7 +28,11 @@ import {
 function ReceivedPage({ store, dispatch }) {
   const { id } = useParams()
   const { push, location, goBack } = useHistory()
-
+  const [currentDonation, setCurrentDonation] = useState({})
+  useEffect(() => {
+    const donation = findDonation(store, id)
+    setCurrentDonation(donation || {})
+  }, [])
   return (
     <div className="container-received">
       <div className="sidebar-donation-prof">
@@ -45,17 +49,25 @@ function ReceivedPage({ store, dispatch }) {
       <div className="details-received">
         <div className="details-amount">
           <Legend type={LegendTypes.LIGHT} orientation={LegendTypes.START} message={legendDonationWaitAmount} />
-          <Legend type={LegendTypes.STRONG} orientation={LegendTypes.START} message={store.donation.received.amount} />
+          <Legend type={LegendTypes.STRONG} orientation={LegendTypes.START} message={currentDonation.quantity || 0} />
         </div>
       </div>
       <div className="details-received">
         <div className="details-date">
           <Legend type={LegendTypes.LIGHT} orientation={LegendTypes.START} message={legendDonationWaitDate} />
-          <Legend type={LegendTypes.STRONG} orientation={LegendTypes.START} message={store.donation.received.date} />
+          <Legend
+            type={LegendTypes.STRONG}
+            orientation={LegendTypes.START}
+            message={formatDate(currentDonation.received)}
+          />
         </div>
         <div className="details-amount">
           <Legend type={LegendTypes.LIGHT} orientation={LegendTypes.END} message={legendDonationDateFinal} />
-          <Legend type={LegendTypes.STRONG} orientation={LegendTypes.END} message={store.donation.received.deadline} />
+          <Legend
+            type={LegendTypes.STRONG}
+            orientation={LegendTypes.END}
+            message={formatDate(currentDonation.completed)}
+          />
         </div>
       </div>
       <hr />

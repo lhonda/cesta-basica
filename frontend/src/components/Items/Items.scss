@@ -75,8 +75,15 @@
   margin: 10px 0px;
 
   &.complete {
-    color: #93278f;
-    border: 1px solid #93278f;
+    color: #93278F;
+    border: 1px solid #93278F;
+
+    svg {
+      path {
+        fill: currentColor;
+      }
+    }
+
   }
   &.small {
     width: 150px;

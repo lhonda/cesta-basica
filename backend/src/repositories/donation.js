@@ -25,8 +25,7 @@ export const donationSchema = new Schema({
     required: [true, 'Quantity is required']
   },
   receivedQuantity: {
-    type: Number,
-    required: [true, 'Quantity is required']
+    type: Number
   },
   donor: {
     type: String

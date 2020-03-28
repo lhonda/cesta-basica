@@ -24,7 +24,6 @@ import {
   back,
   titleDonationProf,
   legendAddPicPersonReceiveCard,
-  legendInputCardDeliveryStatus,
   legendPicDonation,
   legendInputAddPic,
   legendInputFullName,

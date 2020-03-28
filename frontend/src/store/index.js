@@ -15,6 +15,7 @@ const cleanState = {
   donationList: null,
   photoReceived: null,
   userLocation: {},
+  cardList: null,
 }
 
 function saveState(newState) {
@@ -40,6 +41,7 @@ const actionMap = {
   [types.SET_LOGOUT]: () => logout(),
   [types.SET_DONATION_LIST]: (state, payload) => saveState({ ...state, donationList: payload }),
   [types.SET_PHOTO_RECEIVED]: (state, payload) => saveState({ ...state, photoReceived: payload }),
+  [types.SET_CARD_LIST]: (state, payload) => saveState({ ...state, cardList: payload }),
 }
 
 export function reducer(state, action) {

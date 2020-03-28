@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { useParams, useHistory } from 'react-router-dom'
 import { Modal } from '../Modal'
@@ -11,6 +11,8 @@ import { Items, ItemsTypes } from '../../components/Items'
 import { Button, ButtonTypes } from '../../components/Button'
 import { ButtonIcon } from '../../components/ButtonIcon'
 import { LogoBack } from '../../components/Logo'
+
+import { CardList } from '../../services/API/cardList'
 
 import './ReceivedCurrent.scss'
 
@@ -29,8 +31,11 @@ import { EndDonation } from '../../services/API/donationList'
 import { findDonation } from '../../utils/findDonationByid'
 import { formatDate } from '../../utils/formatDateToptbr'
 
+import { DonationStatus } from '../../utils/donationStatus'
+
 function ReceivedCurrentPage({ store, dispatch }) {
   const { id } = useParams()
+  const { cardList } = store
   const [showModal, setShowModal] = useState(false)
   const [currentDonation, setCurrentDonation] = useState({})
 
@@ -39,9 +44,28 @@ function ReceivedCurrentPage({ store, dispatch }) {
     EndDonation(id, () => push('/donation-list'))
   }
 
+  async function retrieveCards() {
+    await CardList(dispatch)
+  }
+
+  function verifyIfCardsAreFilled() {
+    let filteredCards = []
+    if (cardList) {
+      filteredCards = cardList.filter(
+        (card) =>
+          (card.statusText === DonationStatus.ENTREGUE.status && card.receivedCpf !== null && card.receivedName !== null) ||
+          card.statusText === DonationStatus.NAO_ENTREGUE.status
+      )
+    }
+
+    return cardList.length === filteredCards.length
+  }
+
   useEffect(() => {
     const donation = findDonation(store, id)
     setCurrentDonation(donation || {})
+    retrieveCards()
+    verifyIfCardsAreFilled()
   }, [])
 
   return (
@@ -84,19 +108,22 @@ function ReceivedCurrentPage({ store, dispatch }) {
       </div>
       <hr />
       <div className="main-received-current-prof">
-        <Items
-          type={ItemsTypes.BASKET}
-          size={ItemsTypes.LARGE}
-          handleClick={handleDonationReceivedVoucher}
-          complete
-          title="#JKKS5LSLA8"
-        />
+        {cardList &&
+          cardList.map((card) => (
+            <Items
+              complete={card.statusText === DonationStatus.ENTREGUE.status}
+              type={ItemsTypes.BASKET}
+              size={ItemsTypes.LARGE}
+              handleClick={handleDonationReceivedVoucher}
+              title={card.voucherId}
+            />
+          ))}
       </div>
       <div className="footer-received-prof">
         <Button
           handleClick={() => handleToggleModal(setShowModal)}
           size={ButtonTypes.LARGE}
-          disable
+          disable={!verifyIfCardsAreFilled()}
           message={legendDonationReceivedFinishButton}
         />
       </div>

@@ -14,6 +14,8 @@ const cleanState = {
   doneHealthCheck: checkExpiresCheckList(),
   donationList: null,
   photoReceived: null,
+  userLocation: {},
+  cardList: null,
 }
 
 function saveState(newState) {
@@ -32,12 +34,14 @@ export const Context = React.createContext()
 
 const actionMap = {
   [types.SET_USER]: (state, payload) => saveState({ ...state, user: payload }),
+  [types.SET_USER_LOCATION]: (state, payload) => saveState({ ...state, userLocation: payload }),
   [types.SET_TOKEN]: (state, { token }) => saveState({ ...state, auth: { ...state.auth, token } }),
   [types.SET_DECLARATION]: (state, payload) => saveState({ ...state, declaration: payload }),
   [types.SET_HEALTHCHECK]: (state, payload) => saveState({ ...state, doneHealthCheck: payload }),
   [types.SET_LOGOUT]: () => logout(),
   [types.SET_DONATION_LIST]: (state, payload) => saveState({ ...state, donationList: payload }),
   [types.SET_PHOTO_RECEIVED]: (state, payload) => saveState({ ...state, photoReceived: payload }),
+  [types.SET_CARD_LIST]: (state, payload) => saveState({ ...state, cardList: payload }),
 }
 
 export function reducer(state, action) {

@@ -72,6 +72,12 @@ export async function donate ({
   }
 
   if (donation) {
+    const voucher = await Voucher.findOne({ voucherId })
+
+    if (!voucher) {
+      throw new Error(`Could not find the voucherId provided: ${voucherId}`)
+    }
+
     const timestamp = new Date()
     const [, ext] = donateDonationFile.mimetype.split('/')
     const key = `provas/entregas/entrega-doacao-${login}-${donationId}-${timestamp.toISOString()}.${ext}`
@@ -91,11 +97,8 @@ export async function donate ({
       console.log(`File uploaded successfully.Key:${key}`)
     })
 
-    const voucher = await Voucher.findOne({ voucherId })
-
-    if (!voucher) {
-      throw new Error(`Could not find the voucherId provided: ${voucherId}`)
-    }
+    donation.status = 3
+    donation.lastDelivery = timestamp
 
     voucher.receivedCpf = receivedCpf
     voucher.status = 2
@@ -107,24 +110,11 @@ export async function donate ({
       coordinates: [lon, lat]
     }
 
-    donation.quantity--
-
-    if (donation.quantity < 0) {
-      throw new Error('The quantity specified isn\'t available')
-    } else if (donation.quantity === 0) {
-      donation.status = 4
-      donation.completed = timestamp
-      donation.quantity = 0
-    } else {
-      donation.status = 3
-      donation.lastDelivery = timestamp
-    }
-
-    console.log(voucher)
     console.log(donation)
+    console.log(voucher)
 
-    await voucher.save()
     await donation.save()
+    await voucher.save()
 
     return donation
   }

@@ -45,7 +45,7 @@ function ReceivedCurrentPage({ store, dispatch }) {
   }
 
   async function retrieveCards() {
-    await CardList(dispatch)
+    await CardList(dispatch, id)
   }
 
   function verifyIfCardsAreFilled() {
@@ -86,7 +86,7 @@ function ReceivedCurrentPage({ store, dispatch }) {
       <div className="details-received">
         <div className="details-amount">
           <Legend type={LegendTypes.LIGHT} orientation={LegendTypes.START} message={legendDonationWaitAmount} />
-          <Legend type={LegendTypes.STRONG} orientation={LegendTypes.START} message={currentDonation.quantity || 0} />
+          <Legend type={LegendTypes.STRONG} orientation={LegendTypes.START} message={cardList && cardList.length} />
         </div>
       </div>
       <div className="details-received">

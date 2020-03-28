@@ -63,13 +63,15 @@ function ReceivedCurrentProfPage({ store, dispatch }) {
       <div className="header-donation-received-current-prof">
         <Title message={`${titleDonationProf}`} />
         <Paragraph size={ParagraphTypes.MEDIUM} content="descriptionDonationProf" />
-        <Items size={ItemsTypes.LARGE} align={ItemsTypes.START} title={`Cesta ${voucher}`} />
+        <Items size={ItemsTypes.LARGE} align={ItemsTypes.START} title={`Cartão Nº ${voucher}`} />
+        <div style={{ paddingBottom: '.7rem' }} />
         <Items
           placeholder={legendInputCardDeliveryStatus}
           size={ItemsTypes.LARGE}
           type={ItemsTypes.SELECT}
           align={ItemsTypes.START}
         />
+        <div style={{ paddingBottom: '.7rem' }} />
         <Input
           placeholder={legendInputFullName}
           inputType={inputTypes.TEXT}
@@ -78,6 +80,7 @@ function ReceivedCurrentProfPage({ store, dispatch }) {
           value={fullName}
           handleOnChange={setFullName}
         />
+        <div style={{ paddingBottom: '.7rem' }} />
         <Input
           placeholder={placeholderCPF}
           inputType={inputTypes.CPF}
@@ -104,7 +107,7 @@ function ReceivedCurrentProfPage({ store, dispatch }) {
       </div>
 
       <div className="footer-donation-received-current-prof">
-        <Button handleClick={handleClickButton} size={ButtonTypes.LARGE} message={confirm} disable={true} />
+        <Button handleClick={handleClickButton} size={ButtonTypes.LARGE} message={confirm} disable />
       </div>
     </div>
   )

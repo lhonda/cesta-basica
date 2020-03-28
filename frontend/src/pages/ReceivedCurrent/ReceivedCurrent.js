@@ -49,15 +49,11 @@ function ReceivedCurrentPage({ store, dispatch }) {
   }
 
   function verifyIfCardsAreFilled() {
-    let filteredCards = []
-    if (cardList) {
-      filteredCards = cardList.filter(
+    const filteredCards = cardList.filter(
         (card) =>
           (card.statusText === DonationStatus.ENTREGUE.status && card.receivedCpf !== null && card.receivedName !== null) ||
           card.statusText === DonationStatus.NAO_ENTREGUE.status
       )
-    }
-
     return cardList.length === filteredCards.length
   }
 
@@ -65,8 +61,13 @@ function ReceivedCurrentPage({ store, dispatch }) {
     const donation = findDonation(store, id)
     setCurrentDonation(donation || {})
     retrieveCards()
-    verifyIfCardsAreFilled()
   }, [])
+
+  useEffect(() => {
+    if (cardList) {
+      verifyIfCardsAreFilled()
+    }
+  }, [cardList])
 
   return (
     <div className="container-received-prof">
@@ -123,7 +124,7 @@ function ReceivedCurrentPage({ store, dispatch }) {
         <Button
           handleClick={() => handleToggleModal(setShowModal)}
           size={ButtonTypes.LARGE}
-          disable={!verifyIfCardsAreFilled()}
+          disable={cardList && !verifyIfCardsAreFilled()}
           message={legendDonationReceivedFinishButton}
         />
       </div>

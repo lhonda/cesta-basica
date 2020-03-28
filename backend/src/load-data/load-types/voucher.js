@@ -1,26 +1,22 @@
 import { connect, disconnect } from '../../core/database'
-import { Donation } from '../../repositories'
+import { Voucher } from '../../repositories'
 import { config } from 'dotenv'
 import { genericProcess } from '../genericProcess'
 
 export async function process () {
-  return genericProcess(Donation, 'donation-data.csv', 'donationId', row => {
+  return genericProcess(Voucher, 'voucher-data.csv', 'voucherId', row => {
+    const timestamp = new Date()
+
     return {
+      voucherId: row.voucherId,
       donationId: row.donationId,
       leaderLogin: row.leaderLogin,
-      site: row.site,
-      city: row.city,
-      state: row.state,
-      quantity: row.quantity,
-      receivedQuantity: null,
-      donor: null,
       status: 1,
-      receivedCardsS3Key: null,
-      created: null,
-      received: null,
-      lastDelivery: null,
-      completed: null,
-      strayed: null,
+      created: timestamp,
+      delivered: null,
+      receivedCpf: null,
+      receivedName: null,
+      cardDonatedS3Key: null,
       point: null
     }
   })

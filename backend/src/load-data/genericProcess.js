@@ -5,7 +5,7 @@ import yaml from 'js-yaml'
 import path from 'path'
 import fs from 'fs'
 
-export async function genericProcess (schema, csvName, csvMap) {
+export async function genericProcess (schema, csvName, idCols, csvMap, keepCols) {
   try {
     const csvPath = path.resolve('data-to-load', csvName)
 
@@ -16,7 +16,7 @@ export async function genericProcess (schema, csvName, csvMap) {
 
     const rows = (await csvtojson().fromFile(csvPath)).map(csvMap)
 
-    await genericLoad(schema, rows)
+    await genericLoad(schema, rows, idCols, keepCols)
 
     fs.writeFileSync(`${csvPath}.results.json`, JSON.stringify(rows, null, 2))
     fs.writeFileSync(`${csvPath}.results.csv`, (new Parser()).parse(rows))

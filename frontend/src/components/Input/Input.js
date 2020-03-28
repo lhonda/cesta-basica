@@ -19,7 +19,6 @@ function Input({
   messageError,
   ignoreValidate,
 }) {
-  console.log(value)
   // eslint-disable-next-line eqeqeq
   const isValid = value.length > 0 && (value.length >= minLength || value.length == maxLength)
   const currentStyleInput = isValid ? 'customInput--success' : ''

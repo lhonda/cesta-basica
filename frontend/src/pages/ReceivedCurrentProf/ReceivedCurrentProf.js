@@ -70,53 +70,55 @@ function ReceivedCurrentProfPage({ store, dispatch }) {
   return (
     <>
       {loading && <Loader />}
-      <form onSubmit={handleClickButton} className="container-donation-received-current-prof">
-        <div className="sidebar-donation-received-current-prof">
-          <ButtonIcon handleClick={goBack}>
-            <LogoBack height={10} />
-          </ButtonIcon>
-          <Legend type={LegendTypes.STRONG} message={back} />
-        </div>
-        <div className="header-donation-received-current-prof">
-          <Title message={`${titleDonationProf}`} />
-          <Paragraph size={ParagraphTypes.MEDIUM} content="descriptionDonationProf" />
-          <Items size={ItemsTypes.LARGE} align={ItemsTypes.START} title={`Cartão Nº ${voucher}`} />
-          <div style={{ paddingBottom: '.7rem' }} />
-          <Select
-            value={delivered}
-            placeholder="Status da entrega do cartão"
-            getValue={setDelivered}
-            optionsList={optionsList}
-          />
-          <div style={{ paddingBottom: '.7rem' }} />
-          {delivered === 'true' && (
-            <>
-              <Input
-                placeholder={legendInputFullName}
-                inputType={inputTypes.TEXT}
-                minLength="2"
-                maxLength="30"
-                value={fullName}
-                handleOnChange={setFullName}
-              />
-              {fullName.length >= 2 ? <></> : <div style={{ paddingBottom: '.7rem' }} />}
-              <Input
-                placeholder={placeholderCPF}
-                inputType={inputTypes.CPF}
-                minLength="14"
-                maxLength="14"
-                value={CPF}
-                isRequired={false}
-                handleOnChange={setCPF}
-              />
-              <div className="details-donation-received-current-prof" />
-              <div className="main-donation-received-current-prof">
-                <Legend size={LegendTypes.SIZE_LARGE} message={legendAddPicPersonReceiveCard} />
-                <SubTitle type={SubTitleTypes.MEDIUM} width={SubTitleTypes.SIZE_SMALL} message={legendPicDonation} />
-                <File file={image} handleImage={handleImageFile} placeholder={legendInputAddPic} />
-              </div>
-            </>
-          )}
+      <form onSubmit={handleClickButton}>
+        <div className="container-donation-received-current-prof">
+          <div className="sidebar-donation-received-current-prof">
+            <ButtonIcon handleClick={goBack}>
+              <LogoBack height={10} />
+            </ButtonIcon>
+            <Legend type={LegendTypes.STRONG} message={back} />
+          </div>
+          <div className="header-donation-received-current-prof">
+            <Title message={`${titleDonationProf}`} />
+            <Paragraph size={ParagraphTypes.MEDIUM} content="descriptionDonationProf" />
+            <Items size={ItemsTypes.LARGE} align={ItemsTypes.START} title={`Cartão Nº ${voucher}`} />
+            <div style={{ paddingBottom: '.7rem' }} />
+            <Select
+              value={delivered}
+              placeholder="Status da entrega do cartão"
+              getValue={setDelivered}
+              optionsList={optionsList}
+            />
+            <div style={{ paddingBottom: '.7rem' }} />
+            {delivered === 'true' && (
+              <>
+                <Input
+                  placeholder={legendInputFullName}
+                  inputType={inputTypes.TEXT}
+                  minLength="2"
+                  maxLength="30"
+                  value={fullName}
+                  handleOnChange={setFullName}
+                />
+                {fullName.length >= 2 ? <></> : <div style={{ paddingBottom: '.7rem' }} />}
+                <Input
+                  placeholder={placeholderCPF}
+                  inputType={inputTypes.CPF}
+                  minLength="14"
+                  maxLength="14"
+                  value={CPF}
+                  isRequired={false}
+                  handleOnChange={setCPF}
+                />
+                <div className="details-donation-received-current-prof" />
+                <div className="main-donation-received-current-prof">
+                  <Legend size={LegendTypes.SIZE_LARGE} message={legendAddPicPersonReceiveCard} />
+                  <SubTitle type={SubTitleTypes.MEDIUM} width={SubTitleTypes.SIZE_SMALL} message={legendPicDonation} />
+                  <File file={image} handleImage={handleImageFile} placeholder={legendInputAddPic} />
+                </div>
+              </>
+            )}
+          </div>
         </div>
         <div className="footer-donation-received-current-prof">
           <Button size={ButtonTypes.LARGE} message={confirm} disable={disableButton} />

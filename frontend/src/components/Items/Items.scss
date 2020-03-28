@@ -29,11 +29,9 @@
     text-align: end;
   }
 
-  h5 {
-    font-size: 16px;
-    line-height: 18px;
-    /* or 112% */
-    padding: 15px;
+  span {
+    font-size: 14px;
+    padding: 15px 15px 15px 19px ;
     display: flex;
     align-items: center;
     text-align: center;
@@ -41,12 +39,17 @@
     color: #202228;
   }
   
+  &--medium{
+    span {
+      font-weight: 400;
+    }
+  }
+
   select {
     font-family: Rubik;
     font-style: normal;
     font-weight: normal;
     font-size: 14px;
-    line-height: 18px;
     padding: 16px;
     display: flex;
     align-items: center;

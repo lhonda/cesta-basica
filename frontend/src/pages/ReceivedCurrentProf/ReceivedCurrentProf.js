@@ -57,7 +57,7 @@ function ReceivedCurrentProfPage({ store, dispatch }) {
     setImage(event.target.files[0])
   }
 
-  async function handleClickButton(e) {
+  async function handleSubmit(e) {
     e.preventDefault()
     setLoading(true)
     const clearCpf = CPF.replace(/\./g, '').replace(/-/g, '')
@@ -70,7 +70,7 @@ function ReceivedCurrentProfPage({ store, dispatch }) {
   return (
     <>
       {loading && <Loader />}
-      <form onSubmit={handleClickButton} className="container-donation-received-current-prof">
+      <form onSubmit={handleSubmit} className="container-donation-received-current-prof">
         <div className="sidebar-donation-received-current-prof">
           <ButtonIcon handleClick={goBack}>
             <LogoBack height={10} />

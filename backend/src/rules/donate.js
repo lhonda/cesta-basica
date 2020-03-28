@@ -79,10 +79,6 @@ export async function donate ({
   /**
    * More validations when delivered = true
    */
-  if (!receivedCpf) {
-    throw new Error('receivedCpf is required when delivered = true')
-  }
-
   if (!receivedName) {
     throw new Error('receivedName is required when delivered = true')
   }

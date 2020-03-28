@@ -1,51 +1,63 @@
 .item {
-height: 52px;
-&.small {
-  width: auto;
-}
-&.medium {
-  width: 250px;
-}
-&.large {
-  width: 100%;
-}
-background: #EFEFEF;
-border-radius: 4px;
+  font-family: Rubik;
+  font-style: normal;
+  font-weight: normal;
+  height: 52px;
+  &.small {
+    width: auto;
+  }
+  &.medium {
+    width: 250px;
+  }
+  &.large {
+    width: 100%;
+  }
+  background: #f2f2f2;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  &.start {
+    text-align: start;
+    justify-content: flex-start;
+  }
+  &.center {
+    justify-content: center;
+    text-align: center;
+  }
+  &.end {
+    justify-content: flex-end;
+    text-align: end;
+  }
+
+  h5 {
+    font-size: 16px;
+    line-height: 18px;
+    /* or 112% */
+    padding: 15px;
     display: flex;
     align-items: center;
-    &.start {
-      text-align: start;
-      justify-content: flex-start;
-    }
-    &.center {
-      justify-content: center;
-      text-align: center;
-    }
-    &.end {
-      justify-content: flex-end;
-      text-align: end;
-    }
-
-    h5 {
-      font-family: Rubik;
-      font-style: normal;
-      font-weight: normal;
-      font-size: 16px;
-      line-height: 18px;
-      /* or 112% */
-      padding: 15px;
-      display: flex;
-      align-items: center;
-      text-align: center;
-      letter-spacing: 0.2px;
-      color: #202228;
-    }
- select {
-  height: 100%;
-  width: 100%;
-  background-color: transparent;
-  border: none;
- }
+    text-align: center;
+    letter-spacing: 0.2px;
+    color: #202228;
+  }
+  
+  select {
+    font-family: Rubik;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 18px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.2px;
+    color: #909090;
+    height: 100%;
+    width: 100%;
+    background-color: transparent;
+    border: none;
+  }
 }
 .item-basket {
   height: 45px;
@@ -60,8 +72,8 @@ border-radius: 4px;
   margin: 10px 0px;
 
   &.complete {
-    color: #93278F;
-    border: 1px solid #93278F;
+    color: #93278f;
+    border: 1px solid #93278f;
   }
   &.small {
     width: 150px;

@@ -14,6 +14,10 @@ import { Paragraph, ParagraphTypes } from '../../components/Paragraph'
 import { SubTitle, SubTitleTypes } from '../../components/SubTitle'
 import { Button, ButtonTypes } from '../../components/Button'
 import { ButtonIcon, ButtonIconTypes } from '../../components/ButtonIcon'
+import { Loader } from '../../components/Loader'
+import { icSuccess } from '../../assets/icons'
+
+import { Upload } from '../../services/API/upload'
 
 import './ReceivedCurrentProf.scss'
 
@@ -21,18 +25,35 @@ import {
   confirm,
   back,
   titleDonationProf,
-  legendAddPicPersonReceivedDonation,
-  legendAddPicPersonReceivedDonationWithDocument,
+  legendAddPicPersonReceiveCard,
+  legendInputCardDeliveryStatus,
   legendPicDonation,
   legendInputAddPic,
-  legendPicFiscalNode,
+  legendInputFullName,
+  placeholderCPF,
 } from '../../utils/strings'
 
 function ReceivedCurrentProfPage({ store, dispatch }) {
   const { voucher } = useParams()
   const { goBack } = useHistory()
+  const [fullName, setFullName] = useState('')
+  const [CPF, setCPF] = useState('')
+  const [image, setImage] = useState(false)
+  const [loading, setLoading] = useState(false)
+
+  const handleImageFile = (event) => {
+    setImage(event.target.files[0])
+  }
+
+  const handleClickButton = async () => {
+    setLoading(true)
+    await Upload({ donationId: 1, file: image })
+    setLoading(false)
+  }
+
   return (
     <div className="container-donation-received-current-prof">
+      {loading && <Loader />}
       <div className="sidebar-donation-received-current-prof">
         <ButtonIcon handleClick={goBack}>
           <LogoBack height={10} />
@@ -43,22 +64,47 @@ function ReceivedCurrentProfPage({ store, dispatch }) {
         <Title message={`${titleDonationProf}`} />
         <Paragraph size={ParagraphTypes.MEDIUM} content="descriptionDonationProf" />
         <Items size={ItemsTypes.LARGE} align={ItemsTypes.START} title={`Cesta ${voucher}`} />
-        <Items size={ItemsTypes.LARGE} type={ItemsTypes.SELECT} align={ItemsTypes.START} title={`Cesta ${voucher}`} />
+        <Items
+          placeholder={legendInputCardDeliveryStatus}
+          size={ItemsTypes.LARGE}
+          type={ItemsTypes.SELECT}
+          align={ItemsTypes.START}
+        />
+        <Input
+          placeholder={legendInputFullName}
+          inputType={inputTypes.TEXT}
+          minLength="2"
+          maxLength="30"
+          value={fullName}
+          handleOnChange={setFullName}
+        />
+        <Input
+          placeholder={placeholderCPF}
+          inputType={inputTypes.CPF}
+          minLength="6"
+          maxLength="14"
+          value={CPF}
+          handleOnChange={setCPF}
+        />
       </div>
       <div className="details-donation-received-current-prof" />
       <div className="main-donation-received-current-prof">
-        <Legend size={LegendTypes.SIZE_LARGE} message={legendAddPicPersonReceivedDonation} />
+        <Legend size={LegendTypes.SIZE_LARGE} message={legendAddPicPersonReceiveCard} />
         <SubTitle type={SubTitleTypes.MEDIUM} width={SubTitleTypes.SIZE_SMALL} message={legendPicDonation} />
-        <File placeholder={legendInputAddPic} />
-      </div>
-      <div className="main-donation-received-current-prof">
-        <Legend size={LegendTypes.SIZE_LARGE} message={legendAddPicPersonReceivedDonationWithDocument} />
-        <SubTitle type={SubTitleTypes.MEDIUM} width={SubTitleTypes.SIZE_SMALL} message={legendPicFiscalNode} />
-        <File placeholder={legendInputAddPic} />
+        {!image ? (
+          <File file={image} handleImage={handleImageFile} placeholder={legendInputAddPic} />
+        ) : (
+          <img
+            className="customInput__icon"
+            src={icSuccess}
+            alt="icon for information warning or success"
+            height={18}
+          />
+        )}
       </div>
 
       <div className="footer-donation-received-current-prof">
-        <Button size={ButtonTypes.LARGE} message={confirm} />
+        <Button handleClick={handleClickButton} size={ButtonTypes.LARGE} message={confirm} disable={true} />
       </div>
     </div>
   )

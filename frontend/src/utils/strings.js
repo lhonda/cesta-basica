@@ -116,3 +116,5 @@ export const completeDeliveryInformationContate = 'Caso tenha ocorrido algum pro
 // Generic
 export const WORD_NO = 'Não'
 export const WORD_YES = 'Sim'
+export const deliveredFirstLetterCapitalized = 'Entregue'
+export const notDeliveredFirstLetterCapitalized = 'Não entregue'

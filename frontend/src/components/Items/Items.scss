@@ -62,6 +62,13 @@ border-radius: 4px;
   &.complete {
     color: #93278F;
     border: 1px solid #93278F;
+
+    svg {
+      path {
+        fill: currentColor;
+      }
+    }
+
   }
   &.small {
     width: 150px;

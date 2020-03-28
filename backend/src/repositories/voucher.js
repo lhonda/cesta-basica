@@ -4,6 +4,7 @@ import { pointSchema } from './pointSchema'
 const voucherSchema = new Schema({
   voucherId: {
     type: String,
+    unique: true,
     required: [true, 'voucherId is required']
   },
   donationId: {

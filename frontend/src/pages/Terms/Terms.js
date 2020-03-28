@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { connect } from '../../store'
+import { connect, types } from '../../store'
 import { Title } from '../../components/Title'
 import { Terms } from '../../components/Terms'
 import { Button, ButtonTypes } from '../../components/Button'
 import { Checkbox } from '../../components/Checkbox'
-import { types } from '../../store'
 import './Term.scss'
 
 import { Loader } from '../../components/Loader'

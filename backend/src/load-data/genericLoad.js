@@ -2,7 +2,7 @@ function compareStringArrays (a, b) {
   return (JSON.stringify(a) === JSON.stringify(b))
 }
 
-export async function genericLoad (schema, rows) {
+export async function genericLoad (schema, rows, idCols, keepCols = []) {
   if (!schema) {
     throw new Error('schema is required')
   }
@@ -19,5 +19,29 @@ export async function genericLoad (schema, rows) {
     throw new Error(`Columns names must be at this order: ${schemaKeys.join(', ')}`)
   }
 
-  return Promise.all(rows.map(async row => schema.create(row)))
+  idCols = [].concat(idCols)
+
+  return Promise.all(rows.map(async row => {
+    const findObj = idCols.reduce((obj, colname) => {
+      obj[colname] = row[colname]
+      return obj
+    }, {})
+    console.log(findObj)
+
+    const existing = await schema.findOne(findObj)
+    console.log(existing)
+
+    if (!existing) {
+      return schema.create(row)
+    }
+
+    schemaKeys.forEach(colname => {
+      if (!keepCols.includes(colname)) {
+        existing[colname] = row[colname]
+      }
+    })
+    console.log(existing)
+
+    return existing.save()
+  }))
 }

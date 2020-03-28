@@ -25,23 +25,23 @@ import {
   completeDeliveryTitle,
 } from '../../utils/strings'
 import { handleDonationReceivedVoucher, handleToggleModal } from '../../services/handles'
+import { EndDonation } from '../../services/API/donationList'
 
 function ReceivedCurrentPage({ store, dispatch }) {
   const { id } = useParams()
   const [showModal, setShowModal] = useState(false)
 
   const { goBack, push } = useHistory()
+  function endDonations() {
+    EndDonation(id, () => push('/donation-list'))
+  }
 
   return (
     <div className="container-received-prof">
-      <Modal
-        isOpenModal={showModal}
-        actionExit={() => push('/donation-list')}
-        title={completeDeliveryTitle}
-      />
+      <Modal isOpenModal={showModal} actionExit={endDonations} title={completeDeliveryTitle} />
       <div className="sidebar-donation-prof">
         <ButtonIcon handleClick={goBack}>
-          <LogoBack height={'10'} />
+          <LogoBack height="10" />
         </ButtonIcon>
         <Legend type={LegendTypes.STRONG} message={back} />
       </div>

@@ -13,5 +13,11 @@ function Select({ value, placeholder, getValue, optionsList }) {
     </select>
   )
 }
+Select.propTypes = {
+  value: PropTypes.string.isRequired,
+  placeholder: PropTypes.string.isRequired,
+  getValue: PropTypes.func.isRequired,
+  optionsList: PropTypes.array.isRequired,
+}
 
 export default Select

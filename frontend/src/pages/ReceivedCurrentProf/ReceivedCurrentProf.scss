@@ -39,14 +39,13 @@ hr {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  margin-bottom: 10px;
 }
 .footer-donation-received-current-prof {
   padding: 0 40px 20px 5px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  position: fixed;
+  position: absolute;
   bottom: 0;
   width: -webkit-fill-available;
 }

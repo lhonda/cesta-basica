@@ -14,8 +14,6 @@ export async function DonationsList(dispatch) {
 }
 
 export async function DonationVoucher(dataScreen, store, goToNextRoute) {
-  goToNextRoute()
-  
   const { id, voucher, delivered, CPF, fullName, image } = dataScreen
   const { lat, lon } = store.userLocation
   const formData = new FormData()

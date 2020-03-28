@@ -51,13 +51,15 @@ function ReceivedCurrentProfPage({ store, dispatch }) {
     },
   ]
 
+  const disableButton = delivered === 'true' ? !(fullName !== '') : false
+
   const handleImageFile = (event) => {
     setImage(event.target.files[0])
   }
 
-  async function handleClickButton() {
+  async function handleClickButton(e) {
+    e.preventDefault()
     setLoading(true)
-    // await Upload({ donationId: 1, file: image })
     const clearCpf = CPF.replace(/\./g, '').replace(/-/g, '')
     const data = { id, voucher, delivered, CPF: clearCpf, fullName, image }
     const goToDonateList = () => push(`/donation/${id}/received/current`)
@@ -66,61 +68,61 @@ function ReceivedCurrentProfPage({ store, dispatch }) {
   }
 
   return (
-    <div className="container-donation-received-current-prof">
+    <>
       {loading && <Loader />}
-      <div className="sidebar-donation-received-current-prof">
-        <ButtonIcon handleClick={goBack}>
-          <LogoBack height={10} />
-        </ButtonIcon>
-        <Legend type={LegendTypes.STRONG} message={back} />
-      </div>
-      <div className="header-donation-received-current-prof">
-        <Title message={`${titleDonationProf}`} />
-        <Paragraph size={ParagraphTypes.MEDIUM} content="descriptionDonationProf" />
-        <Items size={ItemsTypes.LARGE} align={ItemsTypes.START} title={`Cartão Nº ${voucher}`} />
-        <div style={{ paddingBottom: '.7rem' }} />
-        <Select
-          value={delivered}
-          placeholder="Status da entrega do cartão"
-          getValue={setDelivered}
-          optionsList={optionsList}
-        />
-        <div style={{ paddingBottom: '.7rem' }} />
-        {delivered == 'true' ? (
-          <>
-            <Input
-              placeholder={legendInputFullName}
-              inputType={inputTypes.TEXT}
-              minLength="2"
-              maxLength="30"
-              value={fullName}
-              handleOnChange={setFullName}
-            />
-            <div style={{ paddingBottom: '.7rem' }} />
-            <Input
-              placeholder={placeholderCPF}
-              inputType={inputTypes.CPF}
-              minLength="14"
-              maxLength="14"
-              value={CPF}
-              handleOnChange={setCPF}
-            />
-          </>
-        ) : (
-          <></>
-        )}
-      </div>
-      <div className="details-donation-received-current-prof" />
-      <div className="main-donation-received-current-prof">
-        <Legend size={LegendTypes.SIZE_LARGE} message={legendAddPicPersonReceiveCard} />
-        <SubTitle type={SubTitleTypes.MEDIUM} width={SubTitleTypes.SIZE_SMALL} message={legendPicDonation} />
-        <File file={image} handleImage={handleImageFile} placeholder={legendInputAddPic} />
-      </div>
-
-      <div className="footer-donation-received-current-prof">
-        <Button handleClick={handleClickButton} size={ButtonTypes.LARGE} message={confirm} />
-      </div>
-    </div>
+      <form onSubmit={handleClickButton} className="container-donation-received-current-prof">
+        <div className="sidebar-donation-received-current-prof">
+          <ButtonIcon handleClick={goBack}>
+            <LogoBack height={10} />
+          </ButtonIcon>
+          <Legend type={LegendTypes.STRONG} message={back} />
+        </div>
+        <div className="header-donation-received-current-prof">
+          <Title message={`${titleDonationProf}`} />
+          <Paragraph size={ParagraphTypes.MEDIUM} content="descriptionDonationProf" />
+          <Items size={ItemsTypes.LARGE} align={ItemsTypes.START} title={`Cartão Nº ${voucher}`} />
+          <div style={{ paddingBottom: '.7rem' }} />
+          <Select
+            value={delivered}
+            placeholder="Status da entrega do cartão"
+            getValue={setDelivered}
+            optionsList={optionsList}
+          />
+          <div style={{ paddingBottom: '.7rem' }} />
+          {delivered === 'true' && (
+            <>
+              <Input
+                placeholder={legendInputFullName}
+                inputType={inputTypes.TEXT}
+                minLength="2"
+                maxLength="30"
+                value={fullName}
+                handleOnChange={setFullName}
+              />
+              {fullName.length >= 2 ? <></> : <div style={{ paddingBottom: '.7rem' }} />}
+              <Input
+                placeholder={placeholderCPF}
+                inputType={inputTypes.CPF}
+                minLength="14"
+                maxLength="14"
+                value={CPF}
+                isRequired={false}
+                handleOnChange={setCPF}
+              />
+              <div className="details-donation-received-current-prof" />
+              <div className="main-donation-received-current-prof">
+                <Legend size={LegendTypes.SIZE_LARGE} message={legendAddPicPersonReceiveCard} />
+                <SubTitle type={SubTitleTypes.MEDIUM} width={SubTitleTypes.SIZE_SMALL} message={legendPicDonation} />
+                <File file={image} handleImage={handleImageFile} placeholder={legendInputAddPic} />
+              </div>
+            </>
+          )}
+        </div>
+        <div className="footer-donation-received-current-prof">
+          <Button size={ButtonTypes.LARGE} message={confirm} disable={disableButton} />
+        </div>
+      </form>
+    </>
   )
 }
 ReceivedCurrentProfPage.propTypes = {

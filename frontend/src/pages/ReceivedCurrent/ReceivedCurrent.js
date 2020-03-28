@@ -34,14 +34,10 @@ function ReceivedCurrentPage({ store, dispatch }) {
 
   return (
     <div className="container-received-prof">
-      <Modal
-        isOpenModal={showModal}
-        actionExit={() => handleToggleModal(setShowModal)}
-        title={completeDeliveryTitle}
-      />
+      <Modal isOpenModal={showModal} actionExit={() => handleToggleModal(setShowModal)} title={completeDeliveryTitle} />
       <div className="sidebar-donation-prof">
         <ButtonIcon handleClick={goBack}>
-          <LogoBack height={'10'} />
+          <LogoBack height="10" />
         </ButtonIcon>
         <Legend type={LegendTypes.STRONG} message={back} />
       </div>

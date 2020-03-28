@@ -41,9 +41,21 @@ border-radius: 4px;
       color: #202228;
     }
  select {
+  font-family: Rubik;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 18px;
+  /* or 112% */
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.2px;
+  color: #909090;
   height: 100%;
   width: 100%;
-  background-color: transparent;
+  background-color: #f2f2f2;
   border: none;
  }
 }

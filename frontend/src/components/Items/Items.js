@@ -25,7 +25,7 @@ function Item({ title, size, align, handleClick, type, complete }) {
       </div>
     ),
     [ItemsTypes.SELECT]: (
-      <div className={`item ${size} ${align}`}>
+      <div className={['item ', size, align]}>
         <select>{RenderOptions()}</select>
       </div>
     ),

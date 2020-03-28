@@ -1,4 +1,5 @@
 import { Voucher } from '../repositories'
+import { statusesVoucher } from '../enums'
 
 export async function listVouchers ({ login }) {
   console.log(arguments)
@@ -13,7 +14,8 @@ export async function listVouchers ({ login }) {
     delivered,
     receivedCpf,
     receivedName,
-    point
+    point,
+    status
   }) => ({
     voucherId,
     donationId,
@@ -23,7 +25,9 @@ export async function listVouchers ({ login }) {
     delivered,
     receivedCpf,
     receivedName,
-    point
+    point,
+    status,
+    statusText: statusesVoucher[status]
   }))
 
   console.log(vouchers)

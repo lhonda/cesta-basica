@@ -48,7 +48,10 @@ function DonationPage({ store }) {
     setLoading(true)
 
     await Upload({ ...userLocation, donationId, file: image, receivedQuantity: numberDonation })
-    history.push(`/donation/${donationId}/received`)
+    history.push({
+      pathname: `/donation/${donationId}/received`,
+      state: { receivedQuantity: numberDonation },
+    })
     setLoading(false)
   }
   return (

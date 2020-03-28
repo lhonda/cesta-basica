@@ -25,7 +25,7 @@ import {
   legendDonationDateFinal,
 } from '../../utils/strings'
 
-function ReceivedPage({ store, dispatch }) {
+function ReceivedPage({ store }) {
   const { id } = useParams()
   const { push, location, goBack } = useHistory()
   const [currentDonation, setCurrentDonation] = useState({})
@@ -49,7 +49,11 @@ function ReceivedPage({ store, dispatch }) {
       <div className="details-received">
         <div className="details-amount">
           <Legend type={LegendTypes.LIGHT} orientation={LegendTypes.START} message={legendDonationWaitAmount} />
-          <Legend type={LegendTypes.STRONG} orientation={LegendTypes.START} message={currentDonation.quantity || 0} />
+          <Legend
+            type={LegendTypes.STRONG}
+            orientation={LegendTypes.START}
+            message={location.state.receivedQuantity || 0}
+          />
         </div>
       </div>
       <div className="details-received">

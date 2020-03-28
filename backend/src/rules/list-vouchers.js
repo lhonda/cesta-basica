@@ -36,7 +36,7 @@ export async function listVouchers ({ login, donationId }) {
     receivedName,
     point,
     status,
-    statusText: ''
+    statusText: statusesVoucher[status]
   }))
 
   console.log(vouchers)

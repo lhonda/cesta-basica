@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import './DonationList.scss'
-import { connect } from '../../store'
+import { connect, types } from '../../store'
 
 import { Loader } from '../../components/Loader'
 
@@ -16,6 +16,22 @@ import { CommitmentCheck } from '../../services/API/terms'
 function DonationList({ store, dispatch, history }) {
   const [loading, setLoading] = useState()
   const { donationList } = store
+
+  useEffect(() => {
+    getGeoLocation()
+  }, [])
+
+  function getGeoLocation() {
+    navigator.geolocation.getCurrentPosition(position => {
+
+      const userLocation = {
+        lat: position.coords.latitude,
+        lon: position.coords.longitude,
+      }
+
+      dispatch({ type: types.SET_USER_LOCATION, payload: userLocation })
+    })
+  }
 
   async function getDonationList() {
     setLoading(true)

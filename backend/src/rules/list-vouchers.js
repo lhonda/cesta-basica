@@ -1,10 +1,19 @@
 import { Voucher } from '../repositories'
 import { statusesVoucher } from '../enums'
 
-export async function listVouchers ({ login }) {
+export async function listVouchers ({ login, donationId }) {
   console.log(arguments)
+
+  if (!login) {
+    throw new Error('login is required')
+  }
+
+  if (!donationId) {
+    throw new Error('donationId is required')
+  }
+
   const vouchers = (
-    await Voucher.find({ leaderLogin: login })
+    await Voucher.find({ donationId, leaderLogin: login })
   ).map(({
     voucherId,
     donationId,

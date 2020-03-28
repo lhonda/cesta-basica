@@ -20,8 +20,8 @@ function RenderOptions() {
 function Item({ title, size, align, handleClick, type, complete }) {
   const components = {
     [ItemsTypes.SYMPTOMS]: (
-      <div className={`item ${size} ${align}`}>
-        <h5>{title}</h5>
+      <div className={`item ${size} ${align} item--medium`}>
+        <span>{title}</span>
       </div>
     ),
     [ItemsTypes.SELECT]: (

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { useHistory } from 'react-router-dom'
+import { useParams, useHistory } from 'react-router-dom'
 import { connect } from '../../store'
 import { Title } from '../../components/Title'
 import { LogoBack } from '../../components/Logo'
@@ -11,6 +11,7 @@ import { Paragraph, ParagraphTypes } from '../../components/Paragraph'
 import { SubTitle, SubTitleTypes } from '../../components/SubTitle'
 import { Button, ButtonTypes } from '../../components/Button'
 import { ButtonIcon } from '../../components/ButtonIcon'
+import { findDonation } from '../../utils/findDonationByid'
 
 import { Loader } from '../../components/Loader'
 
@@ -27,10 +28,15 @@ import {
   legendInputAddPic,
 } from '../../utils/strings'
 
-function DonationPage({ store, dispatch }) {
-  const { goBack } = useHistory()
+function DonationPage({ store }) {
+  const history = useHistory()
+  const { goBack } = history
+  const { userLocation } = store
+  const { id } = useParams()
   const [numberDonation, setNumberDonation] = useState('')
   const [image, setImage] = useState('')
+  const donation = findDonation(store, id)
+  const { donationId } = donation
 
   const [loading, setLoading] = useState(false)
 
@@ -41,7 +47,8 @@ function DonationPage({ store, dispatch }) {
   const handleClickButton = async () => {
     setLoading(true)
 
-    await Upload({ donationId: 1, file: image })
+    await Upload({ ...userLocation, donationId, file: image, receivedQuantity: numberDonation })
+    history.push(`/donation/${donationId}/received`)
     setLoading(false)
   }
   return (

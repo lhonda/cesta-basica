@@ -52,8 +52,6 @@ export const contate = 'Isadora Correa'
 export const confirm = 'Confirmar'
 export const back = 'Voltar'
 export const titleTerms = 'Termo de compromisso'
-export const locationPermission =
-  'Para utilizar a aplicação é necessário sabermos a sua localização. Essa localização é somente usada durante a utilização da aplicação.'
 
 // Checklist screen
 export const titleChecklist = 'Checklist de Saúde'
@@ -62,7 +60,7 @@ export const declareChecklist = 'Declaro que li e não estou apresentando nenhum
 export const LegendChecklist = '*O vírus também é transmitido por pessoas assintomáticas.'
 export const linkChecklist = 'Estou com sintomas, o que fazer?'
 
-// donation list
+// Donation list
 export const donationListVoidText = 'Você está sem pedidos \nde doações no momento'
 export const donationTitlePage = 'Lista de doações'
 export const exitText = 'Sair'
@@ -90,19 +88,25 @@ export const lostFirstLetterCapitalized = 'Extraviado'
 export const deliveredToLeader = 'Entregue para líder'
 
 // Donation Prof screen
-export const titleDonationProf = 'Evidência do Recebimento'
+export const titleDonationProf = 'Evidência de Entrega'
 export const descriptionDonationReceived =
-  'Quando for iniciar as entregas dos cartões na comunidade, atualize seu status na plataforma para <span class="paragraph--medium">"Iniciar Entrega"<span>.'
+  'Quando for iniciar as entregas das doações na comunidade, atualize seu status na plataforma para "Iniciar Entrega".'
 export const descriptionDonationReceivedSecondparagraph =
-  'Importante lembrar que você possui <span class="paragraph--medium">24h</span> para finalizar as entregas e precisa tirar uma foto para cada entrega de cartão na comunidade. E avise ao familiar para levar um documento com foto. Excelente trabalho :)'
-export const descriptionDonationProf = 'Precisamos que você complete as informações sobre o recebimento do cartão.'
-export const legendInputAmountDonation = 'Quantidade de cartões recebidos'
-export const legendPicDonation = 'Foto do recebimento'
+  'Importante lembrar que você possui 24h para finalizar as entregas e precisa tirar uma foto para cada entrega de doação na comunidade. Excelente trabalho :)'
+export const descriptionDonationProf = 'Precisamos que você complete as informações sobre a entrega do cartão.'
+export const legendInputAmountDonation = 'Quantidade de doações recebidas'
 
+export const legendInputCardNumber = 'Cartão Nº '
+export const legendInputCardDeliveryStatus = 'Status da entrega do cartão'
+export const legendInputFullName = 'Nome Completo'
+export const legendInputCpf = 'CPF'
+
+export const legendPicDonation = 'Foto\n da entrega'
 export const legendPicFiscalNode = 'Foto da nota fiscal'
 export const legendInputAddPic = 'adicionar foto da galeria'
 export const legendNFQuestion = 'Deseja adicionar Nota Fiscal?'
 
+export const legendAddPicPersonReceiveCard = 'Tirar uma foto da pessoa com o cartão'
 export const legendAddPicPersonReceivedDonation = 'Tirar uma foto da pessoa recebendo a doação.'
 export const legendAddPicPersonReceivedDonationWithDocument =
   'Tirar uma foto da pessoa segurando documento ao lado do rosto.'
@@ -116,3 +120,5 @@ export const completeDeliveryInformationContate = 'Caso tenha ocorrido algum pro
 // Generic
 export const WORD_NO = 'Não'
 export const WORD_YES = 'Sim'
+export const deliveredFirstLetterCapitalized = 'Entregue'
+export const notDeliveredFirstLetterCapitalized = 'Não entregue'

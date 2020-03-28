@@ -51,7 +51,10 @@ router.post('/admin/sign-in', (req, res) =>
 
 // listar vouchers de uma doacao
 router.get('/vouchers', authRequired('leader'), (req, res) =>
-  listVouchers(req.auth)
+  listVouchers({
+    login: req.auth.login,
+    donationId: req.body.donationId
+  })
     .then(data => res.status(data.length === 0 ? 404 : 200).json(data))
     .catch(err => {
       console.log(err)

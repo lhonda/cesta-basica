@@ -10,17 +10,6 @@ const cleanState = {
   auth: {
     token: null,
   },
-  donation: {
-    received: {
-      date: '26/03/2020 11h00',
-      amount: 50,
-      type: 'Cesta básica',
-      deadline: '27/03/2020 12h03',
-    },
-    gived: {
-      amount: 50,
-    },
-  },
   declaration: false,
   doneHealthCheck: checkExpiresCheckList(),
   donationList: null,
@@ -47,10 +36,6 @@ const actionMap = {
   [types.SET_DECLARATION]: (state, payload) => saveState({ ...state, declaration: payload }),
   [types.SET_HEALTHCHECK]: (state, payload) => saveState({ ...state, doneHealthCheck: payload }),
   [types.SET_LOGOUT]: () => logout(),
-  [types.SET_DONATION]: (state, payload) => ({
-    ...state,
-    donation: payload,
-  }),
   [types.SET_DONATION_LIST]: (state, payload) => saveState({ ...state, donationList: payload }),
   [types.SET_PHOTO_RECEIVED]: (state, payload) => saveState({ ...state, photoReceived: payload }),
 }

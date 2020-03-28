@@ -10,6 +10,4 @@ export async function endDonation ({ donationId }) {
   donation.status = 4
   donation.completed = new Date()
   await donation.save()
-
-  return
 }

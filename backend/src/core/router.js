@@ -53,7 +53,7 @@ router.post('/admin/sign-in', (req, res) =>
 router.get('/vouchers', authRequired('leader'), (req, res) =>
   listVouchers({
     login: req.auth.login,
-    donationId: req.body.donationId
+    donationId: req.query.donationId
   })
     .then(data => res.status(data.length === 0 ? 404 : 200).json(data))
     .catch(err => {

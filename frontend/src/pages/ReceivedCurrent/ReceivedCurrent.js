@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { useParams, useHistory } from 'react-router-dom'
 import { Modal } from '../Modal'
-import { connect } from '../../store'
+import { connect, types } from '../../store'
 import { Title } from '../../components/Title'
 import { Status } from '../../components/Status'
 import { Sidebar } from '../../components/Sidebar'
@@ -26,18 +26,22 @@ import {
   legendDonationDateFinal,
   completeDeliveryTitle,
 } from '../../utils/strings'
-import { handleDonationReceivedVoucher, handleToggleModal } from '../../services/handles'
+import { handleToggleModal } from '../../services/handles'
 import { EndDonation } from '../../services/API/donationList'
 import { findDonation } from '../../utils/findDonationByid'
 import { formatDate } from '../../utils/formatDateToptbr'
+import { Loader } from '../../components/Loader'
+
 
 import { DonationStatus } from '../../utils/donationStatus'
 
 function ReceivedCurrentPage({ store, dispatch }) {
   const { id } = useParams()
+  const history = useHistory()
   const { cardList } = store
   const [showModal, setShowModal] = useState(false)
   const [currentDonation, setCurrentDonation] = useState({})
+  const [loading, setloading] = useState(false)
 
   const { goBack, push } = useHistory()
   function endDonations() {
@@ -50,27 +54,28 @@ function ReceivedCurrentPage({ store, dispatch }) {
 
   function verifyIfCardsAreFilled() {
     const filteredCards = cardList.filter(
-        (card) =>
-          (card.status === DonationStatus.ENTREGUE.id  && card.receivedName !== null) ||
-          card.status === DonationStatus.NAO_ENTREGUE.id
-      )
+      (card) =>
+        (card.status === DonationStatus.ENTREGUE.id) ||
+        card.status === DonationStatus.NAO_ENTREGUE.id
+    )
     return cardList.length === filteredCards.length
   }
-
+  const handleClickItem = (voucher) => history.push(`${history.location.pathname}/${voucher}/prof`)
   useEffect(() => {
+    setloading(true)
+    dispatch({ type: types.CLEAN_CARD_LIST })
     const donation = findDonation(store, id)
     setCurrentDonation(donation || {})
     retrieveCards()
-  }, [])
-
-  useEffect(() => {
     if (cardList) {
       verifyIfCardsAreFilled()
     }
-  }, [cardList])
+    setloading(false)
+  }, [])
 
   return (
     <>
+      {loading && <Loader />}
       <div className="container-received-prof">
         <Modal isOpenModal={showModal} actionExit={endDonations} title={completeDeliveryTitle} />
         <div className="sidebar-donation-prof">
@@ -116,7 +121,7 @@ function ReceivedCurrentPage({ store, dispatch }) {
                 statusId={card.status}
                 type={ItemsTypes.BASKET}
                 size={ItemsTypes.LARGE}
-                handleClick={handleDonationReceivedVoucher}
+                handleClick={handleClickItem}
                 title={card.voucherId}
               />
             ))}

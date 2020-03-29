@@ -1,4 +1,5 @@
-import { titleReceivedProf, titleDonationProf } from '../utils/strings'
+import * as strings from '../utils/strings'
+import { func } from 'prop-types'
 
 window.dataLayer = window.dataLayer || []
 
@@ -7,10 +8,7 @@ export function sendEvent({ categoy, action, label }) {
     event: 'ga.event',
     gaCategory: categoy,
     gaAction: action,
-  }
-
-  if(label) {
-    event.gaLabel = label
+    gaLabel: label || null
   }
 
   window.dataLayer.push(event)
@@ -18,7 +16,7 @@ export function sendEvent({ categoy, action, label }) {
 
 export function receivedProf(status, voucher) {
   sendEvent({
-    categoy: titleReceivedProf,
+    categoy: strings.titleReceivedProf,
     action: status,
     label: voucher
   })
@@ -26,8 +24,22 @@ export function receivedProf(status, voucher) {
 
 export function donationProf(donationId, numberDonation) {
   sendEvent({
-    categoy: titleDonationProf,
+    categoy: strings.titleDonationProf,
     action: donationId,
     label: numberDonation
+  })
+}
+
+export function startDelivery(donationId) {
+  sendEvent({
+    categoy: strings.legendDonationReceivedButton,
+    action: donationId
+  })
+}
+
+export function endDelivery(donationId) {
+  sendEvent({
+    categoy: strings.legendDonationReceivedFinishButton,
+    action: donationId
   })
 }

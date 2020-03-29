@@ -44,10 +44,10 @@ function ReceivedCurrentProfPage({ store, dispatch }) {
 
   function isDelivered() {
     const { status, receivedName, receivedCpf } = donationInfo
-    if (status === 2 && receivedName && receivedCpf) {
+    if (status === 2 && receivedName) {
       setFullName(receivedName)
-      setCPF(receivedCpf)
-      return setDelivered(status === 2 ? 'true' : 'false')
+      setCPF(receivedCpf || '')
+      return setDelivered('true')
     } else if (status === 3) {
       setDelivered('false')
     } else {
@@ -106,7 +106,10 @@ function ReceivedCurrentProfPage({ store, dispatch }) {
 
       dispatch({ type: types.SET_CARD_LIST, payload: newCardList })
     }
-    await DonationVoucher(data, store, returnPage)
+    const updateDonate = await DonationVoucher(data, store)
+    if (updateDonate) {
+      returnPage()
+    }
     setLoading(false)
   }
 

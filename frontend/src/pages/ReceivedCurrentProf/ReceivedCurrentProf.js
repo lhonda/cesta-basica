@@ -82,7 +82,7 @@ function ReceivedCurrentProfPage({ store, dispatch }) {
     },
   ]
 
-  const disableButton = delivered !== 'null' ? (delivered === 'true' ? !(fullName !== '') : false) : true
+  const disableButton = delivered !== 'null' ? (delivered === 'true' ? !(fullName !== '' && image) : false) : true
 
   const handleImageFile = (event) => {
     setImage(event.target.files[0])
@@ -100,7 +100,7 @@ function ReceivedCurrentProfPage({ store, dispatch }) {
       cleanDataUserDonation.delivered = ''
       cleanDataUserDonation.receivedName = ''
 
-      const cleanCard = store.cardList.filter(card  => card.voucherId !== donationInfo.voucherId)
+      const cleanCard = store.cardList.filter(card => card.voucherId !== donationInfo.voucherId)
 
       const newCardList = [...cleanCard, cleanDataUserDonation]
 

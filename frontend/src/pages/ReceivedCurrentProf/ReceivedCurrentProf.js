@@ -82,8 +82,6 @@ function ReceivedCurrentProfPage({ store, dispatch }) {
     },
   ]
 
-  // limpar dados quando delivered mudar e quando o delivered for true, tem de validar se foto tem conteudo para habilitar botão
-  // dispatch para limpar store d d do o voucher atual
   const disableButton = delivered !== 'null' ? (delivered === 'true' ? !(fullName !== '') : false) : true
 
   const handleImageFile = (event) => {

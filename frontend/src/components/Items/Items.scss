@@ -38,7 +38,7 @@
     letter-spacing: 0.2px;
     color: #202228;
   }
-  
+
   &--medium{
     span {
       font-weight: 400;
@@ -83,8 +83,18 @@
         fill: currentColor;
       }
     }
-
   }
+  &.not-complete {
+    color: #93278F;
+    border: 1px solid #93278F;
+
+    svg {
+      path {
+        fill: #202228;
+      }
+    }
+  }
+
   &.small {
     width: 150px;
   }

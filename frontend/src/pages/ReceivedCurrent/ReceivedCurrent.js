@@ -70,55 +70,57 @@ function ReceivedCurrentPage({ store, dispatch }) {
   }, [cardList])
 
   return (
-    <div className="container-received-prof">
-      <Modal isOpenModal={showModal} actionExit={endDonations} title={completeDeliveryTitle} />
-      <div className="sidebar-donation-prof">
-        <ButtonIcon handleClick={goBack}>
-          <LogoBack height="10" />
-        </ButtonIcon>
-        <Legend type={LegendTypes.STRONG} message={back} />
-      </div>
-      <div className="header-received-prof">
-        <Title message={`${titleDonation} ${id}`} />
-        <Status message={statusDonationReceivedCurrent} />
-        <Sidebar current={3} />
-      </div>
-      <div className="details-received">
-        <div className="details-amount">
-          <Legend type={LegendTypes.LIGHT} orientation={LegendTypes.START} message={legendDonationWaitAmount} />
-          <Legend type={LegendTypes.STRONG} orientation={LegendTypes.START} message={cardList && cardList.length} />
+    <>
+      <div className="container-received-prof">
+        <Modal isOpenModal={showModal} actionExit={endDonations} title={completeDeliveryTitle} />
+        <div className="sidebar-donation-prof">
+          <ButtonIcon handleClick={goBack}>
+            <LogoBack height="10" />
+          </ButtonIcon>
+          <Legend type={LegendTypes.STRONG} message={back} />
         </div>
-      </div>
-      <div className="details-received">
-        <div className="details-date">
-          <Legend type={LegendTypes.LIGHT} orientation={LegendTypes.START} message={legendDonationWaitDate} />
-          <Legend
-            type={LegendTypes.STRONG}
-            orientation={LegendTypes.START}
-            message={formatDate(currentDonation.received)}
-          />
+        <div className="header-received-prof">
+          <Title message={`${titleDonation} ${id}`} />
+          <Status message={statusDonationReceivedCurrent} />
+          <Sidebar current={3} />
         </div>
-        <div className="details-amount">
-          <Legend type={LegendTypes.LIGHT} orientation={LegendTypes.END} message={legendDonationDateFinal} />
-          <Legend
-            type={LegendTypes.STRONG}
-            orientation={LegendTypes.END}
-            message={formatDate(currentDonation.completed)}
-          />
+        <div className="details-received">
+          <div className="details-amount">
+            <Legend type={LegendTypes.LIGHT} orientation={LegendTypes.START} message={legendDonationWaitAmount} />
+            <Legend type={LegendTypes.STRONG} orientation={LegendTypes.START} message={cardList && cardList.length} />
+          </div>
         </div>
-      </div>
-      <hr />
-      <div className="main-received-current-prof">
-        {cardList &&
-          cardList.map((card) => (
-            <Items
-              statusId={card.status}
-              type={ItemsTypes.BASKET}
-              size={ItemsTypes.LARGE}
-              handleClick={handleDonationReceivedVoucher}
-              title={card.voucherId}
+        <div className="details-received">
+          <div className="details-date">
+            <Legend type={LegendTypes.LIGHT} orientation={LegendTypes.START} message={legendDonationWaitDate} />
+            <Legend
+              type={LegendTypes.STRONG}
+              orientation={LegendTypes.START}
+              message={formatDate(currentDonation.received)}
             />
-          ))}
+          </div>
+          <div className="details-amount">
+            <Legend type={LegendTypes.LIGHT} orientation={LegendTypes.END} message={legendDonationDateFinal} />
+            <Legend
+              type={LegendTypes.STRONG}
+              orientation={LegendTypes.END}
+              message={formatDate(currentDonation.completed)}
+            />
+          </div>
+        </div>
+        <hr />
+        <div className="main-received-current-prof">
+          {cardList &&
+            cardList.map((card) => (
+              <Items
+                statusId={card.status}
+                type={ItemsTypes.BASKET}
+                size={ItemsTypes.LARGE}
+                handleClick={handleDonationReceivedVoucher}
+                title={card.voucherId}
+              />
+            ))}
+        </div>
       </div>
       <div className="footer-received-prof">
         <Button
@@ -128,7 +130,7 @@ function ReceivedCurrentPage({ store, dispatch }) {
           message={legendDonationReceivedFinishButton}
         />
       </div>
-    </div>
+    </>
   )
 }
 ReceivedCurrentPage.propTypes = {

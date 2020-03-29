@@ -28,6 +28,8 @@ import {
   legendInputAddPic,
 } from '../../utils/strings'
 
+import * as analytics from '../../services/analytics'
+
 function DonationPage({ store }) {
   const history = useHistory()
   const { goBack } = history
@@ -48,6 +50,7 @@ function DonationPage({ store }) {
     setLoading(true)
 
     await Upload({ ...userLocation, donationId, file: image, receivedQuantity: numberDonation })
+    analytics.donationProf(donationId, numberDonation)
     history.push(`/donation/${donationId}/received`)
     setLoading(false)
   }
@@ -62,7 +65,7 @@ function DonationPage({ store }) {
       </div>
 
       <div className="header-donation-prof">
-        <Title message={`${titleDonationProf}`} />
+        <Title message={titleDonationProf} />
         <Paragraph size={ParagraphTypes.LIGHT} content="descriptionDonationProf" />
         <Input
           ignoreValidate

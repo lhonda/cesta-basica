@@ -51,8 +51,8 @@ function ReceivedCurrentPage({ store, dispatch }) {
   function verifyIfCardsAreFilled() {
     const filteredCards = cardList.filter(
         (card) =>
-          (card.statusText === DonationStatus.ENTREGUE.status && card.receivedCpf !== null && card.receivedName !== null) ||
-          card.statusText === DonationStatus.NAO_ENTREGUE.status
+          (card.status === DonationStatus.ENTREGUE.id  && card.receivedName !== null) ||
+          card.status === DonationStatus.NAO_ENTREGUE.id
       )
     return cardList.length === filteredCards.length
   }
@@ -112,7 +112,7 @@ function ReceivedCurrentPage({ store, dispatch }) {
         {cardList &&
           cardList.map((card) => (
             <Items
-              complete={card.statusText === DonationStatus.ENTREGUE.status}
+              statusId={card.status}
               type={ItemsTypes.BASKET}
               size={ItemsTypes.LARGE}
               handleClick={handleDonationReceivedVoucher}

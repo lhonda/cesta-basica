@@ -14,6 +14,8 @@ export const errorMessageInvalidPassword = 'Senha incorreta. Tente novamente.'
 export const textButtonForLogin = 'Entrar'
 
 // Terms screen
+export const locationPermission =
+  'Para utilizar a aplicação é necessário sabermos a sua localização. Essa localização é somente usada durante a utilização da aplicação.'
 export const introductionCompromise =
   'Eu nesse momento passei ser chamado de VOLUNTÁRIO e INSTITUTO GERANDO FALCÕES, pessoa jurídica sem fins lucrativos, inscrito no CNPJ/MF sob o nº 18.463.148/0001-28, com sede na cidade de Poá – SP, na Avenida Niterói, n 96 – Kemel – Poá/SP, doravante chamada de INSTITUTO,'
 export const considerations1 =

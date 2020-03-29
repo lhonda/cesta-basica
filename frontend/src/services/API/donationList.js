@@ -13,7 +13,7 @@ export async function DonationsList(dispatch) {
   }
 }
 
-export async function DonationVoucher(dataScreen, store, goToNextRoute) {
+export async function DonationVoucher(dataScreen, store) {
   const { id, voucher, delivered, CPF, fullName, image } = dataScreen
   const { lat, lon } = store.userLocation
   const formData = new FormData()
@@ -30,9 +30,9 @@ export async function DonationVoucher(dataScreen, store, goToNextRoute) {
         'Content-Type': 'multipart/form-data',
       },
     })
-    goToNextRoute()
+    return true
   } catch (error) {
-    return 'failed'
+    return false
   }
 }
 

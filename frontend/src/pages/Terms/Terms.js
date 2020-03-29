@@ -8,7 +8,7 @@ import { Checkbox } from '../../components/Checkbox'
 import './Term.scss'
 
 import { Loader } from '../../components/Loader'
-import { declareTermUse, cancel, singin, titleTerms } from '../../utils/strings'
+import { declareTermUse, cancel, singin, titleTerms, locationPermission } from '../../utils/strings'
 import { AcceptTerms } from '../../services/API/terms'
 import { handleCheckedDeclararion, handleClickCancelTerms } from '../../services/handles'
 
@@ -47,7 +47,7 @@ function TermsPage({ store, dispatch, history }) {
           <Title message={titleTerms} />
         </div>
         <div className="main-terms">
-          {!latitude && !longitude && <div className="alert warning">{}</div>}
+          {!latitude && !longitude && <div className="alert warning">{locationPermission}</div>}
           <Terms />
           <div style={{ margin: '1.2rem 0 0 0 ' }}>
             <Checkbox

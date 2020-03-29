@@ -1,7 +1,7 @@
 .container-received-prof {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: 80vh;
   overflow: hidden;
   padding: 40px 16px 0px;
 }
@@ -30,16 +30,17 @@ hr {
   width: 100%;
 }
 .main-received-current-prof {
-  height: 210px;
   overflow-y: scroll;
 
 }
 .footer-received-prof {
+  height: 10vh;
+  padding: 0 1rem 1rem 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: fixed;
   bottom: 0;
-  padding: 0 40px 20px 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: -webkit-fill-available;
+  width: 100%;
+  box-sizing: border-box;
 }

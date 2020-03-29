@@ -47,18 +47,27 @@ function ReceivedCurrentProfPage({ store, dispatch }) {
     if (status > 1 && receivedName && receivedCpf) {
       setFullName(receivedName)
       setCPF(receivedCpf)
-      setDelivered(status === 2 ? 'false' : 'true')
+      return setDelivered(status === 2 ? 'true' : 'false')
     }
+    setDelivered('null')
   }
 
   useEffect(() => {
     isDelivered()
   },[])
 
+  function handleOnchangeSelect(value){
+    setDelivered(value)
+    if (value === 'false') {
+      setFullName('')
+      setCPF('')
+    }
+  }
+
   const optionsList = [
     {
       value: 'null',
-      string: 'Selecione...',
+      string: 'Selecione',
     },
     {
       value: true,
@@ -70,7 +79,9 @@ function ReceivedCurrentProfPage({ store, dispatch }) {
     },
   ]
 
-  const disableButton = delivered === 'true' ? !(fullName !== '') : false
+  // limpar dados quando delivered mudar e quando o delivered for true, tem de validar se foto tem conteudo para habilitar botão
+  // dispatch para limpar store d d do o voucher atual
+  const disableButton = delivered !=='null' && (delivered === 'true' ? !(fullName !== '') : false)
 
   const handleImageFile = (event) => {
     setImage(event.target.files[0])
@@ -104,7 +115,7 @@ function ReceivedCurrentProfPage({ store, dispatch }) {
             <Select
               value={delivered}
               placeholder="Status da entrega do cartão"
-              getValue={setDelivered}
+              getValue={handleOnchangeSelect}
               optionsList={optionsList}
             />
             <div style={{ paddingBottom: '.7rem' }} />

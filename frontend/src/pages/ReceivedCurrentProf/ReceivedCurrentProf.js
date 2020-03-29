@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { useParams, useHistory } from 'react-router-dom'
-import { connect } from '../../store'
+import { connect, types } from '../../store'
 import { Title } from '../../components/Title'
 import { Items, ItemsTypes } from '../../components/Items'
 import { LogoBack } from '../../components/Logo'
@@ -44,19 +44,22 @@ function ReceivedCurrentProfPage({ store, dispatch }) {
 
   function isDelivered() {
     const { status, receivedName, receivedCpf } = donationInfo
-    if (status > 1 && receivedName && receivedCpf) {
+    if (status === 2 && receivedName && receivedCpf) {
       setFullName(receivedName)
       setCPF(receivedCpf)
       return setDelivered(status === 2 ? 'true' : 'false')
+    } else if (status === 3) {
+      setDelivered('false')
+    } else {
+      setDelivered('null')
     }
-    setDelivered('null')
   }
 
   useEffect(() => {
     isDelivered()
-  },[])
+  }, [])
 
-  function handleOnchangeSelect(value){
+  function handleOnchangeSelect(value) {
     setDelivered(value)
     if (value === 'false') {
       setFullName('')
@@ -92,6 +95,19 @@ function ReceivedCurrentProfPage({ store, dispatch }) {
     setLoading(true)
     const clearCpf = CPF.replace(/\./g, '').replace(/-/g, '')
     const data = { id, voucher, delivered, CPF: clearCpf, fullName, image }
+
+    if (delivered === 'false') {
+      const cleanDataUserDonation = { ...donationInfo }
+      cleanDataUserDonation.receivedCpf = ''
+      cleanDataUserDonation.delivered = ''
+      cleanDataUserDonation.receivedName = ''
+
+      const cleanCard = store.cardList.filter(card  => card.voucherId !== donationInfo.voucherId)
+
+      const newCardList = [...cleanCard, cleanDataUserDonation]
+
+      dispatch({ type: types.SET_CARD_LIST, payload: newCardList })
+    }
     await DonationVoucher(data, store, returnPage)
     setLoading(false)
   }

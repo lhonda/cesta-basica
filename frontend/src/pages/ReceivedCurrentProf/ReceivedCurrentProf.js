@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { useParams, useHistory } from 'react-router-dom'
 import { connect } from '../../store'
@@ -32,15 +32,34 @@ import {
 
 function ReceivedCurrentProfPage({ store, dispatch }) {
   const { id, voucher } = useParams()
-  const { goBack, push } = useHistory()
+  const { push } = useHistory()
   const [fullName, setFullName] = useState('')
   const [CPF, setCPF] = useState('')
   const [image, setImage] = useState()
   const [delivered, setDelivered] = useState(false)
 
   const [loading, setLoading] = useState(false)
+  const returnPage = () => push(`/donation/${id}/received/current`)
+  const donationInfo = store.cardList.find((item) => item.voucherId === voucher)
+
+  function isDelivered() {
+    const { status, receivedName, receivedCpf } = donationInfo
+    if (status > 1 && receivedName && receivedCpf) {
+      setFullName(receivedName)
+      setCPF(receivedCpf)
+      setDelivered(status === 2 ? 'false' : 'true')
+    }
+  }
+
+  useEffect(() => {
+    isDelivered()
+  },[])
 
   const optionsList = [
+    {
+      value: 'null',
+      string: 'Selecione...',
+    },
     {
       value: true,
       string: 'Entregue',
@@ -62,8 +81,7 @@ function ReceivedCurrentProfPage({ store, dispatch }) {
     setLoading(true)
     const clearCpf = CPF.replace(/\./g, '').replace(/-/g, '')
     const data = { id, voucher, delivered, CPF: clearCpf, fullName, image }
-    const goToDonateList = () => push(`/donation/${id}/received/current`)
-    await DonationVoucher(data, store, goToDonateList)
+    await DonationVoucher(data, store, returnPage)
     setLoading(false)
   }
 
@@ -73,7 +91,7 @@ function ReceivedCurrentProfPage({ store, dispatch }) {
       <form onSubmit={handleSubmit}>
         <div className="container-donation-received-current-prof">
           <div className="sidebar-donation-received-current-prof">
-            <ButtonIcon handleClick={goBack}>
+            <ButtonIcon handleClick={returnPage}>
               <LogoBack height={10} />
             </ButtonIcon>
             <Legend type={LegendTypes.STRONG} message={back} />

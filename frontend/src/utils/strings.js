@@ -90,7 +90,8 @@ export const lostFirstLetterCapitalized = 'Extraviado'
 export const deliveredToLeader = 'Entregue para líder'
 
 // Donation Prof screen
-export const titleDonationProf = 'Evidência de Entrega'
+export const titleDonationProf = 'Evidência de Recebimento'
+export const titleReceivedProf = 'Evidência de Entrega'
 export const descriptionDonationReceived =
   'Quando for iniciar as entregas das doações na comunidade, atualize seu status na plataforma para "Iniciar Entrega".'
 export const descriptionDonationReceivedSecondparagraph =

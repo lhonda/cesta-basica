@@ -44,8 +44,8 @@ function ReceivedCurrentProfPage({ store, dispatch }) {
 
   function isDelivered() {
     const { status, receivedName, receivedCpf } = donationInfo
-    if (status === 2 && receivedName) {
-      setFullName(receivedName)
+    if (status === 2) {
+      setFullName(receivedName || '')
       setCPF(receivedCpf || '')
       return setDelivered('true')
     } else if (status === 3) {

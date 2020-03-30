@@ -34,6 +34,7 @@ import { Loader } from '../../components/Loader'
 
 
 import { DonationStatus } from '../../utils/donationStatus'
+import * as analytics from '../../services/analytics'
 
 function ReceivedCurrentPage({ store, dispatch }) {
   const { id } = useParams()
@@ -129,7 +130,10 @@ function ReceivedCurrentPage({ store, dispatch }) {
       </div>
       <div className="footer-received-prof">
         <Button
-          handleClick={() => handleToggleModal(setShowModal)}
+          handleClick={() => {
+            analytics.endDelivery(id)
+            handleToggleModal(setShowModal)
+          }}
           size={ButtonTypes.LARGE}
           disable={cardList && !verifyIfCardsAreFilled()}
           message={legendDonationReceivedFinishButton}

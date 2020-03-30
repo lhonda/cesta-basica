@@ -25,6 +25,8 @@ import {
   legendDonationDateFinal,
 } from '../../utils/strings'
 
+import * as analytics from '../../services/analytics'
+
 function ReceivedPage({ store, dispatch }) {
   const { id } = useParams()
   const { push, location, goBack } = useHistory()
@@ -77,7 +79,10 @@ function ReceivedPage({ store, dispatch }) {
       </div>
       <div className="footer-received">
         <Button
-          handleClick={() => push(`${location.pathname}/current`)}
+          handleClick={() => {
+            analytics.startDelivery(id)
+            push(`${location.pathname}/current`)
+          }}
           size={ButtonTypes.LARGE}
           message={legendDonationReceivedButton}
         />

@@ -17,6 +17,7 @@ export async function process () {
       status: 1,
       receivedCardsS3Key: null,
       created: null,
+      scheduled: row.scheduled,
       received: null,
       lastDelivery: null,
       completed: null,

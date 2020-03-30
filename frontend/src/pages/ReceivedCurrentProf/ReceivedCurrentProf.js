@@ -22,13 +22,15 @@ import { DonationVoucher } from '../../services/API/donationList'
 import {
   confirm,
   back,
-  titleDonationProf,
+  titleReceivedProf,
   legendAddPicPersonReceiveCard,
   legendPicDonation,
   legendInputAddPic,
   legendInputFullName,
   placeholderCPF,
 } from '../../utils/strings'
+
+import * as analytics from '../../services/analytics'
 
 function ReceivedCurrentProfPage({ store, dispatch }) {
   const { id, voucher } = useParams()
@@ -110,6 +112,10 @@ function ReceivedCurrentProfPage({ store, dispatch }) {
     if (updateDonate) {
       returnPage()
     }
+
+    const deliveryStatus = optionsList.find(option => `${option.value}` === delivered)
+    analytics.receivedProf(deliveryStatus.string, voucher)
+
     setLoading(false)
   }
 
@@ -125,7 +131,7 @@ function ReceivedCurrentProfPage({ store, dispatch }) {
             <Legend type={LegendTypes.STRONG} message={back} />
           </div>
           <div className="header-donation-received-current-prof">
-            <Title message={`${titleDonationProf}`} />
+            <Title message={titleReceivedProf} />
             <Paragraph size={ParagraphTypes.MEDIUM} content="descriptionDonationProf" />
             <Items size={ItemsTypes.LARGE} align={ItemsTypes.START} title={`Cartão Nº ${voucher}`} />
             <div style={{ paddingBottom: '.7rem' }} />

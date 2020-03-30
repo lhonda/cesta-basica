@@ -60,7 +60,7 @@ function ReceivedPage({ store, dispatch }) {
           <Legend
             type={LegendTypes.STRONG}
             orientation={LegendTypes.START}
-            message={formatDate(currentDonation.received)}
+            message={formatDate(currentDonation.scheduled)}
           />
         </div>
         <div className="details-amount">

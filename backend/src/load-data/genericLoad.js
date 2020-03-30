@@ -26,10 +26,10 @@ export async function genericLoad (schema, rows, idCols, keepCols = []) {
       obj[colname] = row[colname]
       return obj
     }, {})
-    console.log(findObj)
+    // console.log(findObj)
 
     const existing = await schema.findOne(findObj)
-    console.log(existing)
+    // console.log(existing)
 
     if (!existing) {
       return schema.create(row)
@@ -40,7 +40,7 @@ export async function genericLoad (schema, rows, idCols, keepCols = []) {
         existing[colname] = row[colname]
       }
     })
-    console.log(existing)
+    // console.log(existing)
 
     return existing.save()
   }))

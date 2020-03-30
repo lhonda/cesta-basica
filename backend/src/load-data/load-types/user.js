@@ -21,7 +21,8 @@ export async function process () {
       state: row.state,
       deliveryLocation: row.deliveryLocation,
       deliveryCep: row.deliveryCep,
-      slums: row.slums
+      slums: row.slums,
+      userType: row.userType
     }
   })
 }

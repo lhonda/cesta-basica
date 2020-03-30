@@ -57,6 +57,9 @@ const schema = new Schema({
   },
   slums: {
     type: String
+  },
+  userType: {
+    type: String
   }
 })
 

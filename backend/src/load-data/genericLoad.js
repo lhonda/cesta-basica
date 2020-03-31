@@ -35,6 +35,11 @@ export async function genericLoad (schema, rows, idCols, keepCols = []) {
       return schema.create(row)
     }
 
+    /*
+    if (keepCols.length === 0) {
+      return
+    }
+
     schemaKeys.forEach(colname => {
       if (!keepCols.includes(colname)) {
         existing[colname] = row[colname]
@@ -43,5 +48,6 @@ export async function genericLoad (schema, rows, idCols, keepCols = []) {
     // console.log(existing)
 
     return existing.save()
+    */
   }))
 }

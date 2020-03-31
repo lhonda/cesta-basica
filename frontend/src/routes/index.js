@@ -16,6 +16,8 @@ import { Received } from '../pages/Received'
 import { ReceivedCurrent } from '../pages/ReceivedCurrent'
 import { ReceivedCurrentProf } from '../pages/ReceivedCurrentProf'
 
+export { nextRouteToRole } from './routeWrapper'
+
 export const Routes = () => (
   <BrowserRouter>
     <Switch>
@@ -25,6 +27,7 @@ export const Routes = () => (
       <Route path="/terms" exact component={Terms} isPrivate />
       <Route path="/checklist" exact component={Checklist} isPrivate />
       <Route path="/donation-list" exact component={DonationList} isPrivate />
+      <Route path="/donation-list/admin" exact component={DonationList} isPrivate />
       <Route path="/donation/:id/wait" exact component={Donation} isPrivate />
       <Route path="/donation/:id/wait/prof" exact component={DonationProf} isPrivate />
       <Route path="/donation/:id/received" exact component={Received} isPrivate />

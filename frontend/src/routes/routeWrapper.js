@@ -6,22 +6,29 @@ import { setToken } from '../services/API'
 
 import { checkExpiresCheckList } from '../services/storage'
 
-function RouteWrapper({ component: Component, isPrivate, store, ...rest }) {
-  const { auth } = store
-  const { path } = rest
+export const nextRouteToRole = {
+  leader: '/donation-list',
+  admin: '/donation-list/admin',
+}
 
-  const doneHealthCheck = checkExpiresCheckList()
+function RouteWrapper({ component: Component, isPrivate, store, ...rest }) {
+  const {
+    auth,
+    user: { role },
+  } = store
+  const { path } = rest
 
   if (!auth.token && isPrivate) {
     return <Redirect to="/login" />
   }
 
-  // verificar role do usuario para saber qual rota direcionar no futuro
   if (auth.token) {
     if (path === '/login' || path === '/') {
-      return <Redirect to="/donation-list" />
+      return <Redirect to={nextRouteToRole[role] || '/'} />
     }
-    if (!doneHealthCheck && path !== '/checklist') {
+
+    const doneHealthCheck = checkExpiresCheckList()
+    if (role !== 'leader' && !doneHealthCheck && path !== '/checklist') {
       return <Redirect to="/checklist" />
     }
   }

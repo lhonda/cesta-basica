@@ -81,7 +81,7 @@ export const legendDonationWaitInformation =
 export const contateNumber = '(31) 98717-2222'
 export const legendDonationWaitInformationButton =
   'Ao clicar em "Cartões recebidos" você estará confirmando que recebeu e preencherá algumas informações de detalhe da entrega.'
-export const legendDonationWaitButton = 'Cartões recebidos'
+export const legendDonationWaitButton = 'Cartões Recebidos'
 export const legendDonationReceivedButton = 'Iniciar Entrega'
 export const legendDonationReceivedFinishButton = 'Encerrar Entrega'
 export const completedFirstLetterCapitalized = 'Completo'

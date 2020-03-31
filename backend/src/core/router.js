@@ -14,10 +14,6 @@ import {
   donate,
   endDonation,
   deleteEvents,
-  createDonation,
-  listAdminDonations,
-  detailDonation,
-  listDonationHistory
 } from '../rules'
 
 export const router = Router()
@@ -66,7 +62,7 @@ router.get('/vouchers', authRequired('leader'), (req, res) =>
     }))
 
 // listar doações que foram pre carregadas no banco de dados
-router.get('/donations', authRequired(), (req, res) =>
+router.get('/donations', authRequired('leader'), (req, res) =>
   listDonations(req.auth)
     .then(data => res.status(data.donations.length === 0 ? 404 : 200).json(data))
     .catch(err => {

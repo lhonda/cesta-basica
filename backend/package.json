@@ -14,6 +14,7 @@
     "load-data-donations": "node -r esm src/load-data/load-types/donation.js",
     "load-data-vouchers": "node -r esm src/load-data/load-types/voucher.js",
     "load-data-mock": "node -r esm src/load-data/mock.js",
+    "load-data-mock2": "node -r esm src/load-data/mock2.js",
     "build": ""
   },
   "dependencies": {

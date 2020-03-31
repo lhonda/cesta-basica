@@ -13,7 +13,11 @@ import {
   receive,
   donate,
   endDonation,
-  deleteEvents
+  deleteEvents,
+  createDonation,
+  listAdminDonations,
+  detailDonation,
+  listDonationHistory
 } from '../rules'
 
 export const router = Router()
@@ -62,7 +66,7 @@ router.get('/vouchers', authRequired('leader'), (req, res) =>
     }))
 
 // listar doações que foram pre carregadas no banco de dados
-router.get('/donations', authRequired('leader'), (req, res) =>
+router.get('/donations', authRequired(), (req, res) =>
   listDonations(req.auth)
     .then(data => res.status(data.donations.length === 0 ? 404 : 200).json(data))
     .catch(err => {
@@ -100,6 +104,7 @@ router.post('/donations/:donationId/donate', authRequired('leader'), (req, res) 
     lon: req.body.lon,
     delivered: req.body.delivered,
     quantity: req.body.quantity,
+    leaderComment: req.body.leaderComment,
     receivedCpf: req.body.receivedCpf,
     receivedName: req.body.receivedName,
     donateDonationFile: req.files ? req.files.donateDonationFile : undefined

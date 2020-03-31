@@ -39,15 +39,13 @@ function DonationList({ store, dispatch, history }) {
     setLoading(false)
   }
 
-  useEffect(() => {
-    getDonationList()
-  }, [])
+  useEffect(() => getDonationList(), [])
 
   return (
     <div className="containerDonation">
       {loading && <Loader />}
       <DonationHeader />
-      {donationList ? (
+      {donationList && (
         <div className="containerDonation__list">
           {donationList.map((item) => {
             const { quantity, status, donationId } = item
@@ -62,9 +60,9 @@ function DonationList({ store, dispatch, history }) {
             )
           })}
         </div>
-      ) : (
-          <DonationIsEmpty />
-        )}
+      )}
+
+      {donationList && donationList.length === 0 && <DonationIsEmpty />}
       <BottomMenu />
     </div>
   )

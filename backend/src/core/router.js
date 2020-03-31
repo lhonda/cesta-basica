@@ -55,7 +55,7 @@ router.get('/vouchers', authRequired('leader'), (req, res) =>
     login: req.auth.login,
     donationId: req.query.donationId
   })
-    .then(data => res.status(data.length === 0 ? 404 : 200).json(data))
+    .then(data => res.status(200).json(data))
     .catch(err => {
       console.log(err)
       res.status(500).json({ message: err.message })
@@ -64,7 +64,7 @@ router.get('/vouchers', authRequired('leader'), (req, res) =>
 // listar doações que foram pre carregadas no banco de dados
 router.get('/donations', authRequired('leader'), (req, res) =>
   listDonations(req.auth)
-    .then(data => res.status(data.donations.length === 0 ? 404 : 200).json(data))
+    .then(data => res.status(200).json(data))
     .catch(err => {
       console.log(err)
       res.status(500).json({ message: err.message })

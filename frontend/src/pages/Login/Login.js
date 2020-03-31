@@ -12,7 +12,6 @@ import {
   placeholderCPF,
   typeYourPassword,
   errorMessageInvalidLogin,
-  errorMessageInvalidPassword,
   textButtonForLogin,
 } from '../../utils/strings'
 
@@ -57,7 +56,6 @@ function Login({ dispatch }) {
             value={login}
             handleOnChange={setLogin}
             withError={error}
-            messageError={errorMessageInvalidLogin}
           />
 
           <div style={{ marginTop: '2rem' }} />
@@ -69,7 +67,7 @@ function Login({ dispatch }) {
             value={password}
             handleOnChange={setPassword}
             withError={error}
-            messageError={errorMessageInvalidPassword}
+            messageError={errorMessageInvalidLogin}
           />
 
           <div style={{ marginTop: '2.3rem' }} />

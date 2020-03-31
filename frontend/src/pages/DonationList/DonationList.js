@@ -22,8 +22,7 @@ function DonationList({ store, dispatch, history }) {
   }, [])
 
   function getGeoLocation() {
-    navigator.geolocation.getCurrentPosition(position => {
-
+    navigator.geolocation.getCurrentPosition((position) => {
       const userLocation = {
         lat: position.coords.latitude,
         lon: position.coords.longitude,
@@ -51,9 +50,15 @@ function DonationList({ store, dispatch, history }) {
       {donationList ? (
         <div className="containerDonation__list">
           {donationList.map((item) => {
-            const { donor, quantity, status, donationId, leaderLogin, receivedDate } = item
+            const { quantity, status, donationId } = item
             return (
-              <DonationItem title={donor} quantity={quantity} key={donationId} stateDonation={status} donationId={donationId} />
+              <DonationItem
+                title={donationId}
+                quantity={quantity}
+                key={donationId}
+                stateDonation={status}
+                donationId={donationId}
+              />
             )
           })}
         </div>

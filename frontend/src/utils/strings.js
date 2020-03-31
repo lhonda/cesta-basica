@@ -9,8 +9,7 @@ export const homeSeparatedLine = 'FAÇA A SUA PARTE!'
 export const titleLoginScreen = 'Entre na plataforma'
 export const placeholderCPF = 'Digite seu CPF'
 export const typeYourPassword = 'Digite sua senha'
-export const errorMessageInvalidLogin = 'Cpf não cadastrado. Corrija o número do CPF.'
-export const errorMessageInvalidPassword = 'Senha incorreta. Tente novamente.'
+export const errorMessageInvalidLogin = 'CPF ou Senha incorretos. Tente novamente.'
 export const textButtonForLogin = 'Entrar'
 
 // Terms screen

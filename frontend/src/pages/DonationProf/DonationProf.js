@@ -68,7 +68,6 @@ function DonationPage({ store }) {
         <Title message={titleDonationProf} />
         <Paragraph size={ParagraphTypes.LIGHT} content="descriptionDonationProf" />
         <Input
-          ignoreValidate
           inputType={inputTypes.NUMBER}
           size={inputTypes.SIZE_LARGE}
           handleOnChange={setNumberDonation}

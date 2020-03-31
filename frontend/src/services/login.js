@@ -1,6 +1,6 @@
 import { Api } from './API'
 import { types } from '../store'
-import { nextRouteToRole } from '../routes'
+import { nextRouteToRole } from '../routes/routeWrapper'
 
 const route = '/sign-in'
 

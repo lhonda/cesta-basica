@@ -1,3 +1,3 @@
-import DonationList from './DonationList'
+import { DonationListLeader } from './DonationListLeader'
 
-export { DonationList }
+export { DonationListLeader }

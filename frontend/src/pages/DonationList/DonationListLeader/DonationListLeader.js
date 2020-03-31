@@ -1,19 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import './DonationList.scss'
-import { connect, types } from '../../store'
+import './DonationListLeader.scss'
+import { connect, types } from '../../../store'
 
-import { Loader } from '../../components/Loader'
+import { Loader } from '../../../components/Loader'
 
-import { DonationHeader } from './DonationHeader'
-import { DonationIsEmpty } from './DonationIsEmpty'
-import { DonationItem } from './DonationItem'
-import { BottomMenu } from './BottomMenu'
+import { DonationHeader, DonationIsEmpty, DonationItem, BottomMenu } from '../CommonComponents'
 
-import { DonationsList } from '../../services/API/donationList'
-import { CommitmentCheck } from '../../services/API/terms'
+import { DonationsList } from '../../../services/API/donationList'
+import { CommitmentCheck } from '../../../services/API/terms'
 
-function DonationList({ store, dispatch, history }) {
+function DonationListLeader({ store, dispatch, history }) {
   const [loading, setLoading] = useState()
   const { donationList } = store
 
@@ -62,14 +59,14 @@ function DonationList({ store, dispatch, history }) {
         </div>
       )}
 
-      {donationList && donationList.length === 0 && <DonationIsEmpty />}
+      {((donationList && donationList.length === 0) || !donationList) && <DonationIsEmpty />}
       <BottomMenu />
     </div>
   )
 }
 
-DonationList.propTypes = {
+DonationListLeader.propTypes = {
   store: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
 }
-export default connect(DonationList)
+export default connect(DonationListLeader)

@@ -15,6 +15,8 @@
     "load-data-vouchers": "node -r esm src/load-data/load-types/voucher.js",
     "load-data-mock-leader": "node -r esm src/load-data/mock-leader.js",
     "load-data-mock-leader2": "node -r esm src/load-data/mock-leader2.js",
+    "load-data-mock-leader-only": "node -r esm src/load-data/mock-leader-only.js",
+    "load-data-mock-leader-plus-donation-no-voucher": "node -r esm src/load-data/mock-leader-plus-donation-no-voucher.js",
     "load-data-mock-admin": "node -r esm src/load-data/mock-admin.js",
     "data-sanitize-missing-leading-zeros": "node -r esm src/load-data/sanitize-missing-leading-zeros.js",
     "data-sanitize-trailling-spaces": "node -r esm src/load-data/sanitize-trailling-spaces.js",

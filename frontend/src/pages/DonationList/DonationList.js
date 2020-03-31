@@ -39,7 +39,9 @@ function DonationList({ store, dispatch, history }) {
     setLoading(false)
   }
 
-  useEffect(() => getDonationList(), [])
+  useEffect(() => {
+    getDonationList()
+  }, [])
 
   return (
     <div className="containerDonation">

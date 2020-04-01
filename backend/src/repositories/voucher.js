@@ -15,6 +15,9 @@ const voucherSchema = new Schema({
     type: String,
     required: [true, 'leaderLogin is required']
   },
+  leaderComment: {
+    type: String
+  },
   status: {
     type: Number,
     enum: [1, 2, 3],

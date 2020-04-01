@@ -17,12 +17,7 @@ function Input({
   isRequired,
   withError,
   messageError,
-  ignoreValidate,
 }) {
-  // eslint-disable-next-line eqeqeq
-  const isValid = value.length > 0 && (value.length >= minLength || value.length == maxLength)
-  const currentStyleInput = isValid ? 'customInput--success' : ''
-
   function formatValue(inputValue) {
     switch (inputType) {
       case inputTypes.CPF:
@@ -36,41 +31,28 @@ function Input({
 
   return (
     <>
-      <input
-        className={`customInput ${currentStyleInput} ${size} ${withError && 'customInput--error'}`}
-        maxLength={maxLength}
-        minLength={minLength}
-        placeholder={placeholder}
-        title={placeholder}
-        type={inputType}
-        value={formatValue(value)}
-        onChange={(e) => handleOnChange(e.target.value)}
-        required={isRequired}
-      />
-
-      {withError && !ignoreValidate ? (
-        <span style={{ zIndex: '1000' }}>
+      <div className="containerInput">
+        <input
+          className={`customInput ${size} ${withError ? 'customInput--error' : ''}`}
+          maxLength={maxLength}
+          minLength={minLength}
+          placeholder={placeholder}
+          title={placeholder}
+          type={inputType}
+          value={formatValue(value)}
+          onChange={(e) => handleOnChange(e.target.value)}
+          required={isRequired}
+        />
+        {withError && (
           <img
             className="customInput__icon"
             src={icWarning}
             alt="icon for information warning or success"
             height={18}
           />
-          {withError && <span className="customInput__messageError">{messageError}</span>}
-        </span>
-      ) : (
-        isValid &&
-        !ignoreValidate && (
-          <span>
-            <img
-              className="customInput__icon"
-              src={icSuccess}
-              alt="icon for information warning or success"
-              height={18}
-            />
-          </span>
-        )
-      )}
+        )}
+      </div>
+      {withError && messageError && <span className="messageError">{messageError}</span>}
     </>
   )
 }
@@ -84,7 +66,6 @@ Input.propTypes = {
   handleOnChange: PropTypes.func.isRequired,
   isRequired: PropTypes.bool,
   withError: PropTypes.bool,
-  ignoreValidate: PropTypes.bool,
   messageError: PropTypes.string,
   size: PropTypes.string,
 }
@@ -96,9 +77,8 @@ Input.defaultProps = {
   minLength: '2',
   isRequired: true,
   withError: false,
-  ignoreValidate: false,
   size: '',
-  messageError: 'Senha incorreta. Tente novamente.',
+  messageError: '',
 }
 
 export default Input

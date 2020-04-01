@@ -9,11 +9,11 @@ import {
   checkCommitment,
   checklist,
   listVouchers,
-  listDonations,
+  findDonationByUser,
   receive,
   donate,
   endDonation,
-  deleteEvents
+  deleteEvents,
 } from '../rules'
 
 export const router = Router()
@@ -55,16 +55,16 @@ router.get('/vouchers', authRequired('leader'), (req, res) =>
     login: req.auth.login,
     donationId: req.query.donationId
   })
-    .then(data => res.status(data.length === 0 ? 404 : 200).json(data))
+    .then(data => res.status(200).json(data))
     .catch(err => {
       console.log(err)
       res.status(500).json({ message: err.message })
     }))
 
 // listar doações que foram pre carregadas no banco de dados
-router.get('/donations', authRequired('leader'), (req, res) =>
-  listDonations(req.auth)
-    .then(data => res.status(data.donations.length === 0 ? 404 : 200).json(data))
+router.get('/donations', authRequired(), (req, res) =>
+  findDonationByUser(req.auth)
+    .then(data => res.status(200).json(data))
     .catch(err => {
       console.log(err)
       res.status(500).json({ message: err.message })
@@ -100,6 +100,7 @@ router.post('/donations/:donationId/donate', authRequired('leader'), (req, res) 
     lon: req.body.lon,
     delivered: req.body.delivered,
     quantity: req.body.quantity,
+    leaderComment: req.body.leaderComment,
     receivedCpf: req.body.receivedCpf,
     receivedName: req.body.receivedName,
     donateDonationFile: req.files ? req.files.donateDonationFile : undefined

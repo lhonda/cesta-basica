@@ -9,7 +9,7 @@ import {
   checkCommitment,
   checklist,
   listVouchers,
-  listDonations,
+  findDonationByUser,
   receive,
   donate,
   endDonation,
@@ -62,8 +62,8 @@ router.get('/vouchers', authRequired('leader'), (req, res) =>
     }))
 
 // listar doações que foram pre carregadas no banco de dados
-router.get('/donations', authRequired('leader'), (req, res) =>
-  listDonations(req.auth)
+router.get('/donations', authRequired(), (req, res) =>
+  findDonationByUser(req.auth)
     .then(data => res.status(200).json(data))
     .catch(err => {
       console.log(err)

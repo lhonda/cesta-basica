@@ -44,13 +44,13 @@ function ReceivedCurrentPage({ store, dispatch }) {
   const [loading, setloading] = useState(false)
   const { push } = useHistory()
 
-  const url = '/donation-list'
+  const path = '/donation-list'
 
   function endDonations() {
-    EndDonation(id, () => push(url))
+    EndDonation(id, () => push(path))
   }
 
-  const returnPage = () => push(url)
+  const returnPage = () => push(path)
 
   async function retrieveCards() {
     await CardList(dispatch, id)

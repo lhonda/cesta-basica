@@ -42,16 +42,16 @@ function ReceivedCurrentPage({ store, dispatch }) {
   const [showModal, setShowModal] = useState(false)
   const [currentDonation, setCurrentDonation] = useState({})
   const [loading, setloading] = useState(false)
-  const { push } = useHistory()
+  const { push, goBack } = useHistory()
+  const donation = findDonation(store, id)
+  const { donationId } = donation
 
-  const url = '/donation-list'
+  console.log(history);
+  
 
   function endDonations() {
-    EndDonation(id, () => push(url))
+    EndDonation(id, () => push('/donation-list'))
   }
-
-  const returnPage = () => push(url)
-
   async function retrieveCards() {
     await CardList(dispatch, id)
   }
@@ -82,7 +82,7 @@ function ReceivedCurrentPage({ store, dispatch }) {
       <div className="container-received-prof">
         <Modal isOpenModal={showModal} actionExit={endDonations} title={completeDeliveryTitle} />
         <div className="sidebar-donation-prof">
-          <ButtonIcon handleClick={returnPage}>
+          <ButtonIcon handleClick={goBack}>
             <LogoBack height="10" />
           </ButtonIcon>
           <Legend type={LegendTypes.STRONG} message={back} />

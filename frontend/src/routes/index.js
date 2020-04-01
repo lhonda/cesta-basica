@@ -9,7 +9,7 @@ import { Register } from '../pages/Register'
 import { Terms } from '../pages/Terms'
 import { Checklist } from '../pages/Checklist'
 
-import { DonationListLeader } from '../pages/DonationList'
+import { DonationListLeader, DonationListAdmin } from '../pages/DonationList'
 import { Donation } from '../pages/Donation'
 import { DonationProf } from '../pages/DonationProf'
 import { Received } from '../pages/Received'
@@ -25,12 +25,13 @@ export const Routes = () => (
       <Route path="/terms" exact component={Terms} isPrivate />
       <Route path="/checklist" exact component={Checklist} isPrivate />
       <Route path="/donation-list" exact component={DonationListLeader} isPrivate />
-      <Route path="/donation-list/admin" exact component={DonationListLeader} isPrivate />
       <Route path="/donation/:id/wait" exact component={Donation} isPrivate />
       <Route path="/donation/:id/wait/prof" exact component={DonationProf} isPrivate />
       <Route path="/donation/:id/received" exact component={Received} isPrivate />
       <Route path="/donation/:id/received/current" exact component={ReceivedCurrent} isPrivate />
       <Route path="/donation/:id/received/current/:voucher/prof" exact component={ReceivedCurrentProf} isPrivate />
+
+      <Route path="/donation-list/admin" exact component={DonationListAdmin} isPrivate />
     </Switch>
   </BrowserRouter>
 )

@@ -14,10 +14,6 @@ function DonationListLeader({ store, dispatch, history }) {
   const [loading, setLoading] = useState()
   const { donationList } = store
 
-  useEffect(() => {
-    getGeoLocation()
-  }, [])
-
   function getGeoLocation() {
     navigator.geolocation.getCurrentPosition((position) => {
       const userLocation = {
@@ -36,7 +32,10 @@ function DonationListLeader({ store, dispatch, history }) {
     setLoading(false)
   }
 
-  useEffect(() => getDonationList(), [])
+  useEffect(() => {
+    getGeoLocation()
+    getDonationList()
+  }, [])
 
   return (
     <div className="containerDonation">

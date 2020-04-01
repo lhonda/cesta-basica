@@ -6,6 +6,9 @@ import { connect, types } from '../../../store'
 import { Loader } from '../../../components/Loader'
 
 import { DonationHeader, DonationIsEmpty, DonationItem, BottomMenu } from '../CommonComponents'
+import { Button, ButtonTypes } from '../../../components/Button'
+
+import { registerNewDonation } from '../../../utils/strings'
 
 function DonationListAdmin({ store, dispatch, history }) {
   const [loading, setLoading] = useState()
@@ -19,7 +22,19 @@ function DonationListAdmin({ store, dispatch, history }) {
       {loading && <Loader />}
       <div className="containerDonation">
         <DonationHeader />
-        <DonationIsEmpty />
+
+        <div className="containerDonation__list">
+          <DonationIsEmpty whichMessage="admin" />
+        </div>
+
+        <div className="containerDonation__button">
+          <Button
+            size={ButtonTypes.LARGE}
+            typeButton="button"
+            message={registerNewDonation}
+            handleClick={() => alert('oi')}
+          />
+        </div>
         <BottomMenu />
       </div>
     </>

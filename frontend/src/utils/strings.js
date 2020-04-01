@@ -62,7 +62,7 @@ export const LegendChecklist = '*O vírus também é transmitido por pessoas ass
 export const linkChecklist = 'Estou com sintomas, o que fazer?'
 
 // Donation list
-export const donationListVoidText = 'Você está sem pedidos \nde doações no momento'
+export const donationListVoidText = 'Você está sem pedidos <br/>de doações no momento.'
 export const donationTitlePage = 'Lista de doações'
 export const exitText = 'Sair'
 
@@ -118,6 +118,10 @@ export const completeDeliveryTitle = 'Entrega de doação completa!'
 export const completeDeliveryThanks =
   'Líder, somos um time de heróis e heroínas! Obrigado por continuar agindo e salvando vidas diante das adversidades e do caos! Continue se cuidando para poder cuidar do próximo! Tamojunto! '
 export const completeDeliveryInformationContate = 'Caso tenha ocorrido algum problema na entrega, entre em contato com:'
+
+// Donation list admin
+export const messageIfListIsVoid = 'Você ainda não <br/>cadastrou uma entrega'
+export const registerNewDonation = 'Cadastrar Entrega'
 
 // Generic
 export const WORD_NO = 'Não'

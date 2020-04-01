@@ -9,6 +9,9 @@ import {
   checkCommitment,
   checklist,
   listVouchers,
+  filterDonation,
+  filterLeader,
+  filterSite,
   findDonationByUser,
   receive,
   donate,
@@ -47,6 +50,33 @@ router.get('/vouchers', authRequired('leader'), (req, res, next) =>
   })
     .then(data => res.status(200).json(data))
     .catch(next))
+
+// listar doações que foram pre carregadas no banco de dados
+router.get('/filter/donations', authRequired('leader'), (req, res) =>
+  filterDonation(req.query.donationId)
+    .then(data => res.status(200).json(data))
+    .catch(err => {
+      console.log(err)
+      res.status(500).json({ message: err.message })
+    }))
+
+// listar doações que foram pre carregadas no banco de dados
+router.get('/filter/leader', authRequired('leader'), (req, res) =>
+  filterLeader(req.query.name)
+    .then(data => res.status(200).json(data))
+    .catch(err => {
+      console.log(err)
+      res.status(500).json({ message: err.message })
+    }))
+
+// listar doações que foram pre carregadas no banco de dados
+router.get('/filter/site', authRequired('leader'), (req, res) =>
+  filterSite(req.query.name)
+    .then(data => res.status(200).json(data))
+    .catch(err => {
+      console.log(err)
+      res.status(500).json({ message: err.message })
+    }))
 
 // listar doações que foram pre carregadas no banco de dados
 router.get('/donations', authRequired(), (req, res, next) =>

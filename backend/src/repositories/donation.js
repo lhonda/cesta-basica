@@ -5,20 +5,25 @@ export const donationSchema = new Schema({
   donationId: {
     type: String,
     unique: true,
+    trim: true,
     required: [true, 'DonationId is required']
   },
   leaderLogin: {
     type: String,
+    trim: true,
     required: [true, 'leaderLogin is required']
   },
   site: {
-    type: String
+    type: String,
+    trim: true
   },
   city: {
-    type: String
+    type: String,
+    trim: true
   },
   state: {
-    type: String
+    type: String,
+    trim: true
   },
   quantity: {
     type: Number,
@@ -28,7 +33,8 @@ export const donationSchema = new Schema({
     type: Number
   },
   donor: {
-    type: String
+    type: String,
+    trim: true
   },
   status: {
     type: Number,

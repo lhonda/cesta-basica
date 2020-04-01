@@ -65,14 +65,16 @@ function DonationList({ store, dispatch, history }) {
       )}
 
       {((donationList && donationList.length === 0) || !donationList) && <DonationIsEmpty />}
-      <div className="containerDonation__button">
-        <Button
-          size={ButtonTypes.LARGE}
-          typeButton="button"
-          message={registerNewDonation}
-          handleClick={() => alert('oi')}
-        />
-      </div>
+      {role === 'admin' && (
+        <div className="containerDonation__button">
+          <Button
+            size={ButtonTypes.LARGE}
+            typeButton="button"
+            message={registerNewDonation}
+            handleClick={() => alert('oi')}
+          />
+        </div>
+      )}
       <BottomMenu />
     </div>
   )

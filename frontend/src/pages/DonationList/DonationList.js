@@ -58,20 +58,21 @@ function DonationList({ store, dispatch, history }) {
                 key={donationId}
                 stateDonation={status}
                 donationId={donationId}
+                userRole={role}
               />
             )
           })}
         </div>
       )}
 
-      {((donationList && donationList.length === 0) || !donationList) && <DonationIsEmpty />}
+      {((donationList && donationList.length === 0) || !donationList) && <DonationIsEmpty whichMessage={role} />}
       {role === 'admin' && (
         <div className="containerDonation__button">
           <Button
             size={ButtonTypes.LARGE}
             typeButton="button"
             message={registerNewDonation}
-            handleClick={() => alert('oi')}
+            handleClick={() => alert('register')}
           />
         </div>
       )}

@@ -9,7 +9,7 @@ import { Register } from '../pages/Register'
 import { Terms } from '../pages/Terms'
 import { Checklist } from '../pages/Checklist'
 
-import { DonationList, DonationListAdmin } from '../pages/DonationList'
+import { DonationList } from '../pages/DonationList'
 import { Donation } from '../pages/Donation'
 import { DonationProf } from '../pages/DonationProf'
 import { Received } from '../pages/Received'

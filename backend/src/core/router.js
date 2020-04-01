@@ -65,7 +65,7 @@ router.get('/vouchers', authRequired('leader'), (req, res) =>
     }))
 
 // listar doações que foram pre carregadas no banco de dados
-router.get('/filter/bordero', authRequired('leader'), (req, res) =>
+router.get('/filter/donations', authRequired('leader'), (req, res) =>
   filterDonation(req.query.donationId)
     .then(data => res.status(200).json(data))
     .catch(err => {

@@ -1,18 +1,24 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import './DonationListLeader.scss'
-import { connect, types } from '../../../store'
+import './DonationList.scss'
+import { connect, types } from '../../store'
 
-import { Loader } from '../../../components/Loader'
+import { Loader } from '../../components/Loader'
 
-import { DonationHeader, DonationIsEmpty, DonationItem, BottomMenu } from '../CommonComponents'
+import { DonationHeader, DonationIsEmpty, DonationItem, BottomMenu } from './CommonComponents'
+import { Button, ButtonTypes } from '../../components/Button'
 
-import { DonationsList } from '../../../services/API/donationList'
-import { CommitmentCheck } from '../../../services/API/terms'
+import { DonationsList } from '../../services/API/donationList'
+import { CommitmentCheck } from '../../services/API/terms'
 
-function DonationListLeader({ store, dispatch, history }) {
+import { registerNewDonation } from '../../utils/strings'
+
+function DonationList({ store, dispatch, history }) {
   const [loading, setLoading] = useState()
-  const { donationList } = store
+  const {
+    donationList,
+    user: { role },
+  } = store
 
   function getGeoLocation() {
     navigator.geolocation.getCurrentPosition((position) => {
@@ -42,7 +48,7 @@ function DonationListLeader({ store, dispatch, history }) {
       {loading && <Loader />}
       <DonationHeader />
       {donationList && (
-        <div className="containerDonation__list">
+        <div className={`containerDonation__list containerDonation__list--${role}`}>
           {donationList.map((item) => {
             const { quantity, status, donationId } = item
             return (
@@ -59,13 +65,21 @@ function DonationListLeader({ store, dispatch, history }) {
       )}
 
       {((donationList && donationList.length === 0) || !donationList) && <DonationIsEmpty />}
+      <div className="containerDonation__button">
+        <Button
+          size={ButtonTypes.LARGE}
+          typeButton="button"
+          message={registerNewDonation}
+          handleClick={() => alert('oi')}
+        />
+      </div>
       <BottomMenu />
     </div>
   )
 }
 
-DonationListLeader.propTypes = {
+DonationList.propTypes = {
   store: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
 }
-export default connect(DonationListLeader)
+export default connect(DonationList)

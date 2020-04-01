@@ -1,12 +1,17 @@
 .containerDonation {
   box-sizing: border-box;
   overflow: hidden;
-  height: 100vh;
   &__list {
-    padding: 1rem 1rem 0 1rem;
-    // height: calc(100vh - 12.8rem - 2.4rem);
-    overflow-y: scroll;
+    padding: 1rem 1rem 1.2rem 1rem;
+
+    &--leader {
+      height: calc(100vh - 12.8rem);
+    }
+    &--admin {
+      height: calc(100vh - 12.8rem - 2.4rem);
+    }
   }
+
   &__button {
     position: relative;
     top: 0.4rem;

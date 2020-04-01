@@ -6,11 +6,6 @@ import { setToken } from '../services/API'
 
 import { checkExpiresCheckList } from '../services/storage'
 
-export const nextRouteToRole = {
-  leader: '/donation-list',
-  admin: '/donation-list/admin',
-}
-
 function RouteWrapper({ component: Component, isPrivate, store, ...rest }) {
   const {
     auth,
@@ -24,11 +19,11 @@ function RouteWrapper({ component: Component, isPrivate, store, ...rest }) {
 
   if (auth.token) {
     if (path === '/login' || path === '/') {
-      return <Redirect to={nextRouteToRole[role] || '/'} />
+      return <Redirect to="/donation-list" />
     }
 
     const doneHealthCheck = checkExpiresCheckList()
-    if (role !== 'leader' && !doneHealthCheck && path !== '/checklist') {
+    if (role === 'leader' && !doneHealthCheck && path !== '/checklist') {
       return <Redirect to="/checklist" />
     }
   }

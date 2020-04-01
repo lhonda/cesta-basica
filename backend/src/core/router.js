@@ -52,31 +52,22 @@ router.get('/vouchers', authRequired('leader'), (req, res, next) =>
     .catch(next))
 
 // listar doações que foram pre carregadas no banco de dados
-router.get('/filter/donations', authRequired('leader'), (req, res) =>
+router.get('/filter/donations', authRequired('leader'), (req, res, next) =>
   filterDonation(req.query.donationId)
     .then(data => res.status(200).json(data))
-    .catch(err => {
-      console.log(err)
-      res.status(500).json({ message: err.message })
-    }))
+    .catch(next))
 
 // listar doações que foram pre carregadas no banco de dados
-router.get('/filter/leader', authRequired('leader'), (req, res) =>
+router.get('/filter/leader', authRequired('leader'), (req, res, next) =>
   filterLeader(req.query.name)
     .then(data => res.status(200).json(data))
-    .catch(err => {
-      console.log(err)
-      res.status(500).json({ message: err.message })
-    }))
+    .catch(next))
 
 // listar doações que foram pre carregadas no banco de dados
-router.get('/filter/site', authRequired('leader'), (req, res) =>
+router.get('/filter/site', authRequired('leader'), (req, res, next) =>
   filterSite(req.query.name)
     .then(data => res.status(200).json(data))
-    .catch(err => {
-      console.log(err)
-      res.status(500).json({ message: err.message })
-    }))
+    .catch(next))
 
 // listar doações que foram pre carregadas no banco de dados
 router.get('/donations', authRequired(), (req, res, next) =>

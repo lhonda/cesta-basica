@@ -32,7 +32,6 @@ import { findDonation } from '../../utils/findDonationByid'
 import { formatDate } from '../../utils/formatDateToptbr'
 import { Loader } from '../../components/Loader'
 
-
 import { DonationStatus } from '../../utils/donationStatus'
 import * as analytics from '../../services/analytics'
 
@@ -43,25 +42,23 @@ function ReceivedCurrentPage({ store, dispatch }) {
   const [showModal, setShowModal] = useState(false)
   const [currentDonation, setCurrentDonation] = useState({})
   const [loading, setloading] = useState(false)
+  const { push, goBack } = useHistory()
 
-  const { goBack, push } = useHistory()
   function endDonations() {
     EndDonation(id, () => push('/donation-list'))
   }
-
   async function retrieveCards() {
     await CardList(dispatch, id)
   }
 
   function verifyIfCardsAreFilled() {
     const filteredCards = cardList.filter(
-      (card) =>
-        (card.status === DonationStatus.ENTREGUE.id) ||
-        card.status === DonationStatus.NAO_ENTREGUE.id
+      (card) => card.status === DonationStatus.ENTREGUE.id || card.status === DonationStatus.NAO_ENTREGUE.id
     )
     return cardList.length === filteredCards.length
   }
   const handleClickItem = (voucher) => history.push(`${history.location.pathname}/${voucher}/prof`)
+
   useEffect(() => {
     setloading(true)
     dispatch({ type: types.CLEAN_CARD_LIST })

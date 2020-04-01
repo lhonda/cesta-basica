@@ -48,12 +48,12 @@ function DonationPage({ store }) {
 
   const handleClickButton = async () => {
     setLoading(true)
-
     await Upload({ ...userLocation, donationId, file: image, receivedQuantity: numberDonation })
     analytics.donationProf(donationId, numberDonation)
     history.push(`/donation/${donationId}/received`)
     setLoading(false)
   }
+
   return (
     <div className="container-donation-prof">
       {loading && <Loader />}

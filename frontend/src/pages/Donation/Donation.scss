@@ -18,17 +18,20 @@
   height: 25%;
   display: flex;
   justify-content: space-between;
+  
   .details-date {
     width: 100px;
   }
   .details-amount {
     width: 80px;
+    margin-bottom: 35px;
   }
 
   h5 {
     margin-top: 0;
   }
 }
+
 hr {
   border: .5px solid #EFEFEF;
   width: 100%;

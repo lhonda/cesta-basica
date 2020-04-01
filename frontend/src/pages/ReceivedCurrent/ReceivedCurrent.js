@@ -43,11 +43,6 @@ function ReceivedCurrentPage({ store, dispatch }) {
   const [currentDonation, setCurrentDonation] = useState({})
   const [loading, setloading] = useState(false)
   const { push, goBack } = useHistory()
-  const donation = findDonation(store, id)
-  const { donationId } = donation
-
-  console.log(history);
-  
 
   function endDonations() {
     EndDonation(id, () => push('/donation-list'))

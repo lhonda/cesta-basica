@@ -37,7 +37,6 @@ function ReceivedCurrentProfPage({ store, dispatch }) {
   const [CPF, setCPF] = useState('')
   const [image, setImage] = useState()
   const [delivered, setDelivered] = useState(false)
-
   const [loading, setLoading] = useState(false)
   const donationInfo = store.cardList.find((item) => item.voucherId === voucher)
 

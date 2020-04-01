@@ -13,7 +13,7 @@ import {
   receive,
   donate,
   endDonation,
-  deleteEvents
+  deleteEvents,
 } from '../rules'
 
 export const router = Router()
@@ -100,6 +100,7 @@ router.post('/donations/:donationId/donate', authRequired('leader'), (req, res) 
     lon: req.body.lon,
     delivered: req.body.delivered,
     quantity: req.body.quantity,
+    leaderComment: req.body.leaderComment,
     receivedCpf: req.body.receivedCpf,
     receivedName: req.body.receivedName,
     donateDonationFile: req.files ? req.files.donateDonationFile : undefined

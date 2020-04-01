@@ -10,6 +10,7 @@ export async function donate ({
   delivered,
   receivedCpf,
   receivedName,
+  leaderComment,
   donateDonationFile
 }) {
   console.log(arguments)
@@ -48,7 +49,7 @@ export async function donate ({
   const voucher = await Voucher.findOne({ voucherId })
 
   if (!voucher) {
-    throw new Error(`Could not find the Voucher with id: ${donationId}`)
+    throw new Error(`Could not find the Voucher with id: ${voucherId}`)
   }
 
   if (donation.leaderLogin !== login) {
@@ -63,7 +64,11 @@ export async function donate ({
    * Not delivered
    */
   if (delivered === false || delivered === 'false') {
+    if (!leaderComment) {
+      throw new Error('leaderComment is required')
+    }
     voucher.status = 3
+    voucher.leaderComment = leaderComment
     voucher.delivered = timestamp
     voucher.point = {
       type: 'Point',

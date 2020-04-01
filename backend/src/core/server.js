@@ -3,7 +3,7 @@ import fileUpload from 'express-fileupload'
 import helmet from 'helmet'
 import cors from 'cors'
 import morgan from 'morgan'
-import { databaseConnector } from '../middlewares'
+import { databaseConnector, genericErrorHanlder } from '../middlewares'
 import { router } from './router'
 
 export const app = express()
@@ -16,6 +16,7 @@ app.use(helmet())
 app.use(cors())
 app.use(databaseConnector)
 app.use(router)
+app.use(genericErrorHanlder)
 
 export const start = () =>
   new Promise(resolve => app.listen(process.env.PORT, () => resolve(app)))

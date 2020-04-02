@@ -4,10 +4,10 @@ import './Button.scss'
 
 import { ButtonTypes } from './ButtonTypes'
 
-function Button({ type, size, message, disable, handleClick }) {
+function Button({ type, size, message, disable, handleClick, typeButton }) {
   return (
     <button
-      type="submit"
+      type={typeButton}
       tabIndex={0}
       aria-label={message}
       disabled={disable}
@@ -25,6 +25,7 @@ Button.propTypes = {
   disable: PropTypes.bool,
   handleClick: PropTypes.func,
   size: PropTypes.string,
+  typeButton: PropTypes.string,
 }
 
 Button.defaultProps = {
@@ -32,6 +33,7 @@ Button.defaultProps = {
   size: ButtonTypes.MEDIUM,
   message: '',
   disable: false,
-  handleClick: () => {},
+  handleClick: () => { },
+  typeButton: 'submit',
 }
 export default Button

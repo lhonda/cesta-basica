@@ -1,7 +1,7 @@
 import React from 'react'
 import './BottomMenu.scss'
 
-import { icBasket } from '../../../assets/icons'
+import { icBasket } from '../../../../assets/icons'
 
 function BottomMenu() {
   return (

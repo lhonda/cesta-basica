@@ -6,7 +6,7 @@ export async function updateDonation (
   siteId,
   donationId,
   quantity,
-  sendDate
+  sentDate
 ) {
   console.log(donationId)
   if (!leaderLogin) {
@@ -25,8 +25,8 @@ export async function updateDonation (
     throw new Error('quantity is required')
   }
 
-  if (!sendDate) {
-    throw new Error('sendDate is required')
+  if (!sentDate) {
+    throw new Error('sentDate is required')
   }
 
   const donation = await Donation.findOne({ donationId })
@@ -43,7 +43,7 @@ export async function updateDonation (
   donation.quantity = quantity
   donation.status = 1
   donation.created = timestamp
-  donation.scheduled = sendDate
+  donation.sentDate = sentDate
 
   await donation.updateOne(donation)
 }

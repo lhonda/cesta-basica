@@ -196,7 +196,7 @@ router.patch('/donations', authRequired('admin'), (req, res) =>
     req.body.siteId,
     req.body.donationId,
     req.body.quantity,
-    req.body.sendDate
+    req.body.sentDate
   )
     .then(() => res.status(204).end())
     .catch(err => {

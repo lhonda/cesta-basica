@@ -47,6 +47,7 @@ export const donationSchema = new Schema({
   },
   created: { type: Date },
   scheduled: { type: Date },
+  sentDate: { type: Date },
   received: { type: Date },
   lastDelivery: { type: Date },
   completed: { type: Date },

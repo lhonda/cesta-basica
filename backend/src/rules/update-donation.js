@@ -1,19 +1,20 @@
-import { Donation, Site, User } from '../repositories'
+import { Donation } from '../repositories'
 
 export async function updateDonation (
-  { login },
-  leaderName,
-  siteName,
+  login,
+  leaderLogin,
+  siteId,
   donationId,
   quantity,
   sendDate
 ) {
-  if (!leaderName) {
-    throw new Error('leaderName is required')
+  console.log(donationId)
+  if (!leaderLogin) {
+    throw new Error('leaderLogin is required')
   }
 
-  if (!siteName) {
-    throw new Error('siteName is required')
+  if (!siteId) {
+    throw new Error('siteId is required')
   }
 
   if (!donationId) {
@@ -29,16 +30,16 @@ export async function updateDonation (
   }
 
   const donation = await Donation.findOne({ donationId })
-  const site = await Site.findOne({ name: siteName })
-  const user = await User.findOne({ name: leaderName })
   const timestamp = new Date()
 
+  if (!donation) {
+    throw new Error('This donationId was not found in our database')
+  }
+
   donation.donationId = donationId
-  donation.leaderLogin = user.login
+  donation.leaderLogin = leaderLogin
   donation.adminLogin = login
-  donation.site = site.name
-  donation.city = site.city
-  donation.state = site.state
+  donation.siteId = siteId
   donation.quantity = quantity
   donation.status = 1
   donation.created = timestamp

@@ -32,6 +32,7 @@ function ReceivedPage({ store, dispatch }) {
   const { id } = useParams()
   const { push, location, goBack } = useHistory()
   const [currentDonation, setCurrentDonation] = useState({})
+  
   useEffect(() => {
     const donation = findDonation(store, id)
     setCurrentDonation(donation || {})

@@ -1,8 +1,4 @@
-import {
-  deliveredToLeader,
-  deliveredFirstLetterCapitalized,
-  notDeliveredFirstLetterCapitalized,
-} from '../utils/strings'
+import { deliveredToLeader, deliveredFirstLetterCapitalized, notDeliveredFirstLetterCapitalized } from './strings'
 
 export const DonationStatus = {
   ENTREGUE_LIDER: { id: 1, status: deliveredToLeader },

@@ -36,7 +36,7 @@ if (require.main === module) {
       const leaderLogin = login
 
       let donationId
-      
+
       // First donation with 3 vouchers
       donationId = random.longid() * -1
 
@@ -91,8 +91,6 @@ if (require.main === module) {
         })
       }
 
-
-
       // Third donation with 10 vouchers
       donationId = random.longid() * -1
 
@@ -119,7 +117,6 @@ if (require.main === module) {
           created: timestamp
         })
       }
-    
 
       await disconnect()
     } catch (err) {

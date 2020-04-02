@@ -95,6 +95,11 @@
     }
   }
 
+  &.initial:not(.unfilled) {
+    border-color: #93278F;
+    color: #93278F;
+  }
+
   &.small {
     width: 150px;
   }

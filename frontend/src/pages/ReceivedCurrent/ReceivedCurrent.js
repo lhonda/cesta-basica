@@ -41,7 +41,7 @@ function ReceivedCurrentPage({ store, dispatch }) {
   const { cardList } = store
   const [showModal, setShowModal] = useState(false)
   const [currentDonation, setCurrentDonation] = useState({})
-  const [loading, setloading] = useState(false)
+  const [loading, setLoading] = useState(true)
   const { push, goBack } = useHistory()
 
   function endDonations() {
@@ -57,10 +57,11 @@ function ReceivedCurrentPage({ store, dispatch }) {
     )
     return cardList.length === filteredCards.length
   }
-  const handleClickItem = (voucher) => history.push(`${history.location.pathname}/${voucher}/prof`)
+
+  const handleClickItem = (voucher, state) => state !== 'unfilled' && history.push(`${history.location.pathname}/${voucher}/prof`)
 
   useEffect(() => {
-    setloading(true)
+    setLoading(true)
     dispatch({ type: types.CLEAN_CARD_LIST })
     const donation = findDonation(store, id)
     setCurrentDonation(donation || {})
@@ -68,7 +69,7 @@ function ReceivedCurrentPage({ store, dispatch }) {
     if (cardList) {
       verifyIfCardsAreFilled()
     }
-    setloading(false)
+    setLoading(false)
   }, [])
 
   return (
@@ -114,15 +115,21 @@ function ReceivedCurrentPage({ store, dispatch }) {
         <hr />
         <div className="main-received-current-prof">
           {cardList &&
-            cardList.map((card) => (
-              <Items
-                statusId={card.status}
-                type={ItemsTypes.BASKET}
-                size={ItemsTypes.LARGE}
-                handleClick={handleClickItem}
-                title={card.voucherId}
-              />
-            ))}
+            cardList.map((card, i, arr) => {
+              const state = arr[i-1] ? (arr[i-1].status > 1 ? 'filled' : 'unfilled') : 'first'
+
+              return (
+                <Items
+                  key={card.voucherId}
+                  state={state}
+                  statusId={card.status}
+                  type={ItemsTypes.BASKET}
+                  size={ItemsTypes.LARGE}
+                  handleClick={handleClickItem}
+                  title={card.voucherId}
+                />
+              )
+            } )}
         </div>
       </div>
       <div className="footer-received-prof">

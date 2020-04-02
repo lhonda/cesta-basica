@@ -48,7 +48,6 @@ export function endDelivery(donationId) {
 
 export function setUser() {
   if(!locals.userId) {
-    console.log(locals)
     const user = ((storage.get()||{user: {}})).user
     locals.userId = user.id
     locals.userRole = user.role

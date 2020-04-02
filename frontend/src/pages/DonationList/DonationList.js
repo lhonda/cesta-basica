@@ -45,9 +45,10 @@ function DonationList({ store, dispatch, history }) {
 
   return (
     <div className="containerDonation">
-      {loading && <Loader />}
+      {loading && !donationList && <Loader />}
       <DonationHeader />
-      {donationList && (
+
+      {donationList.length > 0 ? (
         <div className={`containerDonation__list containerDonation__list--${role}`}>
           {donationList.map((item) => {
             const { quantity, status, donationId } = item
@@ -63,9 +64,9 @@ function DonationList({ store, dispatch, history }) {
             )
           })}
         </div>
+      ) : (
+        <DonationIsEmpty whichMessage={role} />
       )}
-
-      {((donationList && donationList.length === 0) || !donationList) && <DonationIsEmpty whichMessage={role} />}
       {role === 'admin' && (
         <div className="containerDonation__button">
           <Button

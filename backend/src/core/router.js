@@ -16,7 +16,8 @@ import {
   receive,
   donate,
   endDonation,
-  deleteEvents
+  deleteEvents,
+  updateDonation
 } from '../rules'
 
 export const router = Router()
@@ -182,6 +183,22 @@ router.get('/commitment/check', authRequired('leader'), (req, res) =>
 router.post('/checklist', authRequired('leader'), (req, res) =>
   checklist(req.auth)
     .then(() => res.status(201).end())
+    .catch(err => {
+      console.log(err)
+      res.status(500).json({ message: err.message })
+    }))
+
+// dar update na donation através do admin
+router.patch('/donations/update', authRequired('admin'), (req, res) =>
+  updateDonation(
+    req.auth,
+    req.body.leaderName,
+    req.body.siteName,
+    req.body.donationId,
+    req.body.quantity,
+    req.body.sendDate
+  )
+    .then(() => res.status(200).end())
     .catch(err => {
       console.log(err)
       res.status(500).json({ message: err.message })

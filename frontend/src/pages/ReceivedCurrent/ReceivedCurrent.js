@@ -76,7 +76,12 @@ function ReceivedCurrentPage({ store, dispatch }) {
     <>
       {loading && <Loader />}
       <div className="container-received-prof">
-        <Modal isOpenModal={showModal} actionExit={endDonations} title={completeDeliveryTitle} />
+        <Modal
+          closeModal={() => setShowModal(false)}
+          isOpenModal={showModal}
+          actionExit={endDonations}
+          title={completeDeliveryTitle}
+        />
         <div className="sidebar-donation-prof">
           <ButtonIcon handleClick={goBack}>
             <LogoBack height="10" />

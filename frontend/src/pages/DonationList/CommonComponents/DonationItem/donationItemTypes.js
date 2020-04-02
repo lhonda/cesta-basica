@@ -5,7 +5,7 @@ import {
   lostFirstLetterCapitalized,
   returnedFirstLetterCapitalized,
   completedFirstLetterCapitalized,
-} from '../../../utils/strings'
+} from '../../../../utils/strings'
 
 export const donationItemTypes = {
   '1': { id: 1, status: statusDonationWait, type: 'wait' },

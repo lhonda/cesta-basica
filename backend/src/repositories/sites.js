@@ -4,6 +4,7 @@ const schema = new Schema({
   siteId: {
     type: String,
     unique: true,
+    trim: true,
     required: [true, 'siteId is required']
   },
   name: {

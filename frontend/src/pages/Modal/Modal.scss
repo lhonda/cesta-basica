@@ -11,6 +11,16 @@
   opacity: 0;
 }
 
+.modal-content {
+  min-height: 50%;
+  margin-bottom: -50px;
+  position: relative;
+  bottom: 1rem;
+  & h2 {
+    font-weight: 400;
+  }
+}
+
 .button-close {
   position: relative;
   float: right;

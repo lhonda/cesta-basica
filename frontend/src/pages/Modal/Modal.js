@@ -33,13 +33,15 @@ function ModalPage({ isOpenModal, title, actionExit, closeModal }) {
       <div onClick={closeModal} className="button-close">
         <LogoClose />
       </div>
-      <Title message={title} />
-      <Paragraph content="completeDeliveryThanks" />
-      <Paragraph content="completeDeliveryInformationContate" />
-      <SubTitle size={SubTitleTypes.MEDIUM} type={SubTitleTypes.STRONG} message={contate} />
-      <SubTitle size={SubTitleTypes.MEDIUM} type={SubTitleTypes.NORMAL} message={contateNumber} />
-      <div className="modal-button">
-        <Button message="OK" handleClick={actionExit} />
+      <div className="modal-content">
+        <Title message={title} />
+        <Paragraph content="completeDeliveryThanks" />
+        <Paragraph content="completeDeliveryInformationContate" />
+        <SubTitle size={SubTitleTypes.MEDIUM} type={SubTitleTypes.STRONG} message={contate} />
+        <SubTitle size={SubTitleTypes.MEDIUM} type={SubTitleTypes.NORMAL} message={contateNumber} />
+        <div className="modal-button">
+          <Button message="OK" handleClick={actionExit} />
+        </div>
       </div>
     </ReactModal>
   )

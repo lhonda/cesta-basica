@@ -12,7 +12,7 @@ const cleanState = {
   },
   declaration: false,
   doneHealthCheck: checkExpiresCheckList(),
-  donationList: null,
+  donationList: [],
   photoReceived: null,
   userLocation: {},
   cardList: null,

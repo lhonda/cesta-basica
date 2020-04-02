@@ -62,7 +62,7 @@ export const LegendChecklist = '*O vírus também é transmitido por pessoas ass
 export const linkChecklist = 'Estou com sintomas, o que fazer?'
 
 // Donation list
-export const donationListVoidText = 'Você está sem pedidos \nde doações no momento'
+export const donationListVoidText = 'Você está sem pedidos <br/>de doações no momento.'
 export const donationTitlePage = 'Lista de doações'
 export const exitText = 'Sair'
 
@@ -97,14 +97,15 @@ export const descriptionDonationReceived =
 export const descriptionDonationReceivedSecondparagraph =
   'Importante lembrar que você possui 24h para finalizar as entregas e precisa tirar uma foto para cada entrega de doação na comunidade. Excelente trabalho :)'
 export const descriptionDonationProf = 'Precisamos que você complete as informações sobre a entrega do cartão.'
-export const legendInputAmountDonation = 'Quantidade de doações recebidas'
+export const legendInputAmountDonation = 'Quantidade de cartões recebidos'
 
 export const legendInputCardNumber = 'Cartão Nº '
 export const legendInputCardDeliveryStatus = 'Status da entrega do cartão'
 export const legendInputFullName = 'Nome Completo'
 export const legendInputCpf = 'CPF'
 
-export const legendPicDonation = 'Foto\n da entrega'
+export const legendPicDonation = 'Foto do recebimento'
+export const legendPicDonationAdded = 'Foto<br> do recebimento adicionada '
 export const legendPicFiscalNode = 'Foto da nota fiscal'
 export const legendInputAddPic = 'adicionar foto da galeria'
 export const legendNFQuestion = 'Deseja adicionar Nota Fiscal?'
@@ -119,6 +120,10 @@ export const completeDeliveryTitle = 'Entrega de doação completa!'
 export const completeDeliveryThanks =
   'Líder, somos um time de heróis e heroínas! Obrigado por continuar agindo e salvando vidas diante das adversidades e do caos! Continue se cuidando para poder cuidar do próximo! Tamojunto! '
 export const completeDeliveryInformationContate = 'Caso tenha ocorrido algum problema na entrega, entre em contato com:'
+
+// Donation list admin
+export const messageIfListIsVoid = 'Você ainda não <br/>cadastrou uma entrega'
+export const registerNewDonation = 'Cadastrar Entrega'
 
 // Generic
 export const WORD_NO = 'Não'

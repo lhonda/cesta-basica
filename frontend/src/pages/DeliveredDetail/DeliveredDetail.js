@@ -1,20 +1,36 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import './DeliveredDetail.scss'
 
 import { connect } from '../../store'
-
 import { CardList } from '../../services/API/cardList'
+
+import { Header } from '../../components/Header'
+
+import { DeliveryInformation } from './DeliveryInformation'
+import { Delivered } from './Delivered'
+
+const teste = [null, true, false]
 
 function DeliveredDetail({ store, dispatch, history, match }) {
   const { id, voucher } = match.params
   const { goBack } = history
-  useEffect(() => CardList(), [])
+  const { delivered, receivedCpf, receivedName, statusText, status } = store.cardList.find(
+    ({ voucherId }) => voucherId === voucher
+  )
+  useEffect(() => {
+    CardList(dispatch, id)
+  }, [])
   return (
-    <div>
-      <button onClick={goBack}></button>
-      alo
-      {JSON.stringify(store.donationList[0])}
+    <div className="containerDonationDetails">
+      <Header title={voucher} onGoBackClick={goBack} />
+
+      <DeliveryInformation deliveryDate={delivered} statusDelivery={statusText} />
+
+      {/* regular expression - colocar o formatador de cpf */}
+      {teste[status] && (
+        <Delivered recipientName={receivedName} recipientCPF={receivedCpf} linkToImage="https://www.google.com" />
+      )}
     </div>
   )
 }

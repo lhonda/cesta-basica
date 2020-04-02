@@ -1,0 +1,29 @@
+.containerDonationDetails {
+  margin: 0;
+  padding: 1.06rem 1rem;
+  &__evidenceTitle {
+    font-weight: 400;
+  }
+  &__delivered {
+    display: flex;
+    justify-content: space-between;
+    &__title {
+      font-size: 14px;
+      color: #909090;
+    }
+    &__value {
+      font-size: 14px;
+      margin-top: 0.5rem;
+      font-weight: 500;
+    }
+    &--left {
+      text-align: left;
+    }
+    &--right {
+      text-align: right;
+    }
+    &--mt {
+      margin-top: 1.8rem;
+    }
+  }
+}

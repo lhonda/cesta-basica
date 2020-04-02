@@ -72,7 +72,7 @@ export const statusDonationWait = 'Esperando recebimento'
 export const statusDonationReceived = 'Doação Recebida'
 export const statusDonationReceivedCurrent = 'Entregando'
 export const legendDonationWaitStatus = 'Status'
-export const legendDonationWaitDate = 'Dia de recebimento'
+export const legendDonationWaitDate = 'Data\n de recebimento'
 export const legendDonationDateFinal = 'Prazo final para entrega'
 export const legendDonationType = 'Tipo da doação'
 export const legendDonationWaitAmount = 'Cartões'
@@ -92,10 +92,15 @@ export const deliveredToLeader = 'Entregue para líder'
 // Donation Prof screen
 export const titleDonationProf = 'Evidência de Recebimento'
 export const titleReceivedProf = 'Evidência de Entrega'
+const txt = '"Iniciar Entrega"'
 export const descriptionDonationReceived =
-  'Quando for iniciar as entregas das doações na comunidade, atualize seu status na plataforma para "Iniciar Entrega".'
+  'Quando for iniciar as entregas dos cartões na comunidade, atualize seu status na plataforma clicando em ' +
+  `${txt.bold()}.`
+const hour = '24h'
 export const descriptionDonationReceivedSecondparagraph =
-  'Importante lembrar que você possui 24h para finalizar as entregas e precisa tirar uma foto para cada entrega de doação na comunidade. Excelente trabalho :)'
+  'Importante lembrar que você possui ' +
+  `${hour.bold()}` +
+  ' para finalizar as entregas e precisa tirar uma foto para cada entrega de doação na comunidade. E avise ao familiar para levar um documento com foto.\n Excelente trabalho :)'
 export const descriptionDonationProf = 'Precisamos que você complete as informações sobre a entrega do cartão.'
 export const legendInputAmountDonation = 'Quantidade de doações recebidas'
 

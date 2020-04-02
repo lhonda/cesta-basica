@@ -14,11 +14,12 @@ import { LogoBack } from '../../components/Logo'
 import './Received.scss'
 
 import { formatDate } from '../../utils/formatDateToptbr'
+import { formatDateTomorrow } from '../../utils/formaDateTomorrow'
 import { findDonation } from '../../utils/findDonationByid'
+import { formatHour } from '../../utils/formatHour';
 import {
   back,
-  titleDonation,
-  statusDonationReceived,
+  legendDonationWaitStatus,
   legendDonationWaitDate,
   legendDonationWaitAmount,
   legendDonationReceivedButton,
@@ -44,14 +45,17 @@ function ReceivedPage({ store, dispatch }) {
         <Legend type={LegendTypes.STRONG} message={back} />
       </div>
       <div className="header-received">
-        <Title message={`${titleDonation} ${id}`} />
-        <Status message={statusDonationReceived} />
+        <Title message={`${id}`} />
         <Sidebar current={2} />
       </div>
       <div className="details-received">
+        <div className="details-status">
+          <Legend type={LegendTypes.LIGHT} orientation={LegendTypes.START} message={legendDonationWaitStatus} />
+          <Legend type={LegendTypes.STRONG} orientation={LegendTypes.START} message={currentDonation.statusText} />
+        </div>
         <div className="details-amount">
-          <Legend type={LegendTypes.LIGHT} orientation={LegendTypes.START} message={legendDonationWaitAmount} />
-          <Legend type={LegendTypes.STRONG} orientation={LegendTypes.START} message={currentDonation.quantity || 0} />
+          <Legend type={LegendTypes.LIGHT} orientation={LegendTypes.END} message={legendDonationWaitAmount} />
+          <Legend type={LegendTypes.STRONG} orientation={LegendTypes.END} message={currentDonation.quantity || 0} />
         </div>
       </div>
       <div className="details-received">
@@ -62,20 +66,26 @@ function ReceivedPage({ store, dispatch }) {
             orientation={LegendTypes.START}
             message={formatDate(currentDonation.scheduled)}
           />
+          <Legend
+            type={LegendTypes.STRONG}
+            orientation={LegendTypes.START}
+            message={formatHour(currentDonation.scheduled)}
+          />
         </div>
         <div className="details-amount">
           <Legend type={LegendTypes.LIGHT} orientation={LegendTypes.END} message={legendDonationDateFinal} />
+          <Legend type={LegendTypes.STRONG} orientation={LegendTypes.END} message={formatDateTomorrow()} />
           <Legend
             type={LegendTypes.STRONG}
             orientation={LegendTypes.END}
-            message={formatDate(currentDonation.completed)}
+            message={formatHour(currentDonation.scheduled)}
           />
         </div>
       </div>
       <hr />
       <div className="main-received">
-        <Paragraph size={ParagraphTypes.LIGHT} content="descriptionDonationReceived" />
-        <Paragraph size={ParagraphTypes.LIGHT} content="descriptionDonationReceivedSecondparagraph" />
+        <Paragraph size={ParagraphTypes.SMALL} content="descriptionDonationReceived" />
+        <Paragraph size={ParagraphTypes.SMALL} content="descriptionDonationReceivedSecondparagraph" />
       </div>
       <div className="footer-received">
         <Button

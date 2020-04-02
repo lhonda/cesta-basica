@@ -1,4 +1,4 @@
-import { Donation, User, Site } from '../repositories'
+import { Donation, User } from '../repositories'
 
 export async function filterDonation (donationId) {
   if (!donationId) {
@@ -8,23 +8,6 @@ export async function filterDonation (donationId) {
   ).map(({ donationId }) => ({ donationId }))
 
   return donationTip
-}
-
-export async function filterSite (name) {
-  if (!name) {
-    throw new Error('Name is required')
-  }
-  const siteTip = (await Site.find(
-    {
-      name: new RegExp(`^${name}`)
-    },
-    {
-      siteId: 1,
-      name: 1
-    })
-  ).map(({ name, siteId }) => ({ name, siteId }))
-
-  return siteTip
 }
 
 export async function filterLeader (name) {
@@ -38,9 +21,9 @@ export async function filterLeader (name) {
     },
     {
       name: 1,
-      login: 12
+      login: 1
     })
-  ).map(({ name, login }) => ({ name, login }))
+  ).map(({ name, login, siteId }) => ({ name, login, siteId }))
 
   return nameTip
 }

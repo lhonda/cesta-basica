@@ -2,7 +2,7 @@ import { model, Schema } from 'mongoose'
 
 const schema = new Schema({
   siteId: {
-    type: String,
+    type: Number,
     unique: true,
     trim: true,
     required: [true, 'siteId is required']

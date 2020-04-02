@@ -97,14 +97,15 @@ export const descriptionDonationReceived =
 export const descriptionDonationReceivedSecondparagraph =
   'Importante lembrar que você possui 24h para finalizar as entregas e precisa tirar uma foto para cada entrega de doação na comunidade. Excelente trabalho :)'
 export const descriptionDonationProf = 'Precisamos que você complete as informações sobre a entrega do cartão.'
-export const legendInputAmountDonation = 'Quantidade de doações recebidas'
+export const legendInputAmountDonation = 'Quantidade de cartões recebidos'
 
 export const legendInputCardNumber = 'Cartão Nº '
 export const legendInputCardDeliveryStatus = 'Status da entrega do cartão'
 export const legendInputFullName = 'Nome Completo'
 export const legendInputCpf = 'CPF'
 
-export const legendPicDonation = 'Foto\n da entrega'
+export const legendPicDonation = 'Foto do recebimento'
+export const legendPicDonationAdded = 'Foto<br> do recebimento adicionada '
 export const legendPicFiscalNode = 'Foto da nota fiscal'
 export const legendInputAddPic = 'adicionar foto da galeria'
 export const legendNFQuestion = 'Deseja adicionar Nota Fiscal?'

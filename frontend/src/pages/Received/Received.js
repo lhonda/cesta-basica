@@ -78,7 +78,7 @@ function ReceivedPage({ store, dispatch }) {
           <Legend
             type={LegendTypes.STRONG}
             orientation={LegendTypes.END}
-            message={formatHour(currentDonation.scheduled)}
+            message={formatHour(currentDonation.received)}
           />
         </div>
       </div>

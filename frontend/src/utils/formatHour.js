@@ -3,6 +3,6 @@ function formatTime(time) {
 }
 
 export const formatHour = (date) => {
-  date = new Date()
-  return `${`${formatTime(date.getHours())}`}h${formatTime(date.getMinutes())}`
+  const time = new Date(date)
+  return `${formatTime(time.getHours())}h${formatTime(time.getMinutes())}`
 }

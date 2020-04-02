@@ -1,8 +1,8 @@
 import { findDonation } from './find-donations'
 import { findDonationByLeader } from './find-donation-by-leader'
 
-export async function findDonationByUser (user) {
+export async function findDonationByUser (donationId, user) {
   return user.role === 'admin'
-    ? findDonation()
+    ? findDonation(donationId)
     : findDonationByLeader(user)
 }

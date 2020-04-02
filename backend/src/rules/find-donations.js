@@ -1,8 +1,13 @@
 import { Donation } from '../repositories'
 import { statuses } from '../enums'
 
-export async function findDonation () {
-  console.log('findALL')
+export async function findDonation (donationId) {
+  if (donationId) {
+    const donations = (await Donation.find({ donationId: new RegExp(`^${donationId}`) }, { donationId: 1 })
+    ).map(({ donationId }) => ({ donationId }))
+
+    return donations
+  }
   const donations = (
     await Donation.find()
   ).map(({

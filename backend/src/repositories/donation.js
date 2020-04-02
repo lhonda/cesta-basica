@@ -14,7 +14,7 @@ export const donationSchema = new Schema({
     required: [true, 'leaderLogin is required']
   },
   siteId: {
-    type: String,
+    type: Number,
     trim: true
   },
   site: {

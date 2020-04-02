@@ -41,7 +41,7 @@ const schema = new Schema({
     type: Date
   },
   siteId: {
-    type: String,
+    type: Number,
     trim: true
   },
   site: {

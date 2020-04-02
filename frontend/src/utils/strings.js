@@ -87,7 +87,9 @@ export const legendDonationReceivedFinishButton = 'Encerrar Entrega'
 export const completedFirstLetterCapitalized = 'Completo'
 export const returnedFirstLetterCapitalized = 'Devolvido'
 export const lostFirstLetterCapitalized = 'Extraviado'
-export const deliveredToLeader = 'Entrega Recebida'
+export const deliveredToLeader = 'Entregue para líder'
+export const deliveredDate = 'Data de envio'
+export const cardsQuantity = 'Quantidade de cartoes'
 
 // Donation Prof screen
 export const titleDonationProf = 'Evidência de Recebimento'
@@ -129,5 +131,7 @@ export const registerNewDonation = 'Cadastrar Entrega'
 // Generic
 export const WORD_NO = 'Não'
 export const WORD_YES = 'Sim'
+export const leader = 'Lider'
+export const unit = 'Unidade'
 export const deliveredFirstLetterCapitalized = 'Entregue'
 export const notDeliveredFirstLetterCapitalized = 'Não entregue'

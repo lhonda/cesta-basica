@@ -1,0 +1,9 @@
+.component-donationDetails-container {
+  margin: 16px;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 32px);
+}
+.component-donationDetails-divider {
+  margin-top: 25px;
+}

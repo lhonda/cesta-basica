@@ -5,10 +5,16 @@
 .containerHeader {
   font-family: Rubik;
   font-weight: 400;
-  padding: 1.8rem 1rem 0 1rem;
+  padding: 1.1rem 1rem 0 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
+
+  h2 {
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 22px;
+  }
 
   span {
     height: 0;
@@ -17,7 +23,7 @@
   a {
     position: relative;
     float: right;
-    top: -3.3rem;
+    top: -3.1rem;
     text-decoration: underline;
     cursor: pointer;
     

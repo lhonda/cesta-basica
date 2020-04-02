@@ -6,12 +6,13 @@ import { SubTitle, SubTitleTypes } from '../../components/SubTitle'
 import { Paragraph } from '../../components/Paragraph'
 import { Button, ButtonTypes } from '../../components/Button'
 import './Modal.scss'
+import { LogoClose } from '../../components/Logo'
 
 import { contate, contateNumber } from '../../utils/strings'
 
 ReactModal.setAppElement('#root')
 
-function ModalPage({ isOpenModal, title, actionExit }) {
+function ModalPage({ isOpenModal, title, actionExit, closeModal }) {
   return (
     <ReactModal
       style={{
@@ -29,6 +30,9 @@ function ModalPage({ isOpenModal, title, actionExit }) {
       contentLabel={title}
       onRequestClose={actionExit}
     >
+      <div onClick={closeModal} className="button-close">
+        <LogoClose />
+      </div>
       <Title message={title} />
       <Paragraph content="completeDeliveryThanks" />
       <Paragraph content="completeDeliveryInformationContate" />

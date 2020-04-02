@@ -11,6 +11,23 @@
   opacity: 0;
 }
 
+.button-close {
+  position: relative;
+  float: right;
+  height: 1.5rem;
+  border-radius: 50vh;
+  width: 1.5rem;
+  background-color: rgba(166, 166, 166, 0.19);
+  cursor: pointer;
+  bottom: 0.4rem;
+  left: 0.3rem;
+    & img {
+      position: relative;
+      left: 6px;
+      top: 6px;
+    }
+  }
+
 .modal-button {
   padding-top: 20px;
   text-align: center;

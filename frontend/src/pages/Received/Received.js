@@ -46,7 +46,7 @@ function ReceivedPage({ store, dispatch }) {
       </div>
       <div className="header-received">
         <Title message={`${id}`} />
-        <Sidebar current={2} />
+        <Sidebar current={currentDonation.status} />
       </div>
       <div className="details-received">
         <div className="details-status">

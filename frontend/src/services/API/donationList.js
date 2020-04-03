@@ -1,5 +1,6 @@
 import { Api } from './index'
 import { types } from '../../store'
+import { compressImageFile } from '../../utils/compressFile'
 
 const route = '/donations'
 const routeDonationEnd = (id) => `/donations/${id}/end`
@@ -16,6 +17,9 @@ export async function DonationsList(dispatch) {
 export async function DonationVoucher(dataScreen, store) {
   const { id, voucher, delivered, CPF, fullName, image } = dataScreen
   const { lat, lon } = store.userLocation
+
+  const compressedFile = image ? await compressImageFile(image) : image
+
   const formData = new FormData()
   formData.append('voucherId', voucher)
   formData.append('lat', lat)
@@ -23,7 +27,7 @@ export async function DonationVoucher(dataScreen, store) {
   formData.append('delivered', delivered)
   formData.append('receivedCpf', CPF)
   formData.append('receivedName', fullName)
-  formData.append('donateDonationFile', image)
+  formData.append('donateDonationFile', compressedFile)
   try {
     await Api.post(`donations/${id}/donate`, formData, {
       headers: {

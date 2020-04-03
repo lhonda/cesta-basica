@@ -40,6 +40,10 @@ const schema = new Schema({
   birthdate: {
     type: Date
   },
+  siteId: {
+    type: Number,
+    trim: true
+  },
   site: {
     type: String
   },

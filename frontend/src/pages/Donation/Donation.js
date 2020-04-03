@@ -23,6 +23,7 @@ import {
   legendDonationWaitDate,
   legendDonationWaitAmount,
   legendDonationWaitButton,
+  legendDonationDevliveryDate,
 } from '../../utils/strings'
 
 import { findDonation } from '../../utils/findDonationByid'
@@ -65,7 +66,7 @@ function DonationPage({ store, dispatch }) {
         </div>
         <div className="details-donation">
           <div className="details-date">
-            <Legend type={LegendTypes.LIGHT} orientation={LegendTypes.START} message={legendDonationWaitDate} />
+            <Legend type={LegendTypes.LIGHT} orientation={LegendTypes.START} message={legendDonationDevliveryDate} />
             <Legend
               type={LegendTypes.STRONG}
               orientation={LegendTypes.START}

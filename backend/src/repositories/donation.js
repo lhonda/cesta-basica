@@ -13,6 +13,10 @@ export const donationSchema = new Schema({
     trim: true,
     required: [true, 'leaderLogin is required']
   },
+  siteId: {
+    type: Number,
+    trim: true
+  },
   site: {
     type: String,
     trim: true
@@ -47,6 +51,7 @@ export const donationSchema = new Schema({
   },
   created: { type: Date },
   scheduled: { type: Date },
+  sentDate: { type: Date },
   received: { type: Date },
   lastDelivery: { type: Date },
   completed: { type: Date },

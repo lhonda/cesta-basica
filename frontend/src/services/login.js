@@ -9,7 +9,6 @@ export async function Auth(dataRequest, dispatch, history) {
     const { user, token } = response.data
     dispatch({ type: types.SET_USER, payload: user })
     dispatch({ type: types.SET_TOKEN, payload: { token } })
-    // trocar quando tiver roles
     history.push('/donation-list')
   } catch (err) {
     return undefined

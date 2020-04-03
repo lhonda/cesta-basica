@@ -3,10 +3,10 @@ import { useHistory } from 'react-router-dom'
 import { func } from 'prop-types'
 import './DonationHeader.scss'
 
-import { icExit } from '../../../assets/icons'
-import { connect, types } from '../../../store'
+import { icExit } from '../../../../assets/icons'
+import { connect, types } from '../../../../store'
 
-import { donationTitlePage, exitText } from '../../../utils/strings'
+import { donationTitlePage, exitText } from '../../../../utils/strings'
 
 function DonationHeader({ dispatch }) {
   const history = useHistory()

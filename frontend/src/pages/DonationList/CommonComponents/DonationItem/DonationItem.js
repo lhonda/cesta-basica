@@ -5,7 +5,7 @@ import './DonationItem.scss'
 
 import { donationItemTypes } from './donationItemTypes'
 
-function DonationItem({ title, quantity, stateDonation, donationId }) {
+function DonationItem({ title, quantity, stateDonation, donationId, userRole }) {
   const history = useHistory()
   const verifyStateDonation = () => {
     if (
@@ -18,12 +18,19 @@ function DonationItem({ title, quantity, stateDonation, donationId }) {
     }
     return true
   }
-  const handleClick = () => {
-    if (verifyStateDonation()) history.push(`/donation/${donationId}/${donationItemTypes[stateDonation].type}`)
+  const handleClick = {
+    leader() {
+      if (verifyStateDonation()) {
+        history.push(`/donation/${donationId}/${donationItemTypes[stateDonation].type}`)
+      }
+    },
+    admin() {
+      alert('admin')
+    },
   }
   const isComplete = stateDonation === donationItemTypes[4].id
   return (
-    <div className="donationItem" onClick={handleClick}>
+    <div className="donationItem" onClick={handleClick[userRole]}>
       <div className="donationItem__content">
         <span className="donationItem__content__title">{title}</span>
         <div>
@@ -42,6 +49,7 @@ DonationItem.propTypes = {
   quantity: PropTypes.number.isRequired,
   stateDonation: PropTypes.number.isRequired,
   donationId: PropTypes.string.isRequired,
+  userRole: PropTypes.string.isRequired,
 }
 
 export default DonationItem

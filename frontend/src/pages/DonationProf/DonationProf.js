@@ -26,6 +26,7 @@ import {
   legendInputAmountDonation,
   legendPicDonation,
   legendInputAddPic,
+  legendPicDonationAdded,
 } from '../../utils/strings'
 
 import * as analytics from '../../services/analytics'
@@ -77,7 +78,11 @@ function DonationPage({ store }) {
       </div>
 
       <div className="main-donation-prof">
-        <SubTitle type={SubTitleTypes.MEDIUM} width={SubTitleTypes.SIZE_SMALL} message={legendPicDonation} />
+        {image ? (
+          <span dangerouslySetInnerHTML={{ __html: legendPicDonationAdded }} />
+        ) : (
+          <SubTitle type={SubTitleTypes.LIGHT} width={SubTitleTypes.SIZE_SMALL} message={legendPicDonation} />
+        )}
         <File file={image} handleImage={handleImageFile} placeholder={legendInputAddPic} />
       </div>
 

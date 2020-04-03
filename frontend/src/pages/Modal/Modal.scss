@@ -16,35 +16,26 @@
   margin-bottom: -50px;
   position: relative;
   bottom: 1rem;
-  & h2 {
-    font-weight: 400;
+
+  .titleTerms {
+    font-weight: normal;
   }
 }
 
-.button-close {
+.modal-header {
   position: relative;
-  float: right;
+  left: 92%;
   height: 1.5rem;
   border-radius: 50vh;
   width: 1.5rem;
-  background-color: rgba(166, 166, 166, 0.19);
-  cursor: pointer;
   bottom: 0.4rem;
-  left: 0.3rem;
-    & img {
-      position: relative;
-      left: 6px;
-      top: 6px;
-    }
-  }
+}
 
 .modal-button {
-  // margin: 2.6rem 0;
   margin: 0;
   height: 50px;
   text-align: center;
   position: relative;
-  // bottom: -6.8rem;
 }
 
 // iphone 5/se

@@ -18,7 +18,7 @@ export async function DonationVoucher(dataScreen, store) {
   const { id, voucher, delivered, CPF, fullName, image } = dataScreen
   const { lat, lon } = store.userLocation
 
-  const compressedFile = await compressImageFile(image)
+  const compressedFile = image ? await compressImageFile(image) : image
 
   const formData = new FormData()
   formData.append('voucherId', voucher)

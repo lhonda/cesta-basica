@@ -3,29 +3,32 @@ import PropTypes from 'prop-types'
 import { Route, Redirect } from 'react-router-dom'
 import { connect } from '../store'
 import { setToken } from '../services/API'
-
 import { checkExpiresCheckList } from '../services/storage'
+import * as analytics from '../services/analytics'
 
 function RouteWrapper({ component: Component, isPrivate, store, ...rest }) {
-  const { auth } = store
+  const {
+    auth,
+    user: { role },
+  } = store
   const { path } = rest
-
-  const doneHealthCheck = checkExpiresCheckList()
 
   if (!auth.token && isPrivate) {
     return <Redirect to="/login" />
   }
 
-  // verificar role do usuario para saber qual rota direcionar no futuro
   if (auth.token) {
     if (path === '/login' || path === '/') {
       return <Redirect to="/donation-list" />
     }
-    if (!doneHealthCheck && path !== '/checklist') {
+
+    const doneHealthCheck = checkExpiresCheckList()
+    if (role === 'leader' && !doneHealthCheck && path !== '/checklist') {
       return <Redirect to="/checklist" />
     }
   }
 
+  analytics.setUser()
   setToken(auth.token)
   return <Route {...rest} component={Component} />
 }

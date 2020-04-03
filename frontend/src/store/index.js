@@ -12,7 +12,7 @@ const cleanState = {
   },
   declaration: false,
   doneHealthCheck: checkExpiresCheckList(),
-  donationList: null,
+  donationList: [],
   photoReceived: null,
   userLocation: {},
   cardList: null,
@@ -46,7 +46,6 @@ const actionMap = {
 }
 
 export function reducer(state, action) {
-  console.log(`Store reducer is called with action ${action.type}`)
   return actionMap[action.type] ? actionMap[action.type](state, action.payload) : state
 }
 

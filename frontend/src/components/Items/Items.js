@@ -19,13 +19,15 @@ function RenderOptions() {
   ))
 }
 
-function Item({ title, size, align, handleClick, type, statusId }) {
+function Item({ title, size, align, handleClick, type, statusId, state }) {
   const [status, setStatus] = useState('')
   function verifyStatusText() {
     if (statusId === DonationStatus.ENTREGUE.id) {
       setStatus('complete')
-    }  else if (statusId === DonationStatus.NAO_ENTREGUE.id) {
+    } else if (statusId === DonationStatus.NAO_ENTREGUE.id) {
       setStatus('not-complete')
+    } else if (statusId === DonationStatus.ENTREGUE_LIDER.id) {
+      setStatus('initial')
     }
   }
 
@@ -45,7 +47,7 @@ function Item({ title, size, align, handleClick, type, statusId }) {
       </div>
     ),
     [ItemsTypes.BASKET]: (
-      <div onClick={() => handleClick(title)} className={`item-basket ${size} ${align} ${status}`}>
+      <div onClick={() => handleClick(title, state)} className={`item-basket ${size} ${align} ${status} ${state}`}>
         <span>{`Cartão ${title}`}</span>
         <LogoBasket />
       </div>
@@ -61,6 +63,7 @@ Item.propTypes = {
   type: PropTypes.string,
   size: PropTypes.string,
   align: PropTypes.string,
+  state: PropTypes.string,
   complete: PropTypes.bool,
   handleClick: PropTypes.func,
 }

@@ -1,9 +1,12 @@
 import { Api } from './index'
+import { compressImageFile } from '../../utils/compressFile'
 
 export async function Upload({ lat, lon, donationId, file, receivedQuantity }) {
 
+  const compressedFile = await compressImageFile(file)
+
   const formData = new FormData()
-  formData.append('receiveDonationFile', file)
+  formData.append('receiveDonationFile', compressedFile)
   formData.append('receivedQuantity', receivedQuantity)
   formData.append('lat', lat)
   formData.append('lon', lon)

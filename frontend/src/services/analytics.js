@@ -1,7 +1,9 @@
 import * as strings from '../utils/strings'
-import { func } from 'prop-types'
+import * as storage from './storage'
 
 window.dataLayer = window.dataLayer || []
+
+const locals = {}
 
 export function sendEvent({ categoy, action, label }) {
   const event = {
@@ -41,5 +43,18 @@ export function endDelivery(donationId) {
   sendEvent({
     categoy: strings.legendDonationReceivedFinishButton,
     action: donationId
+  })
+}
+
+export function setUser() {
+  if(!locals.userId) {
+    const user = ((storage.get()||{user: {}})).user
+    locals.userId = user.id
+    locals.userRole = user.role
+  }
+
+  window.dataLayer.push({
+    userId: locals.userId,
+    userRole: locals.userRole
   })
 }

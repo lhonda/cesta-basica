@@ -15,8 +15,6 @@ import { ButtonIcon } from '../../components/ButtonIcon'
 import { Loader } from '../../components/Loader'
 import { Select } from '../../components/Select'
 
-import { Upload } from '../../services/API/upload'
-
 import './ReceivedCurrentProf.scss'
 import { DonationVoucher } from '../../services/API/donationList'
 import {
@@ -34,14 +32,12 @@ import * as analytics from '../../services/analytics'
 
 function ReceivedCurrentProfPage({ store, dispatch }) {
   const { id, voucher } = useParams()
-  const { push } = useHistory()
+  const { goBack } = useHistory()
   const [fullName, setFullName] = useState('')
   const [CPF, setCPF] = useState('')
   const [image, setImage] = useState()
   const [delivered, setDelivered] = useState(false)
-
   const [loading, setLoading] = useState(false)
-  const returnPage = () => push(`/donation/${id}/received/current`)
   const donationInfo = store.cardList.find((item) => item.voucherId === voucher)
 
   function isDelivered() {
@@ -110,7 +106,7 @@ function ReceivedCurrentProfPage({ store, dispatch }) {
     }
     const updateDonate = await DonationVoucher(data, store)
     if (updateDonate) {
-      returnPage()
+      goBack()
     }
 
     const deliveryStatus = optionsList.find(option => `${option.value}` === delivered)
@@ -125,7 +121,7 @@ function ReceivedCurrentProfPage({ store, dispatch }) {
       <form onSubmit={handleSubmit}>
         <div className="container-donation-received-current-prof">
           <div className="sidebar-donation-received-current-prof">
-            <ButtonIcon handleClick={returnPage}>
+            <ButtonIcon handleClick={goBack}>
               <LogoBack height={10} />
             </ButtonIcon>
             <Legend type={LegendTypes.STRONG} message={back} />

@@ -26,6 +26,7 @@ import {
   legendInputAmountDonation,
   legendPicDonation,
   legendInputAddPic,
+  legendPicDonationAdded,
 } from '../../utils/strings'
 
 import * as analytics from '../../services/analytics'
@@ -48,12 +49,12 @@ function DonationPage({ store }) {
 
   const handleClickButton = async () => {
     setLoading(true)
-
     await Upload({ ...userLocation, donationId, file: image, receivedQuantity: numberDonation })
     analytics.donationProf(donationId, numberDonation)
     history.push(`/donation/${donationId}/received`)
     setLoading(false)
   }
+
   return (
     <div className="container-donation-prof">
       {loading && <Loader />}
@@ -68,7 +69,6 @@ function DonationPage({ store }) {
         <Title message={titleDonationProf} />
         <Paragraph size={ParagraphTypes.LIGHT} content="descriptionDonationProf" />
         <Input
-          ignoreValidate
           inputType={inputTypes.NUMBER}
           size={inputTypes.SIZE_LARGE}
           handleOnChange={setNumberDonation}
@@ -78,7 +78,11 @@ function DonationPage({ store }) {
       </div>
 
       <div className="main-donation-prof">
-        <SubTitle type={SubTitleTypes.MEDIUM} width={SubTitleTypes.SIZE_SMALL} message={legendPicDonation} />
+        {image ? (
+          <span dangerouslySetInnerHTML={{ __html: legendPicDonationAdded }} />
+        ) : (
+          <SubTitle type={SubTitleTypes.LIGHT} width={SubTitleTypes.SIZE_SMALL} message={legendPicDonation} />
+        )}
         <File file={image} handleImage={handleImageFile} placeholder={legendInputAddPic} />
       </div>
 

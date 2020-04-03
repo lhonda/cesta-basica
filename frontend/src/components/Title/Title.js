@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import './Title.scss'
 
 export default function Title({ message }) {
-  return <h2 className="titleTerms">{message}</h2>
+  return <span className="titleTerms">{message}</span>
 }
 Title.propTypes = {
   message: PropTypes.string.isRequired,

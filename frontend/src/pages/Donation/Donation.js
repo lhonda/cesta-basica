@@ -19,11 +19,11 @@ import {
   back,
   contate,
   contateNumber,
-  titleDonation,
-  statusDonationWait,
+  legendDonationWaitStatus,
   legendDonationWaitDate,
   legendDonationWaitAmount,
   legendDonationWaitButton,
+  legendDonationDevliveryDate,
 } from '../../utils/strings'
 
 import { findDonation } from '../../utils/findDonationByid'
@@ -51,22 +51,27 @@ function DonationPage({ store, dispatch }) {
         </div>
 
         <div className="header-donation">
-          <Title message={`${titleDonation} ${id}`} />
-          <Status message={currentDonation.statusText} />
+          <Title message={`${id}`} />
           <Sidebar />
         </div>
         <div className="details-donation">
+          <div className="details-status">
+            <Legend type={LegendTypes.LIGHT} orientation={LegendTypes.START} message={legendDonationWaitStatus} />
+            <Legend type={LegendTypes.STRONG} orientation={LegendTypes.START} message={currentDonation.statusText} />
+          </div>
+          <div className="details-amount">
+            <Legend type={LegendTypes.LIGHT} orientation={LegendTypes.END} message={legendDonationWaitAmount} />
+            <Legend type={LegendTypes.STRONG} orientation={LegendTypes.END} message={currentDonation.quantity || 0} />
+          </div>
+        </div>
+        <div className="details-donation">
           <div className="details-date">
-            <Legend type={LegendTypes.LIGHT} orientation={LegendTypes.START} message={legendDonationWaitDate} />
+            <Legend type={LegendTypes.LIGHT} orientation={LegendTypes.START} message={legendDonationDevliveryDate} />
             <Legend
               type={LegendTypes.STRONG}
               orientation={LegendTypes.START}
               message={formatDate(currentDonation.scheduled)}
             />
-          </div>
-          <div className="details-amount">
-            <Legend type={LegendTypes.LIGHT} orientation={LegendTypes.END} message={legendDonationWaitAmount} />
-            <Legend type={LegendTypes.STRONG} orientation={LegendTypes.END} message={currentDonation.quantity || 0} />
           </div>
         </div>
         <hr />

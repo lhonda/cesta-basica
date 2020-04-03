@@ -9,8 +9,7 @@ export const homeSeparatedLine = 'FAÇA A SUA PARTE!'
 export const titleLoginScreen = 'Entre na plataforma'
 export const placeholderCPF = 'Digite seu CPF'
 export const typeYourPassword = 'Digite sua senha'
-export const errorMessageInvalidLogin = 'Cpf não cadastrado. Corrija o número do CPF.'
-export const errorMessageInvalidPassword = 'Senha incorreta. Tente novamente.'
+export const errorMessageInvalidLogin = 'CPF ou Senha incorretos. Tente novamente.'
 export const textButtonForLogin = 'Entrar'
 
 // Terms screen
@@ -63,7 +62,7 @@ export const LegendChecklist = '*O vírus também é transmitido por pessoas ass
 export const linkChecklist = 'Estou com sintomas, o que fazer?'
 
 // Donation list
-export const donationListVoidText = 'Você está sem pedidos \nde doações no momento'
+export const donationListVoidText = 'Você está sem pedidos <br/>de doações no momento.'
 export const donationTitlePage = 'Lista de doações'
 export const exitText = 'Sair'
 
@@ -72,39 +71,41 @@ export const titleDonation = 'Doação'
 export const statusDonationWait = 'Esperando recebimento'
 export const statusDonationReceived = 'Doação Recebida'
 export const statusDonationReceivedCurrent = 'Entregando'
-export const legendDonationWaitDate = 'Dia de recebimento'
+export const legendDonationWaitStatus = 'Status'
+export const legendDonationWaitDate = 'Data\n de recebimento'
+export const legendDonationDevliveryDate = 'Data\n de envio'
 export const legendDonationDateFinal = 'Prazo final para entrega'
 export const legendDonationType = 'Tipo da doação'
-export const legendDonationWaitAmount = 'Quantidade de cartões'
+export const legendDonationWaitAmount = 'Cartões'
 export const legendDonationWaitInformation =
   'Se ainda não recebeu informações sobre local e horário de recebimento, favor entrar em contato com a equipe do Gerando Falcões, no telefone abaixo:'
 export const contateNumber = '(31) 98717-2222'
-export const legendDonationWaitInformationButton =
-  'Ao clicar em "Cartões recebidos" você estará confirmando que recebeu e preencherá algumas informações de detalhe da entrega.'
-export const legendDonationWaitButton = 'Cartões recebidos'
+export const legendDonationWaitButton = 'Cartões Recebidos'
+export const legendDonationWaitInformationButton = `Ao clicar em "${legendDonationWaitButton.bold()}" você estará confirmando que recebeu e preencherá algumas informações de detalhe da entrega.`
 export const legendDonationReceivedButton = 'Iniciar Entrega'
 export const legendDonationReceivedFinishButton = 'Encerrar Entrega'
 export const completedFirstLetterCapitalized = 'Completo'
 export const returnedFirstLetterCapitalized = 'Devolvido'
 export const lostFirstLetterCapitalized = 'Extraviado'
-export const deliveredToLeader = 'Entregue para líder'
+export const deliveredToLeader = 'Entrega Recebida'
 
 // Donation Prof screen
 export const titleDonationProf = 'Evidência de Recebimento'
 export const titleReceivedProf = 'Evidência de Entrega'
-export const descriptionDonationReceived =
-  'Quando for iniciar as entregas das doações na comunidade, atualize seu status na plataforma para "Iniciar Entrega".'
-export const descriptionDonationReceivedSecondparagraph =
-  'Importante lembrar que você possui 24h para finalizar as entregas e precisa tirar uma foto para cada entrega de doação na comunidade. Excelente trabalho :)'
+const txt = '"Iniciar Entrega"'
+export const descriptionDonationReceived = `Quando for iniciar as entregas dos cartões na comunidade, atualize seu status na plataforma clicando em ${txt.bold()}`
+const hour = '24h'
+export const descriptionDonationReceivedSecondparagraph = `Importante lembrar que você possui ${hour.bold()} para finalizar as entregas e precisa tirar uma foto para cada entrega de doação na comunidade. E avise ao familiar para levar um documento com foto.\n Excelente trabalho :)`
 export const descriptionDonationProf = 'Precisamos que você complete as informações sobre a entrega do cartão.'
-export const legendInputAmountDonation = 'Quantidade de doações recebidas'
+export const legendInputAmountDonation = 'Quantidade de cartões recebidos'
 
 export const legendInputCardNumber = 'Cartão Nº '
 export const legendInputCardDeliveryStatus = 'Status da entrega do cartão'
 export const legendInputFullName = 'Nome Completo'
 export const legendInputCpf = 'CPF'
 
-export const legendPicDonation = 'Foto\n da entrega'
+export const legendPicDonation = 'Foto do recebimento'
+export const legendPicDonationAdded = 'Foto<br> do recebimento adicionada '
 export const legendPicFiscalNode = 'Foto da nota fiscal'
 export const legendInputAddPic = 'adicionar foto da galeria'
 export const legendNFQuestion = 'Deseja adicionar Nota Fiscal?'
@@ -119,6 +120,10 @@ export const completeDeliveryTitle = 'Entrega de doação completa!'
 export const completeDeliveryThanks =
   'Líder, somos um time de heróis e heroínas! Obrigado por continuar agindo e salvando vidas diante das adversidades e do caos! Continue se cuidando para poder cuidar do próximo! Tamojunto! '
 export const completeDeliveryInformationContate = 'Caso tenha ocorrido algum problema na entrega, entre em contato com:'
+
+// Donation list admin
+export const messageIfListIsVoid = 'Você ainda não <br/>cadastrou uma entrega'
+export const registerNewDonation = 'Cadastrar Entrega'
 
 // Generic
 export const WORD_NO = 'Não'

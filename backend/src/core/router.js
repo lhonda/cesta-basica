@@ -9,7 +9,8 @@ import {
   checkCommitment,
   checklist,
   listVouchers,
-  findDonationByUser,
+  findDonationsByUser,
+  findDonationsByParam,
   receive,
   donate,
   endDonation,
@@ -64,9 +65,19 @@ router.get('/vouchers', authRequired('leader'), (req, res) =>
 
 // listar doações que foram pre carregadas no banco de dados
 router.get('/donations', authRequired(), (req, res) =>
-  findDonationByUser(
-    req.query.id,
+  findDonationsByUser(
     req.auth
+  )
+    .then(data => res.status(200).json(data))
+    .catch(err => {
+      console.log(err)
+      res.status(500).json({ message: err.message })
+    }))
+
+// listar doações que foram pre carregadas no banco de dados
+router.get('/donations/:id', authRequired('admin'), (req, res) =>
+  findDonationsByParam(
+    req.params.id
   )
     .then(data => res.status(200).json(data))
     .catch(err => {

@@ -174,8 +174,8 @@ router.post('/checklist', authRequired('leader'), (req, res) =>
     }))
 
 // guardar checklist, so retorna 201 sem conteudo
-router.get('/leaders', authRequired('admin'), (req, res) =>
-  listLeaders(req.query.name)
+router.get('/leaders/:name', authRequired('admin'), (req, res) =>
+  listLeaders(req.params.name)
     .then((data) => res.status(201).json(data))
     .catch(err => {
       console.log(err)

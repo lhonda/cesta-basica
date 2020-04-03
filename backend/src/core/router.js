@@ -14,6 +14,7 @@ import {
   receive,
   donate,
   endDonation,
+  detailsDonation,
   deleteEvents,
   listLeaders
 } from '../rules'
@@ -131,6 +132,16 @@ router.post('/donations/:donationId/end', authRequired('leader'), (req, res) =>
   endDonation({
     donationId: req.params.donationId
   }).then(() => res.status(204).end())
+    .catch(err => {
+      console.log(err)
+      res.status(500).json({ message: err.message })
+    }))
+
+// mostrar detalhe da doacao
+router.get('/donations/:donationId/details', authRequired('admin'), (req, res) =>
+  detailsDonation({
+    donationId: req.params.donationId
+  }).then((data) => res.status(200).json(data))
     .catch(err => {
       console.log(err)
       res.status(500).json({ message: err.message })

@@ -8,7 +8,7 @@ import {
   commitment,
   checkCommitment,
   checklist,
-  listVouchers,
+  findVouchersByUser,
   findDonationsByUser,
   findDonationsByParam,
   receive,
@@ -52,8 +52,9 @@ router.post('/admin/sign-in', (req, res) =>
     }))
 
 // listar vouchers de uma doacao
-router.get('/vouchers', authRequired('leader'), (req, res) =>
-  listVouchers({
+router.get('/vouchers', authRequired(), (req, res) =>
+  findVouchersByUser({
+    role: req.auth.role,
     login: req.auth.login,
     donationId: req.query.donationId
   })

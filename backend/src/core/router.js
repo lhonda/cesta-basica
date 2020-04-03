@@ -15,6 +15,7 @@ import {
   donate,
   endDonation,
   deleteEvents,
+  updateDonation,
   listLeaders
 } from '../rules'
 
@@ -173,10 +174,19 @@ router.post('/checklist', authRequired('leader'), (req, res) =>
       res.status(500).json({ message: err.message })
     }))
 
-// guardar checklist, so retorna 201 sem conteudo
+// dar update na donation através do admin
+router.put('/donations', authRequired('admin'), (req, res) =>
+  updateDonation({ ...req.body, updatedBy: req.auth.login })
+    .then(() => res.status(204).end())
+    .catch(err => {
+      console.log(err)
+      res.status(500).json({ message: err.message })
+    }))
+
+// listar os leaders através de um filtro
 router.get('/leaders/:name', authRequired('admin'), (req, res) =>
   listLeaders(req.params.name)
-    .then((data) => res.status(201).json(data))
+    .then((data) => res.status(200).json(data))
     .catch(err => {
       console.log(err)
       res.status(500).json({ message: err.message })

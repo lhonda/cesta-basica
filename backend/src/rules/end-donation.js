@@ -6,11 +6,10 @@ export async function endDonation ({ donationId }) {
   }
 
   const donation = await Donation.findOne({ donationId })
-
-  const vouchers = await Voucher.find({ donationId, status: 3 })
+  const vouchers = await Voucher.findOne({ donationId, status: 1 })
 
   if (vouchers) {
-    return vouchers
+    throw new Error('You can not finish this donation before changing all vouchers status')
   }
 
   donation.status = 4

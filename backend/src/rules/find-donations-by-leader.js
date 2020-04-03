@@ -1,7 +1,7 @@
 import { Donation } from '../repositories'
 import { statuses } from '../enums'
 
-export async function findDonationByLeader ({ login }) {
+export async function findDonationsByLeader ({ login }) {
   const donations = (
     await Donation.find({ leaderLogin: login })
   ).map(({

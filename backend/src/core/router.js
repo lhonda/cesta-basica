@@ -8,16 +8,15 @@ import {
   commitment,
   checkCommitment,
   checklist,
-  listVouchers,
-  filterDonation,
-  filterLeader,
-  filterSite,
-  findDonationByUser,
+  findVouchersByUser,
+  findDonationsByUser,
+  findDonationsByParam,
   receive,
   donate,
   endDonation,
   deleteEvents,
-  updateDonation
+  updateDonation,
+  listLeaders
 } from '../rules'
 
 export const router = Router()
@@ -54,8 +53,9 @@ router.post('/admin/sign-in', (req, res) =>
     }))
 
 // listar vouchers de uma doacao
-router.get('/vouchers', authRequired('leader'), (req, res) =>
-  listVouchers({
+router.get('/vouchers', authRequired(), (req, res) =>
+  findVouchersByUser({
+    role: req.auth.role,
     login: req.auth.login,
     donationId: req.query.donationId
   })
@@ -66,35 +66,21 @@ router.get('/vouchers', authRequired('leader'), (req, res) =>
     }))
 
 // listar doações que foram pre carregadas no banco de dados
-router.get('/filter/donations', authRequired('leader'), (req, res) =>
-  filterDonation(req.query.donationId)
-    .then(data => res.status(200).json(data))
-    .catch(err => {
-      console.log(err)
-      res.status(500).json({ message: err.message })
-    }))
-
-// listar doações que foram pre carregadas no banco de dados
-router.get('/filter/leader', authRequired('leader'), (req, res) =>
-  filterLeader(req.query.name)
-    .then(data => res.status(200).json(data))
-    .catch(err => {
-      console.log(err)
-      res.status(500).json({ message: err.message })
-    }))
-
-// listar doações que foram pre carregadas no banco de dados
-router.get('/filter/site', authRequired('leader'), (req, res) =>
-  filterSite(req.query.name)
-    .then(data => res.status(200).json(data))
-    .catch(err => {
-      console.log(err)
-      res.status(500).json({ message: err.message })
-    }))
-
-// listar doações que foram pre carregadas no banco de dados
 router.get('/donations', authRequired(), (req, res) =>
-  findDonationByUser(req.auth)
+  findDonationsByUser(
+    req.auth
+  )
+    .then(data => res.status(200).json(data))
+    .catch(err => {
+      console.log(err)
+      res.status(500).json({ message: err.message })
+    }))
+
+// listar doações que foram pre carregadas no banco de dados
+router.get('/donations/:id', authRequired('admin'), (req, res) =>
+  findDonationsByParam(
+    req.params.id
+  )
     .then(data => res.status(200).json(data))
     .catch(err => {
       console.log(err)
@@ -192,6 +178,15 @@ router.post('/checklist', authRequired('leader'), (req, res) =>
 router.put('/donations', authRequired('admin'), (req, res) =>
   updateDonation({ ...req.body, updatedBy: req.auth.login })
     .then(() => res.status(204).end())
+    .catch(err => {
+      console.log(err)
+      res.status(500).json({ message: err.message })
+    }))
+
+// listar os leaders através de um filtro
+router.get('/leaders/:name', authRequired('admin'), (req, res) =>
+  listLeaders(req.params.name)
+    .then((data) => res.status(200).json(data))
     .catch(err => {
       console.log(err)
       res.status(500).json({ message: err.message })

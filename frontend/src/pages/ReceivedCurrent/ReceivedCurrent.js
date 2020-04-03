@@ -55,10 +55,11 @@ function ReceivedCurrentPage({ store, dispatch }) {
     const filteredCards = cardList.filter(
       (card) => card.status === DonationStatus.ENTREGUE.id || card.status === DonationStatus.NAO_ENTREGUE.id
     )
-    return cardList.length === filteredCards.length
+    return cardList.length > 0 && cardList.length === filteredCards.length
   }
 
-  const handleClickItem = (voucher, state) => state !== 'unfilled' && history.push(`${history.location.pathname}/${voucher}/prof`)
+  const handleClickItem = (voucher, state) =>
+    state !== 'unfilled' && history.push(`${history.location.pathname}/${voucher}/prof`)
 
   useEffect(() => {
     setLoading(true)
@@ -76,7 +77,12 @@ function ReceivedCurrentPage({ store, dispatch }) {
     <>
       {loading && <Loader />}
       <div className="container-received-prof">
-        <Modal isOpenModal={showModal} actionExit={endDonations} title={completeDeliveryTitle} />
+        <Modal
+          closeModal={() => setShowModal(false)}
+          isOpenModal={showModal}
+          actionExit={endDonations}
+          title={completeDeliveryTitle}
+        />
         <div className="sidebar-donation-prof">
           <ButtonIcon handleClick={goBack}>
             <LogoBack height="10" />
@@ -116,7 +122,7 @@ function ReceivedCurrentPage({ store, dispatch }) {
         <div className="main-received-current-prof">
           {cardList &&
             cardList.map((card, i, arr) => {
-              const state = arr[i-1] ? (arr[i-1].status > 1 ? 'filled' : 'unfilled') : 'first'
+              const state = arr[i - 1] ? (arr[i - 1].status > 1 ? 'filled' : 'unfilled') : 'first'
 
               return (
                 <Items
@@ -129,7 +135,7 @@ function ReceivedCurrentPage({ store, dispatch }) {
                   title={card.voucherId}
                 />
               )
-            } )}
+            })}
         </div>
       </div>
       <div className="footer-received-prof">

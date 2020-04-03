@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import { HeaderWithSideBar } from '../../../components/Header'
 import { Legend, LegendTypes } from '../../../components/Legend'
@@ -7,10 +8,10 @@ import './styles.scss'
 
 import { legendDonationWaitStatus, leader, unit, deliveredDate, cardsQuantity } from '../../../utils/strings'
 
-function WaitingReceivement() {
+function WaitingReceivement({ current }) {
   return (
     <>
-      <HeaderWithSideBar onGoBackClick={() => {}} title="DonationId/Bordero" />
+      <HeaderWithSideBar onGoBackClick={() => {}} title="DonationId/Bordero" current={current} steps={4} />
       <div className="component-waitingReceivement-content">
         <Legend type={LegendTypes.LIGHT} orientation={LegendTypes.START} message={legendDonationWaitStatus} />
         <Legend type={LegendTypes.STRONG} orientation={LegendTypes.START} message="Entregue para lider" />
@@ -31,6 +32,14 @@ function WaitingReceivement() {
       </div>
     </>
   )
+}
+
+WaitingReceivement.propTypes = {
+  current: PropTypes.number,
+}
+
+WaitingReceivement.defaultProps = {
+  current: 1,
 }
 
 export { WaitingReceivement }

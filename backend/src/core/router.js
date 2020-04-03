@@ -189,15 +189,8 @@ router.post('/checklist', authRequired('leader'), (req, res) =>
     }))
 
 // dar update na donation através do admin
-router.patch('/donations', authRequired('admin'), (req, res) =>
-  updateDonation(
-    req.auth.login,
-    req.body.leaderLogin,
-    req.body.siteId,
-    req.body.donationId,
-    req.body.quantity,
-    req.body.sentDate
-  )
+router.put('/donations', authRequired('admin'), (req, res) =>
+  updateDonation({ ...req.body, updatedBy: req.auth.login })
     .then(() => res.status(204).end())
     .catch(err => {
       console.log(err)

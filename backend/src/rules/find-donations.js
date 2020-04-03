@@ -2,7 +2,6 @@ import { Donation } from '../repositories'
 import { statuses } from '../enums'
 
 export async function findDonation () {
-  console.log('findALL')
   const donations = (
     await Donation.find()
   ).map(({
@@ -14,6 +13,7 @@ export async function findDonation () {
     status,
     created,
     scheduled,
+    sentDate,
     received,
     lastDelivery,
     completed,
@@ -29,6 +29,7 @@ export async function findDonation () {
     statusText: statuses[status],
     created,
     scheduled: scheduled || new Date(),
+    sentDate,
     received,
     lastDelivery,
     completed,

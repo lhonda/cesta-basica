@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import { WaitingReceivement } from '../WaitingReceivement'
 import { Legend, LegendTypes } from '../../../components/Legend'
@@ -7,10 +8,10 @@ import { receivedData, deadlineDate } from '../../../utils/strings'
 
 //import './styles.scss'
 
-function DeliveredLeader() {
+function DeliveredLeader({ current }) {
   return (
     <>
-      <WaitingReceivement current={2} />
+      <WaitingReceivement current={current} />
       <div className="component-waitingReceivement-footer">
         <div>
           <Legend type={LegendTypes.LIGHT} orientation={LegendTypes.START} message={receivedData} />
@@ -25,6 +26,14 @@ function DeliveredLeader() {
       </div>
     </>
   )
+}
+
+DeliveredLeader.propTypes = {
+  current: PropTypes.number,
+}
+
+DeliveredLeader.defaultProps = {
+  current: 2,
 }
 
 export { DeliveredLeader }

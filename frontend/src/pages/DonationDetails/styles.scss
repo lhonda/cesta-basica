@@ -2,7 +2,7 @@
   margin: 16px;
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 32px);
+  overflow-y: scroll;
 }
 .component-donationDetails-divider {
   margin-top: 25px;

@@ -9,14 +9,13 @@ import {
   checkCommitment,
   checklist,
   listVouchers,
-  filterDonation,
-  filterLeader,
-  filterSite,
-  findDonationByUser,
+  findDonationsByUser,
+  findDonationsByParam,
   receive,
   donate,
   endDonation,
-  deleteEvents
+  deleteEvents,
+  listLeaders
 } from '../rules'
 
 export const router = Router()
@@ -65,35 +64,21 @@ router.get('/vouchers', authRequired('leader'), (req, res) =>
     }))
 
 // listar doações que foram pre carregadas no banco de dados
-router.get('/filter/donations', authRequired('leader'), (req, res) =>
-  filterDonation(req.query.donationId)
-    .then(data => res.status(200).json(data))
-    .catch(err => {
-      console.log(err)
-      res.status(500).json({ message: err.message })
-    }))
-
-// listar doações que foram pre carregadas no banco de dados
-router.get('/filter/leader', authRequired('leader'), (req, res) =>
-  filterLeader(req.query.name)
-    .then(data => res.status(200).json(data))
-    .catch(err => {
-      console.log(err)
-      res.status(500).json({ message: err.message })
-    }))
-
-// listar doações que foram pre carregadas no banco de dados
-router.get('/filter/site', authRequired('leader'), (req, res) =>
-  filterSite(req.query.name)
-    .then(data => res.status(200).json(data))
-    .catch(err => {
-      console.log(err)
-      res.status(500).json({ message: err.message })
-    }))
-
-// listar doações que foram pre carregadas no banco de dados
 router.get('/donations', authRequired(), (req, res) =>
-  findDonationByUser(req.auth)
+  findDonationsByUser(
+    req.auth
+  )
+    .then(data => res.status(200).json(data))
+    .catch(err => {
+      console.log(err)
+      res.status(500).json({ message: err.message })
+    }))
+
+// listar doações que foram pre carregadas no banco de dados
+router.get('/donations/:id', authRequired('admin'), (req, res) =>
+  findDonationsByParam(
+    req.params.id
+  )
     .then(data => res.status(200).json(data))
     .catch(err => {
       console.log(err)
@@ -182,6 +167,15 @@ router.get('/commitment/check', authRequired('leader'), (req, res) =>
 router.post('/checklist', authRequired('leader'), (req, res) =>
   checklist(req.auth)
     .then(() => res.status(201).end())
+    .catch(err => {
+      console.log(err)
+      res.status(500).json({ message: err.message })
+    }))
+
+// guardar checklist, so retorna 201 sem conteudo
+router.get('/leaders', authRequired('admin'), (req, res) =>
+  listLeaders(req.query.name)
+    .then((data) => res.status(201).json(data))
     .catch(err => {
       console.log(err)
       res.status(500).json({ message: err.message })

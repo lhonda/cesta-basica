@@ -21,7 +21,7 @@ function ModalPage({ isOpenModal, title, actionExit, closeModal }) {
           backgroundColor: 'rgba(0, 0, 0, 0.4)',
         },
         content: {
-          height: '58vh',
+          height: '62vh',
           top: '50%',
           marginTop: '-29vh',
         },

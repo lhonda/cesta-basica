@@ -4,12 +4,12 @@ import PropTypes from 'prop-types'
 import { WaitingReceivement } from '../WaitingReceivement'
 import { Legend, LegendTypes } from '../../../components/Legend'
 
-import { receivedData, deadlineDate } from '../../../utils/strings'
+import { receivedData, deadlineDate, deliveredToLeader } from '../../../utils/strings'
 
-function DeliveredLeader({ current }) {
+function DeliveredLeader({ current, status }) {
   return (
     <>
-      <WaitingReceivement current={current} />
+      <WaitingReceivement current={current} status={status} />
       <div className="component-waitingReceivement-footer">
         <div>
           <Legend type={LegendTypes.LIGHT} orientation={LegendTypes.START} message={receivedData} />
@@ -27,11 +27,13 @@ function DeliveredLeader({ current }) {
 }
 
 DeliveredLeader.propTypes = {
+  status: PropTypes.string,
   current: PropTypes.number,
 }
 
 DeliveredLeader.defaultProps = {
   current: 2,
+  status: deliveredToLeader,
 }
 
 export { DeliveredLeader }

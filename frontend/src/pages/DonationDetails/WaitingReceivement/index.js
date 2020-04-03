@@ -6,15 +6,22 @@ import { Legend, LegendTypes } from '../../../components/Legend'
 
 import './styles.scss'
 
-import { legendDonationWaitStatus, leader, unit, deliveredDate, cardsQuantity } from '../../../utils/strings'
+import {
+  legendDonationWaitStatus,
+  leader,
+  unit,
+  deliveredDate,
+  cardsQuantity,
+  statusDonationWait,
+} from '../../../utils/strings'
 
-function WaitingReceivement({ current }) {
+function WaitingReceivement({ current, status }) {
   return (
     <>
       <HeaderWithSideBar onGoBackClick={() => {}} title="DonationId/Bordero" current={current} steps={4} />
       <div className="component-waitingReceivement-content">
         <Legend type={LegendTypes.LIGHT} orientation={LegendTypes.START} message={legendDonationWaitStatus} />
-        <Legend type={LegendTypes.STRONG} orientation={LegendTypes.START} message="Entregue para lider" />
+        <Legend type={LegendTypes.STRONG} orientation={LegendTypes.START} message={status} />
         <Legend type={LegendTypes.LIGHT} orientation={LegendTypes.START} message={leader} />
         <Legend type={LegendTypes.STRONG} orientation={LegendTypes.START} message="Carlos Alberto Nascimento" />
         <Legend type={LegendTypes.LIGHT} orientation={LegendTypes.START} message={unit} />
@@ -35,10 +42,12 @@ function WaitingReceivement({ current }) {
 }
 
 WaitingReceivement.propTypes = {
+  status: PropTypes.string,
   current: PropTypes.number,
 }
 
 WaitingReceivement.defaultProps = {
+  status: statusDonationWait,
   current: 1,
 }
 

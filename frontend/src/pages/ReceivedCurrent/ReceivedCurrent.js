@@ -55,7 +55,7 @@ function ReceivedCurrentPage({ store, dispatch }) {
     const filteredCards = cardList.filter(
       (card) => card.status === DonationStatus.ENTREGUE.id || card.status === DonationStatus.NAO_ENTREGUE.id
     )
-    return cardList.length === filteredCards.length
+    return cardList.length > 0 && cardList.length === filteredCards.length
   }
 
   const handleClickItem = (voucher, state) => state !== 'unfilled' && history.push(`${history.location.pathname}/${voucher}/prof`)

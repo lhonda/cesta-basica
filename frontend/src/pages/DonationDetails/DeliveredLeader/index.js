@@ -6,8 +6,6 @@ import { Legend, LegendTypes } from '../../../components/Legend'
 
 import { receivedData, deadlineDate } from '../../../utils/strings'
 
-//import './styles.scss'
-
 function DeliveredLeader({ current }) {
   return (
     <>

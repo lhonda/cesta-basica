@@ -57,14 +57,14 @@
   // iphone 6,7,8
 @media (min-width: 375px) and (min-height: 667px) {
   .modal-button {
-    bottom: -3rem;  
+    bottom: -4rem;  
   }
 }
 
-// pixel 2 XL
+// pixel 2
 @media(min-width: 411px) and (min-height: 731px) {
   .modal-button{
-    bottom: -6rem;
+    bottom: -7rem;
   }
 }
 
@@ -78,14 +78,14 @@
 // iphone 6,7,8 plus
 @media(min-width: 414px) and (min-height: 736px){
   .modal-button{
-    bottom: -6.5rem;
+    bottom: -7.5rem;
   }
 }
 
 // iphone X
 @media(min-width: 375px) and (min-height: 812px){
   .modal-button{
-    bottom: -8rem;
+    bottom: -9rem;
   }
 }
 

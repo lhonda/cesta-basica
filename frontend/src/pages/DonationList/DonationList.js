@@ -51,7 +51,7 @@ function DonationList({ store, dispatch, history }) {
       {donationList.length > 0 ? (
         <div className={`containerDonation__list containerDonation__list--${role}`}>
           {donationList.map((item) => {
-            const { quantity, status, donationId } = item
+            const { quantity, status, donationId, statusText } = item
             return (
               <DonationItem
                 title={donationId}

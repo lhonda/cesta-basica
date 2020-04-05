@@ -105,12 +105,13 @@ export const legendInputFullName = 'Nome Completo'
 export const legendInputCpf = 'CPF'
 
 export const legendPicDonation = 'Foto do recebimento'
+export const legendPhotoDeliveredDone = 'Foto<br>da entrega'
 export const legendPicDonationAdded = 'Foto<br> do recebimento adicionada '
 export const legendPicFiscalNode = 'Foto da nota fiscal'
 export const legendInputAddPic = 'adicionar foto da galeria'
 export const legendNFQuestion = 'Deseja adicionar Nota Fiscal?'
 
-export const legendAddPicPersonReceiveCard = 'Tirar uma foto da pessoa com o cartão'
+export const legendAddPicPersonReceiveCard = 'Tirar uma foto da pessoa com o cartão.'
 export const legendAddPicPersonReceivedDonation = 'Tirar uma foto da pessoa recebendo a doação.'
 export const legendAddPicPersonReceivedDonationWithDocument =
   'Tirar uma foto da pessoa segurando documento ao lado do rosto.'

@@ -165,8 +165,10 @@ function ReceivedCurrentProfPage({ store, dispatch }) {
                   isRequired={false}
                   handleOnChange={setCPF}
                 />
+
+                <Paragraph size={ParagraphTypes.SMALL} content="legendAddPicPersonReceiveCard" />
+
                 <div className="main-donation-received-current-prof">
-                  <Paragraph size={ParagraphTypes.SMALL} content="legendAddPicPersonReceiveCard" />
                   <SubTitle type={SubTitleTypes.LIGHT} width={SubTitleTypes.SIZE_SMALL} message={legendPhotoDeliveredDone} />
                   <File file={image} handleImage={handleImageFile} placeholder={legendInputAddPic} />
                 </div>

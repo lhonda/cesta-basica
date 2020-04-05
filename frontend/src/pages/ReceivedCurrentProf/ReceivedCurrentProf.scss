@@ -56,10 +56,13 @@ hr {
 }
 
 .main-donation-received-current-prof {
-  padding-top: 15px;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
+
+  h3 {
+    margin-top: 0;
+  }
 
   p {
     margin: 0;

@@ -19,7 +19,6 @@ import './ReceivedCurrent.scss'
 import {
   back,
   statusDonationReceivedCurrent,
-  titleDonation,
   legendDonationWaitDate,
   legendDonationWaitAmount,
   legendDonationReceivedFinishButton,
@@ -68,7 +67,6 @@ function ReceivedCurrentPage({ store, dispatch }) {
   useEffect(() => {
     dispatch({ type: types.CLEAN_CARD_LIST })
     const donation = findDonation(store, id)
-    console.log(donation)
     setCurrentDonation(donation || {})
     retrieveCards()
     if (cardList) {
@@ -76,10 +74,6 @@ function ReceivedCurrentPage({ store, dispatch }) {
     }
     setLoading(false)
   }, [])
-
-  const handleCardList = async () => {
-
-  }
 
   return (
     <>

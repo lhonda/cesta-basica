@@ -94,7 +94,7 @@ function ReceivedPage({ store, dispatch }) {
         </div>
         <div className="details-amount">
           <Legend type={LegendTypes.LIGHT} orientation={LegendTypes.END} message={legendDonationDateFinal} />
-          <Legend type={LegendTypes.STRONG} orientation={LegendTypes.END} message={formatDateTomorrow()} />
+          <Legend type={LegendTypes.STRONG} orientation={LegendTypes.END} message={formatDateTomorrow(currentDonation.received)} />
           <Legend
             type={LegendTypes.STRONG}
             orientation={LegendTypes.END}

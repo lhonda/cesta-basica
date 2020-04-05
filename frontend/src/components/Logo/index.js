@@ -15,7 +15,7 @@ LogoBack.propTypes = { height: PropTypes.string }
 LogoBack.defaultProps = { height: '24' }
 
 export const LogoClose = ({ height }) => <img src={icClose} alt="fechar" height={height} />
-LogoBack.propTypes = { height: PropTypes.string }
+LogoBack.propTypes = { height: PropTypes.number }
 LogoBack.defaultProps = { height: '24' }
 
 export const LogoBasket = () => (

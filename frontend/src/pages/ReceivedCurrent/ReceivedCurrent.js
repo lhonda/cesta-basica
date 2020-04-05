@@ -25,11 +25,14 @@ import {
   legendDonationReceivedFinishButton,
   legendDonationDateFinal,
   completeDeliveryTitle,
+  legendDonationWaitStatus,
 } from '../../utils/strings'
 import { handleToggleModal } from '../../services/handles'
 import { EndDonation } from '../../services/API/donationList'
-import { findDonation } from '../../utils/findDonationByid'
 import { formatDate } from '../../utils/formatDateToptbr'
+import { formatDateTomorrow } from '../../utils/formaDateTomorrow'
+import { findDonation } from '../../utils/findDonationByid'
+import { formatHour } from '../../utils/formatHour'
 import { Loader } from '../../components/Loader'
 
 import { DonationStatus } from '../../utils/donationStatus'
@@ -47,6 +50,7 @@ function ReceivedCurrentPage({ store, dispatch }) {
   function endDonations() {
     EndDonation(id, () => push('/donation-list'))
   }
+
   async function retrieveCards() {
     await CardList(dispatch, id)
   }
@@ -62,9 +66,9 @@ function ReceivedCurrentPage({ store, dispatch }) {
     state !== 'unfilled' && history.push(`${history.location.pathname}/${voucher}/prof`)
 
   useEffect(() => {
-    setLoading(true)
     dispatch({ type: types.CLEAN_CARD_LIST })
     const donation = findDonation(store, id)
+    console.log(donation)
     setCurrentDonation(donation || {})
     retrieveCards()
     if (cardList) {
@@ -72,6 +76,10 @@ function ReceivedCurrentPage({ store, dispatch }) {
     }
     setLoading(false)
   }, [])
+
+  const handleCardList = async () => {
+
+  }
 
   return (
     <>
@@ -83,21 +91,26 @@ function ReceivedCurrentPage({ store, dispatch }) {
           actionExit={endDonations}
           title={completeDeliveryTitle}
         />
+
         <div className="sidebar-donation-prof">
           <ButtonIcon handleClick={goBack}>
             <LogoBack height="10" />
           </ButtonIcon>
           <Legend type={LegendTypes.STRONG} message={back} />
         </div>
+
         <div className="header-received-prof">
-          <Title message={`${titleDonation} ${id}`} />
-          <Status message={statusDonationReceivedCurrent} />
-          <Sidebar current={3} />
+          <Title message={`${id}`} />
+          <Sidebar current={currentDonation.status} />
         </div>
         <div className="details-received">
+          <div className="details-status">
+            <Legend type={LegendTypes.LIGHT} orientation={LegendTypes.START} message={legendDonationWaitStatus} />
+            <Legend type={LegendTypes.STRONG} orientation={LegendTypes.START} message={statusDonationReceivedCurrent} />
+          </div>
           <div className="details-amount">
-            <Legend type={LegendTypes.LIGHT} orientation={LegendTypes.START} message={legendDonationWaitAmount} />
-            <Legend type={LegendTypes.STRONG} orientation={LegendTypes.START} message={cardList && cardList.length} />
+            <Legend type={LegendTypes.LIGHT} orientation={LegendTypes.END} message={legendDonationWaitAmount} />
+            <Legend type={LegendTypes.STRONG} orientation={LegendTypes.END} message={currentDonation.quantity || 0} />
           </div>
         </div>
         <div className="details-received">
@@ -106,15 +119,21 @@ function ReceivedCurrentPage({ store, dispatch }) {
             <Legend
               type={LegendTypes.STRONG}
               orientation={LegendTypes.START}
-              message={formatDate(currentDonation.scheduled)}
+              message={formatDate(currentDonation.received)}
+            />
+            <Legend
+              type={LegendTypes.STRONG}
+              orientation={LegendTypes.START}
+              message={formatHour(currentDonation.received)}
             />
           </div>
           <div className="details-amount">
             <Legend type={LegendTypes.LIGHT} orientation={LegendTypes.END} message={legendDonationDateFinal} />
+            <Legend type={LegendTypes.STRONG} orientation={LegendTypes.END} message={formatDateTomorrow(currentDonation.received)} />
             <Legend
               type={LegendTypes.STRONG}
               orientation={LegendTypes.END}
-              message={formatDate(currentDonation.completed)}
+              message={formatHour(currentDonation.received)}
             />
           </div>
         </div>

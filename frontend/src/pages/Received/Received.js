@@ -11,12 +11,16 @@ import { Button, ButtonTypes } from '../../components/Button'
 import { ButtonIcon } from '../../components/ButtonIcon'
 import { LogoBack } from '../../components/Logo'
 
+import { Loader } from '../../components/Loader'
+
+import { DonationsList } from '../../services/API/donationList'
+
 import './Received.scss'
 
 import { formatDate } from '../../utils/formatDateToptbr'
 import { formatDateTomorrow } from '../../utils/formaDateTomorrow'
 import { findDonation } from '../../utils/findDonationByid'
-import { formatHour } from '../../utils/formatHour';
+import { formatHour } from '../../utils/formatHour'
 import {
   back,
   legendDonationWaitStatus,
@@ -24,6 +28,7 @@ import {
   legendDonationWaitAmount,
   legendDonationReceivedButton,
   legendDonationDateFinal,
+  deliveredToLeader,
 } from '../../utils/strings'
 
 import * as analytics from '../../services/analytics'
@@ -32,13 +37,27 @@ function ReceivedPage({ store, dispatch }) {
   const { id } = useParams()
   const { push, location, goBack } = useHistory()
   const [currentDonation, setCurrentDonation] = useState({})
-  
+
+  const [loading, setLoading] = useState()
+
+  const fetchDonation = async () => {
+    await DonationsList(dispatch)
+  }
+
   useEffect(() => {
     const donation = findDonation(store, id)
     setCurrentDonation(donation || {})
-  }, [])
+
+    if (!donation.received) {
+      setLoading(true)
+      fetchDonation()
+      setLoading(false)
+    }
+  }, [store])
+
   return (
     <div className="container-received">
+      {loading && <Loader />}
       <div className="sidebar-donation-prof">
         <ButtonIcon handleClick={goBack}>
           <LogoBack height="10" />
@@ -52,7 +71,7 @@ function ReceivedPage({ store, dispatch }) {
       <div className="details-received">
         <div className="details-status">
           <Legend type={LegendTypes.LIGHT} orientation={LegendTypes.START} message={legendDonationWaitStatus} />
-          <Legend type={LegendTypes.STRONG} orientation={LegendTypes.START} message={currentDonation.statusText} />
+          <Legend type={LegendTypes.STRONG} orientation={LegendTypes.START} message={deliveredToLeader} />
         </div>
         <div className="details-amount">
           <Legend type={LegendTypes.LIGHT} orientation={LegendTypes.END} message={legendDonationWaitAmount} />

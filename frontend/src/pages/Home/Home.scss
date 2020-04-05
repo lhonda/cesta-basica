@@ -24,6 +24,10 @@
   h3 {
     margin-top: 0;
   }
+
+  img {
+    width: 100%;
+  }
 }
 
 .footerHome {
@@ -36,10 +40,13 @@
     letter-spacing: 0.2px;
     font-weight: bold;
     word-break: normal;
+    margin-top: 0;
   }
+
   span {
     display: inline;
   }
+
   span:before {
     content: "\a ";
     white-space: pre;

@@ -43,7 +43,6 @@ function ReceivedCurrentPage({ store, dispatch }) {
   const { cardList } = store
   const [showModal, setShowModal] = useState(false)
   const [currentDonation, setCurrentDonation] = useState({})
-  const [loading, setLoading] = useState(true)
   const { push, goBack } = useHistory()
 
   function endDonations() {
@@ -52,6 +51,10 @@ function ReceivedCurrentPage({ store, dispatch }) {
 
   async function retrieveCards() {
     await CardList(dispatch, id)
+  }
+
+  function clearCardList() {
+    dispatch({ type: types.CLEAN_CARD_LIST })
   }
 
   function verifyIfCardsAreFilled() {
@@ -65,19 +68,22 @@ function ReceivedCurrentPage({ store, dispatch }) {
     state !== 'unfilled' && history.push(`${history.location.pathname}/${voucher}/prof`)
 
   useEffect(() => {
-    dispatch({ type: types.CLEAN_CARD_LIST })
+    clearCardList()
+
     const donation = findDonation(store, id)
     setCurrentDonation(donation || {})
+
     retrieveCards()
+
     if (cardList) {
       verifyIfCardsAreFilled()
     }
-    setLoading(false)
   }, [])
 
   return (
     <>
-      {loading && <Loader />}
+      { cardList &&
+          cardList.length === 0 && <Loader /> }
       <div className="container-received-prof">
         <Modal
           closeModal={() => setShowModal(false)}

@@ -5,7 +5,9 @@ import './SubTitle.scss'
 import { SubTitleTypes } from './SubTitleTypes'
 
 function SubTitle({ size, width, type, message }) {
-  return <h3 className={`subtitle ${size} ${type} ${width}`}>{message}</h3>
+  return <h3 className={`subtitle ${size} ${type} ${width}`}>{
+    message.includes('<br>') ? <span dangerouslySetInnerHTML={{ __html: message }} /> : message
+  }</h3>
 }
 SubTitle.propTypes = {
   message: PropTypes.string.isRequired,

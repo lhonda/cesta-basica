@@ -11,6 +11,10 @@
   flex-direction: row;
   justify-content: space-between;
   flex-wrap: wrap;
+
+  ul {
+    margin: 5px 0;
+  }
 }
 .details-received {
   width: 100%;

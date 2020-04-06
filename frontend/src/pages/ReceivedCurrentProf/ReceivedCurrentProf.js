@@ -22,7 +22,7 @@ import {
   back,
   titleReceivedProf,
   legendAddPicPersonReceiveCard,
-  legendPicDonation,
+  legendPhotoDeliveredDone,
   legendInputAddPic,
   legendInputFullName,
   placeholderCPF,
@@ -126,11 +126,18 @@ function ReceivedCurrentProfPage({ store, dispatch }) {
             </ButtonIcon>
             <Legend type={LegendTypes.STRONG} message={back} />
           </div>
+
           <div className="header-donation-received-current-prof">
             <Title message={titleReceivedProf} />
-            <Paragraph size={ParagraphTypes.MEDIUM} content="descriptionDonationProf" />
-            <Items size={ItemsTypes.LARGE} align={ItemsTypes.START} title={`Cartão Nº ${voucher}`} />
-            <div style={{ paddingBottom: '.7rem' }} />
+            <Paragraph size={ParagraphTypes.HALF} content="descriptionDonationProf" />
+
+            <div className="details-received">
+              <div className="details-status">
+                <Legend type={LegendTypes.LIGHT} orientation={LegendTypes.START} message="Cartão" />
+                <Legend type={LegendTypes.STRONG} orientation={LegendTypes.START} message={voucher} />
+              </div>
+            </div>
+
             <Select
               value={delivered}
               placeholder="Status da entrega do cartão"
@@ -148,7 +155,7 @@ function ReceivedCurrentProfPage({ store, dispatch }) {
                   value={fullName}
                   handleOnChange={setFullName}
                 />
-                {fullName.length >= 2 ? <></> : <div style={{ paddingBottom: '.7rem' }} />}
+
                 <Input
                   placeholder={placeholderCPF}
                   inputType={inputTypes.CPF}
@@ -158,16 +165,18 @@ function ReceivedCurrentProfPage({ store, dispatch }) {
                   isRequired={false}
                   handleOnChange={setCPF}
                 />
-                <div className="details-donation-received-current-prof" />
+
+                <Paragraph size={ParagraphTypes.SMALL} content="legendAddPicPersonReceiveCard" />
+
                 <div className="main-donation-received-current-prof">
-                  <Legend size={LegendTypes.SIZE_LARGE} message={legendAddPicPersonReceiveCard} />
-                  <SubTitle type={SubTitleTypes.MEDIUM} width={SubTitleTypes.SIZE_SMALL} message={legendPicDonation} />
+                  <SubTitle type={SubTitleTypes.LIGHT} width={SubTitleTypes.SIZE_SMALL} message={legendPhotoDeliveredDone} />
                   <File file={image} handleImage={handleImageFile} placeholder={legendInputAddPic} />
                 </div>
               </>
             )}
           </div>
         </div>
+
         <div className="footer-donation-received-current-prof">
           <Button size={ButtonTypes.LARGE} message={confirm} disable={disableButton} />
         </div>

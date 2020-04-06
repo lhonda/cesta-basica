@@ -5,8 +5,9 @@ import { Title } from '../../components/Title'
 import { SubTitle, SubTitleTypes } from '../../components/SubTitle'
 import { Paragraph } from '../../components/Paragraph'
 import { Button, ButtonTypes } from '../../components/Button'
-import './Modal.scss'
 import { LogoClose } from '../../components/Logo'
+import { ButtonIcon } from '../../components/ButtonIcon'
+import './Modal.scss'
 
 import { contate, contateNumber } from '../../utils/strings'
 
@@ -20,7 +21,7 @@ function ModalPage({ isOpenModal, title, actionExit, closeModal }) {
           backgroundColor: 'rgba(0, 0, 0, 0.4)',
         },
         content: {
-          height: '58vh',
+          height: '62vh',
           top: '50%',
           marginTop: '-29vh',
         },
@@ -30,8 +31,10 @@ function ModalPage({ isOpenModal, title, actionExit, closeModal }) {
       contentLabel={title}
       onRequestClose={actionExit}
     >
-      <div onClick={closeModal} className="button-close">
-        <LogoClose />
+      <div className="modal-header">
+        <ButtonIcon handleClick={closeModal}>
+          <LogoClose height="10" />
+        </ButtonIcon>
       </div>
       <div className="modal-content">
         <Title message={title} />

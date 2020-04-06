@@ -7,6 +7,7 @@
 
   .details-received {
     height: auto;
+    padding-bottom: 0;
   }
 }
 
@@ -15,6 +16,10 @@
   flex-direction: row;
   justify-content: space-between;
   flex-wrap: wrap;
+
+  .titleTerms {
+    padding-top: 0;
+  }
 
   h2, h5 {
     margin-top: 5px;
@@ -45,6 +50,7 @@ hr {
   width: 100%;
 }
 .main-received-current-prof {
+  height: 35vh;
   overflow-y: scroll;
 
 }

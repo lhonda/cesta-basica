@@ -1,4 +1,4 @@
-import { Donation, User } from '../repositories'
+import { Donation, User, Site } from '../repositories'
 import { statuses } from '../enums'
 
 export async function detailsDonation ({ donationId }) {
@@ -11,9 +11,6 @@ export async function detailsDonation ({ donationId }) {
         donationId,
         leaderLogin,
         siteId,
-        site,
-        city,
-        state,
         quantity,
         receivedQuantity,
         donor,
@@ -28,14 +25,28 @@ export async function detailsDonation ({ donationId }) {
         strayed,
         point
       }) => {
-        const { name } = await User.findOne({ login: leaderLogin }, { name: 1 })
+        const leader = await User.findOne({ login: leaderLogin }, { name: 1 })
+
+        if (!leader) {
+          throw new Error('Invalid leaderLogin')
+        }
+
+        const site = await Site.findOne({ siteId }, { name: 1, city: 1, state: 1 })
+
+        if (!site) {
+          throw new Error('Invalid siteId')
+        }
+
+        const leaderName = leader.name
+        const siteName = site.name
+        const { city, state } = site
 
         return {
           donationId,
           leaderLogin,
-          name,
+          leaderName,
           siteId,
-          site,
+          siteName,
           city,
           state,
           quantity,
@@ -56,6 +67,12 @@ export async function detailsDonation ({ donationId }) {
       })
     return { donations }
   } catch (error) {
+    if (error.message === 'Invalid leaderLogin') {
+      throw new Error(error.message)
+    }
+    if (error.message === 'Invalid siteId') {
+      throw new Error(error.message)
+    }
     throw new Error(`Does not exists donation with donationId ${donationId}`)
   }
 }

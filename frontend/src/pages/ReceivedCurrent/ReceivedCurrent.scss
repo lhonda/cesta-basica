@@ -1,9 +1,9 @@
 .container-received-prof {
   display: flex;
   flex-direction: column;
-  height: 80vh;
+  height: 83vh;
   overflow: hidden;
-  padding: 40px 16px 0;
+  padding: 1.1rem 1rem 0 1rem;
 
   .details-received {
     height: auto;
@@ -23,6 +23,10 @@
 
   h5 {
     margin-top: 10px;
+  }
+
+  ul {
+    margin: 5px 0;
   }
 }
 .details-received-prof {

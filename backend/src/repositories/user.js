@@ -11,9 +11,6 @@ const schema = new Schema({
     type: String,
     required: [true, 'password is required']
   },
-  initialPassword: {
-    type: String
-  },
   name: {
     type: String
   },

@@ -1,15 +1,13 @@
-import { Donation } from '../repositories'
+import { Donation, User } from '../repositories'
 import { statuses } from '../enums'
 
 export async function detailsDonation ({ donationId }) {
-  console.log(donationId)
   if (!donationId) {
     throw new Error('DonationId is required')
   }
-
   try {
     const donations = await Donation.findOne({ donationId })
-      .map(({
+      .map(async ({
         donationId,
         leaderLogin,
         siteId,
@@ -29,28 +27,33 @@ export async function detailsDonation ({ donationId }) {
         completed,
         strayed,
         point
-      }) => ({
-        donationId,
-        leaderLogin,
-        siteId,
-        site,
-        city,
-        state,
-        quantity,
-        receivedQuantity,
-        donor,
-        status,
-        statusText: statuses[status],
-        receivedCardsS3Key,
-        created,
-        scheduled,
-        sentDate,
-        received,
-        lastDelivery,
-        completed,
-        strayed,
-        point
-      }))
+      }) => {
+        const { name } = await User.findOne({ login: leaderLogin }, { name: 1 })
+
+        return {
+          donationId,
+          leaderLogin,
+          name,
+          siteId,
+          site,
+          city,
+          state,
+          quantity,
+          receivedQuantity,
+          donor,
+          status,
+          statusText: statuses[status],
+          receivedCardsS3Key,
+          created,
+          scheduled,
+          sentDate,
+          received,
+          lastDelivery,
+          completed,
+          strayed,
+          point
+        }
+      })
     return { donations }
   } catch (error) {
     throw new Error(`Does not exists donation with donationId ${donationId}`)

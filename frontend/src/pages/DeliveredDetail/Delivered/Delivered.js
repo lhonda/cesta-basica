@@ -4,6 +4,8 @@ import PropTypes from 'prop-types'
 import { completeName, CPF } from '../../../utils/strings'
 import { ProofOfDelivery } from '../../../components/ProofOfDelivery'
 
+import { maskToCpf } from '../../../utils/masksInput'
+
 export const Delivered = ({ recipientName, recipientCPF, linkToImage }) => (
   <>
     <div className="containerDonationDetails__delivered--mt containerDonationDetails__delivered--left">
@@ -14,11 +16,12 @@ export const Delivered = ({ recipientName, recipientCPF, linkToImage }) => (
     {recipientCPF && (
       <div className="containerDonationDetails__delivered--mt containerDonationDetails__delivered--left">
         <div className="containerDonationDetails__delivered__title">{CPF}</div>
-        <div className="containerDonationDetails__delivered__value">{recipientCPF}</div>
+        <div className="containerDonationDetails__delivered__value">{maskToCpf(String(recipientCPF))}</div>
       </div>
     )}
 
     <div className="containerDonationDetails__delivered--mt" />
+    {/* refatorar o componente */}
     <ProofOfDelivery linkToImage={linkToImage} />
   </>
 )

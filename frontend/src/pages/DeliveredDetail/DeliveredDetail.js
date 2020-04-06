@@ -9,27 +9,34 @@ import { Header } from '../../components/Header'
 
 import { DeliveryInformation } from './DeliveryInformation'
 import { Delivered } from './Delivered'
+import { Undeliverable } from './Undeliverable'
 
-const teste = [null, true, false]
+const teste = {
+  1: null,
+  2: true,
+  3: false,
+}
 
 function DeliveredDetail({ store, dispatch, history, match }) {
   const { id, voucher } = match.params
   const { goBack } = history
+  // comentarios
   const { delivered, receivedCpf, receivedName, statusText, status } = store.cardList.find(
     ({ voucherId }) => voucherId === voucher
   )
-  useEffect(() => {
-    CardList(dispatch, id)
+  useEffect(async () => {
+    await CardList(dispatch, id)
   }, [])
   return (
     <div className="containerDonationDetails">
       <Header title={voucher} onGoBackClick={goBack} />
-
       <DeliveryInformation deliveryDate={delivered} statusDelivery={statusText} />
 
-      {/* regular expression - colocar o formatador de cpf */}
-      {teste[status] && (
+      {/* regular expression */}
+      {teste[status] ? (
         <Delivered recipientName={receivedName} recipientCPF={receivedCpf} linkToImage="https://www.google.com" />
+      ) : (
+        <Undeliverable comment="lorem" />
       )}
     </div>
   )

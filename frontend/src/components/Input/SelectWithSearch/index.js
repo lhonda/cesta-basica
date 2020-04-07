@@ -4,6 +4,9 @@ import PropTypes from 'prop-types'
 import Input from '../Input'
 
 function InputSelectSearch({ value, handleChange, placeholder, data }) {
+
+  console.log(placeholder, data)
+
   return (
     <>
       <Input

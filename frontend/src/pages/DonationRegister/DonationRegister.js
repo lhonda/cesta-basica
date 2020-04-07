@@ -21,7 +21,12 @@ function DonationRegister({ store, dispatch }) {
     <div className="component-container">
       <BackButton goBack={goBack} />
       <Title message="Cadastrar entrega" />
-      <RegisterForm handleSubmit={onSubmit} leaderList={leaderList} donationList={donationList} dispatch={dispatch} />
+      <RegisterForm
+        handleSubmit={onSubmit}
+        leaderList={leaderList || []}
+        donationList={donationList || []}
+        dispatch={dispatch}
+      />
     </div>
   )
 }

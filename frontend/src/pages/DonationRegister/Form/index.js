@@ -6,7 +6,7 @@ import { Input, InputSelectSearch } from '../../../components/Input'
 import { ConfirmButton } from '../../../components/Button/ConfirmButton'
 
 import { LeadersList } from '../../../services/API/leaderList'
-import { DonationsList } from '../../../services/API/donationList';
+import { DonationsList } from '../../../services/API/donationList'
 
 import './Form.scss'
 
@@ -39,6 +39,14 @@ function RegisterForm({ handleSubmit, leaderList, donationList, dispatch }) {
     await DonationsList(dispatch)
   }
 
+  function convert() {
+    return donationList.map((donation) => ({
+      name: donation.donationId
+    }))
+  }
+
+  console.log('donationId: ', donationId)
+
   return (
     <div className="form-container">
       <form
@@ -60,7 +68,7 @@ function RegisterForm({ handleSubmit, leaderList, donationList, dispatch }) {
           handleChange={setUnitName}
         />
         <InputSelectSearch
-          data={donationList}
+          data={convert()}
           value={donationId}
           placeholder="Bordero"
           inputType={inputTypes.TEXT}

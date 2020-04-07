@@ -5,21 +5,19 @@ import Input from '../Input'
 
 function InputSelectSearch({ value, handleChange, placeholder, data }) {
 
-  console.log(placeholder, data)
-
   return (
     <>
       <Input
         value={value}
         placeholder={placeholder}
-        listName="data-list"
+        listName={value}
         name="data-list-choice"
         handleOnChange={handleChange}
       />
 
-      <datalist id="data-list">
+      <datalist id={value}>
         {data.map((item) => (
-            <option value={item.name} />
+          <option value={item.name} />
         ))}
       </datalist>
     </>

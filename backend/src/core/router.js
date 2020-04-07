@@ -25,10 +25,14 @@ export const router = Router()
 router.get('/health-check', (req, res) => res.status(200).json(healthCheck()))
 
 // criacao de novos usuarios
-router.post('/users', authRequired('admin'), (req, res, next) =>
-  createUser(req.body)
-    .then(user => res.status(201).json(user))
-    .catch(next))
+router.post('/users', authRequired('admin'), (req, res) => createUser(req.body)
+  .then(user => res.status(201).json(user))
+  .catch(err => {
+    console.log(err)
+    err.name === 'ValidationError' || err.name === 'Error'
+      ? res.status(400).json({ message: err.message })
+      : res.status(500).json({ message: 'Internal' })
+  }))
 
 // login generico / lider
 router.post('/sign-in', (req, res) =>

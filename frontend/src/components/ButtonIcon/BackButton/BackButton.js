@@ -8,7 +8,7 @@ import { Legend, LegendTypes } from '../../Legend'
 import './BackButton.scss'
 import { back } from '../../../utils/strings'
 
-export default function BackButton(goBack) {
+export default function BackButton({ goBack }) {
   return (
     <div className="container-back-button">
       <ButtonIcon handleClick={goBack}>

@@ -16,6 +16,7 @@ const cleanState = {
   photoReceived: null,
   userLocation: {},
   cardList: [],
+  leaderList: null,
 }
 
 function saveState(newState) {
@@ -38,6 +39,7 @@ const actionMap = {
   [types.SET_TOKEN]: (state, { token }) => saveState({ ...state, auth: { ...state.auth, token } }),
   [types.SET_DECLARATION]: (state, payload) => saveState({ ...state, declaration: payload }),
   [types.SET_HEALTHCHECK]: (state, payload) => saveState({ ...state, doneHealthCheck: payload }),
+  [types.SET_LEADER_LIST]: (state, payload) => saveState({ ...state, leaderList: payload }),
   [types.SET_LOGOUT]: () => logout(),
   [types.SET_DONATION_LIST]: (state, payload) => saveState({ ...state, donationList: payload }),
   [types.SET_PHOTO_RECEIVED]: (state, payload) => saveState({ ...state, photoReceived: payload }),

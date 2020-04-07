@@ -35,7 +35,6 @@ export async function updateDonation ({
     siteId,
     quantity,
     status: 1,
-    created: new Date(),
     sentDate
   })
 }

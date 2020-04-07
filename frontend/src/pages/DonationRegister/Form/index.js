@@ -39,13 +39,11 @@ function RegisterForm({ handleSubmit, leaderList, donationList, dispatch }) {
     await DonationsList(dispatch)
   }
 
-  function convert() {
+  function convertDonationList() {
     return donationList.map((donation) => ({
-      name: donation.donationId
+      name: donation.donationId,
     }))
   }
-
-  console.log('donationId: ', donationId)
 
   return (
     <div className="form-container">
@@ -68,7 +66,7 @@ function RegisterForm({ handleSubmit, leaderList, donationList, dispatch }) {
           handleChange={setUnitName}
         />
         <InputSelectSearch
-          data={convert()}
+          data={convertDonationList()}
           value={donationId}
           placeholder="Bordero"
           inputType={inputTypes.TEXT}

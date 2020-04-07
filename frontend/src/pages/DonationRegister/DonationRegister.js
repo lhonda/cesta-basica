@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react'
+import React from 'react'
+import { useHistory } from 'react-router-dom'
 import { connect } from '../../store'
 
 import { RegisterForm } from './Form'
@@ -9,9 +10,10 @@ import './DonationRegister.scss'
 
 function DonationRegister({ store, dispatch }) {
   const { leaderList, donationList } = store
+  const history = useHistory()
 
   function goBack() {
-    console.log('goBack')
+    history.push('/donation-list')
   }
   function onSubmit(request) {
     console.log('onSubmit - request: ', request)

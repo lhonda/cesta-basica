@@ -1,5 +1,6 @@
 import { encrypt } from '../../../services'
 import HttpException from '../../../core/http-exception'
+import { CPF_REGEX } from '../filter-util'
 
 const forEachFunc = (
   [
@@ -14,10 +15,9 @@ const forEachFunc = (
 ) => {
   // VALIDAR DADOS DOS CAMPOS DE ENTRADA AQUI
 
-  // DEIXEI AQUI PARA TESTE
-  // if (lineNumber === '5' || lineNumber === '10') {
-  //   return erros.push(parseInt(lineNumber, 10) + 1);
-  // }
+  if (!CPF_REGEX.test(cpf)) {
+    return erros.push(parseInt(lineNumber, 10) + 1)
+  }
 
   // Se existirem erros, nem perde mais tempo processando dados que serão descartados
   if (erros.length === 0) {

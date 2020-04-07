@@ -48,3 +48,12 @@ export async function EndDonation(id, nextPage) {
     return 'failed'
   }
 }
+
+export async function DonationDetails(dispatch, id) {
+  try {
+    const { donations } = (await Api.get(`${route}/${id}/details`, { params: { id } })).data
+    dispatch({ type: types.SET_DONATION_DETAILS, payload: donations })
+  } catch (err) {
+    return 'failed'
+  }
+}

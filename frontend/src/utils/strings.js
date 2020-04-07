@@ -63,7 +63,7 @@ export const linkChecklist = 'Estou com sintomas, o que fazer?'
 
 // Donation list
 export const donationListVoidText = 'Você está sem pedidos <br/>de doações no momento.'
-export const donationTitlePage = 'Lista de doações'
+export const donationTitlePage = 'Lista de entregas'
 export const exitText = 'Sair'
 
 // Donation screen
@@ -87,7 +87,11 @@ export const legendDonationReceivedFinishButton = 'Encerrar Entrega'
 export const completedFirstLetterCapitalized = 'Completo'
 export const returnedFirstLetterCapitalized = 'Devolvido'
 export const lostFirstLetterCapitalized = 'Extraviado'
-export const deliveredToLeader = 'Entrega Recebida'
+export const deliveredToLeader = 'Entregue para líder'
+export const deliveredDate = 'Data de envio'
+export const cardsQuantity = 'Quantidade de cartoes'
+export const receivedData = 'Data de recebimento'
+export const deadlineDate = 'Prazo final para entrega'
 
 // Donation Prof screen
 export const titleDonationProf = 'Evidência de Recebimento'
@@ -105,6 +109,7 @@ export const legendInputFullName = 'Nome Completo'
 export const legendInputCpf = 'CPF'
 
 export const legendPicDonation = 'Foto do recebimento'
+export const legendPicDonationWithNewLine = 'Foto<br> do recebimento'
 export const legendPhotoDeliveredDone = 'Foto<br>da entrega'
 export const legendPicDonationAdded = 'Foto<br> do recebimento adicionada '
 export const legendPicFiscalNode = 'Foto da nota fiscal'
@@ -129,5 +134,7 @@ export const registerNewDonation = 'Cadastrar Entrega'
 // Generic
 export const WORD_NO = 'Não'
 export const WORD_YES = 'Sim'
+export const leader = 'Lider'
+export const unit = 'Unidade'
 export const deliveredFirstLetterCapitalized = 'Entregue'
 export const notDeliveredFirstLetterCapitalized = 'Não entregue'

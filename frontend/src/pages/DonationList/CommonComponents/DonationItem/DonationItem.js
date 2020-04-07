@@ -25,7 +25,7 @@ function DonationItem({ title, quantity, stateDonation, donationId, userRole }) 
       }
     },
     admin() {
-      alert('admin')
+      history.push(`/donation/${donationId}/details`)
     },
   }
   const isComplete = stateDonation === donationItemTypes[4].id

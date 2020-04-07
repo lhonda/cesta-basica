@@ -9,14 +9,14 @@ import {
   checklist,
   findVouchersByUser,
   findDonationsByUser,
-  findDonationsByParam,
   receive,
   donate,
   endDonation,
   detailsDonation,
   deleteEvents,
   updateDonation,
-  listLeaders
+  listLeaders,
+  listSites
 } from '../rules'
 
 export const router = Router()
@@ -52,21 +52,12 @@ router.get('/vouchers', authRequired(), (req, res, next) =>
     role: req.auth.role,
     login: req.auth.login,
     donationId: req.query.donationId
-  })
-    .then(data => res.status(200).json(data))
+  }).then(data => res.status(200).json(data))
     .catch(next))
 
 // listar doações que foram pre carregadas no banco de dados
 router.get('/donations', authRequired(), (req, res, next) =>
-  findDonationsByUser(
-    req.auth
-  )
-    .then(data => res.status(200).json(data))
-    .catch(next))
-
-// listar doações que foram pre carregadas no banco de dados
-router.get('/donations/:id', authRequired('admin'), (req, res, next) =>
-  findDonationsByParam(req.params.id)
+  findDonationsByUser(req.auth, req.query.donationId)
     .then(data => res.status(200).json(data))
     .catch(next))
 
@@ -151,7 +142,13 @@ router.put('/donations', authRequired('admin'), (req, res, next) =>
     .catch(next))
 
 // listar os leaders através de um filtro
-router.get('/leaders/:name', authRequired('admin'), (req, res, next) =>
-  listLeaders(req.params.name)
+router.get('/leaders', authRequired('admin'), (req, res, next) =>
+  listLeaders(req.query.name)
+    .then((data) => res.status(200).json(data))
+    .catch(next))
+
+// listar todos os sites(locais)
+router.get('/sites', authRequired('admin'), (req, res, next) =>
+  listSites()
     .then((data) => res.status(200).json(data))
     .catch(next))

@@ -1,4 +1,4 @@
-import { getConnectionState } from '../core/database'
+import { getConnectionState, isConnected } from '../core/database'
 
 const SECONDS_PER_HOUR = 3600
 const MINUTES_PER_HOUR = 60
@@ -19,7 +19,8 @@ export function healthCheck () {
   return {
     uptime: toHHMMSS(process.uptime()),
     database: {
-      connected: getConnectionState().connected
+      connected: isConnected(),
+      state: getConnectionState()
     }
   }
 }

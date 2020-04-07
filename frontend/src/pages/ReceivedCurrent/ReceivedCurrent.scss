@@ -1,12 +1,13 @@
 .container-received-prof {
   display: flex;
   flex-direction: column;
-  height: 80vh;
+  height: 83vh;
   overflow: hidden;
-  padding: 40px 16px 0;
+  padding: 1.1rem 1rem 0 1rem;
 
   .details-received {
     height: auto;
+    padding-bottom: 0;
   }
 }
 
@@ -16,6 +17,10 @@
   justify-content: space-between;
   flex-wrap: wrap;
 
+  .titleTerms {
+    padding-top: 0;
+  }
+
   h2, h5 {
     margin-top: 5px;
     margin-bottom: 0;
@@ -23,6 +28,10 @@
 
   h5 {
     margin-top: 10px;
+  }
+
+  ul {
+    margin: 5px 0;
   }
 }
 .details-received-prof {
@@ -41,6 +50,7 @@ hr {
   width: 100%;
 }
 .main-received-current-prof {
+  height: 35vh;
   overflow-y: scroll;
 
 }

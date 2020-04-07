@@ -5,9 +5,9 @@ import checkVoucher from './voucher/check'
 const check = {
   user: checkUsers,
   donation: checkDonation,
-  voucher: checkVoucher,
+  voucher: checkVoucher
 }
 
-export function checkFile(data, type) {
+export function checkFile (data, type) {
   return check[type] ? check[type](data) : ''
 }

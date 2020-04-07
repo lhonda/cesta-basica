@@ -5,9 +5,9 @@ import filterVoucher from './voucher/filter'
 const filter = {
   user: filterUsers,
   donation: filterDonation,
-  voucher: filterVoucher,
+  voucher: filterVoucher
 }
 
-export function filterFile(data, type) {
+export function filterFile (data, type) {
   return filter[type] ? filter[type](data) : ''
 }

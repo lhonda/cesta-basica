@@ -10,11 +10,11 @@ const forEachFunc = (
     ]
   ],
   sucess,
-  erros,
+  erros
 ) => {
-  //VALIDAR DADOS DOS CAMPOS DE ENTRADA AQUI
+  // VALIDAR DADOS DOS CAMPOS DE ENTRADA AQUI
 
-  //DEIXEI AQUI PARA TESTE
+  // DEIXEI AQUI PARA TESTE
   // if (lineNumber === '5' || lineNumber === '10') {
   //   return erros.push(parseInt(lineNumber, 10) + 1);
   // }
@@ -22,19 +22,31 @@ const forEachFunc = (
   // Se existirem erros, nem perde mais tempo processando dados que serão descartados
   if (erros.length === 0) {
     return sucess.push({
-      password: encrypt(password), site, city, state, name, rg, phone, email,
-      birthdate, deliveryLocation, deliveryCep, slums, userType,
-      role: 'leader', login: cpf
-    });
+      password: encrypt(password),
+      site,
+      city,
+      state,
+      name,
+      rg,
+      phone,
+      email,
+      birthdate,
+      deliveryLocation,
+      deliveryCep,
+      slums,
+      userType,
+      role: 'leader',
+      login: cpf
+    })
   }
-};
+}
 
 export default async (data) => {
-  const invalid = [];
-  const valid = [];
-  Object.entries(data).forEach((line) => forEachFunc(line, valid, invalid));
+  const invalid = []
+  const valid = []
+  Object.entries(data).forEach((line) => forEachFunc(line, valid, invalid))
   if (invalid.length > 0) {
-    throw new HttpException(422, `Dado(s) inconsistente(s) na(s) linha(s) ${invalid.join(', ')}`);
+    throw new HttpException(422, `Dado(s) inconsistente(s) na(s) linha(s) ${invalid.join(', ')}`)
   }
-  return valid;
-};
+  return valid
+}

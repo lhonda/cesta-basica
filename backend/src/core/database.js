@@ -11,7 +11,7 @@ const connectionStates = {
 }
 
 export const getConnectionState = () =>
-  connectionStates[mongoose.connection.readyState]||connectionStates[0]
+  connectionStates[mongoose.connection.readyState] || connectionStates[0]
 
 export const isConnected = () =>
   mongoose.connection.readyState === 1

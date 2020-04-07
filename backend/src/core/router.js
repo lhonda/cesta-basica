@@ -17,7 +17,7 @@ import {
   updateDonation,
   listLeaders,
   listSites,
-  insertDataFromFile,
+  insertDataFromFile
 } from '../rules'
 
 export const router = Router()

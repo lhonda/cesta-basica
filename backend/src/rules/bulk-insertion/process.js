@@ -5,9 +5,9 @@ import processVoucher from './voucher/process'
 const process = {
   user: processUsers,
   donation: processDonation,
-  voucher: processVoucher,
+  voucher: processVoucher
 }
 
-export function processFile(data, type) {
+export function processFile (data, type) {
   return process[type] ? process[type](data) : ''
 }

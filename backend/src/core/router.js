@@ -16,7 +16,8 @@ import {
   deleteEvents,
   updateDonation,
   listLeaders,
-  listSites
+  listSites,
+  insertDataFromFile,
 } from '../rules'
 
 export const router = Router()
@@ -152,3 +153,12 @@ router.get('/sites', authRequired('admin'), (req, res, next) =>
   listSites()
     .then((data) => res.status(200).json(data))
     .catch(next))
+
+// Inclusão de dados via arquivo;
+router.post('/load/:type', (req, res) => {
+  insertDataFromFile({ file: req.files.file, type: req.params.type })
+    .then(processResult => res.status(200).json(processResult))
+    .catch(
+      err =>
+        res.status(err.statusCode || 500).json({ message: err.message }))
+})

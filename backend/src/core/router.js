@@ -30,7 +30,7 @@ router.post('/users', authRequired('admin'), (req, res) => createUser(req.body)
   .then(user => res.status(201).json(user))
   .catch(err => {
     console.log(err)
-    err.name === 'ValidationError'
+    err.name === 'ValidationError' || err.name === 'Error'
       ? res.status(400).json({ message: err.message })
       : res.status(500).json({ message: 'Internal' })
   }))

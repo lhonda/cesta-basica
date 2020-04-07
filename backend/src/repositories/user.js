@@ -11,9 +11,6 @@ const schema = new Schema({
     type: String,
     required: [true, 'password is required']
   },
-  initialPassword: {
-    type: String
-  },
   name: {
     type: String
   },
@@ -39,6 +36,10 @@ const schema = new Schema({
   },
   birthdate: {
     type: Date
+  },
+  siteId: {
+    type: Number,
+    trim: true
   },
   site: {
     type: String

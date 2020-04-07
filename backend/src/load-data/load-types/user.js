@@ -8,7 +8,6 @@ export async function process () {
     return {
       login: row.cpf,
       password: row.password,
-      initialPassword: row.password,
       name: row.name,
       role: 'leader',
       email: row.email,

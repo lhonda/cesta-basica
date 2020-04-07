@@ -1,0 +1,14 @@
+.component-deliveredLeader-imageButton {
+  padding-top: 0.4rem;
+}
+
+.component-deliveredLeader-footer{
+  display: flex;
+  & h5 {
+    margin: 0.2rem 0;
+  }
+
+  div {
+    width: 50%;
+  }
+}

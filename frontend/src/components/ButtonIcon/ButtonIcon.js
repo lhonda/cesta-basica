@@ -8,7 +8,7 @@ import { ButtonIconTypes } from './ButtonIconTypes'
 function ButtonIcon({ children, size, handleClick, disable, type }) {
   return (
     <button
-      type="submit"
+      type="button"
       tabIndex={0}
       disabled={disable}
       onClick={handleClick}

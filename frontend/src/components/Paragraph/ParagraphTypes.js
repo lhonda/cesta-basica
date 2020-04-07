@@ -3,6 +3,7 @@ export const ParagraphTypes = {
   NORMAL: 'normal',
   LIGHT: 'light',
   SMALL: 'small',
+  HALF: 'half',
   MEDIUM: 'medium',
   LARGE: 'large',
   BOLD: 'bold',

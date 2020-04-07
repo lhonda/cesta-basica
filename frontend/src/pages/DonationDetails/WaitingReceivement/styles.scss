@@ -1,0 +1,13 @@
+.component-waitingReceivement-content {
+  & h5 {
+    margin: 0.2rem 0;
+  }
+}
+
+.component-waitingReceivement-footer{
+  display: flex;
+
+  div {
+    width: 50%;
+  }
+}

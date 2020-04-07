@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import './DeliveryInformation.scss'
+import { formatHour } from '../../../utils/formatHour'
 
 import { evidenceOfDelivered, deliveredDate, deliveredHour, statusDelivered } from '../../../utils/strings'
 import { formatDate } from '../../../utils/formatDateToptbr'
@@ -24,7 +25,7 @@ export const DeliveryInformation = ({ deliveryDate, statusDelivery }) => (
           className="containerDonationDetails__delivered__title"
           dangerouslySetInnerHTML={{ __html: deliveredHour }}
         />
-        <div className="containerDonationDetails__delivered__value">{getHour(deliveryDate)}</div>
+        <div className="containerDonationDetails__delivered__value">{formatHour(deliveryDate)}</div>
       </div>
     </div>
 

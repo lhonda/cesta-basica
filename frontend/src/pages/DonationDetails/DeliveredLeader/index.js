@@ -14,7 +14,7 @@ import { formatDateTomorrow } from '../../../utils/formaDateTomorrow'
 import './styles.scss'
 
 function DeliveredLeader({ current, donation }) {
-  const { received } = donation
+  const { received, receivedCardsS3Key } = donation
 
   return (
     <>
@@ -32,7 +32,7 @@ function DeliveredLeader({ current, donation }) {
         </div>
       </div>
       <div className="component-deliveredLeader-imageButton">
-        <ShowImageButtonWithTitle linkToImage="" text={legendPicDonationWithNewLine} />
+        <ShowImageButtonWithTitle linkToImage={receivedCardsS3Key} text={legendPicDonationWithNewLine} />
       </div>
     </>
   )

@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
+import { useHistory } from 'react-router-dom'
 
 import { Loader } from '../../../components/Loader'
 import { DeliveredLeader } from '../DeliveredLeader'
@@ -7,11 +8,13 @@ import { CardList } from '../../../components/CardList'
 
 function DonationDetailsWithCardList({ current, donation }) {
   const [loading, setLoading] = useState(false)
+  const { push } = useHistory()
+  const onClick = (idCard) => push(`/donation/${donation.donationId}/delivered-details/${idCard}`)
   return (
     <>
       {loading && <Loader />}
       <DeliveredLeader current={current} donation={donation} />
-      <CardList setLoading={setLoading} />
+      <CardList setLoading={setLoading} handleClick={onClick} />
     </>
   )
 }

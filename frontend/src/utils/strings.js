@@ -133,7 +133,7 @@ export const registerNewDonation = 'Cadastrar Entrega'
 
 // DeliveredDetail
 export const evidenceOfDelivered = 'Evidência <br /> de entrega do cartão'
-export const deliveredDate = 'Data da<br/> entrega'
+export const deliveryDate = 'Data da<br/> entrega'
 export const deliveredHour = 'Horário<br/> da entrega'
 export const statusDelivered = 'Status<br/> da entrega'
 export const completeName = 'Nome<br/> Completo'

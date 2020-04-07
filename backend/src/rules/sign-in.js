@@ -1,10 +1,13 @@
 import jwt from 'jsonwebtoken'
-import { encrypt } from '../services'
+import { encrypt, validateLogin } from '../services'
 import { User } from '../repositories'
 
 export async function signin ({ login, password }) {
   // We're having some problems with login with incorrect encrypted password
   // Added this to help us to debug with heorku logs
+  const loginValidated = await validateLogin(login)
+  if (!loginValidated) throw new Error('invalid Login')
+
   User.findOne({ login }).then(user => {
     console.log({
       ReceivedLogin: login,

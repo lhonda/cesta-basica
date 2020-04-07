@@ -43,6 +43,7 @@ const actionMap = {
   [types.SET_PHOTO_RECEIVED]: (state, payload) => saveState({ ...state, photoReceived: payload }),
   [types.SET_CARD_LIST]: (state, payload) => saveState({ ...state, cardList: payload }),
   [types.CLEAN_CARD_LIST]: (state) => saveState({ ...state, cardList: [] }),
+  [types.SET_DONATION_DETAILS]: (state, payload) => saveState({ ...state, donation: payload }),
 }
 
 export function reducer(state, action) {

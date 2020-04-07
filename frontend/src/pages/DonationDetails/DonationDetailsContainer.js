@@ -1,5 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom'
 
+import { connect } from '../../store'
+
+import { Loader } from '../../components/Loader'
 import { Divider } from '../../components/Divider'
 import { DeliveredLeader } from './DeliveredLeader'
 import { WaitingReceivement } from './WaitingReceivement'
@@ -7,36 +11,51 @@ import { DonationDetailsWithCardList } from './DonationDetailsWithCardList'
 
 import './styles.scss'
 
-import { completedFirstLetterCapitalized } from '../../utils/strings'
+import { DonationDetails as DonationDetailsService } from '../../services/API/donationList'
 
-const statusTeste = {
-  WAITING_RECEIVEMENT: 'WAITING_RECEIVEMENT',
-  DELIVERED_LEADER: 'DELIVERED_LEADER',
-  DELIVERING_DONATION: 'DELIVERING_DONATION',
-  COMPLETE: 'COMPLETE',
-}
+import { status } from '../../utils/status'
 
-export default function DonationDetails() {
-  const [status, setStatus] = useState('COMPLETE')
+function DonationDetails({ dispatch, store }) {
+  const [loading, setLoading] = useState(true)
+  const { donation } = store
+  const { id } = useParams()
+
+  async function retrieveDonationDetails() {
+    await DonationDetailsService(dispatch, id)
+  }
+
+  useEffect(() => {
+    retrieveDonationDetails()
+    setLoading(false)
+  }, [])
 
   function render() {
-    if (statusTeste.WAITING_RECEIVEMENT === status) {
-      return <WaitingReceivement />
+    if (donation.status === status.ESPERANDO_RECEBIMENTO.id) {
+      return <WaitingReceivement donation={donation} />
     }
-    if (statusTeste.DELIVERED_LEADER === status) {
-      return <DeliveredLeader />
+    if (donation.status === status.ENTREGUE_LIDER.id) {
+      return <DeliveredLeader donation={donation} />
     }
-    if (statusTeste.DELIVERING_DONATION === status) {
-      return <DonationDetailsWithCardList />
+    if (donation.status === status.ENTREGANDO.id) {
+      return <DonationDetailsWithCardList donation={donation} />
     }
-    return <DonationDetailsWithCardList current={4} status={completedFirstLetterCapitalized} />
+    return <DonationDetailsWithCardList current={4} donation={donation} />
   }
+
   return (
-    <div className="component-donationDetails-container">
-      {render()}
-      <div className="component-donationDetails-divider">
-        <Divider />
-      </div>
-    </div>
+    <>
+      {loading ? (
+        <Loader />
+      ) : (
+        <div className="component-donationDetails-container">
+          {render()}
+          <div className="component-donationDetails-divider">
+            <Divider />
+          </div>
+        </div>
+      )}
+    </>
   )
 }
+
+export default connect(DonationDetails)

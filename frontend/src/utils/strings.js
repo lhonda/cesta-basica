@@ -109,6 +109,7 @@ export const legendInputFullName = 'Nome Completo'
 export const legendInputCpf = 'CPF'
 
 export const legendPicDonation = 'Foto do recebimento'
+export const legendPicDonationWithNewLine = 'Foto<br> do recebimento'
 export const legendPhotoDeliveredDone = 'Foto<br>da entrega'
 export const legendPicDonationAdded = 'Foto<br> do recebimento adicionada '
 export const legendPicFiscalNode = 'Foto da nota fiscal'

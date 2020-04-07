@@ -1,6 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import { useHistory } from 'react-router-dom'
+
 import { HeaderWithSideBar } from '../../../components/Header'
 import { Legend, LegendTypes } from '../../../components/Legend'
 
@@ -10,30 +12,38 @@ import {
   legendDonationWaitStatus,
   leader,
   unit,
-  deliveredDate,
+  deliveredDate as deliveredDateStr,
   cardsQuantity,
-  statusDonationWait,
 } from '../../../utils/strings'
 
-function WaitingReceivement({ current, status }) {
+import { formatDate } from '../../../utils/formatDateToptbr'
+
+function WaitingReceivement({ current, donation }) {
+  const { quantity, statusText, donationId, leaderName, siteName, created } = donation
+  const history = useHistory()
+
+  function navigateToDonationList() {
+    history.push('/donation-list')
+  }
+
   return (
     <>
-      <HeaderWithSideBar onGoBackClick={() => {}} title="DonationId/Bordero" current={current} steps={4} />
+      <HeaderWithSideBar onGoBackClick={navigateToDonationList} title={donationId} current={current} steps={4} />
       <div className="component-waitingReceivement-content">
         <Legend type={LegendTypes.LIGHT} orientation={LegendTypes.START} message={legendDonationWaitStatus} />
-        <Legend type={LegendTypes.STRONG} orientation={LegendTypes.START} message={status} />
+        <Legend type={LegendTypes.STRONG} orientation={LegendTypes.START} message={statusText} />
         <Legend type={LegendTypes.LIGHT} orientation={LegendTypes.START} message={leader} />
-        <Legend type={LegendTypes.STRONG} orientation={LegendTypes.START} message="Carlos Alberto Nascimento" />
+        <Legend type={LegendTypes.STRONG} orientation={LegendTypes.START} message={leaderName} />
         <Legend type={LegendTypes.LIGHT} orientation={LegendTypes.START} message={unit} />
-        <Legend type={LegendTypes.STRONG} orientation={LegendTypes.START} message="Motivar" />
+        <Legend type={LegendTypes.STRONG} orientation={LegendTypes.START} message={siteName} />
         <div className="component-waitingReceivement-footer">
           <div>
-            <Legend type={LegendTypes.LIGHT} orientation={LegendTypes.START} message={deliveredDate} />
-            <Legend type={LegendTypes.STRONG} orientation={LegendTypes.START} message="22/03/2020" />
+            <Legend type={LegendTypes.LIGHT} orientation={LegendTypes.START} message={deliveredDateStr} />
+            <Legend type={LegendTypes.STRONG} orientation={LegendTypes.START} message={formatDate(created)} />
           </div>
           <div>
             <Legend type={LegendTypes.LIGHT} orientation={LegendTypes.END} message={cardsQuantity} />
-            <Legend type={LegendTypes.STRONG} orientation={LegendTypes.END} message="50" />
+            <Legend type={LegendTypes.STRONG} orientation={LegendTypes.END} message={quantity} />
           </div>
         </div>
       </div>
@@ -42,12 +52,19 @@ function WaitingReceivement({ current, status }) {
 }
 
 WaitingReceivement.propTypes = {
-  status: PropTypes.string,
   current: PropTypes.number,
+  donation: PropTypes.shape({
+    donationId: PropTypes.string.isRequired,
+    status: PropTypes.string.isRequired,
+    statusText: PropTypes.string.isRequired,
+    siteName: PropTypes.string.isRequired,
+    leaderName: PropTypes.string.isRequired,
+    created: PropTypes.string.isRequired,
+    quantity: PropTypes.string.isRequired,
+  }).isRequired,
 }
 
 WaitingReceivement.defaultProps = {
-  status: statusDonationWait,
   current: 1,
 }
 

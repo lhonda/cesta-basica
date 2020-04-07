@@ -1,10 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { completeName, CPF } from '../../../utils/strings'
-import { ProofOfDelivery } from '../../../components/ProofOfDelivery'
+import { completeName, CPF, deliveredPhoto } from '../../../utils/strings'
 
 import { maskToCpf } from '../../../utils/masksInput'
+import { ShowImageButtonWithTitle } from '../../../components/ShowImageButtonWithTitle'
 
 export const Delivered = ({ recipientName, recipientCPF, linkToImage }) => (
   <>
@@ -21,8 +21,7 @@ export const Delivered = ({ recipientName, recipientCPF, linkToImage }) => (
     )}
 
     <div className="containerDonationDetails__delivered--mt" />
-    {/* refatorar o componente */}
-    <ProofOfDelivery linkToImage={linkToImage} />
+    <ShowImageButtonWithTitle linkToImage={linkToImage} text={deliveredPhoto} />
   </>
 )
 

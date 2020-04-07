@@ -11,7 +11,7 @@ import { DeliveryInformation } from './DeliveryInformation'
 import { Delivered } from './Delivered'
 import { Undeliverable } from './Undeliverable'
 
-const teste = {
+const checkStatus = {
   1: null,
   2: true,
   3: false,
@@ -20,8 +20,7 @@ const teste = {
 function DeliveredDetail({ store, dispatch, history, match }) {
   const { id, voucher } = match.params
   const { goBack } = history
-  // comentarios
-  const { delivered, receivedCpf, receivedName, statusText, status } = store.cardList.find(
+  const { delivered, receivedCpf, receivedName, statusText, status, leaderComment } = store.cardList.find(
     ({ voucherId }) => voucherId === voucher
   )
   useEffect(async () => {
@@ -32,11 +31,10 @@ function DeliveredDetail({ store, dispatch, history, match }) {
       <Header title={voucher} onGoBackClick={goBack} />
       <DeliveryInformation deliveryDate={delivered} statusDelivery={statusText} />
 
-      {/* regular expression */}
-      {teste[status] ? (
+      {checkStatus[status] ? (
         <Delivered recipientName={receivedName} recipientCPF={receivedCpf} linkToImage="https://www.google.com" />
       ) : (
-        <Undeliverable comment="lorem" />
+        <Undeliverable comment={leaderComment} />
       )}
     </div>
   )

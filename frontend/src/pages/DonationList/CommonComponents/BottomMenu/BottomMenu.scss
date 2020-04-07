@@ -13,4 +13,25 @@
   height: $bottomTabHeight;
   align-items: center;
   position: fixed;
+
+  ul {
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    background: none;
+    border-radius: unset;
+    height: auto;
+    width: auto;
+
+    &:after {
+      margin: 0;
+      padding: 0;
+      height: auto;
+      position: relative;
+      z-index: 1;
+      background: none;
+    }
+  }
 }

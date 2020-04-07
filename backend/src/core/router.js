@@ -155,10 +155,7 @@ router.get('/sites', authRequired('admin'), (req, res, next) =>
     .catch(next))
 
 // Inclusão de dados via arquivo;
-router.post('/load/:type', (req, res) => {
+router.post('/load/:type', authRequired('admin'), (req, res, next) =>
   insertDataFromFile({ file: req.files.file, type: req.params.type })
     .then(processResult => res.status(200).json(processResult))
-    .catch(
-      err =>
-        res.status(err.statusCode || 500).json({ message: err.message }))
-})
+    .catch(next))

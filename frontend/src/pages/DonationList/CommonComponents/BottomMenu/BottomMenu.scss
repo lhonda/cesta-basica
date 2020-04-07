@@ -25,6 +25,17 @@
     height: auto;
     width: auto;
 
+    a {
+      opacity: 0.4;
+
+      &.donations,
+      &.charges {
+        opacity: 1;
+      }
+    }
+
+
+
     &:after {
       margin: 0;
       padding: 0;

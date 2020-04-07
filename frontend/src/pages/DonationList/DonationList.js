@@ -80,7 +80,7 @@ function DonationList({ store, dispatch, history }) {
           />
         </div>
       )}
-      <BottomMenu isAdmin={isAdmin} />
+      <BottomMenu isAdmin={isAdmin()} />
     </div>
   )
 }

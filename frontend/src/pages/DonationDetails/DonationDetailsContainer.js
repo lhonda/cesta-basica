@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 
-import { connect } from '../../store'
+import { connect, types } from '../../store'
 
 import { Loader } from '../../components/Loader'
 import { Divider } from '../../components/Divider'
@@ -23,8 +23,14 @@ function DonationDetails({ dispatch, store }) {
   async function retrieveDonationDetails() {
     await DonationDetailsService(dispatch, id)
   }
+  function cleanDonationState() {
+    dispatch({ type: types.CLEAN_DONATION_DETAILS })
+  }
 
   useEffect(() => {
+    if (donation) {
+      cleanDonationState()
+    }
     retrieveDonationDetails()
     setLoading(false)
   }, [])
@@ -44,7 +50,7 @@ function DonationDetails({ dispatch, store }) {
 
   return (
     <>
-      {loading ? (
+      {loading || !donation ? (
         <Loader />
       ) : (
         <div className="component-donationDetails-container">

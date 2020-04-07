@@ -16,12 +16,10 @@ import './styles.scss'
 function DeliveredLeader({ current, donation }) {
   const { received } = donation
 
-
-
   return (
     <>
       <WaitingReceivement current={current} donation={donation} />
-      <div className="component-waitingReceivement-footer">
+      <div className="component-deliveredLeader-footer">
         <div>
           <Legend type={LegendTypes.LIGHT} orientation={LegendTypes.START} message={receivedData} />
           <Legend type={LegendTypes.STRONG} orientation={LegendTypes.START} message={formatDate(received)} />

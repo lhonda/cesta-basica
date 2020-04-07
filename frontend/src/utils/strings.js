@@ -63,7 +63,7 @@ export const linkChecklist = 'Estou com sintomas, o que fazer?'
 
 // Donation list
 export const donationListVoidText = 'Você está sem pedidos <br/>de doações no momento.'
-export const donationTitlePage = 'Lista de doações'
+export const donationTitlePage = 'Lista de entregas'
 export const exitText = 'Sair'
 
 // Donation screen

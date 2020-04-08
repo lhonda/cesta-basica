@@ -1,6 +1,6 @@
 import { config } from 'dotenv'
 import { connect, disconnect } from '../core/database'
-import { Donation, Site } from '../repositories'
+import { User, Site } from '../repositories'
 
 if (require.main === module) {
   (async function () {
@@ -9,23 +9,22 @@ if (require.main === module) {
       await connect()
 
       /**
-       * Generating the site collection from users and donations collections
+       * Generating the site collection from users and users collections
        */
 
       const sites = await Site.find({ siteId: { $exists: true } })
-      console.log(sites)
 
       let maxSiteId = sites.reduce((max, { siteId }) => Number(siteId) > max ? Number(siteId) : max, 0)
       console.log(maxSiteId)
 
-      const donations = await Donation.find() // { siteId: undefined }
+      const users = await User.find() // { siteId: undefined }
 
-      for (const donation of donations) {
-        const { site, city, state } = donation
-        console.log('checking the site:', site, ' from donationId: ', donation.donationId)
+      for (const user of users) {
+        const { site, city, state } = user
+        console.log('checking the site:', site, ' from userId: ', user.userId)
 
         if (!site) {
-          console.log('skipping the donationId: ', donation.donationId, ' because its site value is: ', site)
+          console.log('skipping the userId: ', user.userId, ' because its site value is: ', site)
           continue
         }
 
@@ -52,23 +51,23 @@ if (require.main === module) {
           await existing.save()
         }
 
-        if (donation.siteId === existing.siteId) {
-          console.log('skipping the donationId: ', donation.donationId, ' same siteId already: ', donation.siteId)
+        if (user.siteId === existing.siteId) {
+          console.log('skipping the userId: ', user.userId, ' same siteId already: ', user.siteId)
         } else {
           console.log(
-            'updating the donationid: ',
-            donation.donationId,
+            'updating the userid: ',
+            user.userId,
             ' from siteId ',
-            donation.siteId,
+            user.siteId,
             ' to siteId: ',
             existing.siteId
           )
 
-          donation.siteId = existing.siteId
-          donation.site = null
-          donation.city = null
-          donation.state = null
-          await donation.save()
+          user.siteId = existing.siteId
+          user.site = null
+          user.city = null
+          user.state = null
+          await user.save()
         }
       }
 

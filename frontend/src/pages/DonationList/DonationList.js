@@ -65,8 +65,8 @@ function DonationList({ store, dispatch, history }) {
           })}
         </div>
       ) : (
-        <DonationIsEmpty whichMessage={role} />
-      )}
+          <DonationIsEmpty whichMessage={role} />
+        )}
       {role === 'admin' && (
         <div className="containerDonation__button">
           <Button
@@ -85,5 +85,7 @@ function DonationList({ store, dispatch, history }) {
 DonationList.propTypes = {
   store: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired,
 }
+
 export default connect(DonationList)

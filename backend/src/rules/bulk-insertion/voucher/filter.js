@@ -14,7 +14,7 @@ const forEachFunc = (
 ) => {
   // VALIDAR DADOS DOS CAMPOS DE ENTRADA AQUI
 
-  if (!!DONATION_ID_REGEX.test(donationId) || !VOUCHER_ID_REGEX.test(voucherId)) {
+  if (!DONATION_ID_REGEX.test(donationId) || !VOUCHER_ID_REGEX.test(voucherId)) {
     return erros.push(parseInt(lineNumber, 10) + 1)
   }
 

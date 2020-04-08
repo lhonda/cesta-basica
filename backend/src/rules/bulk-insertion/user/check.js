@@ -1,9 +1,11 @@
-import { User } from '../../../repositories'
+import { User, Site } from '../../../repositories'
+import genericChecker from '../check-util'
 import HttpException from '../../../core/http-exception'
 
 const loginMapFunc = (user) => user.login
+const getSiteIdFunc = (site) => site.siteId
 
-export default async (validUsers) => {
+const checkUser = async (validUsers) => {
   const toBeAddedDocs = validUsers.map(loginMapFunc)
 
   const existingUsers = await User.find({ login: { $in: toBeAddedDocs } }, 'login')
@@ -14,3 +16,7 @@ export default async (validUsers) => {
 
   return validUsers
 }
+
+export default (validUsers) =>
+  checkUser(validUsers)
+    .then((checkSite) => genericChecker(checkSite, getSiteIdFunc, Site, 'siteId', getSiteIdFunc, 'Site'))

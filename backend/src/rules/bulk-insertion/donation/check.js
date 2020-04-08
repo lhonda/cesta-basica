@@ -1,4 +1,4 @@
-import { User, Donation } from '../../../repositories'
+import { User, Site, Donation } from '../../../repositories'
 import genericChecker from '../check-util'
 
 import HttpException from '../../../core/http-exception'
@@ -6,6 +6,7 @@ import HttpException from '../../../core/http-exception'
 const loginDonationMapFunc = (donation) => donation.leaderLogin
 const loginUserMapFunc = (user) => user.login
 const getDonationIds = (donation) => donation.donationId
+const getSiteIdFunc = (site) => site.siteId
 
 const checkDonationExists = async (validDonations) => {
   const toBeAddedDocs = validDonations.map(getDonationIds)
@@ -22,3 +23,4 @@ const checkDonationExists = async (validDonations) => {
 export default (validDonations) =>
   checkDonationExists(validDonations)
     .then((uniqueDonations) => genericChecker(uniqueDonations, loginDonationMapFunc, User, 'login', loginUserMapFunc, 'Usuário'))
+    .then((checkSite) => genericChecker(checkSite, getSiteIdFunc, Site, 'siteId', getSiteIdFunc, 'Site'))

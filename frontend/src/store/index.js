@@ -15,7 +15,7 @@ const cleanState = {
   donationList: [],
   photoReceived: null,
   userLocation: {},
-  cardList: null,
+  cardList: [],
 }
 
 function saveState(newState) {

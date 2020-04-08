@@ -64,7 +64,7 @@ if (require.main === module) {
           )
 
           user.siteId = existing.siteId
-          user.name = null
+          user.site = null
           user.city = null
           user.state = null
           await user.save()

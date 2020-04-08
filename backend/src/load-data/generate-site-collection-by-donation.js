@@ -13,15 +13,11 @@ if (require.main === module) {
        */
 
       const sites = await Site.find({ siteId: { $exists: true } })
-<<<<<<< HEAD
-=======
       console.log(sites)
->>>>>>> e3848f91c98dcc3d6c3b8296099407be775c9024
 
       let maxSiteId = sites.reduce((max, { siteId }) => Number(siteId) > max ? Number(siteId) : max, 0)
       console.log(maxSiteId)
 
-<<<<<<< HEAD
       const donations = await Donation.find() // { siteId: undefined }
 
       for (const donation of donations) {
@@ -40,17 +36,6 @@ if (require.main === module) {
             throw new Error('The site name: ', existing.name, ' already has a crud but does not has and siteId')
           }
         } else {
-=======
-      const donations = await Donation.find({ siteId: undefined })
-
-      for (const donation of donations) {
-        const { site, city, state } = donation
-        console.log('checking the site:', site)
-
-        let existing = await Site.findOne({ name: site })
-
-        if (!existing) {
->>>>>>> e3848f91c98dcc3d6c3b8296099407be775c9024
           console.log('the site does not exists: ', site)
 
           const siteId = ++maxSiteId
@@ -62,7 +47,6 @@ if (require.main === module) {
             state
           })
 
-<<<<<<< HEAD
           console.log('creating a site name: ', site, ' with id: ', siteId)
 
           await existing.save()
@@ -81,21 +65,11 @@ if (require.main === module) {
           )
 
           donation.siteId = existing.siteId
-          donation.name = null
+          donation.site = null
           donation.city = null
           donation.state = null
           await donation.save()
         }
-=======
-          await existing.save()
-        }
-
-        donation.siteId = existing.siteId
-        // donation.name = null
-        // donation.city = null
-        // donation.state = null
-        await donation.save()
->>>>>>> e3848f91c98dcc3d6c3b8296099407be775c9024
       }
 
       await disconnect()

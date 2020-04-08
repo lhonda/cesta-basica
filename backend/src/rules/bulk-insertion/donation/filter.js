@@ -5,7 +5,7 @@ const forEachFunc = (
   [
     lineNumber,
     [
-      donationId, leaderLogin, name, siteId, quantity, scheduled
+      donationId, leaderLogin, siteId, quantity, scheduled
     ]
   ],
   sucess,
@@ -22,7 +22,6 @@ const forEachFunc = (
     return sucess.push({
       donationId,
       leaderLogin,
-      name,
       siteId: parseInt(siteId, 10),
       quantity,
       scheduled,

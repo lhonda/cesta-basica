@@ -59,7 +59,7 @@ function ChargeAdd() {
       string: 'Líder',
     },
     {
-      value: 'trasnfer',
+      value: 'transfer',
       string: 'Transferência',
     },
     {
@@ -95,7 +95,7 @@ function ChargeAdd() {
       </div>
 
       {error && (
-        <p style={{ color: 'red', }}>
+        <p style={{ color: 'red', maxHeight: 250, overflow: 'auto', }}>
           {error}
         </p>
       )}

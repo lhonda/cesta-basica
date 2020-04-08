@@ -19,20 +19,24 @@ const checkStatus = {
 function DeliveredDetail({ store, history, match }) {
   const { voucher } = match.params
   const { goBack } = history
-  const { cardList } = store
-  const { delivered, receivedCpf, receivedName, statusText, status, leaderComment, publicPhotoUrl } = cardList.find(
-    ({ voucherId }) => voucherId === voucher
-  )
+  const {
+    cardList,
+    donation: { vouchers },
+  } = store
+
+  const getDataByVoucher = (data) => data.find(({ voucherId }) => voucherId === voucher)
+
+  const { delivered, receivedCpf, receivedName, statusText, status, leaderComment } = getDataByVoucher(cardList)
+  const { publicPhotoUrl } = getDataByVoucher(vouchers)
   return (
     <div className="containerDonationDetails">
       <Header title={voucher} onGoBackClick={goBack} />
       <DeliveryInformation deliveryDate={delivered} statusDelivery={statusText} />
-
       {checkStatus[status] ? (
         <Delivered recipientName={receivedName} recipientCPF={receivedCpf} linkToImage={publicPhotoUrl} />
       ) : (
-          <Undeliverable comment={leaderComment} />
-        )}
+        <Undeliverable comment={leaderComment} />
+      )}
     </div>
   )
 }

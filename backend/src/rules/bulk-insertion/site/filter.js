@@ -1,11 +1,11 @@
 import HttpException from '../../../core/http-exception'
-import { CPF_REGEX, SITE_ID_REGEX, DONATION_ID_REGEX } from '../filter-util'
+import { SITE_ID_REGEX } from '../filter-util'
 
 const forEachFunc = (
   [
     lineNumber,
     [
-      donationId, leaderLogin, name, siteId, quantity, scheduled
+      siteId, name, city, state
     ]
   ],
   sucess,
@@ -13,20 +13,17 @@ const forEachFunc = (
 ) => {
   // VALIDAR DADOS DOS CAMPOS DE ENTRADA AQUI
 
-  if (!CPF_REGEX.test(leaderLogin) || !SITE_ID_REGEX.test(siteId) || !DONATION_ID_REGEX.test(donationId)) {
+  if (!SITE_ID_REGEX.test(siteId)) {
     return erros.push(parseInt(lineNumber, 10) + 1)
   }
 
   // Se existirem erros, nem perde mais tempo processando dados que serão descartados
   if (erros.length === 0) {
     return sucess.push({
-      donationId,
-      leaderLogin,
-      name,
       siteId: parseInt(siteId, 10),
-      quantity,
-      scheduled,
-      status: 1
+      name,
+      city,
+      state
     })
   }
 }

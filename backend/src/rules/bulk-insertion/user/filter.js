@@ -23,7 +23,7 @@ const forEachFunc = (
   if (erros.length === 0) {
     return sucess.push({
       password: encrypt(password),
-      siteId,
+      siteId: parseInt(siteId, 10),
       name,
       rg,
       phone,

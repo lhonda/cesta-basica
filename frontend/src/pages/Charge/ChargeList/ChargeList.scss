@@ -1,14 +1,13 @@
-.containerDonation {
+.chargeList {
   box-sizing: border-box;
-  overflow: hidden;
   height: 100vh;
-
+  overflow: hidden;;
 
   &__button {
-    position: relative;
-    top: 0.4rem;
-    padding: 0 1.4rem;
+    bottom: 5rem;
     box-sizing: border-box;
+    padding: 0 1.4rem;
+    position: fixed;
     width: 100%;
   }
 }

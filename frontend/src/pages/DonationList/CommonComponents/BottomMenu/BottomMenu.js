@@ -1,19 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { NavLink, withRouter } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 import './BottomMenu.scss'
 
 import { icBasket, icCharge } from '../../../../assets/icons'
 
-function BottomMenu({ isAdmin, match, history }) {
+function BottomMenu({ isAdmin }) {
 
-  const { path } = match
-
-  console.log(path)
-
-  const isActive = _ => path === '/donation-list'
   return (
     <nav className="containerMenu">
       <ul>
@@ -25,7 +20,7 @@ function BottomMenu({ isAdmin, match, history }) {
 
         {isAdmin && (
           <li>
-            <NavLink to="/charge-list" activeClassName="charges">
+            <NavLink to="/charge" activeClassName="charges">
               <img src={icCharge} alt="Ícone de pasta com dados" />
             </NavLink>
           </li>
@@ -38,8 +33,6 @@ function BottomMenu({ isAdmin, match, history }) {
 
 BottomMenu.propTypes = {
   isAdmin: PropTypes.bool,
-  match: PropTypes.object,
-  history: PropTypes.object,
 }
 
-export default withRouter(BottomMenu)
+export default BottomMenu

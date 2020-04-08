@@ -11,7 +11,9 @@ export async function signin ({ login, password }) {
     console.log({
       ReceivedLogin: login,
       ReceivedPassword: password,
-      EncryptedReceivedPassword: encrypt(password)
+      EncryptedReceivedPassword: encrypt(password),
+      CurrentUserEncryptedPassword: user.password,
+      User: user
     })
   })
 

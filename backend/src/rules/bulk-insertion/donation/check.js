@@ -14,7 +14,7 @@ const checkDonationExists = async (validDonations) => {
   const existingDonations = await Donation.find({ donationId: { $in: toBeAddedDocs } }, 'donationId')
 
   if (existingDonations.length > 0) {
-    throw new HttpException(422, `Pacotes(s) já existente(s) no sistema ${existingDonations.map(getDonationIds).join(', ')}`)
+    throw new HttpException(422, `Pacote(s) já existente(s) no sistema ${existingDonations.map(getDonationIds).join(', ')}`)
   }
 
   return validDonations

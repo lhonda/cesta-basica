@@ -42,23 +42,27 @@ export async function detailsDonation ({ donationId }) {
     throw new Error('Could not find the site associate with this donation')
   }
 
-  const publicPhotoUrl = `https://${process.env.BUCKET_NAME}.s3.amazonaws.com/${receivedCardsS3Key}`
+  const publicPhotoUrl = receivedCardsS3Key ? `https://${process.env.BUCKET_NAME}.s3.amazonaws.com/${receivedCardsS3Key}` : null
 
   const { name: leaderName } = leader
 
   const { name: siteName, city, state } = site
 
   const vouchers = (await Voucher.find({ donationId })).map(({
+    voucherId,
     receivedCpf,
     receivedName,
     receivedContactNumber,
+    leaderComment,
     cardDonatedS3Key
   }) => {
     return {
+      voucherId,
       receivedCpf,
       receivedName,
       receivedContactNumber,
-      publicPhotoUrl: `https://${process.env.BUCKET_NAME}.s3.amazonaws.com/${cardDonatedS3Key}`
+      leaderComment,
+      publicPhotoUrl: cardDonatedS3Key ? `https://${process.env.BUCKET_NAME}.s3.amazonaws.com/${cardDonatedS3Key}` : null
     }
   })
 

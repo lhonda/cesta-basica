@@ -16,6 +16,7 @@ import { Received } from '../pages/Received'
 import { ReceivedCurrent } from '../pages/ReceivedCurrent'
 import { ReceivedCurrentProf } from '../pages/ReceivedCurrentProf'
 import { DonationDetails } from '../pages/DonationDetails'
+import { DeliveredDetail } from '../pages/DeliveredDetail'
 
 import { Charge } from '../pages/Charge'
 
@@ -35,6 +36,7 @@ export const Routes = () => (
       <Route path="/donation/:id/received/current/:voucher/prof" exact component={ReceivedCurrentProf} isPrivate />
       <Route path="/donation/:id/details" exact component={DonationDetails} isPrivate />
       <Route path="/charge" component={Charge} isPrivate />
+      <Route path="/donation/:id/delivered-details/:voucher" exact component={DeliveredDetail} isPrivate />
     </Switch>
   </BrowserRouter>
 )

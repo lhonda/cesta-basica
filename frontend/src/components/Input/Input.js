@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import './Input.scss'
 
 import { inputTypes } from './InputTypes'
-import { maskToCpf, maskToTelephone } from './masksInput'
+import { maskToCpf, maskToTelephone } from '../../utils/masksInput'
 import { icWarning, icSuccess } from '../../assets/icons'
 
 function Input({

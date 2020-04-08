@@ -88,5 +88,7 @@ function DonationList({ store, dispatch, history }) {
 DonationList.propTypes = {
   store: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired,
 }
+
 export default connect(DonationList)

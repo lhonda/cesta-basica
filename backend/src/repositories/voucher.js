@@ -11,10 +11,6 @@ const voucherSchema = new Schema({
     type: String,
     required: [true, 'donationId is required']
   },
-  leaderLogin: {
-    type: String,
-    required: [true, 'leaderLogin is required']
-  },
   leaderComment: {
     type: String
   },

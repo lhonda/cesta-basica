@@ -43,6 +43,8 @@ function DonationList({ store, dispatch, history }) {
     getDonationList()
   }, [])
 
+  const isAdmin = _ => role === 'admin'
+
   return (
     <div className="containerDonation">
       {loading && !donationList && <Loader />}
@@ -65,9 +67,10 @@ function DonationList({ store, dispatch, history }) {
           })}
         </div>
       ) : (
-          <DonationIsEmpty whichMessage={role} />
-        )}
-      {role === 'admin' && (
+        <DonationIsEmpty whichMessage={role} />
+      )}
+
+      {isAdmin && (
         <div className="containerDonation__button">
           <Button
             size={ButtonTypes.LARGE}
@@ -77,7 +80,7 @@ function DonationList({ store, dispatch, history }) {
           />
         </div>
       )}
-      <BottomMenu />
+      <BottomMenu isAdmin={isAdmin()} />
     </div>
   )
 }

@@ -14,9 +14,9 @@ export async function DonationsList(dispatch) {
   }
 }
 
-export async function RegisterDonation(dataScreen) {
+export async function DonationRegister(request) {
   try {
-    await Api.put(route, dataScreen, {
+    await Api.post(route, request, {
       headers: {
         'Content-Type': 'application/json',
       },

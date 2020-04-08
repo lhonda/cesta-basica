@@ -9,7 +9,7 @@ import { BackButton } from '../../components/ButtonIcon'
 import './DonationRegister.scss'
 
 function DonationRegister({ store, dispatch }) {
-  const { leaderList, donationList, siteList } = store
+  const { leaderList, siteList } = store
   const history = useHistory()
 
   function goBack() {
@@ -20,13 +20,7 @@ function DonationRegister({ store, dispatch }) {
     <div className="component-container">
       <BackButton goBack={goBack} />
       <Title message="Cadastrar entrega" />
-      <RegisterForm
-        leaderList={leaderList || []}
-        siteList={siteList || []}
-        donationList={donationList || []}
-        dispatch={dispatch}
-        history={history}
-      />
+      <RegisterForm leaderList={leaderList || []} siteList={siteList || []} dispatch={dispatch} history={history} />
     </div>
   )
 }

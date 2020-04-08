@@ -1,36 +1,32 @@
 import HttpException from '../../../core/http-exception'
-import { DONATION_ID_REGEX, VOUCHER_ID_REGEX } from '../filter-util'
+import { CPF_REGEX, DONATION_ID_REGEX } from '../filter-util'
 
 const forEachFunc = (
   [
     lineNumber,
     [
-      voucherId, donationId
+      donationId, leaderLogin
     ]
   ],
   sucess,
-  erros,
-  created
+  erros
 ) => {
   // VALIDAR DADOS DOS CAMPOS DE ENTRADA AQUI
 
-  if (!DONATION_ID_REGEX.test(donationId) || !VOUCHER_ID_REGEX.test(voucherId)) {
+  if (!CPF_REGEX.test(leaderLogin) || !DONATION_ID_REGEX.test(donationId)) {
     return erros.push(parseInt(lineNumber, 10) + 1)
   }
 
   return sucess.push({
-    voucherId,
     donationId,
-    status: 1,
-    created
+    leaderLogin
   })
 }
 
 export default async (data) => {
   const invalid = []
   const valid = []
-  const currentDate = new Date()
-  Object.entries(data).forEach((line) => forEachFunc(line, valid, invalid, currentDate))
+  Object.entries(data).forEach((line) => forEachFunc(line, valid, invalid))
   if (invalid.length > 0) {
     throw new HttpException(422, `Dado(s) inconsistente(s) na(s) linha(s) ${invalid.join(', ')}`)
   }

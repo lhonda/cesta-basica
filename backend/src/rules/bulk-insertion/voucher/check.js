@@ -1,10 +1,7 @@
-import { User, Donation, Voucher } from '../../../repositories'
+import { Donation, Voucher } from '../../../repositories'
 import genericChecker from '../check-util'
 import HttpException from '../../../core/http-exception'
 
-const getUserLoginFunc = (user) => user.login
-
-const getLeaderIdFunc = (voucherOrUser) => voucherOrUser.leaderLogin
 const getDonationIds = (voucherOrDonation) => voucherOrDonation.donationId
 const getVoucherIdFunc = (voucher) => voucher.voucherId
 
@@ -22,5 +19,4 @@ const checkVouchersExists = async (validDonations) => {
 
 export default (validVouchers) =>
   checkVouchersExists(validVouchers)
-    .then((checkUser) => genericChecker(checkUser, getLeaderIdFunc, User, 'login', getUserLoginFunc, 'Usuário'))
     .then((checkDonation) => genericChecker(checkDonation, getDonationIds, Donation, 'donationId', getDonationIds, 'Pacote'))

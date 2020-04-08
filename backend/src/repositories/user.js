@@ -1,5 +1,4 @@
 import { model, Schema } from 'mongoose'
-import { encrypt } from '../services'
 
 const schema = new Schema({
   login: {
@@ -53,11 +52,6 @@ const schema = new Schema({
   userType: {
     type: String
   }
-})
-
-schema.pre('save', function (next) {
-  this.password = encrypt(this.password)
-  next()
 })
 
 export const User = model('User', schema)

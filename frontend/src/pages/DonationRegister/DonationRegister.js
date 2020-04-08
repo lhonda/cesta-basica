@@ -9,14 +9,11 @@ import { BackButton } from '../../components/ButtonIcon'
 import './DonationRegister.scss'
 
 function DonationRegister({ store, dispatch }) {
-  const { leaderList, donationList } = store
+  const { leaderList, donationList, siteList } = store
   const history = useHistory()
 
   function goBack() {
     history.push('/donation-list')
-  }
-  function onSubmit(request) {
-    console.log('onSubmit - request: ', request)
   }
 
   return (
@@ -24,10 +21,11 @@ function DonationRegister({ store, dispatch }) {
       <BackButton goBack={goBack} />
       <Title message="Cadastrar entrega" />
       <RegisterForm
-        handleSubmit={onSubmit}
         leaderList={leaderList || []}
+        siteList={siteList || []}
         donationList={donationList || []}
         dispatch={dispatch}
+        history={history}
       />
     </div>
   )

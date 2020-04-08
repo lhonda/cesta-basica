@@ -4,31 +4,34 @@ import PropTypes from 'prop-types'
 import { inputTypes } from '../../../components/Input/InputTypes'
 import { Input, InputSelectSearch } from '../../../components/Input'
 import { ConfirmButton } from '../../../components/Button/ConfirmButton'
+import { Loader } from '../../../components/Loader'
 
 import { LeadersList } from '../../../services/API/leaderList'
-import { DonationsList } from '../../../services/API/donationList'
+import { DonationsList, RegisterDonation } from '../../../services/API/donationList'
+import { SiteList } from '../../../services/API/siteList'
+
 
 import './Form.scss'
 
-const data = [{ name: 'Chocolate' }, { name: 'Coconut' }, { name: 'Mint' }, { name: 'Strawberry' }, { name: 'Vanilla' }]
-
-function RegisterForm({ handleSubmit, leaderList, donationList, dispatch }) {
-  const [leaderName, setLeaderName] = useState('')
-  const [unitName, setUnitName] = useState('')
+function RegisterForm({ leaderList, siteList, donationList, dispatch, history }) {
+  const [leaderLogin, setLeaderLogin] = useState('')
+  const [siteId, setSiteId] = useState('')
   const [donationId, setDonationId] = useState('')
-  const [cardQuantity, setCardQuantity] = useState('')
-  const [date, setDate] = useState('')
+  const [quantity, setQuantity] = useState('')
+  const [sentDate, setSentDate] = useState('')
+  const [loading, setLoading] = useState(false)
+
 
   function verifyRequest() {
-    return !!(leaderName === '' || unitName === '' || donationId === '' || cardQuantity === '' || date === '')
+    return !!(leaderLogin === '' || siteId === '' || donationId === '' || quantity === '' || sentDate === '')
   }
 
   useEffect(() => {
     getLeaderList()
-  }, [leaderName])
+  }, [leaderLogin])
 
   async function getLeaderList() {
-    await LeadersList(dispatch, leaderName)
+    await LeadersList(dispatch, leaderLogin)
   }
 
   useEffect(() => {
@@ -39,57 +42,67 @@ function RegisterForm({ handleSubmit, leaderList, donationList, dispatch }) {
     await DonationsList(dispatch)
   }
 
-  function convertDonationList() {
-    return donationList.map((donation) => ({
-      name: donation.donationId,
-    }))
+  useEffect(() => {
+    getSites()
+  }, [siteId])
+
+  async function getSites() {
+    await SiteList(dispatch)
+  }
+
+  const convertListLeader = leaderList.map(({ name, login }) => ({ value: login, label: name }))
+  const convertDonationList = donationList.map(({ donationId }) => ({ value: donationId, label: donationId }))
+  const convertSiteList = siteList.map(({ name, siteId }) => ({ value: siteId, label: name }))
+
+  async function handleSubmit(e) {
+    e.preventDefault()
+    setLoading(true)
+    const data = { siteId, leaderLogin, donationId, quantity, sentDate }
+    await RegisterDonation(data)
+    setLoading(false)
+    history.push('/donation-list')
   }
 
   return (
     <div className="form-container">
-      <form
-        className="form-content"
-        onSubmit={() => handleSubmit({ leaderName, unitName, donationId, cardQuantity, date })}
-      >
+      {loading && <Loader />}
+      <form className="form-content" onSubmit={handleSubmit}>
         <InputSelectSearch
-          data={leaderList}
-          value={leaderName}
+          data={convertListLeader}
+          value={leaderLogin}
           placeholder="Escolher lider"
           inputType={inputTypes.TEXT}
-          handleChange={setLeaderName}
+          handleChange={setLeaderLogin}
         />
         <InputSelectSearch
-          data={data}
-          value={unitName}
+          data={convertSiteList}
+          value={siteId}
           placeholder="Unidade"
           inputType={inputTypes.TEXT}
-          handleChange={setUnitName}
+          handleChange={setSiteId}
         />
         <InputSelectSearch
-          data={convertDonationList()}
+          data={convertDonationList}
           value={donationId}
           placeholder="Bordero"
           inputType={inputTypes.TEXT}
           handleChange={setDonationId}
         />
         <Input
-          value={cardQuantity}
+          value={quantity}
           placeholder="Quantidade de cartoes"
           inputType={inputTypes.TEXT}
-          handleOnChange={setCardQuantity}
+          handleOnChange={setQuantity}
         />
         <Input
-          value={date}
+          value={sentDate}
           placeholder="Data de envio"
           inputType={inputTypes.DATE}
-          handleOnChange={setDate}
-          maxDate="9999-12-31"
+          handleOnChange={setSentDate}
+          maxsentDate="9999-12-31"
         />
         <div className="component-footer">
-          <ConfirmButton
-            handleClick={() => handleSubmit({ leaderName, unitName, donationId, cardQuantity, date })}
-            disable={verifyRequest()}
-          />
+          <ConfirmButton disable={verifyRequest()} />
         </div>
       </form>
     </div>

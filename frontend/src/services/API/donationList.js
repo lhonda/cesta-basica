@@ -14,6 +14,19 @@ export async function DonationsList(dispatch) {
   }
 }
 
+export async function RegisterDonation(dataScreen) {
+  try {
+    await Api.put(route, dataScreen, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    return true
+  } catch (error) {
+    return false
+  }
+}
+
 export async function DonationVoucher(dataScreen, store) {
   const { id, voucher, delivered, CPF, fullName, image } = dataScreen
   const { lat, lon } = store.userLocation

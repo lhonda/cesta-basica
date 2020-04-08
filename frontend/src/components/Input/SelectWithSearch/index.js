@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 import Input from '../Input'
 
 function InputSelectSearch({ value, handleChange, placeholder, data }) {
-
   return (
     <>
       <Input
@@ -16,8 +15,8 @@ function InputSelectSearch({ value, handleChange, placeholder, data }) {
       />
 
       <datalist id={value}>
-        {data.map((item) => (
-          <option value={item.name} />
+        {data.map(({ value, label }) => (
+          <option value={value}>{label}</option>
         ))}
       </datalist>
     </>

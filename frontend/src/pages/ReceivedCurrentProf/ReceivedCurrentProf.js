@@ -98,7 +98,7 @@ function ReceivedCurrentProfPage({ store, dispatch }) {
       cleanDataUserDonation.delivered = ''
       cleanDataUserDonation.receivedName = ''
 
-      const cleanCard = store.cardList.filter(card => card.voucherId !== donationInfo.voucherId)
+      const cleanCard = store.cardList.filter((card) => card.voucherId !== donationInfo.voucherId)
 
       const newCardList = [...cleanCard, cleanDataUserDonation]
 
@@ -109,7 +109,7 @@ function ReceivedCurrentProfPage({ store, dispatch }) {
       goBack()
     }
 
-    const deliveryStatus = optionsList.find(option => `${option.value}` === delivered)
+    const deliveryStatus = optionsList.find((option) => `${option.value}` === delivered)
     analytics.receivedProf(deliveryStatus.string, voucher)
 
     setLoading(false)
@@ -169,7 +169,11 @@ function ReceivedCurrentProfPage({ store, dispatch }) {
                 <Paragraph size={ParagraphTypes.SMALL} content="legendAddPicPersonReceiveCard" />
 
                 <div className="main-donation-received-current-prof">
-                  <SubTitle type={SubTitleTypes.LIGHT} width={SubTitleTypes.SIZE_SMALL} message={legendPhotoDeliveredDone} />
+                  <SubTitle
+                    type={SubTitleTypes.LIGHT}
+                    width={SubTitleTypes.SIZE_SMALL}
+                    message={legendPhotoDeliveredDone}
+                  />
                   <File file={image} handleImage={handleImageFile} placeholder={legendInputAddPic} />
                 </div>
               </>

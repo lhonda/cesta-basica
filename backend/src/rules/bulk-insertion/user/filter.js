@@ -1,12 +1,12 @@
 import { encrypt } from '../../../services'
 import HttpException from '../../../core/http-exception'
-import { CPF_REGEX } from '../filter-util'
+import { CPF_REGEX, SITE_ID_REGEX } from '../filter-util'
 
 const forEachFunc = (
   [
     lineNumber,
     [
-      password, site, city, state, name, cpf, rg, phone, email,
+      password, siteId, name, cpf, rg, phone, email,
       birthdate, deliveryLocation, deliveryCep, slums, userType
     ]
   ],
@@ -15,7 +15,7 @@ const forEachFunc = (
 ) => {
   // VALIDAR DADOS DOS CAMPOS DE ENTRADA AQUI
 
-  if (!CPF_REGEX.test(cpf)) {
+  if (!CPF_REGEX.test(cpf) || !SITE_ID_REGEX.test(siteId)) {
     return erros.push(parseInt(lineNumber, 10) + 1)
   }
 
@@ -23,9 +23,7 @@ const forEachFunc = (
   if (erros.length === 0) {
     return sucess.push({
       password: encrypt(password),
-      site,
-      city,
-      state,
+      siteId,
       name,
       rg,
       phone,

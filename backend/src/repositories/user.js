@@ -41,15 +41,6 @@ const schema = new Schema({
     type: Number,
     trim: true
   },
-  site: {
-    type: String
-  },
-  city: {
-    type: String
-  },
-  state: {
-    type: String
-  },
   deliveryLocation: {
     type: String
   },

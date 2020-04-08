@@ -60,7 +60,7 @@ export const donationSchema = new Schema({
 })
 
 donationSchema.pre('save', function (next) {
-  this.created = new Date()
+  if (!this.created) this.created = new Date()
   next()
 })
 

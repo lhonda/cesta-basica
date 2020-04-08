@@ -1,0 +1,17 @@
+.containerProofOfDelivery {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin: 0 0 1.3rem 0;
+  &__text {
+    font-size: 14px;
+  }
+  &__button{
+    padding: 0.7rem 1.2rem;
+    background-color: #F2F2F2;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

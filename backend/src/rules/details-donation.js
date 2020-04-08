@@ -52,12 +52,14 @@ export async function detailsDonation ({ donationId }) {
     receivedCpf,
     receivedName,
     receivedContactNumber,
+    leaderComment,
     cardDonatedS3Key
   }) => {
     return {
       receivedCpf,
       receivedName,
       receivedContactNumber,
+      leaderComment,
       publicPhotoUrl: `https://${process.env.BUCKET_NAME}.s3.amazonaws.com/${cardDonatedS3Key}`
     }
   })

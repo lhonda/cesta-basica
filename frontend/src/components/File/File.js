@@ -14,6 +14,9 @@ function File({ placeholder, handleImage, file, type }) {
           id="input-new-image"
           type="file"
           accept={type}
+          onClick={(event) => {
+            event.target.value = null
+          }}
         />
       </form>
 

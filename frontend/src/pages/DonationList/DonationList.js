@@ -31,6 +31,10 @@ function DonationList({ store, dispatch, history }) {
     })
   }
 
+  function handleClickNewDonation() {
+    history.push('/donation/register')
+  }
+
   async function getDonationList() {
     setLoading(true)
     await DonationsList(dispatch)
@@ -70,13 +74,13 @@ function DonationList({ store, dispatch, history }) {
         <DonationIsEmpty whichMessage={role} />
       )}
 
-      {isAdmin && (
+      {isAdmin() && (
         <div className="containerDonation__button">
           <Button
             size={ButtonTypes.LARGE}
             typeButton="button"
             message={registerNewDonation}
-            handleClick={() => alert('register')}
+            handleClick={handleClickNewDonation}
           />
         </div>
       )}

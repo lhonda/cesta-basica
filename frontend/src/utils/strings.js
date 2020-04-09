@@ -139,6 +139,7 @@ export const statusDelivered = 'Status<br/> da entrega'
 export const completeName = 'Nome<br/> Completo'
 export const deliveredPhoto = 'Foto<br/> da entrega'
 export const commentLeader = 'Comentário do lider'
+export const deliveredCellphone = 'DDD + Telefone'
 
 // Generic
 export const WORD_NO = 'Não'

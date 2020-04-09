@@ -166,6 +166,7 @@ function ReceivedCurrentProfPage({ store, dispatch }) {
                   minLength="2"
                   maxLength="15"
                   value={phoneNumber}
+                  isRequired={false}
                   handleOnChange={setPhoneNumber}
                 />
 

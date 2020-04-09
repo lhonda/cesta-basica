@@ -74,7 +74,7 @@ function DonationList({ store, dispatch, history }) {
         <DonationIsEmpty whichMessage={role} />
       )}
 
-      {isAdmin && (
+      {isAdmin() && (
         <div className="containerDonation__button">
           <Button
             size={ButtonTypes.LARGE}

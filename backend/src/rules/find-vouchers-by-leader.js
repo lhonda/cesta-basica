@@ -5,10 +5,11 @@ export async function findVouchersByLeader (login, donationId) {
   if (!donationId) {
     throw new Error('donationId is required')
   }
+
   console.log(login, donationId)
 
   const vouchers = (
-    await Voucher.find({ donationId, leaderLogin: login })
+    await Voucher.find({ donationId })
   ).map(({
     voucherId,
     donationId,

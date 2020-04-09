@@ -16,7 +16,7 @@ function InputSelectSearch({ value, handleChange, placeholder, data }) {
 
       <datalist id={value}>
         {data.map(({ value, label }) => (
-          <option value={value}>{label}</option>
+          <option>{label}</option>
         ))}
       </datalist>
     </>

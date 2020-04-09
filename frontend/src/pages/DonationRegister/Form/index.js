@@ -44,10 +44,18 @@ function RegisterForm({ leaderList, siteList, dispatch, history }) {
   const convertListLeader = leaderList.map(({ name, login }) => ({ value: login, label: name }))
   const convertSiteList = siteList.map(({ name, siteId }) => ({ value: siteId, label: name }))
 
+  function findLeaderByName() {
+    return leaderList.find((element) => element.name === leaderLogin)
+  }
+  function findSiteByName() {
+    return siteList.find((element) => element.name === siteId)
+  }
   async function handleSubmit(e) {
     e.preventDefault()
     setLoading(true)
-    const data = { siteId, leaderLogin, donationId, quantity, sentDate }
+    const { login: leaderLogin } = findLeaderByName()
+    const { siteId: findSiteId } = findSiteByName()
+    const data = { siteId: findSiteId, leaderLogin, donationId, quantity, sentDate }
     await DonationRegister(data)
     setLoading(false)
     history.push('/donation-list')

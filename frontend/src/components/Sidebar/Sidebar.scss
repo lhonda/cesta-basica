@@ -8,7 +8,8 @@ ul {
   display: flex;
   justify-content: space-between;
   padding: 0;
-  width: 98%;
+  width: 97%;
+  margin-left: 4px;
 
   &.progressbar-4 {
     li {

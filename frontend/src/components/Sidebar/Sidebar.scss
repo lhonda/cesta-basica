@@ -1,6 +1,8 @@
 .container-steps {
   width: 100%;
   margin: 0;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 ul {
   list-style: none;
@@ -12,18 +14,33 @@ li {
     height: 14px;
     border-radius: 50%;
     background-color: #F2F2F2;
-    &:last-child::after {
-      width: 0px;
+
+    &::after {
+      content: '';
+      height: 5px;
+      width: 30%;
+      max-width: 100%;
+      margin-left: 13px;
+      margin-top: 5px;
+      position: absolute;
+      background-color: #F2F2F2;
     }
-    &:after{
-    content: '';
-    width: 41%;
-    height: 5px;
-    margin-left: 13px;
-    margin-top: 5px;
-    position: absolute;
-    z-index: -10;
-    background-color: #F2F2F2;
+
+    &:last-child::after {
+      content: '';
+      display: none;
+    }
+
+    &.active {
+      background-color: #93278f;
+      border: 1px solid #93278f;
+      box-shadow: 0px 0px 0px 2px #ffffff, 0px 0px 0px 4px #93278f;
+    }
+    &.actived {
+      background-color: #93278F;
+      &::after {
+        background-color: #93278F;
+      }
     }
   }
 }

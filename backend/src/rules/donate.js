@@ -85,10 +85,6 @@ export async function donate ({
     throw new Error('receivedName is required when delivered = true')
   }
 
-  if (!receivedContactNumber) {
-    throw new Error('receivedContactNumber is required when delivered = true')
-  }
-
   if (!donateDonationFile) {
     throw new Error('donateDonationFile is required when delivered = true')
   }

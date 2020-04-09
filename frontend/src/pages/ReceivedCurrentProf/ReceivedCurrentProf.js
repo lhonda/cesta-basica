@@ -35,6 +35,7 @@ function ReceivedCurrentProfPage({ store, dispatch }) {
   const { goBack } = useHistory()
   const [fullName, setFullName] = useState('')
   const [comment, setComment] = useState('')
+  const [phoneNumber, setPhoneNumber] = useState('')
   const [CPF, setCPF] = useState('')
   const [image, setImage] = useState()
   const [delivered, setDelivered] = useState(false)
@@ -42,12 +43,14 @@ function ReceivedCurrentProfPage({ store, dispatch }) {
   const donationInfo = store.cardList.find((item) => item.voucherId === voucher)
 
   function isDelivered() {
-    const { status, receivedName, receivedCpf } = donationInfo
+    const { status, receivedName, receivedCpf, receivedContactNumber, leaderComment } = donationInfo
     if (status === 2) {
       setFullName(receivedName || '')
       setCPF(receivedCpf || '')
+      setPhoneNumber(receivedContactNumber || '')
       return setDelivered('true')
     } else if (status === 3) {
+      setComment(leaderComment)
       setDelivered('false')
     } else {
       setDelivered('null')
@@ -91,7 +94,7 @@ function ReceivedCurrentProfPage({ store, dispatch }) {
     e.preventDefault()
     setLoading(true)
     const clearCpf = CPF.replace(/\./g, '').replace(/-/g, '')
-    const data = { id, voucher, delivered, CPF: clearCpf, fullName, image, comment }
+    const data = { id, voucher, delivered, CPF: clearCpf, fullName, image, comment, phoneNumber }
 
     if (delivered === 'false') {
       const cleanDataUserDonation = { ...donationInfo }
@@ -155,6 +158,15 @@ function ReceivedCurrentProfPage({ store, dispatch }) {
                   maxLength="30"
                   value={fullName}
                   handleOnChange={setFullName}
+                />
+
+                <Input
+                  placeholder='Digite telefone'
+                  inputType={inputTypes.TEXT}
+                  minLength="2"
+                  maxLength="30"
+                  value={phoneNumber}
+                  handleOnChange={setPhoneNumber}
                 />
 
                 <Input

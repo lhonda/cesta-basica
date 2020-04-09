@@ -45,10 +45,18 @@ function RegisterForm({ leaderList, siteList, dispatch, history }) {
   const convertSiteList = siteList.map(({ name, siteId }) => ({ value: siteId, label: name }))
 
   function findLeaderByName() {
-    return leaderList.find((element) => element.name === leaderLogin)
+    const leader = leaderList.find((element) => element.name === leaderLogin)
+    if (leader) {
+      return leader
+    }
+    return ''
   }
   function findSiteByName() {
-    return siteList.find((element) => element.name === siteId)
+    const site = siteList.find((element) => element.name === siteId)
+    if (site) {
+      return site
+    }
+    return ''
   }
   async function handleSubmit(e) {
     e.preventDefault()

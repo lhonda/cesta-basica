@@ -12,7 +12,7 @@ function Sidebar({ steps, current }) {
   }
   return (
     <div className="container-steps">
-      <ul className="progressbar">{RenderLines()}</ul>
+      <ul className={`progressbar progressbar-${steps}`}>{RenderLines()}</ul>
     </div>
   )
 }

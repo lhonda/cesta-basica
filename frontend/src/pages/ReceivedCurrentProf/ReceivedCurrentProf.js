@@ -162,9 +162,9 @@ function ReceivedCurrentProfPage({ store, dispatch }) {
 
                 <Input
                   placeholder='Digite telefone'
-                  inputType={inputTypes.TEXT}
+                  inputType={inputTypes.CELPHONE}
                   minLength="2"
-                  maxLength="30"
+                  maxLength="15"
                   value={phoneNumber}
                   handleOnChange={setPhoneNumber}
                 />

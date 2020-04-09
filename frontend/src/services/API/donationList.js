@@ -28,7 +28,7 @@ export async function DonationRegister(request) {
 }
 
 export async function DonationVoucher(dataScreen, store) {
-  const { id, voucher, delivered, CPF, fullName, image } = dataScreen
+  const { id, voucher, delivered, CPF, fullName, image, comment } = dataScreen
   const { lat, lon } = store.userLocation
 
   const compressedFile = image ? await compressImageFile(image) : image
@@ -41,6 +41,8 @@ export async function DonationVoucher(dataScreen, store) {
   formData.append('receivedCpf', CPF)
   formData.append('receivedName', fullName)
   formData.append('donateDonationFile', compressedFile)
+  formData.append('leaderComment', comment)
+
   try {
     await Api.post(`donations/${id}/donate`, formData, {
       headers: {

@@ -34,6 +34,7 @@ function ReceivedCurrentProfPage({ store, dispatch }) {
   const { id, voucher } = useParams()
   const { goBack } = useHistory()
   const [fullName, setFullName] = useState('')
+  const [comment, setComment] = useState('')
   const [CPF, setCPF] = useState('')
   const [image, setImage] = useState()
   const [delivered, setDelivered] = useState(false)
@@ -90,7 +91,7 @@ function ReceivedCurrentProfPage({ store, dispatch }) {
     e.preventDefault()
     setLoading(true)
     const clearCpf = CPF.replace(/\./g, '').replace(/-/g, '')
-    const data = { id, voucher, delivered, CPF: clearCpf, fullName, image }
+    const data = { id, voucher, delivered, CPF: clearCpf, fullName, image, comment }
 
     if (delivered === 'false') {
       const cleanDataUserDonation = { ...donationInfo }
@@ -145,7 +146,7 @@ function ReceivedCurrentProfPage({ store, dispatch }) {
               optionsList={optionsList}
             />
             <div style={{ paddingBottom: '.7rem' }} />
-            {delivered === 'true' && (
+            {delivered === 'true' ? (
               <>
                 <Input
                   placeholder={legendInputFullName}
@@ -177,6 +178,14 @@ function ReceivedCurrentProfPage({ store, dispatch }) {
                   <File file={image} handleImage={handleImageFile} placeholder={legendInputAddPic} />
                 </div>
               </>
+            ) : (
+              <Input
+                placeholder="Comentário sobre a não entrega"
+                inputType={inputTypes.TEXT}
+                value={comment}
+                isRequired={true}
+                handleOnChange={setComment}
+              />
             )}
           </div>
         </div>

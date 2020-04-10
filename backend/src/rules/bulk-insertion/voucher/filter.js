@@ -1,5 +1,6 @@
-import HttpException from '../../../core/http-exception'
 import { DONATION_ID_REGEX, VOUCHER_ID_REGEX } from '../filter-util'
+import ProcFileException from '../../../core/process-file-exception'
+import { fileStatus } from '../../../repositories'
 
 const forEachFunc = (
   [
@@ -32,7 +33,11 @@ export default async (data) => {
   const currentDate = new Date()
   Object.entries(data).forEach((line) => forEachFunc(line, valid, invalid, currentDate))
   if (invalid.length > 0) {
-    throw new HttpException(422, `Dado(s) inconsistente(s) na(s) linha(s) ${invalid.join(', ')}`)
+    throw new ProcFileException(
+      422,
+      `Dado(s) inconsistente(s) na(s) linha(s) ${invalid.join(', ')}`,
+      fileStatus.invalid
+    )
   }
   return valid
 }

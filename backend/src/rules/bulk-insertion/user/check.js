@@ -1,6 +1,6 @@
-import { User, Site } from '../../../repositories'
+import ProcFileException from '../../../core/process-file-exception'
+import { User, Site, fileStatus } from '../../../repositories'
 import genericChecker from '../check-util'
-import HttpException from '../../../core/http-exception'
 
 const loginMapFunc = (user) => user.login
 const getSiteIdFunc = (site) => site.siteId
@@ -11,7 +11,11 @@ const checkUser = async (validUsers) => {
   const existingUsers = await User.find({ login: { $in: toBeAddedDocs } }, 'login')
 
   if (existingUsers.length > 0) {
-    throw new HttpException(422, `Usuário(s) já existente(s) no sistema ${existingUsers.map(loginMapFunc).join(', ')}`)
+    throw new ProcFileException(
+      422,
+      `Usuário(s) já existente(s) no sistema ${existingUsers.map(loginMapFunc).join(', ')}`,
+      fileStatus.duplicated
+    )
   }
 
   return validUsers

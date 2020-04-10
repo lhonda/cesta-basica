@@ -18,7 +18,7 @@ export default ({ limit = 25, skip = 0, type }) => {
   ).populate(
     {
       path: 'admin',
-      select: 'email'
+      select: 'name email'
     }
   )
 }

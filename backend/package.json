@@ -24,6 +24,7 @@
     "transfer-donation-to-another-leader": "node -r esm src/load-data/transfer-donation-to-another-leader.js",
     "generate-site-collection-by-donation": "node -r esm src/load-data/generate-site-collection-by-donation.js",
     "generate-site-collection-by-user": "node -r esm src/load-data/generate-site-collection-by-user.js",
+    "decrypt-password": "node -r esm src/services/decrypt.js",
     "build": ""
   },
   "dependencies": {

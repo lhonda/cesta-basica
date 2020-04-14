@@ -18,7 +18,11 @@ import {
   listLeaders,
   listSites,
   insertDataFromFile,
-  findCities
+  findCities,
+  fileSave,
+  fileUpdate,
+  fileError,
+  fileFind
 } from '../rules'
 
 export const router = Router()
@@ -156,10 +160,20 @@ router.get('/sites', authRequired('admin'), (req, res, next) =>
     .then((data) => res.status(200).json(data))
     .catch(next))
 
-// Inclusão de dados via arquivo;
+// Inclusão de dados via arquivo
 router.post('/load/:type', authRequired('admin'), (req, res, next) =>
-  insertDataFromFile({ file: req.files.file, type: req.params.type })
-    .then(processResult => res.status(200).json(processResult))
+  fileSave({ file: req.files.file, type: req.params.type, admin: req.auth.id })
+    .then(
+      ({ file, type, fileId }) => insertDataFromFile({ file, type })
+        .then(message => fileUpdate({ fileId, message }))
+        .then(message => res.status(200).json(message))
+        .catch(err => fileError(err, fileId, next)))
+    .catch(next))
+
+// Consulta de arquivos inseridos
+router.get('/load', authRequired('admin'), (req, res, next) =>
+  fileFind(req.query)
+    .then((data) => res.status(200).json(data))
     .catch(next))
 
 // Find all cities from one state

@@ -19,3 +19,5 @@ export { listLeaders } from './list-leaders'
 export { listSites } from './list-sites'
 export { insertDataFromFile } from './bulk-insertion'
 export { findCities } from './find-cities'
+export { fileSave, fileUpdate, fileError, fileFind } from './file'
+

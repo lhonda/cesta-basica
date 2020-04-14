@@ -1,4 +1,5 @@
-import HttpException from '../../../core/http-exception'
+import ProcFileException from '../../../core/process-file-exception'
+import { fileStatus } from '../../../repositories'
 import { SITE_ID_REGEX } from '../filter-util'
 
 const forEachFunc = (
@@ -33,7 +34,11 @@ export default async (data) => {
   const valid = []
   Object.entries(data).forEach((line) => forEachFunc(line, valid, invalid))
   if (invalid.length > 0) {
-    throw new HttpException(422, `Dado(s) inconsistente(s) na(s) linha(s) ${invalid.join(', ')}`)
+    throw new ProcFileException(
+      422,
+      `Dado(s) inconsistente(s) na(s) linha(s) ${invalid.join(', ')}`,
+      fileStatus.invalid
+    )
   }
   return valid
 }

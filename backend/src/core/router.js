@@ -22,7 +22,8 @@ import {
   fileUpdate,
   fileError,
   fileFind,
-  filterDonation
+  filterDonation,
+  findCities
 } from '../rules'
 
 export const router = Router()
@@ -186,4 +187,13 @@ router.post('/load/:type', authRequired('admin'), (req, res, next) =>
 router.get('/filter/donation', authRequired('admin'), (req, res, next) =>
   filterDonation({ ...req.body })
     .then(processResult => res.status(200).json(processResult))
+    .catch(next))
+
+// Find all cities from one state
+router.get('/cities/:state', authRequired('admin'), (req, res, next) =>
+  findCities({
+    state: req.params.state,
+    city: req.query.city
+  })
+    .then(data => res.status(200).json(data))
     .catch(next))

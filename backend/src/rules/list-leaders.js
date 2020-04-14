@@ -11,6 +11,6 @@ export async function listLeaders (name = '') {
 
   return (await User.find({
     role: 'leader',
-    name: new RegExp(`^${name}`)
+    name: new RegExp(`^${name}`, 'i')
   })).map(({ name, login }) => ({ name, login }))
 }

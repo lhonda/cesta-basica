@@ -1,49 +1,34 @@
-import fs from 'fs'
+import { promises as fs } from 'fs'
 import path from 'path'
 import { config } from 'dotenv'
 import { User } from '../repositories'
 import { validateLogin } from '../services/validateLogin'
 import { connect, disconnect } from '../core/database'
+import json2xls from 'json2xls'
 
 if (require.main === module) {
   (async function () {
     try {
       config()
       await connect()
-      /**
-        *  Validate login as Cpf
-      */
 
-      const users = await User.find()
+      const users = await User.find({}, { _id: 0, login: 1, email: 1, name: 1 })
       console.log(`${users.length} users login is about to be verified`)
 
       const invalidLogins = []
 
-      for (const user of users) {
-        const { login, email } = user
-
+      await Promise.all(users.map(async ({ login, email, name }) => {
         try {
-          await validateLogin({ login: login })
-          // console.log('cpf ok')
+          await validateLogin(login)
         } catch (error) {
-          // console.log('invalid')
-          const user = JSON.stringify({ login, email })
-          invalidLogins.push(user)
-          continue
+          invalidLogins.push({ login, email, name })
         }
-      }
+      }))
 
-      console.log(`${invalidLogins.length} invalid users login was found`)
-
-      // console.log('Invalid logins')
-      // console.log(invalidLogins)
-
-      const txtPath = path.resolve('data-to-load', 'invalid-logins')
-
-      fs.writeFile(`${txtPath}`, invalidLogins, function (err) {
-        if (err) throw err
-        console.log('File created with success')
-      })
+      const xlsxData = json2xls(invalidLogins)
+      const xlsxBuffer = Buffer.from(xlsxData, 'binary')
+      const xlsxPath = path.resolve('data-to-load', 'invalid-logins.xlsx')
+      await fs.writeFile(xlsxPath, xlsxBuffer)
 
       await disconnect()
     } catch (err) {

@@ -1,0 +1,53 @@
+@import "../../../../styles/_commons";
+
+.containerMenu {
+    background-color: #ffffff;
+    box-sizing: border-box;
+    width: 100%;
+    border: 2px solid transparent;
+    box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.12);
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: $bottomTabHeight;
+    align-items: center;
+    position: fixed;
+  
+    ul {
+      margin: 0;
+      padding: 0;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+    }
+  
+    li {
+      background: none;
+      border-radius: unset;
+      height: auto;
+      width: auto;
+  
+      a {
+        opacity: 0.4;
+  
+        &.donations,
+        &.charges,
+        &.profile{
+          opacity: 1;
+        }
+      }
+  
+  
+  
+      &:after {
+        margin: 0;
+        padding: 0;
+        height: auto;
+        position: relative;
+        z-index: 1;
+        background: none;
+      }
+    }
+  }

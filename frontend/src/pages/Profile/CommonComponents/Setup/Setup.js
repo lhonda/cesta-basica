@@ -7,12 +7,9 @@ function Setup({ action, message, icon, legend }) {
       <div className="container-icon">
         <img src={icon} alt={legend} />
       </div>
-      <a
-        onClick={action}
-      >{message}</a>
+      <a onClick={action}>{message}</a>
     </div>
   )
 }
 
-
-export default Setup;
+export default Setup

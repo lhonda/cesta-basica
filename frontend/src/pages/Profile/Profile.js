@@ -6,7 +6,6 @@ import Setup from './CommonComponents/Setup/Setup'
 import MenuBottom from './CommonComponents/MenuBottom/MenuBottom'
 import { icEmail, icPassword, icLogout } from '../../assets/icons/index'
 import { profile, settings, changePassword, changeEmail, signOut } from '../../utils/strings'
-
 import './Profile.scss'
 
 function Profile({ dispatch, store }) {

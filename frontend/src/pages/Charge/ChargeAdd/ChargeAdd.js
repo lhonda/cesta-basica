@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react'
-import PropTypes from 'prop-types'
+import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { Select } from '../../../components/Select'
 import { File } from '../../../components/File'
@@ -12,7 +11,7 @@ import { ChargeUpload } from '../../../services/API/chargeUpload'
 
 import './ChargeAdd.scss'
 
-import { confirm } from '../../../utils/strings'
+import { confirm, legendInputAddfile } from '../../../utils/strings'
 
 function ChargeAdd() {
   const history = useHistory()
@@ -36,13 +35,17 @@ function ChargeAdd() {
     setLoading(false)
 
     if (status === 200) {
-      history.push(`/charge`)
+      history.push('/charge')
     } else {
       setFile('')
       setError(response.data.message)
     }
   }
 
+  const handleOnchangeSelect = (value) => {
+    setChargeType(value)
+    setError('')
+  }
   const optionsList = [
     {
       value: '',
@@ -50,7 +53,7 @@ function ChargeAdd() {
     },
     {
       value: 'donation',
-      string: 'Bordero',
+      string: 'Pacote',
     },
     {
       value: 'user',
@@ -66,17 +69,12 @@ function ChargeAdd() {
     },
     {
       value: 'voucher',
-      string: 'Voucher',
+      string: 'Cartão',
     },
   ]
 
-  const handleOnchangeSelect = (value) => {
-    setChargeType(value)
-    setError('')
-  }
-
   return (
-    <div className="chargeAdd container-donation-prof">
+    <div className="chargeAdd container-charge-prof">
       {loading && <Loader />}
 
       <Select
@@ -86,15 +84,15 @@ function ChargeAdd() {
         optionsList={optionsList}
       />
 
-      <div className="main-donation-prof">
+      <div className="main-charge-prof">
         <SubTitle type={SubTitleTypes.LIGHT} width={SubTitleTypes.SIZE_SMALL} message="Carga da planilha" />
 
-        <File type=".csv" file={file} handleImage={handleFile} placeholder="adicionar arquivo" />
+        <File type=".csv" file={file} handleImage={handleFile} placeholder={legendInputAddfile} />
       </div>
 
       {error && <p style={{ color: 'red', maxHeight: 250, overflow: 'auto' }}>{error}</p>}
 
-      <div className="footer-donation-prof">
+      <div className="footer-charge-prof">
         <Button
           handleClick={handleClickButton}
           disable={!file || !chargeType || error}

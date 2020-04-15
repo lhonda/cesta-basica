@@ -19,7 +19,8 @@ function ChargeHeader({ dispatch, title }) {
 
   return (
     <div className="fixedHeader">
-      <header className="containerHeader">
+      <span className="containerHeader">
+        {location.pathname === '/charge' ? <div style={{ paddingTop: '2rem' }} /> : <></>}
         <h2>{title}</h2>
         {location.pathname === '/charge' ? (
           <span>
@@ -31,7 +32,7 @@ function ChargeHeader({ dispatch, title }) {
         ) : (
           <></>
         )}
-      </header>
+      </span>
     </div>
   )
 }

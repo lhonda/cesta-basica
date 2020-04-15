@@ -9,30 +9,24 @@ import { buttonAddChargeText } from '../../../utils/strings'
 
 import './ChargeList.scss'
 
-const ChargeList = ({ history, match, store }) => {
+const ChargeList = ({ match, store }) => {
   const {
     user: { role },
   } = store
 
   const { url } = match
 
-  const chargeList = []
+  const mockChargeList = [
+    { fileName: 'pacotes_tk_abril', date: '01/04/2020', chargeType: 'Pacotes' },
+    { fileName: 'novos_lideres_abril', date: '03/04/2020', chargeType: 'Líder' },
+  ]
 
   const render = () => {
-    return chargeList.length > 0 ? (
+    return mockChargeList.length > 0 ? (
       <div className={`containerCharge__list containerCharge__list--${role}`}>
-        {chargeList.map((item) => {
-          const { quantity, status, donationId } = item
-          return (
-            <ChargeItem
-              title={donationId}
-              quantity={quantity}
-              key={donationId}
-              stateDonation={status}
-              donationId={donationId}
-              userRole={role}
-            />
-          )
+        {mockChargeList.map((item) => {
+          const { fileName, date, chargeType } = item
+          return <ChargeItem fileName={fileName} date={date} chargeType={chargeType} key={item} />
         })}
       </div>
     ) : (

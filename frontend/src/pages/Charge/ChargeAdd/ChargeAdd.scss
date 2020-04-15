@@ -1,13 +1,46 @@
 .chargeAdd {
-  &.container-donation-prof {
-    height: auto;
+  font-family: Rubik;
+
+  &.container-charge-prof {
+    display: flex;
+    flex-direction: column;
+    height: 80%;
+    overflow: hidden;
+    padding: 0 16px 0;
   }
 
-  .main-donation-prof {
-    height: auto;
-  }
+  .main-charge-prof {
+    height: 10%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
-  .footer-donation-prof {
-    bottom: 9vh;
+    h3 {
+      font-family: Rubik;
+      font-style: normal;
+      line-height: 22px;
+      margin: 0.6rem 0 -0.4rem 0;
+      letter-spacing: 0.2px;
+      color: #202228;
+    }
+
+    label {
+      padding-top: 1rem;
+    }
+
+    img {
+      position: relative;
+      top: 0.6rem;
+      margin: 0 0.3rem 0 0;
+    }
+  }
+  .footer-charge-prof {
+    padding: 0 40px 20px 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: fixed;
+    bottom: 0;
+    width: -webkit-fill-available;
   }
 }

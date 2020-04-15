@@ -60,12 +60,13 @@ export const chargeListVoidText = 'Você ainda não possui <br/> cargas realizad
 export const chargeTitlePage = 'Carga de Cartões'
 
 // Charge Screen
-export const chargeTypeVoucher = 'Voucher'
-export const chargeTypeDonation = 'Borderô'
+export const chargeTypeVoucher = 'Cartão'
+export const chargeTypeDonation = 'Pacote'
 export const chargeTypeUser = 'Líder'
 export const chargeTypeTransfer = 'Transferência'
 export const chargeTypeSite = 'Unidade'
 export const buttonAddChargeText = 'Adicionar carga'
+export const legendInputAddfile = 'adicionar arquivo'
 
 // Checklist screen
 export const titleChecklist = 'Checklist de Saúde'

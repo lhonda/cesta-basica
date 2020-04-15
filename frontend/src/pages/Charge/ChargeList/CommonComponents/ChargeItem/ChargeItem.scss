@@ -16,6 +16,7 @@
     display: flex;
     flex-direction: column;
     align-content: center;
+
     &__title {
       color: #202228;
       font-size: 16px;
@@ -28,6 +29,9 @@
     }
 
     &__state {
+      &--false {
+        margin-top: 3px;
+      }
       &--complete {
         color: #328b21;
       }

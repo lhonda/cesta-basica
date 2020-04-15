@@ -3,17 +3,13 @@
   height: 100vh;
   overflow: hidden;
 
-  // &__list {
-  //   overflow-y: scroll;
-  //   &--leader {
-  //     padding: 1rem 1rem 1.2rem 1rem;
-  //     height: calc(100vh - 12.8rem);
-  //   }
-  //   &--admin {
-  //     padding: 1rem 1rem 0 1rem;
-  //     height: calc(100vh - 12.8rem - 2.4rem);
-  //   }
-  // }
+  &__list {
+     overflow-y: scroll;
+     &--admin {
+       padding: 1rem 1rem 0 1rem;
+       height: calc(100vh - 12.8rem - 2.4rem);
+     }
+   }
 
   &__button {
     bottom: 5rem;

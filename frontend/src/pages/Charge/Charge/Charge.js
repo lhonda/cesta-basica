@@ -17,7 +17,7 @@ import './Charge.scss'
 const Charge = () => {
   let history = useHistory()
   const { goBack } = history
-  let location = useLocation()
+  const location = useLocation()
   let { path } = useRouteMatch()
 
   return (
@@ -38,7 +38,7 @@ const Charge = () => {
         <Route path="/charge/add" component={ChargeAdd} />
       </Switch>
 
-      <BottomMenu isAdmin={true} />
+      {location.pathname === '/charge' ? <BottomMenu isAdmin={true} /> : <></>}
     </div>
   )
 }

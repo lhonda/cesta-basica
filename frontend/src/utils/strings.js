@@ -11,6 +11,7 @@ export const placeholderCPF = 'Digite seu CPF'
 export const typeYourPassword = 'Digite sua senha'
 export const errorMessageInvalidLogin = 'CPF ou Senha incorretos. Tente novamente.'
 export const textButtonForLogin = 'Entrar'
+export const exitText = 'Sair'
 
 // Terms screen
 export const locationPermission =
@@ -54,6 +55,18 @@ export const confirm = 'Confirmar'
 export const back = 'Voltar'
 export const titleTerms = 'Termo de compromisso'
 
+// Charge list
+export const chargeListVoidText = 'Você ainda não possui <br/> cargas realizadas'
+export const chargeTitlePage = 'Carga de Cartões'
+
+// Charge Screen
+export const chargeTypeVoucher = 'Voucher'
+export const chargeTypeDonation = 'Borderô'
+export const chargeTypeUser = 'Líder'
+export const chargeTypeTransfer = 'Transferência'
+export const chargeTypeSite = 'Unidade'
+export const buttonAddChargeText = 'Adicionar carga'
+
 // Checklist screen
 export const titleChecklist = 'Checklist de Saúde'
 export const descriptionChecklist = 'Sintomas do Coronavirus (COVID-19)'
@@ -64,7 +77,6 @@ export const linkChecklist = 'Estou com sintomas, o que fazer?'
 // Donation list
 export const donationListVoidText = 'Você está sem pedidos <br/>de doações no momento.'
 export const donationTitlePage = 'Lista de entregas'
-export const exitText = 'Sair'
 
 // Donation screen
 export const titleDonation = 'Doação'

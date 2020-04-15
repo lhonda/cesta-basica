@@ -3,19 +3,18 @@ import React from 'react'
 import { Route, Switch, useLocation, useRouteMatch, useHistory } from 'react-router-dom'
 
 import { Legend, LegendTypes } from '../../../components/Legend'
-import { DonationHeader, BottomMenu } from '../../DonationList/CommonComponents'
-import { ChargeAdd, ChargeList } from '../'
+import { BottomMenu } from '../../DonationList/CommonComponents'
+import { ChargeHeader } from '../ChargeList/CommonComponents/ChargeHeader'
+
+import { ChargeAdd, ChargeList } from '..'
 import { ButtonIcon } from '../../../components/ButtonIcon'
 import { LogoBack } from '../../../components/Logo'
 
-import {
-  back,
-} from '../../../utils/strings'
+import { back, chargeTitlePage } from '../../../utils/strings'
 
 import './Charge.scss'
 
 const Charge = () => {
-
   let history = useHistory()
   const { goBack } = history
   let location = useLocation()
@@ -32,7 +31,7 @@ const Charge = () => {
         </div>
       )}
 
-      <DonationHeader title={location.state ? location.state.title : 'Carga de Cartões'} />
+      <ChargeHeader title={location.state ? location.state.title : chargeTitlePage} />
 
       <Switch>
         <Route path={path} exact component={ChargeList} />

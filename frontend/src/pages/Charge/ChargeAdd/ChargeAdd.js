@@ -12,9 +12,7 @@ import { ChargeUpload } from '../../../services/API/chargeUpload'
 
 import './ChargeAdd.scss'
 
-import {
-  confirm,
-} from '../../../utils/strings'
+import { confirm } from '../../../utils/strings'
 
 function ChargeAdd() {
   const history = useHistory()
@@ -69,7 +67,7 @@ function ChargeAdd() {
     {
       value: 'voucher',
       string: 'Voucher',
-    }
+    },
   ]
 
   const handleOnchangeSelect = (value) => {
@@ -94,11 +92,7 @@ function ChargeAdd() {
         <File type=".csv" file={file} handleImage={handleFile} placeholder="adicionar arquivo" />
       </div>
 
-      {error && (
-        <p style={{ color: 'red', maxHeight: 250, overflow: 'auto', }}>
-          {error}
-        </p>
-      )}
+      {error && <p style={{ color: 'red', maxHeight: 250, overflow: 'auto' }}>{error}</p>}
 
       <div className="footer-donation-prof">
         <Button

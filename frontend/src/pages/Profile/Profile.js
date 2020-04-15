@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom'
 import { func } from 'prop-types'
 import { types, connect } from '../../store'
 import SettingsLink from './CommonComponents/SettingsLink/SettingsLink'
-import MenuBottom from './CommonComponents/MenuBottom/MenuBottom'
+import BottomMenu from '../DonationList/CommonComponents/BottomMenu/BottomMenu'
 import { icEmail, icPassword, icLogout } from '../../assets/icons/index'
 import { profile, settings, changePassword, changeEmail, signOut } from '../../utils/strings'
 import './Profile.scss'
@@ -18,7 +18,7 @@ function Profile({ dispatch, store }) {
     history.push('/newpass')
   }
   function newEmail() {
-    history.push('/newEmail')
+    history.push('/profile/update-email')
   }
   const { user } = store
 
@@ -37,7 +37,7 @@ function Profile({ dispatch, store }) {
         <SettingsLink icon={icPassword} legend="cadeado simbolizando senha" action={newPassword} message={changePassword} />
         <SettingsLink icon={icLogout} legend="alo" action={exit} message={signOut} />
       </div>
-      <MenuBottom />
+      <BottomMenu />
     </>
   )
 }

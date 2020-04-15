@@ -1,5 +1,5 @@
 import React from 'react'
-import './Setup.scss'
+import './SettingsLink.scss'
 
 function Setup({ action, message, icon, legend }) {
   return (
@@ -7,7 +7,7 @@ function Setup({ action, message, icon, legend }) {
       <div className="container-icon">
         <img src={icon} alt={legend} />
       </div>
-      <a onClick={action}>{message}</a>
+      <a href="#" title={message} onClick={action}>{message}</a>
     </div>
   )
 }

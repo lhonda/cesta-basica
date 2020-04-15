@@ -9,7 +9,7 @@ function ChargeItem({ fileName, date, chargeType }) {
         <span className="chargeItem__content__title">{fileName}</span>
         <div>
           <span className="chargeItem__content__quantity">{date}</span>
-          <span className="floatRigth chargeItem__content__state--false">{chargeType}</span>
+          <span className="floatRigth chargeItem__content__state">{chargeType}</span>
         </div>
       </div>
     </div>

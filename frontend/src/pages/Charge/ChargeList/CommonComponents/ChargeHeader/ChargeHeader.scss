@@ -11,6 +11,10 @@
   flex-direction: column;
   justify-content: center;
 
+  h2 {
+    font-size: 22px;
+  }
+
   span {
     height: 0;
   }
@@ -18,7 +22,7 @@
   a {
     position: relative;
     float: right;
-    top: -3.3rem;
+    top: -3.1rem;
     text-decoration: underline;
     cursor: pointer;
     

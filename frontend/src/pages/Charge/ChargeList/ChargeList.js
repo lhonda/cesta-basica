@@ -17,16 +17,18 @@ const ChargeList = ({ match, store }) => {
   const { url } = match
 
   const mockChargeList = [
-    { fileName: 'pacotes_tk_abril', date: '01/04/2020', chargeType: 'Pacotes' },
-    { fileName: 'novos_lideres_abril', date: '03/04/2020', chargeType: 'Líder' },
+    { id: 1, fileName: 'pacotes_tk_abril', date: '01/04/2020', chargeType: 'Pacotes' },
+    { id: 2, fileName: 'novos_lideres_abril', date: '03/04/2020', chargeType: 'Líder' },
   ]
 
   const render = () => {
     return mockChargeList.length > 0 ? (
       <div className={`containerCharge__list containerCharge__list--${role}`}>
         {mockChargeList.map((item) => {
-          const { fileName, date, chargeType } = item
-          return <ChargeItem fileName={fileName} date={date} chargeType={chargeType} key={item} />
+          console.log(item);
+          
+          const { id, fileName, date, chargeType } = item
+          return <ChargeItem key={id} fileName={fileName} date={date} chargeType={chargeType} />
         })}
       </div>
     ) : (

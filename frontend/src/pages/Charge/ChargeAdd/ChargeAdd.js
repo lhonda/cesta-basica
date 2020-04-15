@@ -13,6 +13,8 @@ import './ChargeAdd.scss'
 
 import { confirm, legendInputAddfile } from '../../../utils/strings'
 
+import { chargeSelectList } from './ChargeSelectList'
+
 function ChargeAdd() {
   const history = useHistory()
 
@@ -46,32 +48,6 @@ function ChargeAdd() {
     setChargeType(value)
     setError('')
   }
-  const optionsList = [
-    {
-      value: '',
-      string: 'Selecione o tipo de carga',
-    },
-    {
-      value: 'donation',
-      string: 'Pacote',
-    },
-    {
-      value: 'user',
-      string: 'Líder',
-    },
-    {
-      value: 'transfer',
-      string: 'Transferência',
-    },
-    {
-      value: 'site',
-      string: 'Unidade',
-    },
-    {
-      value: 'voucher',
-      string: 'Cartão',
-    },
-  ]
 
   return (
     <div className="chargeAdd container-charge-prof">
@@ -81,7 +57,7 @@ function ChargeAdd() {
         value={chargeType}
         placeholder="Tipo de Carga"
         getValue={handleOnchangeSelect}
-        optionsList={optionsList}
+        optionsList={chargeSelectList}
       />
 
       <div className="main-charge-prof">

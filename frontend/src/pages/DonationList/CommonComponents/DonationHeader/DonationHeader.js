@@ -1,21 +1,20 @@
 import React from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
-import { func, string } from 'prop-types'
+import { string } from 'prop-types'
 import './DonationHeader.scss'
 
-import { icExit } from '../../../../assets/icons'
-import { connect, types } from '../../../../store'
+import { icFilter } from '../../../../assets/icons'
+import { connect } from '../../../../store'
 
-import { donationTitlePage, exitText } from '../../../../utils/strings'
+import { donationTitlePage } from '../../../../utils/strings'
 
-function DonationHeader({ dispatch, title }) {
+function DonationHeader({ title }) {
   const history = useHistory()
   const location = useLocation()
   const { pathname } = location
 
   function exit() {
-    dispatch({ type: types.SET_LOGOUT })
-    history.push('/login')
+    history.push('/filter')
   }
 
   return (
@@ -23,19 +22,15 @@ function DonationHeader({ dispatch, title }) {
       <header className="containerHeader">
         {pathname === '/donation-list' && <div style={{ paddingTop: '2rem' }} />}
         <h2>{title}</h2>
-        <span>
-          <a onClick={exit}>
-            <img src={icExit} alt="alo" />
-            {exitText}
-          </a>
-        </span>
+        <button onClick={exit} type="button">
+          <img src={icFilter} alt="botao para filtrar doaçoes" />
+        </button>
       </header>
     </div>
   )
 }
 
 DonationHeader.propTypes = {
-  dispatch: func.isRequired,
   title: string,
 }
 

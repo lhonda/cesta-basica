@@ -177,7 +177,7 @@ router.get('/load', authRequired('admin'), (req, res, next) =>
     .catch(next))
 
 // Alteração de e-mail e senha
-router.patch('/users/:login', authRequired(), (req, res, next) =>
-  updateUser({ login: req.body.login, email: req.body.email, password: req.body.password, confirmPassword: req.body.confirmPassword })
+router.patch('/users', authRequired(), (req, res, next) =>
+  updateUser({ login: req.auth.login, email: req.body.email, password: req.body.password, confirmPassword: req.body.confirmPassword })
     .then((data) => res.status(200).json(data))
     .catch(next))

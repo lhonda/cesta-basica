@@ -21,7 +21,8 @@ import {
   fileSave,
   fileUpdate,
   fileError,
-  fileFind
+  fileFind,
+  filterDonation
 } from '../rules'
 
 export const router = Router()
@@ -173,4 +174,16 @@ router.post('/load/:type', authRequired('admin'), (req, res, next) =>
 router.get('/load', authRequired('admin'), (req, res, next) =>
   fileFind(req.query)
     .then((data) => res.status(200).json(data))
+    .catch(next))
+
+// Inclusão de dados via arquivo;
+router.post('/load/:type', authRequired('admin'), (req, res, next) =>
+  insertDataFromFile({ file: req.files.file, type: req.params.type })
+    .then(processResult => res.status(200).json(processResult))
+    .catch(next))
+
+// Inclusão de dados via arquivo;
+router.get('/filter/donation', authRequired('admin'), (req, res, next) =>
+  filterDonation({ ...req.body })
+    .then(processResult => res.status(200).json(processResult))
     .catch(next))

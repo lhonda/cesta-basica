@@ -1,9 +1,15 @@
 .containerHeather {
     width: 100%;
     height: auto;
-    padding-left: 20px;
     letter-spacing: 0.2px;
-    font-family: Rubik;
+    h2{
+      font-family: Rubik;
+      margin-left: 20px;
+      font-weight: 500;
+      font-size: 22px;
+      line-height: 22px;
+    }
+
 }
 
 .containerUser {
@@ -12,7 +18,18 @@
     flex-direction: column;
     text-align: center;
     font-family: Rubik;
-    height: 250px;
+    height: 38vh;
+    h3{
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 20px;
+    }
+    p{
+      font-family: Rubik;
+      color:#909090;
+      font-size: 16px;
+      line-height: 18px;
+    }
 }
 
 .containerSettings {

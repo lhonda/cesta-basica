@@ -157,8 +157,8 @@ export const CPF = 'CPF'
 
 //Profile
 export const signOut = 'Sair da conta'
-export const changePassword = 'Alterar Senha'
-export const changeEmail = 'Alterar e-mail'
+export const changePassword = 'Alterar senha'
+export const changeEmail = 'Alterar E-mail'
 export const settings = 'Configurações'
 export const profile = 'Perfil'
 export const setNewPassword = 'Definir nova senha'

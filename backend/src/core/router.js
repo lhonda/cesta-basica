@@ -21,7 +21,8 @@ import {
   fileSave,
   fileUpdate,
   fileError,
-  fileFind
+  fileFind,
+  updateUser
 } from '../rules'
 
 export const router = Router()
@@ -172,5 +173,11 @@ router.post('/load/:type', authRequired('admin'), (req, res, next) =>
 // Consulta de arquivos inseridos
 router.get('/load', authRequired('admin'), (req, res, next) =>
   fileFind(req.query)
+    .then((data) => res.status(200).json(data))
+    .catch(next))
+
+// Alteração de e-mail e senha
+router.patch('/users/:login/updateUser', (req, res, next) =>
+  updateUser({ login: req.auth.login, email: req.body.email, password: req.body.password, confirmPassword: req.body.confirmPassword })
     .then((data) => res.status(200).json(data))
     .catch(next))

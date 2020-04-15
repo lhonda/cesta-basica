@@ -33,12 +33,11 @@
       opacity: 0.4;
 
       &.donations,
-      &.charges {
+      &.charges,
+      &.profile{
         opacity: 1;
       }
     }
-
-
 
     &:after {
       margin: 0;

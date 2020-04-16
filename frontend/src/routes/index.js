@@ -40,7 +40,7 @@ export const Routes = () => (
       <Route path="/charge" component={Charge} isPrivate />
       <Route path="/donation/:id/delivered-details/:voucher" exact component={DeliveredDetail} isPrivate />
       <Route path="/donation/register" exact component={DonationRegister} isPrivate />
-      <Route path="/profile" component={Profile} isPrivate />
+      <Route path="/profile" exact component={Profile} isPrivate />
     </Switch>
   </BrowserRouter>
 )

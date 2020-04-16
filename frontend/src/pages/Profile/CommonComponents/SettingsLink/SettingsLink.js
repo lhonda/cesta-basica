@@ -1,24 +1,29 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 import './SettingsLink.scss'
 
-function SettingsLink({ action, message, icon, legend }) {
-
+function SettingsLink({ handleClick, message, icon, legend, to }) {
   return (
     <div className="container-setup">
       <div className="container-icon">
         <img src={icon} alt={legend} />
       </div>
-      <a href="#" title={message} onClick={action}>{message}</a>
+      <Link to={to} onClick={handleClick}>
+        {message}
+      </Link>
     </div>
   )
 }
 
 SettingsLink.propTypes = {
-  action: PropTypes.func.isRequired,
+  handleClick: PropTypes.func,
   message: PropTypes.string.isRequired,
   icon: PropTypes.string.isRequired,
   legend: PropTypes.string.isRequired,
+  to: PropTypes.string.isRequired,
 }
-
+SettingsLink.defaultProps = {
+  action: () => {},
+}
 export default SettingsLink

@@ -7,16 +7,10 @@ import { icEmail, icPassword, icLogout } from '../../assets/icons/index'
 import { profile, settings, changePassword, changeEmail, signOut } from '../../utils/strings'
 import './Profile.scss'
 
-function Profile({ dispatch, store, history}) {
-  function exit() {
+function Profile({ dispatch, store, history }) {
+  function logOut() {
     dispatch({ type: types.SET_LOGOUT })
     history.push('/login')
-  }
-  function newPassword() {
-    history.push('/newpass')
-  }
-  function newEmail() {
-    history.push('/profile/update-email')
   }
   const { user } = store
 
@@ -31,9 +25,14 @@ function Profile({ dispatch, store, history}) {
       </header>
       <div className="containerSetup">
         <h3>{settings}</h3>
-        <SettingsLink icon={icEmail} legend="envelop simbolizando e-mail" action={newEmail} message={changeEmail} />
-        <SettingsLink icon={icPassword} legend="cadeado simbolizando senha" action={newPassword} message={changePassword} />
-        <SettingsLink icon={icLogout} legend="alo" action={exit} message={signOut} />
+        <SettingsLink
+          icon={icEmail}
+          legend="envelop simbolizando e-mail"
+          to="/profile/update-email"
+          message={changeEmail}
+        />
+        <SettingsLink icon={icPassword} legend="cadeado simbolizando senha" to="/newpass" message={changePassword} />
+        <SettingsLink icon={icLogout} legend="alo" to="/login" handleClick={logOut} message={signOut} />
       </div>
       <BottomMenu />
     </>

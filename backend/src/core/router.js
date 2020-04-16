@@ -178,11 +178,16 @@ router.get('/load', authRequired('admin'), (req, res, next) =>
     .then((data) => res.status(200).json(data))
     .catch(next))
 
-
 // Alteração de e-mail e senha
 router.patch('/users', authRequired(), (req, res, next) =>
-  updateUser({ login: req.auth.login, email: req.body.email, password: req.body.password, confirmPassword: req.body.confirmPassword })
+  updateUser({
+    login: req.auth.login,
+    email: req.body.email,
+    password: req.body.password,
+    confirmPassword: req.body.confirmPassword
+  })
     .then((data) => res.status(200).json(data))
+    .catch(next))
 
 // Find all cities from one state
 router.get('/cities/:state', authRequired('admin'), (req, res, next) =>
@@ -191,6 +196,7 @@ router.get('/cities/:state', authRequired('admin'), (req, res, next) =>
     city: req.query.city
   })
     .then(data => res.status(200).json(data))
+    .catch(next))
 
 // Inclusão de dados via arquivo;
 router.post('/load/:type', authRequired('admin'), (req, res, next) =>

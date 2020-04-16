@@ -22,7 +22,7 @@ import { Charge } from '../pages/Charge'
 import { DonationRegister } from '../pages/DonationRegister'
 import { Profile } from '../pages/Profile/index'
 
-import { UpdateEmail } from '../pages/UpdateEmail'
+import { UpdateProfile } from '../pages/UpdateProfile'
 
 export const Routes = () => (
   <BrowserRouter>

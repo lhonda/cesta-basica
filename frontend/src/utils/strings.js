@@ -146,6 +146,9 @@ export const titleUpdateEmail = 'Atualizar E-mail'
 export const emailRegistered = 'E-mail cadastrado'
 export const registerNewEmail = 'Novo e-mail'
 
+// updatePassword
+export const titleUpdatePassword = 'Definir nova senha'
+
 // Generic
 export const WORD_NO = 'Não'
 export const WORD_YES = 'Sim'

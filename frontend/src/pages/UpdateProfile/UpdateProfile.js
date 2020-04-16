@@ -8,6 +8,7 @@ import { Loader } from '../../components/Loader'
 import { titleUpdateEmail, titleUpdatePassword } from '../../utils/strings'
 
 import { UpdateEmail } from './UpdateEmail'
+import { UpdatePassword } from './UpdatePassword'
 
 function UpdateProfile({ history, match }) {
   const [loading, setLoading] = useState(false)
@@ -21,7 +22,7 @@ function UpdateProfile({ history, match }) {
     },
     password: {
       title: titleUpdatePassword,
-      Component: () => <div>{whatUpdate}</div>,
+      Component: () => <UpdatePassword setLoading={setLoading} />,
     },
   }
 

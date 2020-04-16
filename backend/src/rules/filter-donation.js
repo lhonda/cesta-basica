@@ -7,11 +7,12 @@ export async function filterDonation ({
   listDonationId,
   state,
   city,
-  dateIn,
-  dateOut
+  dateTo,
+  dateFrom
 }) {
   const filterDonation = {}
   const filterSite = {}
+
   if (leaderLogin) {
     filterDonation.leaderLogin = leaderLogin
   }
@@ -28,28 +29,28 @@ export async function filterDonation ({
     const listDonationIdResolved = listDonationId.map(donation => regexp(donation, 'i'))
     filterDonation.donationId = { $in: listDonationIdResolved }
   }
-
   if (state) {
     filterSite.state = regexp(state, 'i')
   }
   if (city) {
     filterSite.city = regexp(city, 'i')
   }
-  if (dateIn) {
-    filterDonation.dateIn = dateIn
+  if (dateTo || dateFrom) {
+    filterDonation.created = {}
   }
-  if (dateOut) {
-    filterDonation.dateOut = dateOut
+  if (dateTo) {
+    filterDonation.created.$lte = dateTo
+  }
+  if (dateFrom) {
+    filterDonation.created.$gte = dateFrom
   }
 
   if ((state || city) && !siteId) {
-    console.log('FILTRO SITE:', filterSite)
     const listSiteId = (await Site.find(filterSite, { _id: 0, siteId: 1 }))
       .map(({ siteId }) => (siteId))
     filterDonation.siteId = { $in: listSiteId }
   }
 
-  console.log('FILTRO DONATION:', filterDonation)
   const donations = await Donation.find(filterDonation)
 
   return donations

@@ -22,7 +22,8 @@ import {
   fileSave,
   fileUpdate,
   fileError,
-  fileFind
+  fileFind,
+  filterDonation
 } from '../rules'
 
 export const router = Router()
@@ -176,6 +177,7 @@ router.get('/load', authRequired('admin'), (req, res, next) =>
     .then((data) => res.status(200).json(data))
     .catch(next))
 
+
 // Find all cities from one state
 router.get('/cities/:state', authRequired('admin'), (req, res, next) =>
   findCities({
@@ -183,4 +185,15 @@ router.get('/cities/:state', authRequired('admin'), (req, res, next) =>
     city: req.query.city
   })
     .then(data => res.status(200).json(data))
+
+// Inclusão de dados via arquivo;
+router.post('/load/:type', authRequired('admin'), (req, res, next) =>
+  insertDataFromFile({ file: req.files.file, type: req.params.type })
+    .then(processResult => res.status(200).json(processResult))
+    .catch(next))
+
+// Inclusão de dados via arquivo;
+router.get('/filter/donation', authRequired('admin'), (req, res, next) =>
+  filterDonation({ ...req.body })
+    .then(processResult => res.status(200).json(processResult))
     .catch(next))

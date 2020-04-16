@@ -6,4 +6,5 @@ export const inputTypes = {
   SIZE_LARGE: 'large',
   NUMBER: 'number',
   DATE: 'date',
+  EMAIL: 'email',
 }

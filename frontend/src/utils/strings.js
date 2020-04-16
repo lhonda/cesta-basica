@@ -141,6 +141,11 @@ export const deliveredPhoto = 'Foto<br/> da entrega'
 export const commentLeader = 'Comentário do lider'
 export const deliveredCellphone = 'DDD + Telefone'
 
+// updateEmail
+export const titleUpdateEmail = 'Atualizar E-mail'
+export const emailRegistered = 'E-mail cadastrado'
+export const registerNewEmail = 'Novo e-mail'
+
 // Generic
 export const WORD_NO = 'Não'
 export const WORD_YES = 'Sim'
@@ -149,3 +154,4 @@ export const unit = 'Unidade'
 export const deliveredFirstLetterCapitalized = 'Entregue'
 export const notDeliveredFirstLetterCapitalized = 'Não entregue'
 export const CPF = 'CPF'
+export const update = 'Atualizar'

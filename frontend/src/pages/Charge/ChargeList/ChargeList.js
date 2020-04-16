@@ -25,8 +25,6 @@ const ChargeList = ({ match, store }) => {
     return mockChargeList.length > 0 ? (
       <div className={`containerCharge__list containerCharge__list--${role}`}>
         {mockChargeList.map((item) => {
-          console.log(item);
-          
           const { id, fileName, date, chargeType } = item
           return <ChargeItem key={id} fileName={fileName} date={date} chargeType={chargeType} />
         })}
@@ -37,10 +35,10 @@ const ChargeList = ({ match, store }) => {
   }
 
   return (
-    <div className="chargeList">
+    <div className="containerCharge">
       {render()}
 
-      <div className="chargeList__button">
+      <div className="containerCharge__button">
         <Link
           to={{
             pathname: `${url}/add`,

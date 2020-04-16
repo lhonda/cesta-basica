@@ -11,7 +11,7 @@ import { ChargeUpload } from '../../../services/API/chargeUpload'
 
 import './ChargeAdd.scss'
 
-import { confirm, legendInputAddfile } from '../../../utils/strings'
+import { confirm, legendInputAddfile, legendInputChargeType, legendSheetCharge } from '../../../utils/strings'
 
 import { chargeSelectList } from './ChargeSelectList'
 
@@ -55,13 +55,13 @@ function ChargeAdd() {
 
       <Select
         value={chargeType}
-        placeholder="Tipo de Carga"
+        placeholder={legendInputChargeType}
         getValue={handleOnchangeSelect}
         optionsList={chargeSelectList}
       />
 
       <div className="main-charge-prof">
-        <SubTitle type={SubTitleTypes.LIGHT} width={SubTitleTypes.SIZE_SMALL} message="Carga da planilha" />
+        <SubTitle type={SubTitleTypes.LIGHT} width={SubTitleTypes.SIZE_SMALL} message={legendSheetCharge} />
 
         <File type=".csv" file={file} handleImage={handleFile} placeholder={legendInputAddfile} />
       </div>

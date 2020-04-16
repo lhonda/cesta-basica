@@ -5,13 +5,9 @@ import './ChargeItem.scss'
 function ChargeItem({ fileName, date, chargeType }) {
   return (
     <div className="chargeItem">
-      <div className="chargeItem__content">
-        <span className="chargeItem__content__title">{fileName}</span>
-        <div>
-          <span className="chargeItem__content__quantity">{date}</span>
-          <span className="floatRigth chargeItem__content__state">{chargeType}</span>
-        </div>
-      </div>
+      <span className="chargeItem__title">{fileName}</span>
+      <span className="floatLeft chargeItem__quantity">{date}</span>
+      <span className="floatRight chargeItem__state">{chargeType}</span>
     </div>
   )
 }

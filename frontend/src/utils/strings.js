@@ -67,6 +67,9 @@ export const chargeTypeTransfer = 'Transferência'
 export const chargeTypeSite = 'Unidade'
 export const buttonAddChargeText = 'Adicionar carga'
 export const legendInputAddfile = 'adicionar arquivo'
+export const legendInputChargeType = 'Tipo de Carga'
+export const legendSheetCharge = 'Carga da Planilha'
+export const legendEmptyBasket = 'Imagem que representa uma cesta vazia, sem conteúdo'
 
 // Checklist screen
 export const titleChecklist = 'Checklist de Saúde'

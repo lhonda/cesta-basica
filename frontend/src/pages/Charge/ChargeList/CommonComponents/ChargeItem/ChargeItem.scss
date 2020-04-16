@@ -1,4 +1,4 @@
-.floatRigth {
+.floatRight {
   font-size: 12px;
   position: relative;
   float: right;
@@ -12,24 +12,20 @@
   border-radius: 4px;
   height: 4rem;
   font-family: Rubik;
-  &__content {
+
+  &__title {
     display: flex;
-    flex-direction: column;
-    align-content: center;
+    color: #202228;
+    font-size: 16px;
+    margin: 0 0 0.4rem 0;
+  }
 
-    &__title {
-      color: #202228;
-      font-size: 16px;
-      margin: 0 0 0.56rem 0;
-    }
+  &__quantity {
+    color: #909090;
+    font-size: 14px;
+  }
 
-    &__quantity {
-      color: #909090;
-      font-size: 14px;
-    }
-
-    &__state {
-      margin-top: 3px;
-    }
+  &__state {
+    margin-top: 3px;
   }
 }

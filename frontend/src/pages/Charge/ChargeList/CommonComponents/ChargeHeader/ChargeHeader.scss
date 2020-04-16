@@ -6,16 +6,12 @@
 .containerHeader {
   font-family: Rubik;
   font-weight: 400;
-  padding: 0 1rem 0 1rem;
+  padding: 0 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
 
   h2 {
     font-size: 22px;
-  }
-
-  span {
-    height: 0;
   }
 }

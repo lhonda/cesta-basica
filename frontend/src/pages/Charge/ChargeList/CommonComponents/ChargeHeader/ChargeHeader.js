@@ -7,13 +7,14 @@ import { chargeTitlePage } from '../../../../../utils/strings'
 
 function ChargeHeader({ title }) {
   const location = useLocation()
+  const { pathname } = location
 
   return (
     <div className="fixedHeader">
-      <span className="containerHeader">
-        {location.pathname === '/charge' ? <div style={{ paddingTop: '2rem' }} /> : <></>}
+      <div className="containerHeader">
+        {pathname === '/charge' && <div style={{ paddingTop: '2rem' }} />}
         <h2>{title}</h2>
-      </span>
+      </div>
     </div>
   )
 }

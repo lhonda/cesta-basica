@@ -6,7 +6,6 @@ import { Legend, LegendTypes } from '../../../components/Legend'
 import { BottomMenu } from '../../DonationList/CommonComponents'
 import { ChargeHeader } from '../ChargeList/CommonComponents/ChargeHeader'
 
-// eslint-disable-next-line import/no-cycle
 import { ChargeAdd, ChargeList } from '..'
 
 import { ButtonIcon } from '../../../components/ButtonIcon'
@@ -41,7 +40,7 @@ const Charge = () => {
         <Route path="/charge/add" component={ChargeAdd} />
       </Switch>
 
-      {pathname === '/charge' ? <BottomMenu isAdmin /> : <></>}
+      {pathname === '/charge' && <BottomMenu isAdmin />}
     </div>
   )
 }

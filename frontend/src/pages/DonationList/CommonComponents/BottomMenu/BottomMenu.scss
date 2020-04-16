@@ -17,10 +17,9 @@
   ul {
     margin: 0;
     padding: 0;
-    margin: 0;
-    padding: 0;
     list-style: none;
     display: flex;
+    width: auto;
   }
 
   li {
@@ -34,7 +33,7 @@
 
       &.donations,
       &.charges,
-      &.profile{
+      &.profile {
         opacity: 1;
       }
     }

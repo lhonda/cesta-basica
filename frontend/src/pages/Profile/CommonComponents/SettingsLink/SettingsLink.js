@@ -1,7 +1,9 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import './SettingsLink.scss'
 
-function Setup({ action, message, icon, legend }) {
+function SettingsLink({ action, message, icon, legend }) {
+
   return (
     <div className="container-setup">
       <div className="container-icon">
@@ -12,4 +14,11 @@ function Setup({ action, message, icon, legend }) {
   )
 }
 
-export default Setup
+SettingsLink.propTypes = {
+  action: PropTypes.func.isRequired,
+  message: PropTypes.string.isRequired,
+  icon: PropTypes.string.isRequired,
+  legend: PropTypes.string.isRequired,
+}
+
+export default SettingsLink

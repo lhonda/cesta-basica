@@ -1,6 +1,5 @@
 import React from 'react'
-import { useHistory } from 'react-router-dom'
-import { func } from 'prop-types'
+import PropTypes from 'prop-types'
 import { types, connect } from '../../store'
 import SettingsLink from './CommonComponents/SettingsLink/SettingsLink'
 import BottomMenu from '../DonationList/CommonComponents/BottomMenu/BottomMenu'
@@ -8,8 +7,7 @@ import { icEmail, icPassword, icLogout } from '../../assets/icons/index'
 import { profile, settings, changePassword, changeEmail, signOut } from '../../utils/strings'
 import './Profile.scss'
 
-function Profile({ dispatch, store }) {
-  const history = useHistory()
+function Profile({ dispatch, store, history}) {
   function exit() {
     dispatch({ type: types.SET_LOGOUT })
     history.push('/login')
@@ -42,7 +40,18 @@ function Profile({ dispatch, store }) {
   )
 }
 Profile.propTypes = {
-  dispatch: func.isRequired,
+  store: PropTypes.shape({
+    user: PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      login: PropTypes.string.isRequired,
+      role: PropTypes.string.isRequired,
+      email: PropTypes.string.isRequired,
+    }).isRequired,
+  }).isRequired,
+  dispatch: PropTypes.func.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
 }
 
 export default connect(Profile)

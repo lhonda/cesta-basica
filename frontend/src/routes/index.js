@@ -43,6 +43,7 @@ export const Routes = () => (
       <Route path="/donation/:id/delivered-details/:voucher" exact component={DeliveredDetail} isPrivate />
       <Route path="/donation/register" exact component={DonationRegister} isPrivate />
       <Route path="/profile" exact component={Profile} isPrivate />
+      <Route path="/profile/update" component={UpdateProfile} isPrivate />
     </Switch>
   </BrowserRouter>
 )

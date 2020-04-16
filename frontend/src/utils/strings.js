@@ -141,6 +141,11 @@ export const deliveredPhoto = 'Foto<br/> da entrega'
 export const commentLeader = 'Comentário do lider'
 export const deliveredCellphone = 'DDD + Telefone'
 
+// updateEmail
+export const titleUpdateEmail = 'Atualizar E-mail'
+export const emailRegistered = 'E-mail cadastrado'
+export const registerNewEmail = 'Novo e-mail'
+
 // Generic
 export const WORD_NO = 'Não'
 export const WORD_YES = 'Sim'
@@ -149,6 +154,7 @@ export const unit = 'Unidade'
 export const deliveredFirstLetterCapitalized = 'Entregue'
 export const notDeliveredFirstLetterCapitalized = 'Não entregue'
 export const CPF = 'CPF'
+
 
 //Profile
 export const signOut = 'Sair da conta'
@@ -161,3 +167,6 @@ export const passwordCharacters = 'Sua senha deve conter no mínimo 8 caracteres
 export const newPassword = 'Digitar nova senha'
 export const confirmPassword = 'Confirmar senha'
 export const areYouSureSignOut = 'Tem certeza que deseja sair ?'
+
+export const update = 'Atualizar'
+

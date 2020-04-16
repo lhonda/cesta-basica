@@ -18,6 +18,7 @@ import {
   listLeaders,
   listSites,
   insertDataFromFile,
+  findCities,
   fileSave,
   fileUpdate,
   fileError,
@@ -175,6 +176,15 @@ router.get('/load', authRequired('admin'), (req, res, next) =>
   fileFind(req.query)
     .then((data) => res.status(200).json(data))
     .catch(next))
+
+
+// Find all cities from one state
+router.get('/cities/:state', authRequired('admin'), (req, res, next) =>
+  findCities({
+    state: req.params.state,
+    city: req.query.city
+  })
+    .then(data => res.status(200).json(data))
 
 // Inclusão de dados via arquivo;
 router.post('/load/:type', authRequired('admin'), (req, res, next) =>

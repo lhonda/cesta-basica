@@ -20,11 +20,12 @@ const Charge = () => {
   const history = useHistory()
   const { goBack } = history
   const location = useLocation()
+  const { pathname, state } = location
   const { path } = useRouteMatch()
 
   return (
     <div className="chargeList">
-      {location.state && (
+      {state && (
         <div className="backContainer">
           <ButtonIcon handleClick={goBack}>
             <LogoBack height={10} />
@@ -33,14 +34,14 @@ const Charge = () => {
         </div>
       )}
 
-      <ChargeHeader title={location.state ? location.state.title : chargeTitlePage} />
+      <ChargeHeader title={state ? state.title : chargeTitlePage} />
 
       <Switch>
         <Route path={path} exact component={ChargeList} />
         <Route path="/charge/add" component={ChargeAdd} />
       </Switch>
 
-      {location.pathname === '/charge' ? <BottomMenu isAdmin /> : <></>}
+      {pathname === '/charge' ? <BottomMenu isAdmin /> : <></>}
     </div>
   )
 }

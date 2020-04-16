@@ -190,6 +190,17 @@ router.get('/filter/donation', authRequired('admin'), (req, res, next) =>
     .then(processResult => res.status(200).json(processResult))
     .catch(next))
 
+// Alteração de e-mail e senha
+router.patch('/users', authRequired(), (req, res, next) =>
+  updateUser({
+    login: req.auth.login,
+    email: req.body.email,
+    password: req.body.password,
+    confirmPassword: req.body.confirmPassword
+  })
+    .then((data) => res.status(200).json(data))
+    .catch(next))
+
 // Find all cities from one state
 router.get('/cities/:state', authRequired('admin'), (req, res, next) =>
   findCities({

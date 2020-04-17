@@ -17,10 +17,9 @@
   ul {
     margin: 0;
     padding: 0;
-    margin: 0;
-    padding: 0;
     list-style: none;
     display: flex;
+    width: auto;
   }
 
   li {
@@ -33,12 +32,11 @@
       opacity: 0.4;
 
       &.donations,
-      &.charges {
+      &.charges,
+      &.profile {
         opacity: 1;
       }
     }
-
-
 
     &:after {
       margin: 0;

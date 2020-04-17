@@ -1,7 +1,7 @@
-import { Donation, Site } from '../repositories'
+import { Donation, Site, User } from '../repositories'
 
 export async function filterDonation ({
-  leaderLogin,
+  leaderName,
   siteId,
   status,
   listDonationId,
@@ -12,9 +12,13 @@ export async function filterDonation ({
 }) {
   const filterDonation = {}
   const filterSite = {}
-
-  if (leaderLogin) {
-    filterDonation.leaderLogin = leaderLogin
+  if (leaderName) {
+    const user = await User.findOne({ name: leaderName }, { _id: 0, login: 1 })
+    if (user) {
+      filterDonation.leaderLogin = user.login
+    } else {
+      filterDonation.leaderLogin = undefined
+    }
   }
   if (siteId) {
     filterDonation.siteId = siteId

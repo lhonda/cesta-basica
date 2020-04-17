@@ -4,7 +4,7 @@
   overflow: hidden;
 
   &__list {
-     overflow-y: scroll;
+     overflow-y: auto;
      &--admin {
        padding: 0 1rem;
        height: calc(100vh - 12.8rem - 2.4rem);

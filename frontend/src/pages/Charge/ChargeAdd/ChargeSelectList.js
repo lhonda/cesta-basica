@@ -4,12 +4,16 @@ export const chargeSelectList = [
     string: 'Selecione o tipo de carga',
   },
   {
-    value: 'donation',
-    string: 'Pacote',
+    value: 'voucher',
+    string: 'Cartão',
   },
   {
     value: 'user',
     string: 'Líder',
+  },
+  {
+    value: 'donation',
+    string: 'Pacote',
   },
   {
     value: 'transfer',
@@ -18,9 +22,5 @@ export const chargeSelectList = [
   {
     value: 'site',
     string: 'Unidade',
-  },
-  {
-    value: 'voucher',
-    string: 'Cartão',
   },
 ]

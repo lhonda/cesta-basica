@@ -18,6 +18,7 @@ const cleanState = {
   cardList: [],
   leaderList: null,
   siteList: null,
+  chargeList: [],
 }
 
 function saveState(newState) {
@@ -41,6 +42,7 @@ const actionMap = {
   [types.SET_DECLARATION]: (state, payload) => saveState({ ...state, declaration: payload }),
   [types.SET_HEALTHCHECK]: (state, payload) => saveState({ ...state, doneHealthCheck: payload }),
   [types.SET_SITE_LIST]: (state, payload) => saveState({ ...state, siteList: payload }),
+  [types.SET_CHARGE_LIST]: (state, payload) => saveState({ ...state, chargeList: payload }),
   [types.SET_LOGOUT]: () => logout(),
   [types.SET_DONATION_LIST]: (state, payload) => saveState({ ...state, donationList: payload }),
   [types.SET_LEADER_LIST]: (state, payload) => saveState({ ...state, leaderList: payload }),

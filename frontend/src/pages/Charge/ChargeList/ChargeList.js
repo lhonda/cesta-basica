@@ -1,32 +1,51 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { connect } from '../../../store'
+
+import { Loader } from '../../../components/Loader'
 
 import { Button, ButtonTypes } from '../../../components/Button'
 import { ChargeItem, ChargeIsEmpty } from './CommonComponents'
 
+import { ChargesList } from '../../../services/API/chargeList'
+import { chargeTypesList } from '../ChargeTypesList'
+
 import { buttonAddChargeText } from '../../../utils/strings'
+import { formatDate } from '../../../utils/formatDateToptbr'
 
 import './ChargeList.scss'
 
-const ChargeList = ({ match, store }) => {
+function ChargeList({ store, match, dispatch }) {
+  const [loading, setLoading] = useState()
+
   const {
+    chargeList,
     user: { role },
   } = store
 
   const { url } = match
 
-  const mockChargeList = [
-    { id: 1, fileName: 'pacotes_tk_abril', date: '01/04/2020', chargeType: 'Pacotes' },
-    { id: 2, fileName: 'novos_lideres_abril', date: '03/04/2020', chargeType: 'Líder' },
-  ]
+  const matchTypeName = (type) => chargeTypesList.find((e) => e.value === type).string
+
+  useEffect(() => {
+    getChargeList()
+  }, [])
+
+  async function getChargeList() {
+    setLoading(true)
+    await ChargesList(dispatch)
+    setLoading(false)
+  }
 
   const render = () => {
-    return mockChargeList.length > 0 ? (
+    return chargeList.length > 0 ? (
       <div className={`containerCharge__list containerCharge__list--${role}`}>
-        {mockChargeList.map((item) => {
-          const { id, fileName, date, chargeType } = item
-          return <ChargeItem key={id} fileName={fileName} date={date} chargeType={chargeType} />
+        {chargeList.map((item) => {
+          const { _id, fileName, createdAt, type } = item
+          return (
+            <ChargeItem key={_id} fileName={fileName} date={formatDate(createdAt)} chargeType={matchTypeName(type)} />
+          )
         })}
       </div>
     ) : (
@@ -36,6 +55,7 @@ const ChargeList = ({ match, store }) => {
 
   return (
     <div className="containerCharge">
+      {loading && !chargeList && <Loader />}
       {render()}
 
       <div className="containerCharge__button">
@@ -52,6 +72,12 @@ const ChargeList = ({ match, store }) => {
       </div>
     </div>
   )
+}
+
+ChargeList.propTypes = {
+  store: PropTypes.object.isRequired,
+  match: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
 }
 
 export default connect(ChargeList)

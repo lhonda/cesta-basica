@@ -13,7 +13,7 @@ import './ChargeAdd.scss'
 
 import { confirm, legendInputAddfile, legendInputChargeType, legendSheetCharge } from '../../../utils/strings'
 
-import { chargeSelectList } from './ChargeSelectList'
+import { chargeTypesList } from '../ChargeTypesList'
 
 function ChargeAdd() {
   const history = useHistory()
@@ -57,7 +57,7 @@ function ChargeAdd() {
         value={chargeType}
         placeholder={legendInputChargeType}
         getValue={handleOnchangeSelect}
-        optionsList={chargeSelectList}
+        optionsList={chargeTypesList}
       />
 
       <div className="main-charge-prof">

@@ -1,4 +1,4 @@
-export const chargeSelectList = [
+export const chargeTypesList = [
   {
     value: '',
     string: 'Selecione o tipo de carga',

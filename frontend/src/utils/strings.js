@@ -146,6 +146,13 @@ export const titleUpdateEmail = 'Atualizar E-mail'
 export const emailRegistered = 'E-mail cadastrado'
 export const registerNewEmail = 'Novo e-mail'
 
+// updatePassword
+export const titleUpdatePassword = 'Definir nova senha'
+export const informationToUpdatePassword = 'Sua senha deve conter no mínimo 8 caracteres.'
+export const typeNewPassword = 'Digitar nova senha'
+export const typePasswordToCheck = 'Confirmar senha'
+export const passwordsNotSame = 'As senhas precisam ser iguais'
+
 // Generic
 export const WORD_NO = 'Não'
 export const WORD_YES = 'Sim'

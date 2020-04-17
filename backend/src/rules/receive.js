@@ -1,5 +1,5 @@
-import AWS from 'aws-sdk'
 import { Donation } from '../repositories/donation'
+import { S3 } from '../services'
 
 export async function receive ({
   login,
@@ -46,20 +46,11 @@ export async function receive ({
     const [, ext] = receiveDonationFile.mimetype.split('/')
     const key = `provas/recebimentos/recebimento-doacao-${login}-${donationId}-${timestamp.toISOString()}.${ext}`
 
-    const params = {
-      Bucket: process.env.BUCKET_NAME,
-      Key: key,
-      Body: receiveDonationFile.data
+    try {
+      await S3.upload(key, receiveDonationFile.data)
+    } catch (error) {
+      throw error
     }
-
-    const s3 = new AWS.S3()
-
-    s3.upload(params, function (err, data) {
-      if (err) {
-        throw err
-      }
-      console.log(`File uploaded successfully.Key:${key}`)
-    })
 
     const point = {
       type: 'Point',

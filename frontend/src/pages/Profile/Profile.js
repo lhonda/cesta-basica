@@ -7,6 +7,8 @@ import { icEmail, icPassword, icLogout } from '../../assets/icons/index'
 import { profile, settings, changePassword, changeEmail, signOut } from '../../utils/strings'
 import './Profile.scss'
 
+import { Alert } from '../../components/Alert'
+
 function Profile({ dispatch, store, history }) {
   function logOut() {
     dispatch({ type: types.SET_LOGOUT })
@@ -16,6 +18,7 @@ function Profile({ dispatch, store, history }) {
 
   return (
     <>
+      <Alert message="teste" />
       <header className="containerHeather">
         <h1>{profile}</h1>
         <div className="containerUser">
@@ -33,6 +36,7 @@ function Profile({ dispatch, store, history }) {
         />
         <SettingsLink icon={icPassword} legend="cadeado simbolizando senha" to="/newpass" message={changePassword} />
         <SettingsLink icon={icLogout} legend="alo" to="/login" handleClick={logOut} message={signOut} />
+        <button onClick={() => dispatch({ type: types.SHOW_ALERT, payload: { message: 'golaço', type: 'success' } })}>oi</button>
       </div>
       <BottomMenu />
     </>

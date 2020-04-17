@@ -18,6 +18,10 @@ const cleanState = {
   cardList: [],
   leaderList: null,
   siteList: null,
+  notification: {
+    message: '',
+    type: '',
+  },
 }
 
 function saveState(newState) {
@@ -49,6 +53,8 @@ const actionMap = {
   [types.CLEAN_CARD_LIST]: (state) => saveState({ ...state, cardList: [] }),
   [types.SET_DONATION_DETAILS]: (state, payload) => saveState({ ...state, donation: payload }),
   [types.CLEAN_DONATION_DETAILS]: (state) => saveState({ ...state, donation: null }),
+  [types.SHOW_ALERT]: (state, payload) => ({ ...state, notification: payload }),
+  [types.HIDE_ALERT]: (state) => ({ ...state, notification: { message: '', type: '' } }),
 }
 
 export function reducer(state, action) {

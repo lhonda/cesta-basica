@@ -17,7 +17,14 @@ import {
   createDonation,
   listLeaders,
   listSites,
-  insertDataFromFile
+  insertDataFromFile,
+  findCities,
+  fileSave,
+  fileUpdate,
+  fileError,
+  fileFind,
+  updateUser,
+  filterDonation
 } from '../rules'
 
 export const router = Router()
@@ -155,8 +162,50 @@ router.get('/sites', authRequired('admin'), (req, res, next) =>
     .then((data) => res.status(200).json(data))
     .catch(next))
 
+// Inclusão de dados via arquivo
+router.post('/load/:type', authRequired('admin'), (req, res, next) =>
+  fileSave({ file: req.files.file, type: req.params.type, admin: req.auth.id })
+    .then(
+      ({ file, type, fileId }) => insertDataFromFile({ file, type })
+        .then(message => fileUpdate({ fileId, message }))
+        .then(message => res.status(200).json(message))
+        .catch(err => fileError(err, fileId, next)))
+    .catch(next))
+
+// Consulta de arquivos inseridos
+router.get('/load', authRequired('admin'), (req, res, next) =>
+  fileFind(req.query)
+    .then((data) => res.status(200).json(data))
+    .catch(next))
+
+// Alteração de e-mail e senha
+router.patch('/users', authRequired(), (req, res, next) =>
+  updateUser({
+    login: req.auth.login,
+    email: req.body.email,
+    password: req.body.password,
+    confirmPassword: req.body.confirmPassword
+  })
+    .then((data) => res.status(200).json(data))
+    .catch(next))
+
+// Find all cities from one state
+router.get('/cities/:state', authRequired('admin'), (req, res, next) =>
+  findCities({
+    state: req.params.state,
+    city: req.query.city
+  })
+    .then(data => res.status(200).json(data))
+    .catch(next))
+
 // Inclusão de dados via arquivo;
 router.post('/load/:type', authRequired('admin'), (req, res, next) =>
   insertDataFromFile({ file: req.files.file, type: req.params.type })
+    .then(processResult => res.status(200).json(processResult))
+    .catch(next))
+
+// Inclusão de dados via arquivo;
+router.get('/filter/donation', authRequired('admin'), (req, res, next) =>
+  filterDonation({ ...req.body })
     .then(processResult => res.status(200).json(processResult))
     .catch(next))

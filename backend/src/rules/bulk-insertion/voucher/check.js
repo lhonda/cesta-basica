@@ -1,6 +1,6 @@
-import { Donation, Voucher } from '../../../repositories'
+import { Donation, Voucher, fileStatus } from '../../../repositories'
+import ProcFileException from '../../../core/process-file-exception'
 import genericChecker from '../check-util'
-import HttpException from '../../../core/http-exception'
 
 const getDonationIds = (voucherOrDonation) => voucherOrDonation.donationId
 const getVoucherIdFunc = (voucher) => voucher.voucherId
@@ -11,7 +11,11 @@ const checkVouchersExists = async (validDonations) => {
   const existingDonations = await Voucher.find({ voucherId: { $in: toBeAddedDocs } }, 'voucherId')
 
   if (existingDonations.length > 0) {
-    throw new HttpException(422, `Vouchers(s) já existente(s) no sistema ${existingDonations.map(getVoucherIdFunc).join(', ')}`)
+    throw new ProcFileException(
+      422,
+      `Vouchers(s) já existente(s) no sistema ${existingDonations.map(getVoucherIdFunc).join(', ')}`,
+      fileStatus.duplicated
+    )
   }
 
   return validDonations

@@ -157,6 +157,18 @@ export const deliveredPhoto = 'Foto<br/> da entrega'
 export const commentLeader = 'Comentário do lider'
 export const deliveredCellphone = 'DDD + Telefone'
 
+// updateEmail
+export const titleUpdateEmail = 'Atualizar E-mail'
+export const emailRegistered = 'E-mail cadastrado'
+export const registerNewEmail = 'Novo e-mail'
+
+// updatePassword
+export const titleUpdatePassword = 'Definir nova senha'
+export const informationToUpdatePassword = 'Sua senha deve conter no mínimo 8 caracteres.'
+export const typeNewPassword = 'Digitar nova senha'
+export const typePasswordToCheck = 'Confirmar senha'
+export const passwordsNotSame = 'As senhas precisam ser iguais'
+
 // Generic
 export const WORD_NO = 'Não'
 export const WORD_YES = 'Sim'
@@ -165,3 +177,19 @@ export const unit = 'Unidade'
 export const deliveredFirstLetterCapitalized = 'Entregue'
 export const notDeliveredFirstLetterCapitalized = 'Não entregue'
 export const CPF = 'CPF'
+
+
+//Profile
+export const signOut = 'Sair da conta'
+export const changePassword = 'Alterar senha'
+export const changeEmail = 'Alterar E-mail'
+export const settings = 'Configurações'
+export const profile = 'Perfil'
+export const setNewPassword = 'Definir nova senha'
+export const passwordCharacters = 'Sua senha deve conter no mínimo 8 caracteres'
+export const newPassword = 'Digitar nova senha'
+export const confirmPassword = 'Confirmar senha'
+export const areYouSureSignOut = 'Tem certeza que deseja sair ?'
+
+export const update = 'Atualizar'
+

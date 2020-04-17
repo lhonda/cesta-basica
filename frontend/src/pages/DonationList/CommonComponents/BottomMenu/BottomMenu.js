@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom'
 
 import './BottomMenu.scss'
 
-import { icBasket, icCharge } from '../../../../assets/icons'
+import { icBasket, icCharge, icProfile } from '../../../../assets/icons'
 
 function BottomMenu({ isAdmin }) {
 
@@ -26,6 +26,11 @@ function BottomMenu({ isAdmin }) {
           </li>
         )}
 
+        <li>
+          <NavLink to="/profile" activeClassName="profile">
+            <img src={icProfile} alt="Ícone de uma pessoa" />
+          </NavLink>
+        </li>
       </ul>
     </nav>
   )

@@ -1,5 +1,5 @@
-import { Donation } from '../../../repositories'
-import HttpException from '../../../core/http-exception'
+import ProcFileException from '../../../core/process-file-exception'
+import { Donation, fileStatus } from '../../../repositories'
 
 export default async (validDonations) => {
   const mapObject = {}
@@ -34,7 +34,11 @@ export default async (validDonations) => {
   )
 
   if (errors.length > 0) {
-    throw new HttpException(422, `Falha ao processar pacote(s) para o(s) novo(s) líder(es) ${errors.join(', ')}`)
+    throw new ProcFileException(
+      422,
+      `Falha ao processar pacote(s) para o(s) novo(s) líder(es) ${errors.join(', ')}`,
+      fileStatus.partial
+    )
   }
 
   return { message: `${validDonations.length} pacote(s) atualizado(s) com sucesso.` }

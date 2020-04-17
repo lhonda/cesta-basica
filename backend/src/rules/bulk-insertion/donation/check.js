@@ -1,7 +1,6 @@
-import { User, Site, Donation } from '../../../repositories'
+import ProcFileException from '../../../core/process-file-exception'
+import { User, Site, Donation, fileStatus } from '../../../repositories'
 import genericChecker from '../check-util'
-
-import HttpException from '../../../core/http-exception'
 
 const loginDonationMapFunc = (donation) => donation.leaderLogin
 const loginUserMapFunc = (user) => user.login
@@ -14,7 +13,11 @@ const checkDonationExists = async (validDonations) => {
   const existingDonations = await Donation.find({ donationId: { $in: toBeAddedDocs } }, 'donationId')
 
   if (existingDonations.length > 0) {
-    throw new HttpException(422, `Pacote(s) já existente(s) no sistema ${existingDonations.map(getDonationIds).join(', ')}`)
+    throw new ProcFileException(
+      422,
+      `Pacote(s) já existente(s) no sistema ${existingDonations.map(getDonationIds).join(', ')}`,
+      fileStatus.duplicated
+    )
   }
 
   return validDonations

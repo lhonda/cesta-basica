@@ -14,11 +14,7 @@ export async function filterDonation ({
   const filterSite = {}
   if (leaderName) {
     const user = await User.findOne({ name: leaderName }, { _id: 0, login: 1 })
-    if (user) {
-      filterDonation.leaderLogin = user.login
-    } else {
-      filterDonation.leaderLogin = undefined
-    }
+    user ? filterDonation.leaderLogin = user.login : filterDonation.leaderLogin = undefined
   }
   if (siteId) {
     filterDonation.siteId = siteId

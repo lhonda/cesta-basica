@@ -8,18 +8,14 @@ import { Loader } from '../../components/Loader'
 import { DonationHeader, DonationIsEmpty, DonationItem, BottomMenu } from './CommonComponents'
 import { Button, ButtonTypes } from '../../components/Button'
 
-import { DonationsList } from '../../services/API/donationList'
+import { FilteredDonationList } from '../../services/API/donationList'
 import { CommitmentCheck } from '../../services/API/terms'
 
 import { registerNewDonation } from '../../utils/strings'
 
 function DonationList({ store, dispatch, history }) {
   const [loading, setLoading] = useState()
-
-  const {
-    donationList,
-    user: { role },
-  } = store
+  const { donationList, user: { role }, filters } = store
 
   function getGeoLocation() {
     navigator.geolocation.getCurrentPosition((position) => {
@@ -38,7 +34,7 @@ function DonationList({ store, dispatch, history }) {
 
   async function getDonationList() {
     setLoading(true)
-    await DonationsList(dispatch)
+    await FilteredDonationList(dispatch, filters)
     await CommitmentCheck(history)
     setLoading(false)
   }
@@ -53,7 +49,7 @@ function DonationList({ store, dispatch, history }) {
   return (
     <div className="containerDonation">
       {loading && !donationList && <Loader />}
-      <DonationHeader />
+      <DonationHeader isAdmin={isAdmin} qntd={filters.filterQnt} />
 
       {donationList.length > 0 ? (
         <div className={`containerDonation__list containerDonation__list--${role}`}>

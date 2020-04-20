@@ -17,6 +17,7 @@ import { ReceivedCurrent } from '../pages/ReceivedCurrent'
 import { ReceivedCurrentProf } from '../pages/ReceivedCurrentProf'
 import { DonationDetails } from '../pages/DonationDetails'
 import { DeliveredDetail } from '../pages/DeliveredDetail'
+import { FilterScreen } from '../pages/Filter'
 
 import { Charge } from '../pages/Charge'
 import { DonationRegister } from '../pages/DonationRegister'
@@ -44,6 +45,7 @@ export const Routes = () => (
       <Route path="/donation/register" exact component={DonationRegister} isPrivate />
       <Route path="/profile" exact component={Profile} isPrivate />
       <Route path="/profile/update" component={UpdateProfile} isPrivate />
+      <Route path="/filter" exact component={FilterScreen} isPrivate />
     </Switch>
   </BrowserRouter>
 )

@@ -1,14 +1,16 @@
 import React from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
-import { string } from 'prop-types'
+import { string, bool, number } from 'prop-types'
 import './DonationHeader.scss'
 
 import { icFilter } from '../../../../assets/icons'
 import { connect } from '../../../../store'
 
+import { Notification } from '../../../../components/Notification'
+
 import { donationTitlePage } from '../../../../utils/strings'
 
-function DonationHeader({ title }) {
+function DonationHeader({ title, isAdmin, qntd }) {
   const history = useHistory()
   const location = useLocation()
   const { pathname } = location
@@ -22,9 +24,16 @@ function DonationHeader({ title }) {
       <header className="containerHeader">
         {pathname === '/donation-list' && <div style={{ paddingTop: '2rem' }} />}
         <h2>{title}</h2>
-        <button onClick={exit} type="button">
-          <img src={icFilter} alt="botao para filtrar doaçoes" />
-        </button>
+        {isAdmin && (
+          <div>
+            <div className="header-notification">
+              <Notification qntd={qntd} />
+            </div>
+            <button onClick={exit} type="button">
+              <img src={icFilter} alt="botao para filtrar doaçoes" />
+            </button>
+          </div>
+        )}
       </header>
     </div>
   )
@@ -32,10 +41,14 @@ function DonationHeader({ title }) {
 
 DonationHeader.propTypes = {
   title: string,
+  isAdmin: bool,
+  qntd: number,
 }
 
 DonationHeader.defaultProps = {
   title: donationTitlePage,
+  isAdmin: false,
+  qntd: 0,
 }
 
 export default connect(DonationHeader)

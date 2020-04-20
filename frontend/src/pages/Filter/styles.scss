@@ -1,0 +1,48 @@
+.filter-container {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 32px);
+  margin: 16px;
+}
+
+.formFilter-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.formFilter-subtitle {
+  padding-bottom: 20px;
+}
+
+.formFilter-content {
+  div {
+    margin-bottom: 20px;
+  }
+  select {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}
+
+.formFilter-dates {
+  display: flex;
+  justify-content: space-between;
+}
+
+.formFilter-initialDate {
+  max-width: 48%;
+}
+
+.formFilter-finalDate {
+  max-width: 48%;
+}
+
+
+.formFilter-footer {
+  margin-bottom: 16px;
+  bottom: 0;
+  width: -webkit-fill-available;
+}
+
+

@@ -25,7 +25,8 @@ import {
   fileError,
   fileFind,
   updateUser,
-  filterDonation
+  filterDonation,
+  listReports
 } from '../rules'
 
 export const router = Router()
@@ -219,3 +220,9 @@ router.get('/filter/donation', authRequired('admin'), (req, res, next) =>
   })
     .then(processResult => res.status(200).json(processResult))
     .catch(next))
+
+
+router.get('/reports' /* authRequired('admin') */, (req, res, next) =>
+  listReports()
+  .then(processResult => res.status(200).json(processResult))
+  .catch(next))

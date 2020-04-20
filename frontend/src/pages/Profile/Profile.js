@@ -18,7 +18,7 @@ function Profile({ dispatch, store, history }) {
 
   return (
     <>
-      <Alert message="teste" />
+      <Alert />
       <header className="containerHeather">
         <h1>{profile}</h1>
         <div className="containerUser">
@@ -36,7 +36,22 @@ function Profile({ dispatch, store, history }) {
         />
         <SettingsLink icon={icPassword} legend="cadeado simbolizando senha" to="/newpass" message={changePassword} />
         <SettingsLink icon={icLogout} legend="alo" to="/login" handleClick={logOut} message={signOut} />
-        <button onClick={() => dispatch({ type: types.SHOW_ALERT, payload: { message: 'golaço', type: 'success' } })}>oi</button>
+        <button
+          type="button"
+          onClick={() => {
+            dispatch({
+              type: types.SHOW_ALERT,
+              payload: {
+                message: 'Falha ai irmao',
+                type: 'failure',
+              },
+            })
+          }}
+        >
+          oi
+        </button>
+
+        <button onClick={() => dispatch({ type: types.HIDE_ALERT })}>oi2</button>
       </div>
       <BottomMenu />
     </>

@@ -13,24 +13,24 @@ export const alertTypes = {
 function Alert({ dispatch, store }) {
   const [isAlert, setIsAlert] = useState(false)
   const close = () => dispatch({ type: typesStore.HIDE_ALERT })
+  const hide = isAlert ? {} : { display: 'none' }
   const { message, type } = store.notification
   useEffect(() => {
-    console.log(message)
-    if (!message && !type) {
-      return setInterval(() => {
+    if (message === '' && type === '' && isAlert) {
+      setIsAlert(false)
+    } else if (message !== '' && type !== '' && !isAlert) {
+      setIsAlert(true)
+      setTimeout(() => {
         setIsAlert(false)
         close()
-      }, 7000)
+      }, 2000)
     }
-    return setIsAlert(true)
-  }, [store.notification])
+  }, [message, type])
 
   return (
-    isAlert && (
-      <a href="#" onClick={close} className={`Alert Alert--${alertTypes.SUCCESS}`}>
-        {message}
-      </a>
-    )
+    <span onClick={close} className={`Alert Alert--${type}`} style={hide}>
+      {message}
+    </span>
   )
 }
 

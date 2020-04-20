@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react'
-import PropTypes from 'prop-types'
+import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { Select } from '../../../components/Select'
 import { File } from '../../../components/File'
@@ -12,9 +11,9 @@ import { ChargeUpload } from '../../../services/API/chargeUpload'
 
 import './ChargeAdd.scss'
 
-import {
-  confirm,
-} from '../../../utils/strings'
+import { confirm, legendInputAddfile, legendInputChargeType, legendSheetCharge } from '../../../utils/strings'
+
+import { chargeTypesList } from '../ChargeTypesList'
 
 function ChargeAdd() {
   const history = useHistory()
@@ -38,39 +37,12 @@ function ChargeAdd() {
     setLoading(false)
 
     if (status === 200) {
-      history.push(`/charge`)
+      history.push('/charge')
     } else {
       setFile('')
       setError(response.data.message)
     }
   }
-
-  const optionsList = [
-    {
-      value: '',
-      string: 'Selecione o tipo de carga',
-    },
-    {
-      value: 'donation',
-      string: 'Bordero',
-    },
-    {
-      value: 'user',
-      string: 'Líder',
-    },
-    {
-      value: 'transfer',
-      string: 'Transferência',
-    },
-    {
-      value: 'site',
-      string: 'Unidade',
-    },
-    {
-      value: 'voucher',
-      string: 'Voucher',
-    }
-  ]
 
   const handleOnchangeSelect = (value) => {
     setChargeType(value)
@@ -78,29 +50,25 @@ function ChargeAdd() {
   }
 
   return (
-    <div className="chargeAdd container-donation-prof">
+    <div className="chargeAdd container-charge-prof">
       {loading && <Loader />}
 
       <Select
         value={chargeType}
-        placeholder="Tipo de Carga"
+        placeholder={legendInputChargeType}
         getValue={handleOnchangeSelect}
-        optionsList={optionsList}
+        optionsList={chargeTypesList}
       />
 
-      <div className="main-donation-prof">
-        <SubTitle type={SubTitleTypes.LIGHT} width={SubTitleTypes.SIZE_SMALL} message="Carga da planilha" />
+      <div className="main-charge-prof">
+        <SubTitle type={SubTitleTypes.LIGHT} width={SubTitleTypes.SIZE_SMALL} message={legendSheetCharge} />
 
-        <File type=".csv" file={file} handleImage={handleFile} placeholder="adicionar arquivo" />
+        <File type=".csv" file={file} handleImage={handleFile} placeholder={legendInputAddfile} />
       </div>
 
-      {error && (
-        <p style={{ color: 'red', maxHeight: 250, overflow: 'auto', }}>
-          {error}
-        </p>
-      )}
+      {error && <p style={{ color: 'red', maxHeight: 250, overflow: 'auto' }}>{error}</p>}
 
-      <div className="footer-donation-prof">
+      <div className="footer-charge-prof">
         <Button
           handleClick={handleClickButton}
           disable={!file || !chargeType || error}

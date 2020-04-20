@@ -1,3 +1,1 @@
-import Charge from './Charge'
-
-export { Charge }
+export { Charge } from './Charge'

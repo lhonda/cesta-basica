@@ -8,7 +8,11 @@ function Select({ value, placeholder, getValue, optionsList }) {
     <select value={value} className="customSelect" placeholder={placeholder} onChange={handleOnChange}>
       {optionsList.map((item) => {
         const { value, string } = item
-        return <option key={value} value={value}>{string}</option>
+        return (
+          <option key={value} value={value}>
+            {string}
+          </option>
+        )
       })}
     </select>
   )

@@ -15,6 +15,7 @@ import { registerNewDonation } from '../../utils/strings'
 
 function DonationList({ store, dispatch, history }) {
   const [loading, setLoading] = useState()
+
   const {
     donationList,
     user: { role },
@@ -47,7 +48,7 @@ function DonationList({ store, dispatch, history }) {
     getDonationList()
   }, [])
 
-  const isAdmin = _ => role === 'admin'
+  const isAdmin = (_) => role === 'admin'
 
   return (
     <div className="containerDonation">

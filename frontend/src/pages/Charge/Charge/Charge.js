@@ -3,27 +3,29 @@ import React from 'react'
 import { Route, Switch, useLocation, useRouteMatch, useHistory } from 'react-router-dom'
 
 import { Legend, LegendTypes } from '../../../components/Legend'
-import { DonationHeader, BottomMenu } from '../../DonationList/CommonComponents'
-import { ChargeAdd, ChargeList } from '../'
+import { BottomMenu } from '../../DonationList/CommonComponents'
+import { ChargeHeader } from '../ChargeList/CommonComponents/ChargeHeader'
+
+import { ChargeAdd } from '../ChargeAdd'
+import { ChargeList } from '../ChargeList'
+
 import { ButtonIcon } from '../../../components/ButtonIcon'
 import { LogoBack } from '../../../components/Logo'
 
-import {
-  back,
-} from '../../../utils/strings'
+import { back, chargeTitlePage } from '../../../utils/strings'
 
 import './Charge.scss'
 
-const Charge = () => {
-
-  let history = useHistory()
+export const Charge = () => {
+  const history = useHistory()
   const { goBack } = history
-  let location = useLocation()
-  let { path } = useRouteMatch()
+  const location = useLocation()
+  const { pathname, state } = location
+  const { path } = useRouteMatch()
 
   return (
     <div className="chargeList">
-      {location.state && (
+      {state && (
         <div className="backContainer">
           <ButtonIcon handleClick={goBack}>
             <LogoBack height={10} />
@@ -32,16 +34,14 @@ const Charge = () => {
         </div>
       )}
 
-      <DonationHeader title={location.state ? location.state.title : 'Carga de Cartões'} />
+      <ChargeHeader title={state ? state.title : chargeTitlePage} />
 
       <Switch>
         <Route path={path} exact component={ChargeList} />
         <Route path="/charge/add" component={ChargeAdd} />
       </Switch>
 
-      <BottomMenu isAdmin={true} />
+      {pathname === '/charge' && <BottomMenu isAdmin />}
     </div>
   )
 }
-
-export default Charge

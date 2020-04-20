@@ -1,69 +1,83 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { connect } from '../../../store'
 
+import { Loader } from '../../../components/Loader'
+
 import { Button, ButtonTypes } from '../../../components/Button'
-import { DonationIsEmpty, DonationItem } from '../../DonationList/CommonComponents'
+import { ChargeItem, ChargeIsEmpty } from './CommonComponents'
+
+import { ChargesList } from '../../../services/API/chargeList'
+import { chargeTypesList } from '../ChargeTypesList'
+
+import { buttonAddChargeText } from '../../../utils/strings'
+import { formatDate } from '../../../utils/formatDateToptbr'
 
 import './ChargeList.scss'
 
-const ChargeList = ({ history, match, store }) => {
+function ChargeList({ store, match, dispatch }) {
+  const [loading, setLoading] = useState()
+
   const {
+    chargeList,
     user: { role },
   } = store
 
   const { url } = match
 
-  const chargeList = []
+  const matchTypeName = (type) => chargeTypesList.find((e) => e.value === type).string
+
+  useEffect(() => {
+    getChargeList()
+  }, [])
+
+  async function getChargeList() {
+    setLoading(true)
+    await ChargesList(dispatch)
+    setLoading(false)
+  }
 
   const render = () => {
-    return (
-      chargeList.length > 0 ? (
-        <div className={`containerDonation__list containerDonation__list--${role}`}>
-          {chargeList.map((item) => {
-            const { quantity, status, donationId, } = item
-            return (
-              <DonationItem
-                title={donationId}
-                quantity={quantity}
-                key={donationId}
-                stateDonation={status}
-                donationId={donationId}
-                userRole={role}
-              />
-            )
-          })}
-        </div>
-      ) : (
-        <DonationIsEmpty whichMessage={role} />
-      )
+    return chargeList?.length > 0 ? (
+      <div className={`containerCharge__list containerCharge__list--${role}`}>
+        {chargeList.map((item) => {
+          const { _id, fileName, createdAt, type } = item
+          return (
+            <ChargeItem key={_id} fileName={fileName} date={formatDate(createdAt)} chargeType={matchTypeName(type)} />
+          )
+        })}
+      </div>
+    ) : (
+      <ChargeIsEmpty whichMessage={role} />
     )
   }
 
   return (
-    <div className="chargeList">
+    <div className="containerCharge">
+      {loading && !chargeList && <Loader />}
       {render()}
 
-      <div className="chargeList__button">
-      <Link
-        to={{
-          pathname: `${url}/add`,
-          state: {
-            title: 'Adicionar carga',
-          },
-        }}
-      >
-        <Button
-          size={ButtonTypes.LARGE}
-          typeButton="button"
-          message={'Adicionar carga'}
-        />
-      </Link>
-
+      <div className="containerCharge__button">
+        <Link
+          to={{
+            pathname: `${url}/add`,
+            state: {
+              title: `${buttonAddChargeText}`,
+            },
+          }}
+        >
+          <Button size={ButtonTypes.LARGE} typeButton="button" message={buttonAddChargeText} />
+        </Link>
       </div>
     </div>
   )
 }
 
-export default connect(ChargeList)
+ChargeList.propTypes = {
+  store: PropTypes.object.isRequired,
+  match: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
+}
 
+export default connect(ChargeList)

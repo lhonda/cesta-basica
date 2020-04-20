@@ -14,7 +14,11 @@ export async function findCities ({
     filter.city = new RegExp(`^${city}`, 'i')
   }
 
-  const cities = await Site.find(filter, { _id: 0, city: 1 })
+  let cities = await Site.find(filter, { _id: 0, city: 1 })
+
+  cities = cities.filter(function (city) {
+    return !this[JSON.stringify(city)] && (this[JSON.stringify(city)] = true)
+  }, Object.create(null))
 
   return cities
 }

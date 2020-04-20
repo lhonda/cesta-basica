@@ -1,5 +1,5 @@
 import { Donation, Voucher } from '../repositories'
-import AWS from 'aws-sdk'
+import { S3 } from '../services'
 
 export async function donate ({
   login,
@@ -95,20 +95,11 @@ export async function donate ({
   const [, ext] = donateDonationFile.mimetype.split('/')
   const key = `provas/entregas/entrega-doacao-${login}-${donationId}-${timestamp.toISOString()}.${ext}`
 
-  const params = {
-    Bucket: process.env.BUCKET_NAME,
-    Key: key,
-    Body: donateDonationFile.data
+  try {
+    await S3.upload(key, donateDonationFile.data)
+  } catch (error) {
+    throw error
   }
-
-  const s3 = new AWS.S3()
-
-  s3.upload(params, function (err, data) {
-    if (err) {
-      throw err
-    }
-    console.log(`File uploaded successfully.Key:${key}`)
-  })
 
   /**
    * Persisting information do mongodb

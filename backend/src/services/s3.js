@@ -9,42 +9,60 @@ export function upload(Key, Body) {
   }).promise()
 }
 
-export function createMultipartUpload(s3, Key) {
+async function uploadByCursor(Key, Cursor) {
+  console.log("UPLOAD")
+  let Body;
+  try {
+    await Cursor
+      .eachAsync(async doc => {
+        Body += doc.value
+      })
+    console.log(Body)
+    return upload(Key, Body)
+  } catch(err) {
+    console.error(err)
+    throw err
+  }
+}
+
+function createMultipartUpload(s3, Key) {
   return s3.createMultipartUpload({
     Bucket: process.env.BUCKET_NAME,
     Key,
   }).promise()
 }
 
-export async function multipartUploadCSVFromCursor(Key, cursor, transformation, batchSize = 9) {
+async function uploadMultipartByCursor(Key, Cursor, batchSize = 9) {
+  console.log("MULTIPART")
+
+  let Body = ""
+  let count = 0
+  let PartNumber = 0
+  let uploadParts = []
   try {
     const { UploadId } = await createMultipartUpload(s3, Key)
-
-    let Body = ""
-    let count = 0
-    let PartNumber = 0
-    let uploadParts = []
-    await cursor.map(transformation).eachAsync(async doc => {
-      if (count === batchSize) {
-        count = 0
-        PartNumber += 1
-        const { ETag } = await s3.uploadPart({
-          UploadId,
-          Key,
-          Body,
-          PartNumber,
-          Bucket: process.env.BUCKET_NAME,
-        }).promise()
-        uploadParts.push({
-          PartNumber,
-          ETag
-        })
-        Body = ""
-      }
-
-      Body += `${doc}\n`
-      count += 1
-    })
+    await Cursor
+      .eachAsync(async doc => {
+        if (count === batchSize) {
+          console.log(Body)
+          count = 0
+          PartNumber += 1
+          const { ETag } = await s3.uploadPart({
+            UploadId,
+            Key,
+            Body,
+            PartNumber,
+            Bucket: process.env.BUCKET_NAME,
+          }).promise()
+          uploadParts.push({
+            PartNumber,
+            ETag
+          })
+          Body = ""
+        }
+        Body += `${doc.value}\n`
+        count += 1
+      })
 
     if (Body.length > 0) {
       PartNumber += 1
@@ -72,6 +90,24 @@ export async function multipartUploadCSVFromCursor(Key, cursor, transformation, 
     }).promise()
     console.log(result)
     return result
+  } catch(err) {
+    console.error(err)
+    throw err
+  }
+}
+
+export async function uploadCSVReport(Key, cursor) {
+  try {
+    let bufferSize = 0
+    cursor.map(doc => {bufferSize += doc.size; return doc })
+    console.log("BUFFER SIZE", bufferSize)
+
+    if (bufferSize >= 5 * 1000 * 1000) {
+      return uploadMultipartByCursor(Key, cursor)
+    }
+
+    return uploadByCursor(Key, cursor)
+
   } catch (error) {
     console.error(error)
   }

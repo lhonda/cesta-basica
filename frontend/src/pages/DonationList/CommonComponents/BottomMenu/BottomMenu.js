@@ -8,7 +8,6 @@ import './BottomMenu.scss'
 import { icBasket, icCharge, icProfile } from '../../../../assets/icons'
 
 function BottomMenu({ isAdmin }) {
-
   return (
     <nav className="containerMenu">
       <ul>

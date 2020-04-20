@@ -17,9 +17,8 @@
   ul {
     margin: 0;
     padding: 0;
-    list-style: none;
-    display: flex;
     width: auto;
+    
   }
 
   li {
@@ -46,5 +45,9 @@
       z-index: 1;
       background: none;
     }
+  }
+
+  img {
+    width: 120px;
   }
 }

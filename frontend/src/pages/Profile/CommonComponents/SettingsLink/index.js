@@ -1,3 +1,1 @@
-import Setup from './Setup'
-
-export { Setup }
+export { SettingsLink } from './SettingsLink'

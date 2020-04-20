@@ -6,7 +6,8 @@ import { Legend, LegendTypes } from '../../../components/Legend'
 import { BottomMenu } from '../../DonationList/CommonComponents'
 import { ChargeHeader } from '../ChargeList/CommonComponents/ChargeHeader'
 
-import { ChargeAdd, ChargeList } from '..'
+import { ChargeAdd } from '../ChargeAdd'
+import { ChargeList } from '../ChargeList'
 
 import { ButtonIcon } from '../../../components/ButtonIcon'
 import { LogoBack } from '../../../components/Logo'
@@ -15,7 +16,7 @@ import { back, chargeTitlePage } from '../../../utils/strings'
 
 import './Charge.scss'
 
-const Charge = () => {
+export const Charge = () => {
   const history = useHistory()
   const { goBack } = history
   const location = useLocation()
@@ -44,5 +45,3 @@ const Charge = () => {
     </div>
   )
 }
-
-export default Charge

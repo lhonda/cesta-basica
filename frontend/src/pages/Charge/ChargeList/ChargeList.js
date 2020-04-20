@@ -39,7 +39,7 @@ function ChargeList({ store, match, dispatch }) {
   }
 
   const render = () => {
-    return chargeList.length > 0 ? (
+    return chargeList?.length > 0 ? (
       <div className={`containerCharge__list containerCharge__list--${role}`}>
         {chargeList.map((item) => {
           const { _id, fileName, createdAt, type } = item

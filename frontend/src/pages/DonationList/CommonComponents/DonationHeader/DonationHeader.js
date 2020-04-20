@@ -1,5 +1,5 @@
 import React from 'react'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useLocation } from 'react-router-dom'
 import { func, string } from 'prop-types'
 import './DonationHeader.scss'
 
@@ -10,13 +10,18 @@ import { donationTitlePage, exitText } from '../../../../utils/strings'
 
 function DonationHeader({ dispatch, title }) {
   const history = useHistory()
+  const location = useLocation()
+  const { pathname } = location
+
   function exit() {
     dispatch({ type: types.SET_LOGOUT })
     history.push('/login')
   }
+
   return (
     <div className="fixedHeader">
       <header className="containerHeader">
+        {pathname === '/donation-list' && <div style={{ paddingTop: '2rem' }} />}
         <h2>{title}</h2>
         <span>
           <a onClick={exit}>

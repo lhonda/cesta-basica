@@ -1,0 +1,31 @@
+.floatRight {
+  font-size: 12px;
+  position: relative;
+  float: right;
+  color: #c7c7c7;
+}
+.chargeItem {
+  margin: 0.5rem;
+  padding: 0.56rem;
+  box-sizing: border-box;
+  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  height: 4rem;
+  font-family: Rubik;
+
+  &__title {
+    display: flex;
+    color: #202228;
+    font-size: 16px;
+    margin: 0 0 0.4rem 0;
+  }
+
+  &__quantity {
+    color: #909090;
+    font-size: 14px;
+  }
+
+  &__state {
+    margin-top: 3px;
+  }
+}

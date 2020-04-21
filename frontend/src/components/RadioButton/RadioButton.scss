@@ -1,0 +1,28 @@
+.radioButton-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.radioButton-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-bottom: 28px;
+
+  label {
+    font-size: 14px;
+    color: #202228;
+    line-height: 22px;
+    font-family: Rubik;
+    padding-left: 10px;
+    font-style: normal;
+    font-weight: normal;
+    letter-spacing: 0.2px;
+  }
+
+  input {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+  }
+}

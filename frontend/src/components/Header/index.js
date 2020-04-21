@@ -1,5 +1,5 @@
-import Header from './Header'
+import { HeaderWithGoBack } from './WithGoBack'
 import HeaderWithSideBar from './WithSideBar'
-import HeaderWithFilter from './WithFilter'
+import { HeaderWithIcon } from './WithIcon'
 
-export { Header, HeaderWithSideBar, HeaderWithFilter }
+export { HeaderWithGoBack, HeaderWithSideBar, HeaderWithIcon }

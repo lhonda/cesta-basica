@@ -4,7 +4,7 @@ import './DeliveredDetail.scss'
 
 import { connect } from '../../store'
 
-import { Header } from '../../components/Header'
+import { HeaderWithGoBack } from '../../components/Header'
 
 import { DeliveryInformation } from './DeliveryInformation'
 import { Delivered } from './Delivered'
@@ -38,7 +38,7 @@ function DeliveredDetail({ store, history, match }) {
   const { publicPhotoUrl } = getDataByVoucher(vouchers)
   return (
     <div className="containerDonationDetails">
-      <Header title={voucher} onGoBackClick={goBack} />
+      <HeaderWithGoBack title={voucher} onGoBackClick={goBack} />
       <DeliveryInformation deliveryDate={delivered} statusDelivery={statusText} />
       {checkStatus[status] ? (
         <Delivered

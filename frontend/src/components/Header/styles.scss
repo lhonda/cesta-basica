@@ -1,10 +1,7 @@
-.header-button {
+.header-container {
   display: flex;
-}
-.header-content {
-  display: flex;
+  flex-direction: row;
   justify-content: space-between;
-  align-items: center;
 
   button {
     border: none;
@@ -16,4 +13,8 @@
   button:focus {
     outline: none;
   }
+}
+
+.header-title {
+  display: flex;
 }

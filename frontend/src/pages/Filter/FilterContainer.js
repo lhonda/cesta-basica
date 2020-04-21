@@ -9,7 +9,7 @@ import { setFilters } from '../../services/API/filters'
 
 import { Loader } from '../../components/Loader'
 import { Select } from '../../components/Select'
-import { HeaderWithFilter } from '../../components/Header'
+import { HeaderWithGoBack } from '../../components/Header'
 import { Button, ButtonTypes } from '../../components/Button'
 import { SubTitle, SubTitleTypes } from '../../components/SubTitle'
 import { Input, inputTypes, InputWithMultiSelect } from '../../components/Input'
@@ -139,7 +139,7 @@ function FilterContainer({ store, dispatch }) {
     <>
       {isLoading && <Loader />}
       <div className="filter-container">
-        <HeaderWithFilter
+        <HeaderWithGoBack
           title={filter}
           message={cleanFilter}
           onMessageClick={handleCleanFilter}

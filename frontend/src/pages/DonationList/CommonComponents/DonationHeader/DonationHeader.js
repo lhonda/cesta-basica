@@ -1,42 +1,23 @@
 import React from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { string, bool, number } from 'prop-types'
-import './DonationHeader.scss'
 
-import { icFilter } from '../../../../assets/icons'
 import { connect } from '../../../../store'
-
-import { Notification } from '../../../../components/Notification'
+import { icFilter } from '../../../../assets/icons'
 
 import { donationTitlePage } from '../../../../utils/strings'
+import { HeaderWithIcon } from '../../../../components/Header'
+
+import './DonationHeader.scss'
 
 function DonationHeader({ title, isAdmin, qntd }) {
   const history = useHistory()
-  const location = useLocation()
-  const { pathname } = location
 
-  function exit() {
+  function navigateToFilter() {
     history.push('/filter')
   }
 
-  return (
-    <div className="fixedHeader">
-      <header className="containerHeader">
-        {pathname === '/donation-list' && <div style={{ paddingTop: '2rem' }} />}
-        <h2>{title}</h2>
-        {isAdmin && (
-          <div>
-            <div className="header-notification">
-              <Notification qntd={qntd} />
-            </div>
-            <button onClick={exit} type="button">
-              <img src={icFilter} alt="botao para filtrar doaçoes" />
-            </button>
-          </div>
-        )}
-      </header>
-    </div>
-  )
+  return <HeaderWithIcon title={title} icon={icFilter} qntd={qntd} onClick={navigateToFilter} isAdmin={isAdmin} />
 }
 
 DonationHeader.propTypes = {

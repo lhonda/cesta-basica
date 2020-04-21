@@ -1,46 +1,35 @@
 import React from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
-import { func, string } from 'prop-types'
+import { useHistory } from 'react-router-dom'
+import { string, bool, number } from 'prop-types'
+
+import { connect } from '../../../../store'
+import { icFilter } from '../../../../assets/icons'
+
+import { donationTitlePage } from '../../../../utils/strings'
+import { HeaderWithIcon } from '../../../../components/Header'
+
 import './DonationHeader.scss'
 
-import { icExit } from '../../../../assets/icons'
-import { connect, types } from '../../../../store'
-
-import { donationTitlePage, exitText } from '../../../../utils/strings'
-
-function DonationHeader({ dispatch, title }) {
+function DonationHeader({ title, isAdmin, qntd }) {
   const history = useHistory()
-  const location = useLocation()
-  const { pathname } = location
 
-  function exit() {
-    dispatch({ type: types.SET_LOGOUT })
-    history.push('/login')
+  function navigateToFilter() {
+    history.push('/filter')
   }
 
-  return (
-    <div className="fixedHeader">
-      <header className="containerHeader">
-        {pathname === '/donation-list' && <div style={{ paddingTop: '2rem' }} />}
-        <h2>{title}</h2>
-        <span>
-          <a onClick={exit}>
-            <img src={icExit} alt="alo" />
-            {exitText}
-          </a>
-        </span>
-      </header>
-    </div>
-  )
+  return <HeaderWithIcon title={title} icon={icFilter} qntd={qntd} onClick={navigateToFilter} isAdmin={isAdmin} />
 }
 
 DonationHeader.propTypes = {
-  dispatch: func.isRequired,
   title: string,
+  isAdmin: bool,
+  qntd: number,
 }
 
 DonationHeader.defaultProps = {
   title: donationTitlePage,
+  isAdmin: false,
+  qntd: 0,
 }
 
 export default connect(DonationHeader)

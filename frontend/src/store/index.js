@@ -23,6 +23,9 @@ const cleanState = {
     type: '',
   },
   chargeList: [],
+  cities: [],
+  states: [],
+  filters: {},
 }
 
 function saveState(newState) {
@@ -57,6 +60,9 @@ const actionMap = {
   [types.CLEAN_DONATION_DETAILS]: (state) => saveState({ ...state, donation: null }),
   [types.SHOW_ALERT]: (state, payload) => ({ ...state, notification: payload }),
   [types.HIDE_ALERT]: (state) => ({ ...state, notification: { message: '', type: '' } }),
+  [types.SET_CITIES]: (state, payload) => saveState({ ...state, cities: payload }),
+  [types.SET_STATES]: (state, payload) => saveState({ ...state, states: payload }),
+  [types.SET_FILTERS]: (state, payload) => saveState({ ...state, filters: payload }),
 }
 
 export function reducer(state, action) {

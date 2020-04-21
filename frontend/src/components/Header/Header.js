@@ -1,28 +1,34 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+import { string, func } from 'prop-types'
 
-import { LogoBack } from '../Logo'
 import { Title } from '../Title'
-import { ButtonIcon } from '../ButtonIcon'
-import { Legend, LegendTypes } from '../Legend'
 
-import { back } from '../../utils/strings'
+import './styles.scss'
 
-export default function Header({ onGoBackClick, title }) {
+function Header({ title, message, onMessageClick }) {
   return (
-    <div className="component-header">
-      <div className="sidebar-donation-prof">
-        <ButtonIcon handleClick={onGoBackClick}>
-          <LogoBack height="10" />
-        </ButtonIcon>
-        <Legend type={LegendTypes.STRONG} message={back} />
+    <div className="header-container">
+      <div className="header-title">
+        <Title message={title} />
       </div>
-      <Title message={title} />
+      {message && (
+        <button onClick={onMessageClick} type="button">
+          <h5>{message}</h5>
+        </button>
+      )}
     </div>
   )
 }
 
 Header.propTypes = {
-  title: PropTypes.string.isRequired,
-  onGoBackClick: PropTypes.func.isRequired,
+  message: string,
+  onMessageClick: func,
+  title: string.isRequired,
 }
+
+Header.defaultProps = {
+  message: '',
+  onMessageClick: () => {},
+}
+
+export { Header }

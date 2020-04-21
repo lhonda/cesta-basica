@@ -7,6 +7,7 @@ import { maskToCpf, maskToTelephone } from '../../utils/masksInput'
 import { icWarning, icSuccess } from '../../assets/icons'
 
 function Input({
+  disabled,
   listName,
   maxDate,
   placeholder,
@@ -35,6 +36,7 @@ function Input({
     <>
       <div className="containerInput">
         <input
+          disabled={disabled}
           list={listName}
           max={maxDate}
           className={`customInput ${size} ${withError ? 'customInput--error' : ''}`}
@@ -62,6 +64,7 @@ function Input({
 }
 
 Input.propTypes = {
+  disabled: PropTypes.bool,
   listName: PropTypes.string,
   maxDate: PropTypes.string,
   placeholder: PropTypes.string,
@@ -77,6 +80,7 @@ Input.propTypes = {
 }
 
 Input.defaultProps = {
+  disabled: false,
   listName: '',
   maxDate: '9999-12-31',
   placeholder: '',

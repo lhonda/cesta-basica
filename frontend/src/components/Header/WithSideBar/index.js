@@ -1,13 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import Header from '../Header'
+import { HeaderWithGoBack } from '../WithGoBack'
 import { Sidebar } from '../../Sidebar'
 
 export default function HeaderWithSideBar({ onGoBackClick, title, steps, current }) {
   return (
     <>
-      <Header onGoBackClick={onGoBackClick} title={title} />
+      <HeaderWithGoBack onGoBackClick={onGoBackClick} title={title} />
       <Sidebar current={current} steps={steps} />
     </>
   )

@@ -1,0 +1,20 @@
+.header-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  button {
+    border: none;
+    background: none;
+    h5 {
+      margin: 0;
+    }
+  }
+  button:focus {
+    outline: none;
+  }
+}
+
+.header-title {
+  display: flex;
+}

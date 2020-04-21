@@ -1,0 +1,25 @@
+.filterNotification-container {
+  display: flex;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  background-color: #93278F;
+
+  span {
+    margin: 0;
+    padding: 0;
+    width: 14px;
+    height: 14px;
+    color: #FFF;
+    display: flex;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 22px;
+    font-family: Rubik;
+    align-items: center;
+    justify-content: center;
+  }
+}

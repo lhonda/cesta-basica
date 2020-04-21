@@ -3,6 +3,7 @@ import { types } from '../../store'
 import { compressImageFile } from '../../utils/compressFile'
 
 const route = '/donations'
+const routeFilter = '/filter/donation'
 const routeDonationEnd = (id) => `/donations/${id}/end`
 
 export async function DonationsList(dispatch) {
@@ -69,6 +70,30 @@ export async function DonationDetails(dispatch, id) {
   try {
     const response = (await Api.get(`${route}/${id}/details`, { params: { id } })).data
     dispatch({ type: types.SET_DONATION_DETAILS, payload: response })
+  } catch (err) {
+    return 'failed'
+  }
+}
+
+export async function FilteredDonationList(dispatch, filters = {}) {
+  const {
+    leaderName = '',
+    siteId = '',
+    status = '',
+    listDonationId = '',
+    state = '',
+    city = '',
+    dateTo = '',
+    dateFrom = '',
+  } = filters
+  try {
+    const response = (
+      await Api.get(routeFilter, {
+        params: { leaderName, siteId, status, listDonationId, state, city, dateTo, dateFrom },
+      })
+    ).data
+
+    dispatch({ type: types.SET_DONATION_LIST, payload: response })
   } catch (err) {
     return 'failed'
   }

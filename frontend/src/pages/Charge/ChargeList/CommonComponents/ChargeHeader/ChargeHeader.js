@@ -10,8 +10,8 @@ function ChargeHeader({ title }) {
   const { pathname } = location
 
   return (
-    <div className="fixedHeader">
-      <div className="containerHeader">
+    <div className="header-chargeHeader">
+      <div className="header-chargeContainer">
         {pathname === '/charge' && <div style={{ paddingTop: '2rem' }} />}
         <h2>{title}</h2>
       </div>

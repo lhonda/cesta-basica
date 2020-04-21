@@ -2,7 +2,7 @@
   box-sizing: border-box;
   height: 100vh;
   overflow: hidden;
-  
+
   .backContainer {
     display: flex;
     padding: 1rem 1rem 0;
@@ -14,4 +14,8 @@
     position: fixed;
     width: 100%;
   }
+}
+
+.charge-header {
+  padding: 0.8rem 1.5rem 0px 1.5rem;
 }

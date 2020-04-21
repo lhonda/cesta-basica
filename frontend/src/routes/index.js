@@ -16,7 +16,7 @@ import { Donation } from '../pages/Donation'
 import { Received } from '../pages/Received'
 import { FilterScreen } from '../pages/Filter'
 import { Profile } from '../pages/Profile/index'
-import { ExportType } from '../pages/Export/Type'
+import { Export } from '../pages/Export'
 import { DonationProf } from '../pages/DonationProf'
 import { DonationList } from '../pages/DonationList'
 import { ReceivedCurrent } from '../pages/ReceivedCurrent'
@@ -48,7 +48,7 @@ export const Routes = () => (
       <Route path="/profile" exact component={Profile} isPrivate />
       <Route path="/profile/update" component={UpdateProfile} isPrivate />
       <Route path="/filter" exact component={FilterScreen} isPrivate />
-      <Route path="/export/types" exact component={ExportType} isPrivate />
+      <Route path="/export" component={Export} isPrivate />
     </Switch>
   </BrowserRouter>
 )

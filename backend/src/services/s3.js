@@ -260,8 +260,8 @@ export async function uploadCSVReport2 (Key, result) {
   const bufferSize = Buffer.byteLength(result)
   console.log('BUFFER', bufferSize / 1024 / 1024)
   fs.writeFileSync(Key, result)
-
   await uploadFileAsync(Key)
+  fs.unlinkSync(Key)
   console.log('Upload Completed uploadCSVReport2')
 }
 
@@ -274,7 +274,7 @@ if (require.main === module) {
     try {
       config()
 
-      const testDataArray = Array(1024 * 6).fill().map((x, i) => i).map(y => Array(1024).fill().map(z => 0).join(''))
+      const testDataArray = Array(1024 * 1).fill().map((x, i) => i).map(y => Array(1024).fill().map(z => 0).join(''))
 
       /* old call
       await uploadCSVReport('teste4.txt', testDataArray.map(x => ({
@@ -283,7 +283,7 @@ if (require.main === module) {
       })))
       */
 
-      await uploadCSVReport2('teste6.txt', testDataArray.join('\n'))
+      await uploadCSVReport2('teste8.txt', testDataArray.join('\n'))
     } catch (err) {
       console.error(err)
     }

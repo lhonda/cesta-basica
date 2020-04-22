@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import PropTypes from 'prop-types'
+import PropTypes, { object } from 'prop-types'
 import './style.scss'
 
 import { exportListTitle } from '../../../utils/strings'
@@ -9,10 +9,12 @@ import { Header } from '../../../components/Header/Header'
 import { connect, types } from '../../../store'
 import { getReportList } from '../../../services/API/report'
 
-function ReportList({ store, dispatch }) {
-  const { reportList } = store
+function ReportList({ store: { reportList }, dispatch }) {
   async function getReports() {
-    await getReportList()
+    const { status, data } = await getReportList()
+    if (status === 200) {
+      dispatch({ type: types.SET_REPORT_LIST, payload: data })
+    }
   }
   useEffect(() => getReports(), [])
 
@@ -25,7 +27,9 @@ function ReportList({ store, dispatch }) {
 }
 
 ReportList.propTypes = {
-  store: PropTypes.object.isRequired,
+  store: PropTypes.shape({
+    reportList: PropTypes.arrayOf(PropTypes.object).isRequired,
+  }).isRequired,
   dispatch: PropTypes.func.isRequired,
 }
 

@@ -7,21 +7,26 @@ import { exportListTitle } from '../../../utils/strings'
 import { Header } from '../../../components/Header/Header'
 
 import { connect, types } from '../../../store'
+import { getReportList } from '../../../services/API/report'
 
-function List({ store, dispatch }) {
-  const { exportList } = store
-  useEffect(() => { }, [])
+function ReportList({ store, dispatch }) {
+  const { reportList } = store
+  async function getReports() {
+    await getReportList()
+  }
+  useEffect(() => getReports(), [])
 
   return (
     <div className="containerExportList">
       <Header title={exportListTitle} />
+      {JSON.stringify(reportList)}
     </div>
   )
 }
 
-List.propTypes = {
+ReportList.propTypes = {
   store: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
 }
 
-export default connect(List)
+export default connect(ReportList)

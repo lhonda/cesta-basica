@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom'
 
 import { RadioButton } from '../../../components/RadioButton'
 import { HeaderWithGoBack } from '../../../components/Header'
@@ -16,9 +17,22 @@ import {
 import './styles.scss'
 
 function ExportType() {
+  const history = useHistory()
+  const [selected, setSelected] = useState('')
+
   function handleGoBack() {
-    console.log('onGoBack')
+    console.log('handleGoBack')
   }
+  function handleClick() {
+    history.push('/export/filters', { selected })
+  }
+  function handleRadioChange(event) {
+    setSelected(event.target.value)
+  }
+  function enabledButton() {
+    return selected === ''
+  }
+
   return (
     <div className="exportType-container">
       <div className="exportType-header">
@@ -26,10 +40,18 @@ function ExportType() {
       </div>
       <div className="exportType-content">
         <div className="exportType-radioBtn">
-          <RadioButton options={[unit, leader, borderoFirstLetterCapitalized, cardsFirstLetterCapitalized]} />
+          <RadioButton
+            handleChecked={handleRadioChange}
+            options={[unit, leader, borderoFirstLetterCapitalized, cardsFirstLetterCapitalized]}
+          />
         </div>
         <div className="exportType-footer">
-          <Button disable={() => {}} size={ButtonTypes.LARGE} message={continueFirstLetterCapitalized} />
+          <Button
+            size={ButtonTypes.LARGE}
+            message={continueFirstLetterCapitalized}
+            handleClick={handleClick}
+            disable={enabledButton()}
+          />
         </div>
       </div>
     </div>

@@ -26,6 +26,7 @@ const cleanState = {
   cities: [],
   states: [],
   filters: {},
+  exportList: [],
 }
 
 function saveState(newState) {

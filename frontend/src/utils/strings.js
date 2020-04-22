@@ -227,3 +227,6 @@ export const exportType = 'Tipo de exportaçao'
 export const exportFirstLetterCapitalized = 'Exportar'
 export const youCanChooseOneOrMoreFiltersForExport =
   'Você pode utilizar o filtro para fazer a exportação dos arquivos da forma que você precisa.'
+
+// export List
+export const exportListTitle = 'Lista de Exportação'

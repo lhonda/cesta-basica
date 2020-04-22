@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { useLocation } from 'react-router-dom'
 import { types, connect } from '../../store'
 import { SettingsLink } from './CommonComponents/SettingsLink'
-import BottomMenu from '../DonationList/CommonComponents/BottomMenu/BottomMenu'
+import { BottomMenu } from '../../components/BottomMenu'
 import { icEmail, icPassword, icLogout } from '../../assets/icons/index'
 import { profile, settings, changePassword, changeEmail, signOut } from '../../utils/strings'
 import './Profile.scss'
@@ -16,6 +16,8 @@ function Profile({ dispatch, store, history }) {
     history.push('/login')
   }
   const { user } = store
+
+  const isAdmin = () => user.role === 'admin'
 
   return (
     <>
@@ -38,7 +40,7 @@ function Profile({ dispatch, store, history }) {
         <SettingsLink icon={icPassword} legend="cadeado simbolizando senha" to="/newpass" message={changePassword} />
         <SettingsLink icon={icLogout} legend="alo" to="/login" handleClick={logOut} message={signOut} />
       </div>
-      <BottomMenu />
+      <BottomMenu isAdmin={isAdmin()} />
     </>
   )
 }

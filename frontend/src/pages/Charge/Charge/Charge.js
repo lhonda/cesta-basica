@@ -3,7 +3,7 @@ import React from 'react'
 import { Route, Switch, useLocation, useRouteMatch, useHistory } from 'react-router-dom'
 
 import { Legend, LegendTypes } from '../../../components/Legend'
-import { BottomMenu } from '../../DonationList/CommonComponents'
+import { BottomMenu } from '../../../components/BottomMenu'
 import { ChargeHeader } from '../ChargeList/CommonComponents/ChargeHeader'
 
 import { ChargeAdd } from '../ChargeAdd'

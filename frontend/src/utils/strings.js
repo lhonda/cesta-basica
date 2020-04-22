@@ -178,8 +178,7 @@ export const deliveredFirstLetterCapitalized = 'Entregue'
 export const notDeliveredFirstLetterCapitalized = 'Não entregue'
 export const CPF = 'CPF'
 
-
-//Profile
+// Profile
 export const signOut = 'Sair da conta'
 export const changePassword = 'Alterar senha'
 export const changeEmail = 'Alterar E-mail'
@@ -190,6 +189,10 @@ export const passwordCharacters = 'Sua senha deve conter no mínimo 8 caracteres
 export const newPassword = 'Digitar nova senha'
 export const confirmPassword = 'Confirmar senha'
 export const areYouSureSignOut = 'Tem certeza que deseja sair ?'
-
 export const update = 'Atualizar'
 
+// Bottom Menu Icon Legends
+export const basketIconLegend = 'Doações'
+export const chargeIconLegend = 'Cargas'
+export const exportIconLegend = 'Exportar'
+export const profileIconLegend = 'Perfil'

@@ -4,10 +4,8 @@ import { connect } from '../../../store'
 
 import { getCities } from '../../../services/API/city'
 import { getStates } from '../../../services/API/state'
-import { setFilters } from '../../../services/API/filters'
 
 import { UnitFilter } from './Unit'
-//import { FilterForm } from './Filter'
 import { LeaderFilter } from './Leader'
 
 import { FilterForm } from '../../../components/FilterForm'
@@ -155,17 +153,15 @@ function ExportForm({ store, dispatch }) {
     <div className="exportForm-container">
       <div>
         <HeaderWithGoBack onGoBackClick={handleGoBack} title={filter} message={selected} />
+        {renderFilterComponent()}
       </div>
-      <div className="exportForm-content">
-        <div className="exportForm-content-data">{renderFilterComponent()}</div>
-        <div className="exportForm-content-footer">
-          <Button
-            size={ButtonTypes.LARGE}
-            message={exportFirstLetterCapitalized}
-            handleClick={handleSubmit}
-            disable={enableButton()}
-          />
-        </div>
+      <div>
+        <Button
+          size={ButtonTypes.LARGE}
+          message={exportFirstLetterCapitalized}
+          handleClick={handleSubmit}
+          disable={enableButton()}
+        />
       </div>
     </div>
   )

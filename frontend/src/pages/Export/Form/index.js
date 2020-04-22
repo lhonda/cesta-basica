@@ -4,6 +4,7 @@ import { connect } from '../../../store'
 
 import { getCities } from '../../../services/API/city'
 import { getStates } from '../../../services/API/state'
+import { SiteList } from '../../../services/API/siteList'
 
 import { UnitFilter } from './Unit'
 import { LeaderFilter } from './Leader'
@@ -14,11 +15,12 @@ import { Button, ButtonTypes } from '../../../components/Button'
 
 import { postReport } from '../../../services/API/report'
 
-import { formatCities, formatStates, formatStatus } from '../../../utils/formatDataToSelectData'
+import { formatCities, formatStates, formatStatus, formatSites } from '../../../utils/formatDataToSelectData'
 import {
   unit,
   filter,
   chooseCity,
+  chooseSite,
   chooseState,
   leader as leaderStr,
   cardsFirstLetterCapitalized,
@@ -31,7 +33,7 @@ import './styles.scss'
 
 function ExportForm({ store, dispatch }) {
   const history = useHistory()
-  const { states, cities, donationList } = store
+  const { states, cities, donationList, siteList } = store
   const {
     location: {
       state: { selected },
@@ -48,6 +50,12 @@ function ExportForm({ store, dispatch }) {
   const [leader, setLeader] = useState('')
   const [borderos, setBorderos] = useState([])
 
+  async function getSitesList() {
+    setIsLoading(true)
+    await SiteList(dispatch)
+    setIsLoading(false)
+  }
+
   async function getCitiesList() {
     setIsLoading(true)
     await getCities(dispatch, countryState)
@@ -62,6 +70,7 @@ function ExportForm({ store, dispatch }) {
 
   useEffect(() => {
     getStatesList()
+    getSitesList()
   }, [])
 
   useEffect(() => {
@@ -101,6 +110,7 @@ function ExportForm({ store, dispatch }) {
           setLeader={setLeader}
           setSelectedCity={setCity}
           selectedState={countryState}
+          sites={formatSites(siteList)}
           states={formatStates(states)}
           cities={formatCities(cities)}
           setSelectedState={setCountryState}
@@ -126,6 +136,7 @@ function ExportForm({ store, dispatch }) {
         statusList={formatStatus()}
         countryState={countryState}
         setFinalDate={setFinalDate}
+        sites={formatSites(siteList)}
         cities={formatCities(cities)}
         states={formatStates(states)}
         borderoList={getDonationIds()}
@@ -135,6 +146,7 @@ function ExportForm({ store, dispatch }) {
       />
     )
   }
+
   function setType() {
     let type = 'sites'
     if (selected === leaderStr) {
@@ -161,7 +173,7 @@ function ExportForm({ store, dispatch }) {
   function enableButton() {
     return !!(
       leader === '' &&
-      site === '' &&
+      (site === '' || site === chooseSite) &&
       status === '' &&
       borderos.length === 0 &&
       (countryState === '' || countryState === chooseState) &&

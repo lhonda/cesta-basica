@@ -2,6 +2,7 @@ import React from 'react'
 import { func, array, string } from 'prop-types'
 
 import { UnitFilter } from '../Unit'
+import { Select } from '../../../../components/Select'
 import { Input, inputTypes } from '../../../../components/Input'
 
 import { chooseLeader, unit } from '../../../../utils/strings'
@@ -9,16 +10,17 @@ import { chooseLeader, unit } from '../../../../utils/strings'
 import './styles.scss'
 
 function LeaderFilter({
-  leader,
-  setLeader,
   site,
-  setSite,
-  selectedState,
-  setSelectedState,
+  sites,
   states,
+  leader,
+  cities,
+  setSite,
+  setLeader,
+  selectedState,
   selectedCity,
   setSelectedCity,
-  cities,
+  setSelectedState,
 }) {
   return (
     <>
@@ -30,13 +32,7 @@ function LeaderFilter({
           inputType={inputTypes.TEXT}
           handleOnChange={setLeader}
         />
-        <Input
-          value={site}
-          placeholder={unit}
-          isRequired={false}
-          handleOnChange={setSite}
-          inputType={inputTypes.TEXT}
-        />
+        <Select value={site} getValue={setSite} optionsList={sites} placeholder={unit} />
       </div>
       <UnitFilter
         states={states}

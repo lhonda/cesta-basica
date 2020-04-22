@@ -17,11 +17,11 @@ const cleanState = {
   userLocation: {},
   cardList: [],
   leaderList: null,
-  siteList: null,
   notification: {
     message: '',
     type: '',
   },
+  siteList: [],
   chargeList: [],
   cities: [],
   states: [],

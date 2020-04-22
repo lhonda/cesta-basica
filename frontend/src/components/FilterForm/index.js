@@ -23,6 +23,7 @@ function FilterForm({
   leader,
   site,
   city,
+  sites,
   states,
   cities,
   status,
@@ -59,13 +60,7 @@ function FilterForm({
             inputType={inputTypes.TEXT}
             handleOnChange={setLeader}
           />
-          <Input
-            value={site}
-            placeholder={unit}
-            isRequired={false}
-            handleOnChange={setSite}
-            inputType={inputTypes.TEXT}
-          />
+          <Select value={site} getValue={setSite} optionsList={sites} placeholder={unit} />
           <Select
             value={status}
             getValue={setStatus}

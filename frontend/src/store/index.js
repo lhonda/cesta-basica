@@ -19,6 +19,9 @@ const cleanState = {
   leaderList: null,
   siteList: null,
   chargeList: [],
+  cities: [],
+  states: [],
+  filters: {},
 }
 
 function saveState(newState) {
@@ -51,6 +54,9 @@ const actionMap = {
   [types.CLEAN_CARD_LIST]: (state) => saveState({ ...state, cardList: [] }),
   [types.SET_DONATION_DETAILS]: (state, payload) => saveState({ ...state, donation: payload }),
   [types.CLEAN_DONATION_DETAILS]: (state) => saveState({ ...state, donation: null }),
+  [types.SET_CITIES]: (state, payload) => saveState({ ...state, cities: payload }),
+  [types.SET_STATES]: (state, payload) => saveState({ ...state, states: payload }),
+  [types.SET_FILTERS]: (state, payload) => saveState({ ...state, filters: payload }),
 }
 
 export function reducer(state, action) {

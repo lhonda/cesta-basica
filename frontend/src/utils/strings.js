@@ -168,6 +168,10 @@ export const informationToUpdatePassword = 'Sua senha deve conter no mínimo 8 c
 export const typeNewPassword = 'Digitar nova senha'
 export const typePasswordToCheck = 'Confirmar senha'
 export const passwordsNotSame = 'As senhas precisam ser iguais'
+// Filter Form
+export const filter = 'Filtro'
+export const cleanFilter = 'Limpar filtro'
+export const youCanChooseOneOrMoreFilters = 'Voce pode escolher um ou mais campos para criar um filtro'
 
 // Generic
 export const WORD_NO = 'Não'
@@ -196,3 +200,17 @@ export const basketIconLegend = 'Doações'
 export const chargeIconLegend = 'Cargas'
 export const exportIconLegend = 'Exportar'
 export const profileIconLegend = 'Perfil'
+
+export const statusFirstLetterCapitalized = 'Status'
+export const countryStateFirstLetterCapitalized = 'Estado'
+export const cityFirstLetterCapitalized = 'Cidade'
+export const initialDateFirstLetterCapitalized = 'Data inicial'
+export const finalDateFirstLetterCapitalized = 'Data final'
+export const filterFirstLetterCapitalized = 'Filtrar'
+export const chooseState = 'Selecione o estado'
+export const chooseCity = 'Selecione a cidade'
+export const chooseStatus = 'Selecione o status'
+export const chooseLeader = 'Escolher lider'
+export const borderoFirstLetterCapitalized = 'Pacote'
+export const maxSentDate = '9999-12-31'
+

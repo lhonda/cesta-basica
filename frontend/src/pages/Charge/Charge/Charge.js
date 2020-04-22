@@ -1,18 +1,12 @@
 import React from 'react'
-
 import { Route, Switch, useLocation, useRouteMatch, useHistory } from 'react-router-dom'
 
 import { Legend, LegendTypes } from '../../../components/Legend'
 import { BottomMenu } from '../../../components/BottomMenu'
 import { ChargeHeader } from '../ChargeList/CommonComponents/ChargeHeader'
-
 import { ChargeAdd } from '../ChargeAdd'
 import { ChargeList } from '../ChargeList'
-
-import { ButtonIcon } from '../../../components/ButtonIcon'
-import { LogoBack } from '../../../components/Logo'
-
-import { back, chargeTitlePage } from '../../../utils/strings'
+import { chargeTitlePage } from '../../../utils/strings'
 
 import './Charge.scss'
 
@@ -23,19 +17,25 @@ export const Charge = () => {
   const { pathname, state } = location
   const { path } = useRouteMatch()
 
+  function renderHeaderWithGoBack() {
+    return (
+      <div className="charge-header">
+        <HeaderWithGoBack onGoBackClick={goBack} title={state.title} />
+      </div>
+    )
+  }
+
+  function renderHeader() {
+    return (
+      <div className="charge-header">
+        <Header title={chargeTitlePage} />
+      </div>
+    )
+  }
+
   return (
     <div className="chargeList">
-      {state && (
-        <div className="backContainer">
-          <ButtonIcon handleClick={goBack}>
-            <LogoBack height={10} />
-          </ButtonIcon>
-          <Legend type={LegendTypes.STRONG} message={back} />
-        </div>
-      )}
-
-      <ChargeHeader title={state ? state.title : chargeTitlePage} />
-
+      {state ? renderHeaderWithGoBack() : renderHeader()}
       <Switch>
         <Route path={path} exact component={ChargeList} />
         <Route path="/charge/add" component={ChargeAdd} />

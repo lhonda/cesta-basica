@@ -1,4 +1,10 @@
 .containerExportList {
   font-family: Rubik;
   padding: 2.12rem 1rem 1rem 1rem;
+
+  &__reportList {
+    div:first-child{
+      margin-top: 1.5rem;
+    }
+  }
 }

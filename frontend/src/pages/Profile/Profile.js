@@ -34,10 +34,15 @@ function Profile({ dispatch, store, history }) {
         <SettingsLink
           icon={icEmail}
           legend="envelope simbolizando e-mail"
-          to="/profile/update-email"
+          to="/profile/update/email"
           message={changeEmail}
         />
-        <SettingsLink icon={icPassword} legend="cadeado simbolizando senha" to="/newpass" message={changePassword} />
+        <SettingsLink
+          icon={icPassword}
+          legend="cadeado simbolizando senha"
+          to="/profile/update/password"
+          message={changePassword}
+        />
         <SettingsLink icon={icLogout} legend="alo" to="/login" handleClick={logOut} message={signOut} />
       </div>
       <BottomMenu isAdmin={isAdmin()} />

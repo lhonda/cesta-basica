@@ -193,8 +193,13 @@ export const passwordCharacters = 'Sua senha deve conter no mínimo 8 caracteres
 export const newPassword = 'Digitar nova senha'
 export const confirmPassword = 'Confirmar senha'
 export const areYouSureSignOut = 'Tem certeza que deseja sair ?'
-
 export const update = 'Atualizar'
+
+// Bottom Menu Icon Legends
+export const basketIconLegend = 'Doações'
+export const chargeIconLegend = 'Cargas'
+export const exportIconLegend = 'Exportar'
+export const profileIconLegend = 'Perfil'
 
 export const statusFirstLetterCapitalized = 'Status'
 export const countryStateFirstLetterCapitalized = 'Estado'
@@ -208,3 +213,4 @@ export const chooseStatus = 'Selecione o status'
 export const chooseLeader = 'Escolher lider'
 export const borderoFirstLetterCapitalized = 'Pacote'
 export const maxSentDate = '9999-12-31'
+

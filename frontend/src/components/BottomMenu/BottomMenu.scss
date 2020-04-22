@@ -1,4 +1,4 @@
-@import "../../../../styles/_commons";
+@import '../../styles/_commons';
 
 .containerMenu {
   background-color: #ffffff;
@@ -17,8 +17,6 @@
   ul {
     margin: 0;
     padding: 0;
-    list-style: none;
-    display: flex;
     width: auto;
   }
 
@@ -27,14 +25,24 @@
     border-radius: unset;
     height: auto;
     width: auto;
+    display: flex;
 
     a {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-decoration: none;
       opacity: 0.4;
 
       &.donations,
       &.charges,
+      &.exports,
       &.profile {
         opacity: 1;
+        p {
+          opacity: 1;
+        }
       }
     }
 
@@ -45,6 +53,21 @@
       position: relative;
       z-index: 1;
       background: none;
+    }
+
+    img {
+      width: auto;
+      height: 1.9rem;
+    }
+
+    p {
+      font-family: Rubik;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 14px;
+      color: #93278f;
+      margin: 2px;
     }
   }
 }

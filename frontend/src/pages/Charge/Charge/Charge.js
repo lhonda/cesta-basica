@@ -1,10 +1,9 @@
 import React from 'react'
 import { Route, Switch, useLocation, useRouteMatch, useHistory } from 'react-router-dom'
 
-import { Header } from '../../../components/Header/Header'
-import { HeaderWithGoBack } from '../../../components/Header'
-import { BottomMenu } from '../../DonationList/CommonComponents'
-
+import { Legend, LegendTypes } from '../../../components/Legend'
+import { BottomMenu } from '../../../components/BottomMenu'
+import { ChargeHeader } from '../ChargeList/CommonComponents/ChargeHeader'
 import { ChargeAdd } from '../ChargeAdd'
 import { ChargeList } from '../ChargeList'
 import { chargeTitlePage } from '../../../utils/strings'

@@ -256,6 +256,15 @@ export async function uploadCSVReport (Key, result) {
   }
 }
 
+export async function uploadCSVReport2 (Key, result) {
+  const bufferSize = Buffer.byteLength(result)
+  console.log('BUFFER', bufferSize / 1024 / 1024)
+  fs.writeFileSync(Key, result)
+
+  await uploadFileAsync(Key)
+  console.log('Upload Completed uploadCSVReport2')
+}
+
 /**
  * to test this, call from command line:
  * node -r esm src/services/s3.js
@@ -265,12 +274,16 @@ if (require.main === module) {
     try {
       config()
 
-      const testDataArray = Array(1024 * 1).fill().map((x, i) => i).map(x => Array(1024).fill().map((x, i) => i).join('')).map(x => ({
+      const testDataArray = Array(1024 * 6).fill().map((x, i) => i).map(y => Array(1024).fill().map(z => 0).join(''))
+
+      /* old call
+      await uploadCSVReport('teste4.txt', testDataArray.map(x => ({
         value: x,
         size: Buffer.byteLength(x)
-      }))
+      })))
+      */
 
-      await uploadCSVReport('test/teste2.csv', testDataArray)
+      await uploadCSVReport2('teste6.txt', testDataArray.join('\n'))
     } catch (err) {
       console.error(err)
     }

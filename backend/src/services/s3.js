@@ -1,9 +1,16 @@
+/* eslint-disable handle-callback-err */
 import { S3 } from 'aws-sdk'
+import { config } from 'dotenv'
+import async from 'async'
+import fs from 'fs'
+import path from 'path'
+import util from 'util'
+
 const s3 = new S3()
 let createPartLock = true
 
-export function upload(Key, Body) {
-  console.log("UPLOAD")
+export function upload (Key, Body) {
+  console.log('UPLOAD')
   return s3.upload({
     Bucket: process.env.BUCKET_NAME,
     Key,
@@ -11,61 +18,61 @@ export function upload(Key, Body) {
   }).promise()
 }
 
-function progress(progress, max, parts) {
+function progress (progress, max, parts) {
   process.stdout.write(`Progress: ${progress} of ${max} -- ${((progress / max) * 100).toFixed(2)}% (${parts} Parts created)\r`)
 }
 
-async function uploadByCursor(Key, result) {
-  let Body = "";
+async function uploadByCursor (Key, result) {
+  let Body = ''
   try {
     result.map(async doc => {
-        Body += `${doc.value}\n`
-      })
+      Body += `${doc.value}\n`
+    })
     return upload(Key, Body)
-  } catch(err) {
+  } catch (err) {
     console.error(err)
     throw err
   }
 }
 
-function createMultipartUpload(s3, Key) {
+function createMultipartUpload (s3, Key) {
   return s3.createMultipartUpload({
     Bucket: process.env.BUCKET_NAME,
-    Key,
+    Key
   }).promise()
 }
 
-async function createUploadPart(Key, Body, PartNumber, UploadId) {
+async function createUploadPart (Key, Body, PartNumber, UploadId) {
   if (createPartLock) return
-  console.log("Creating Part")
+  console.log('Creating Part')
   createPartLock = true
   return await s3.uploadPart({
     UploadId,
     Key,
     Body,
     PartNumber,
-    Bucket: process.env.BUCKET_NAME,
+    Bucket: process.env.BUCKET_NAME
   }).promise()
 }
 
-async function uploadMultipartByCursor(Key, result, totalByteSize) {
-  console.log("MULTIPART")
+async function uploadMultipartByCursor (Key, result, totalByteSize) {
+  console.log('MULTIPART')
 
   let uploadedBytes = 0
-  let upId;
-  let Body = ""
+  let upId
+  let Body = ''
   let PartNumber = 0
-  let uploadParts = []
-  let promises = []
-  let megaByteChunks = []
+  const uploadParts = []
+  const promises = []
+  const megaByteChunks = []
   try {
     return await createMultipartUpload(s3, Key)
       .then(({ UploadId }) => {
-        console.log("Comencing Part Upload Creation ...")
+        console.log('Comencing Part Upload Creation ...')
         upId = UploadId
         result
           .map(async doc => {
-            let bodySize = Buffer.byteLength(Body)
+            const bodySize = Buffer.byteLength(Body)
             // Create a megabyte Chunk
             if (bodySize >= 1 * 1000 * 1000) {
               megaByteChunks.push(Body)
@@ -73,11 +80,13 @@ async function uploadMultipartByCursor(Key, result, totalByteSize) {
             }
             if (megaByteChunks.length >= 5) {
               PartNumber += 1
-              let chunk = megaByteChunks
+              // eslint-disable-next-line no-unused-vars
+              const chunk = megaByteChunks
               promises.push(createUploadPart(Key, Body, PartNumber, upId).then(part => {
                 if (part) {
                   uploadParts.push(part)
                 } else {
+                  // eslint-disable-next-line no-unused-expressions
                   console.error
                 }
               }))
@@ -91,20 +100,21 @@ async function uploadMultipartByCursor(Key, result, totalByteSize) {
             }
           })
       }).then(() => {
-        console.log("Resolving part creation promises...")
+        console.log('Resolving part creation promises...')
         return Promise.all(promises)
       }).then(() => {
-        console.log("Check Body residues ...")
+        console.log('Check Body residues ...')
         if (Body.length > 0) {
           PartNumber += 1
           return createUploadPart(Key, Body, PartNumber, upId)
             .then((part) => {
-              console.log("PART EXISTS? ", (part != undefined), part)
+              // eslint-disable-next-line eqeqeq
+              console.log('PART EXISTS? ', (part != undefined), part)
               uploadParts.push(part)
             })
         }
       }).then(() => {
-        console.log("Sorting parts")
+        console.log('Sorting parts')
         return Promise.resolve(uploadParts.sort((a, b) => a.PartNumber - b.PartNumber))
       }).then(partsSorted => s3.completeMultipartUpload({
         Bucket: process.env.BUCKET_NAME,
@@ -148,29 +158,121 @@ async function uploadMultipartByCursor(Key, result, totalByteSize) {
     // }).promise()
     // console.log(s3Response)
     // return s3Response
-  } catch(err) {
+  } catch (err) {
     console.error(err)
     throw err
   }
 }
 
-export async function uploadCSVReport(Key, result) {
+function uploadMultipart (absoluteFilePath, fileName, uploadCb) {
+  s3.createMultipartUpload({ Bucket: process.env.BUCKET_NAME, Key: fileName }, (mpErr, multipart) => {
+    if (!mpErr) {
+      // console.log("multipart created", multipart.UploadId);
+      fs.readFile(absoluteFilePath, (err, fileData) => {
+        const partSize = 1024 * 1024 * 5
+        const parts = Math.ceil(fileData.length / partSize)
 
+        async.timesSeries(parts, (partNum, next) => {
+          const rangeStart = partNum * partSize
+          const end = Math.min(rangeStart + partSize, fileData.length)
+
+          console.log('uploading ', fileName, ' % ', (partNum / parts).toFixed(2))
+
+          partNum++
+          async.retry((retryCb) => {
+            s3.uploadPart({
+              Body: fileData.slice(rangeStart, end),
+              Bucket: process.env.BUCKET_NAME,
+              Key: fileName,
+              PartNumber: partNum,
+              UploadId: multipart.UploadId
+            }, (err, mData) => {
+              retryCb(err, mData)
+            })
+          }, (err, data) => {
+            // console.log(data);
+            next(err, { ETag: data.ETag, PartNumber: partNum })
+          })
+        // eslint-disable-next-line handle-callback-err
+        }, (err, dataPacks) => {
+          s3.completeMultipartUpload({
+            Bucket: process.env.BUCKET_NAME,
+            Key: fileName,
+            MultipartUpload: {
+              Parts: dataPacks
+            },
+            UploadId: multipart.UploadId
+          }, uploadCb)
+        })
+      })
+    } else {
+      uploadCb(mpErr)
+    }
+  })
+}
+
+function uploadFile (absoluteFilePath, uploadCb) {
+  const fileName = path.basename(absoluteFilePath)
+  const stats = fs.statSync(absoluteFilePath)
+  const fileSizeInBytes = stats.size
+
+  if (fileSizeInBytes < (1024 * 1024 * 5)) {
+    async.retry((retryCb) => {
+      // eslint-disable-next-line handle-callback-err
+      fs.readFile(absoluteFilePath, (err, fileData) => {
+        s3.putObject({
+          Bucket: process.env.BUCKET_NAME,
+          Key: fileName,
+          Body: fileData
+        }, retryCb)
+      })
+    }, uploadCb)
+  } else {
+    uploadMultipart(absoluteFilePath, fileName, uploadCb)
+  }
+}
+
+const uploadFileAsync = util.promisify(uploadFile)
+
+export async function uploadCSVReport (Key, result) {
   try {
-    let bufferSize = 0
-    result.map(doc => {bufferSize += doc.size; return doc })
-    console.log("BUFFER SIZE", bufferSize)
-    console.log("DOC", result[0])
+    const bufferSize = result.reduce((total, item) => total + item.size, 0)
+
+    console.log('BUFFER SIZE', bufferSize)
+    console.log('DOC', result[0])
+
+    let response
 
     if (bufferSize >= 5 * 1000 * 1000) {
-      return uploadMultipartByCursor(Key, result, bufferSize)
+      response = await uploadMultipartByCursor(Key, result, bufferSize)
+    } else {
+      response = await uploadByCursor(Key, result)
     }
 
-    const response = await uploadByCursor(Key, result)
-    console.log("Upload Completed")
+    console.log('Upload Completed')
     return response
-
   } catch (error) {
     console.error(error)
   }
+}
+
+/**
+ * to test this, call from command line:
+ * node -r esm src/services/s3.js
+ */
+if (require.main === module) {
+  (async function () {
+    try {
+      config()
+
+      const testDataArray = Array(1024 * 1).fill().map((x, i) => i).map(x => Array(1024).fill().map((x, i) => i).join('')).map(x => ({
+        value: x,
+        size: Buffer.byteLength(x)
+      }))
+
+      await uploadCSVReport('test/teste2.csv', testDataArray)
+    } catch (err) {
+      console.error(err)
+    }
+  }())
 }

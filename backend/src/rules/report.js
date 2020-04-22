@@ -26,6 +26,7 @@ export async function listReports () {
 }
 
 export async function createReport (entity, body) {
+
   /**
    * entity = (voucher, donation, users, sites)
    * Filtros
@@ -40,4 +41,5 @@ export async function createReport (entity, body) {
   const data = reportData(entity, filters)
 
   return data
+}
 }

@@ -12,6 +12,8 @@ import { FilterForm } from '../../../components/FilterForm'
 import { HeaderWithGoBack } from '../../../components/Header'
 import { Button, ButtonTypes } from '../../../components/Button'
 
+import { postReport } from '../../../services/API/report'
+
 import { formatCities, formatStates, formatStatus } from '../../../utils/formatDataToSelectData'
 import {
   unit,
@@ -19,7 +21,9 @@ import {
   chooseCity,
   chooseState,
   leader as leaderStr,
+  cardsFirstLetterCapitalized,
   exportFirstLetterCapitalized,
+  borderoFirstLetterCapitalized,
   youCanChooseOneOrMoreFiltersForExport,
 } from '../../../utils/strings'
 
@@ -131,9 +135,27 @@ function ExportForm({ store, dispatch }) {
       />
     )
   }
+  function setType() {
+    let type = 'sites'
+    if (selected === leaderStr) {
+      type = 'users'
+    } else if (selected === borderoFirstLetterCapitalized) {
+      type = 'donation'
+    } else if (selected === cardsFirstLetterCapitalized) {
+      type = 'voucher'
+    }
+    return type
+  }
+
+  function navigateToExportList() {
+    history.push('/export')
+  }
+
   function handleSubmit() {
     const request = { leader, site, status, borderos, countryState, city, initialDate, finalDate }
+    postReport(dispatch, request, setType())
     console.log('request: ', request)
+    navigateToExportList()
   }
 
   function enableButton() {

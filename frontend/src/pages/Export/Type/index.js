@@ -20,8 +20,12 @@ function ExportType() {
   const history = useHistory()
   const [selected, setSelected] = useState('')
 
+  function navigateToExportList() {
+    history.push('/export')
+  }
+
   function handleGoBack() {
-    console.log('handleGoBack')
+    navigateToExportList()
   }
   function handleClick() {
     history.push('/export/filters', { selected })

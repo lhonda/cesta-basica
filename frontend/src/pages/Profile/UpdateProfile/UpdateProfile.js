@@ -28,8 +28,8 @@ function UpdateProfile({ history, match }) {
       <div className="containerUpdate">
         <HeaderWithGoBack title={titles[pathname]} onGoBackClick={goBack} />
         <Switch>
-          <Route path={titles.titleUpdateEmail} component={() => <UpdateEmail setLoading={setLoading} />} />
-          <Route path={titles.titleUpdatePassword} component={() => <UpdatePassword setLoading={setLoading} />} />
+          <Route path={`${path}/email`} component={() => <UpdateEmail setLoading={setLoading} />} />
+          <Route path={`${path}/password`} component={() => <UpdatePassword setLoading={setLoading} />} />
         </Switch>
       </div>
     </>

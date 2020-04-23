@@ -16,7 +16,11 @@ import { registerNewDonation } from '../../utils/strings'
 
 function DonationList({ store, dispatch, history }) {
   const [loading, setLoading] = useState()
-  const { donationList, user: { role }, filters } = store
+  const {
+    donationList,
+    user: { role },
+    filters,
+  } = store
 
   function getGeoLocation() {
     navigator.geolocation.getCurrentPosition((position) => {

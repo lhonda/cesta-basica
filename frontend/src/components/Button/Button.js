@@ -33,7 +33,7 @@ Button.defaultProps = {
   size: ButtonTypes.MEDIUM,
   message: '',
   disable: false,
-  handleClick: () => { },
+  handleClick: () => {},
   typeButton: 'submit',
 }
 export default Button

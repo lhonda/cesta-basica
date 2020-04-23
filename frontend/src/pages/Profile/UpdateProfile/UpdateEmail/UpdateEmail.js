@@ -2,13 +2,13 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { useHistory } from 'react-router-dom'
 
-import { Input, inputTypes } from '../../../components/Input'
-import { Button } from '../../../components/Button'
+import { Input, inputTypes } from '../../../../components/Input'
+import { Button } from '../../../../components/Button'
 
-import { emailRegistered, registerNewEmail, update } from '../../../utils/strings'
-import { updateEmail } from '../../../services/API/updateDataUser'
+import { emailRegistered, registerNewEmail, update } from '../../../../utils/strings'
+import { updateEmail } from '../../../../services/API/updateDataUser'
 
-import { connect, types } from '../../../store'
+import { connect, types } from '../../../../store'
 
 function UpdateEmail({ setLoading, store, dispatch }) {
   const [newEmail, setNewEmail] = useState()

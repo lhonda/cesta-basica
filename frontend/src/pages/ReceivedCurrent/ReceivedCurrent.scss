@@ -3,7 +3,7 @@
   flex-direction: column;
   height: 83vh;
   overflow: hidden;
-  padding: 1.1rem 1rem 0 1rem;
+  padding: 1.1rem 1rem 0;
 
   .details-received {
     height: auto;
@@ -16,10 +16,6 @@
   flex-direction: row;
   justify-content: space-between;
   flex-wrap: wrap;
-
-  .titleTerms {
-    padding-top: 0;
-  }
 
   h2, h5 {
     margin-top: 5px;
@@ -56,7 +52,7 @@ hr {
 }
 .footer-received-prof {
   height: 10vh;
-  padding: 0 1rem 1rem 1rem;
+  padding: 0 1rem 1rem;
   display: flex;
   justify-content: center;
   align-items: center;

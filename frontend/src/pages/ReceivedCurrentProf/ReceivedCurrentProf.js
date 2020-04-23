@@ -142,6 +142,17 @@ function ReceivedCurrentProfPage({ store, dispatch }) {
               </div>
             </div>
 
+            <Paragraph size={ParagraphTypes.SMALL} content="legendAddPicPersonReceiveCard" />
+
+            <div className="main-donation-received-current-prof">
+              <SubTitle
+                type={SubTitleTypes.LIGHT}
+                width={SubTitleTypes.SIZE_SMALL}
+                message={legendPhotoDeliveredDone}
+              />
+              <File file={image} handleImage={handleImageFile} placeholder={legendInputAddPic} />
+            </div>
+
             <Select
               value={delivered}
               placeholder="Status da entrega do cartão"
@@ -161,7 +172,7 @@ function ReceivedCurrentProfPage({ store, dispatch }) {
                 />
 
                 <Input
-                  placeholder='Digite telefone'
+                  placeholder="Digite telefone"
                   inputType={inputTypes.CELPHONE}
                   minLength="2"
                   maxLength="15"
@@ -179,17 +190,6 @@ function ReceivedCurrentProfPage({ store, dispatch }) {
                   isRequired={false}
                   handleOnChange={setCPF}
                 />
-
-                <Paragraph size={ParagraphTypes.SMALL} content="legendAddPicPersonReceiveCard" />
-
-                <div className="main-donation-received-current-prof">
-                  <SubTitle
-                    type={SubTitleTypes.LIGHT}
-                    width={SubTitleTypes.SIZE_SMALL}
-                    message={legendPhotoDeliveredDone}
-                  />
-                  <File file={image} handleImage={handleImageFile} placeholder={legendInputAddPic} />
-                </div>
               </>
             ) : (
               <Input

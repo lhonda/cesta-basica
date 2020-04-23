@@ -1,5 +1,16 @@
 .containerUpdate {
   padding: 1rem;
+
+  &__legend {
+    font-family: Rubik;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 20px;
+    p {
+      margin: 1rem 0 0;
+    }
+  }
+
   &__group {
     margin-top: 1rem;
     &__title {
@@ -13,13 +24,12 @@
     }
   }
   &__form {
-    margin: 2.8rem 0 0 0;
-    padding: 0 0.5rem;
-
+    margin: 2rem 0 0 0;
+    
     .buttonUpdate {
       bottom: 0;
       position: fixed;
-      margin: 0 2.8rem 1rem 0;
+      margin: 0 2rem 1rem 0;
       width: -webkit-fill-available;
       button {
         width: 100%;

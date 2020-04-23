@@ -1,8 +1,10 @@
 import { Api } from './index'
 
+const route = '/users'
+
 async function updateUser(payload) {
   try {
-    return await Api.patch('/user', payload)
+    return await Api.patch(route, payload)
   } catch ({ response }) {
     return response
   }

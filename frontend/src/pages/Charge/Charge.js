@@ -1,12 +1,12 @@
 import React from 'react'
 import { Route, Switch, useLocation, useRouteMatch, useHistory } from 'react-router-dom'
 
-import { BottomMenu } from '../../../components/BottomMenu'
-import { Header } from '../../../components/Header/Header'
-import { HeaderWithGoBack } from '../../../components/Header/WithGoBack';
-import { ChargeAdd } from '../ChargeAdd'
-import { ChargeList } from '../ChargeList'
-import { chargeTitlePage } from '../../../utils/strings'
+import { BottomMenu } from '../../components/BottomMenu'
+import { Header } from '../../components/Header'
+import { HeaderWithGoBack } from '../../components/Header/WithGoBack'
+import { ChargeAdd } from './ChargeAdd'
+import { ChargeList } from './ChargeList'
+import { chargeTitlePage } from '../../utils/strings'
 
 import './Charge.scss'
 
@@ -19,7 +19,7 @@ export const Charge = () => {
 
   function renderHeaderWithGoBack() {
     return (
-      <div className="charge-header">
+      <div className="chargeHeader">
         <HeaderWithGoBack onGoBackClick={goBack} title={state.title} />
       </div>
     )
@@ -27,7 +27,7 @@ export const Charge = () => {
 
   function renderHeader() {
     return (
-      <div className="charge-header">
+      <div className="chargeHeader">
         <Header title={chargeTitlePage} />
       </div>
     )

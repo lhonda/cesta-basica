@@ -25,7 +25,7 @@ import { Charge } from '../pages/Charge'
 import { DonationRegister } from '../pages/DonationRegister'
 import { Profile } from '../pages/Profile/index'
 
-import { UpdateProfile } from '../pages/UpdateProfile'
+import { UpdateProfile } from '../pages/Profile/UpdateProfile'
 
 export const Routes = () => (
   <BrowserRouter>

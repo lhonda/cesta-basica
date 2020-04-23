@@ -1,16 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { useLocation } from 'react-router-dom'
 import { types, connect } from '../../store'
 import { SettingsLink } from './CommonComponents/SettingsLink'
+import { Header } from '../../components/Header'
 import { BottomMenu } from '../../components/BottomMenu'
 import { icEmail, icPassword, icLogout } from '../../assets/icons/index'
 import { profile, settings, changePassword, changeEmail, signOut } from '../../utils/strings'
 import './Profile.scss'
 
 function Profile({ dispatch, store, history }) {
-  const location = useLocation()
-  const { pathname } = location
   function logOut() {
     dispatch({ type: types.SET_LOGOUT })
     history.push('/login')
@@ -21,14 +19,14 @@ function Profile({ dispatch, store, history }) {
 
   return (
     <>
-      <header className="containerHeader">
-        {pathname === '/profile' && <div style={{ paddingTop: '2rem' }} />}
-        <h2>{profile}</h2>
-        <div className="containerUser">
-          <h2>{user.login}</h2>
-          <p>{user.email}</p>
-        </div>
-      </header>
+      <div className="profileHeader">
+        <Header title={profile} />
+      </div>
+      <div className="containerUser">
+        <h2>{user.login}</h2>
+        <p>{user.email}</p>
+      </div>
+
       <div className="containerSetup">
         <h3>{settings}</h3>
         <SettingsLink

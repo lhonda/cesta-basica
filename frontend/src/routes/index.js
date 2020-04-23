@@ -3,6 +3,8 @@ import { Switch, BrowserRouter } from 'react-router-dom'
 
 import Route from './routeWrapper'
 
+import { Alert } from '../components/Alert'
+
 import { Home } from '../pages/Home'
 import { Login } from '../pages/Login'
 import { Register } from '../pages/Register'
@@ -27,6 +29,7 @@ import { UpdateProfile } from '../pages/UpdateProfile'
 
 export const Routes = () => (
   <BrowserRouter>
+    <Alert />
     <Switch>
       <Route path="/" exact component={Home} />
       <Route path="/login" exact component={Login} />

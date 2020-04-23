@@ -30,7 +30,9 @@ function ReportList({ store: { reportList }, dispatch }) {
   }
 
   const handleClick = () => push(`${path}/types`)
-  useEffect(() => getReports(), [])
+  useEffect(() => {
+    getReports()
+  }, [])
   return (
     <>
       {loading && <Loader />}

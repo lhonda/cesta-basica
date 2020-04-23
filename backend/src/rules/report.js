@@ -1,40 +1,29 @@
 import { statusesReport } from '../enums'
+import { Report } from '../repositories'
 
-export async function listReports() {
-  return [
+export async function listReports () {
+  const reports = await Report.find({})
+  return reports.map(r => (
     {
-      status: 1,
-      statusText: statusesReport[1],
-      timestamp: new Date(),
-      details: "Vouchers"
-    },
-    {
-      status: 2,
-      statusText: statusesReport[2],
-      timestamp: new Date(),
-      details: "Users",
-      url: "http://samplecsvs.s3.amazonaws.com/Sacramentorealestatetransactions.csv"
-    },
-    {
-      status: 3,
-      statusText: statusesReport[3],
-      timestamp: new Date(),
-      details: "Vouchers"
+      status: r.status,
+      statusText: statusesReport[r.status],
+      timestamp: r.timestamp,
+      details: r.details,
+      url: r.url
     }
-  ]
+  ))
 }
 
-export async function createReport(entity, body) {
+export async function createReport (entity, body) {
 
   /**
    * entity = (voucher, donation, users, sites)
    * Filtros
    */
 
-   /**
+  /**
     * 201 = Created (se processo foi inidicado)
     * 409 = Conflict (se existe um processo sendo processado)
     */
 
-    return
 }

@@ -1,0 +1,16 @@
+{
+  "name": "lambda-cesta-basica-poc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "zip": "./build.sh ."
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.660.0",
+    "mongoose": "^5.9.9"
+  }
+}

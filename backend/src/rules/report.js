@@ -1,40 +1,35 @@
-import { statusesReport } from '../enums'
+import * as Request from 'axios'
 
-export async function listReports() {
-  return [
+import { statusesReport } from '../enums'
+import { Report } from '../repositories'
+
+export async function listReports () {
+  const reports = await Report.find({})
+  return reports.map(r => (
     {
-      status: 1,
-      statusText: statusesReport[1],
-      timestamp: new Date(),
-      details: "Vouchers"
-    },
-    {
-      status: 2,
-      statusText: statusesReport[2],
-      timestamp: new Date(),
-      details: "Users",
-      url: "http://samplecsvs.s3.amazonaws.com/Sacramentorealestatetransactions.csv"
-    },
-    {
-      status: 3,
-      statusText: statusesReport[3],
-      timestamp: new Date(),
-      details: "Vouchers"
+      status: r.status,
+      statusText: statusesReport[r.status],
+      timestamp: r.timestamp,
+      details: r.details,
+      url: r.url
     }
-  ]
+  ))
 }
 
-export async function createReport(entity, body) {
+export async function createReport (entity, filters) {
+  try {
+    const response = await Request.post(process.env.GATEWAY_URL, {
+      entity,
+      filters
+    })
 
-  /**
-   * entity = (voucher, donation, users, sites)
-   * Filtros
-   */
-
-   /**
-    * 201 = Created (se processo foi inidicado)
-    * 409 = Conflict (se existe um processo sendo processado)
-    */
-
-    return
+    if ([202, 409].includes(response.status)) return response
+    return {
+      status: 502
+    }
+  } catch (error) {
+    return {
+      status: 502
+    }
+  }
 }

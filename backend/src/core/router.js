@@ -227,22 +227,22 @@ router.get('/reports' /* authRequired('admin') */, (req, res, next) =>
     .then(processResult => res.status(200).json(processResult))
     .catch(next))
 
-router.post("/reports/donation" /* authRequired('admin') */, (req, res, next) =>
-  createReport("donation", req.body)
-    .then(result => res.status(201).json(result))
+router.post('/reports/donation' /* authRequired('admin') */, (req, res, next) =>
+  createReport('donation', req.body)
+    .then(result => res.status(result.status).send())
     .catch())
 
-router.post("/reports/voucher" /* authRequired('admin') */, (req, res, next) =>
-  createReport("voucher", req.body)
-    .then(result => res.status(201).json(result))
+router.post('/reports/voucher' /* authRequired('admin') */, (req, res, next) =>
+  createReport('voucher', req.body)
+    .then(result => res.status(result.status).send())
     .catch())
 
-router.post("/reports/users" /* authRequired('admin') */, (req, res, next) =>
-  createReport("users", req.body)
-    .then(result => res.status(201).json(result))
+router.post('/reports/users' /* authRequired('admin') */, (req, res, next) =>
+  createReport('users', req.body)
+    .then(result => res.status(result.status).send())
     .catch())
 
-router.post("/reports/sites" /* authRequired('admin') */, (req, res, next) =>
-  createReport("sites", req.body)
-    .then(result => res.status(201).json(result))
+router.post('/reports/sites' /* authRequired('admin') */, (req, res, next) =>
+  createReport('sites', req.body)
+    .then(result => res.status(result.status).send())
     .catch())

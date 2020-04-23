@@ -48,7 +48,9 @@ function UpdatePassword({ setLoading }) {
 
   return (
     <>
-      <p>{informationToUpdatePassword}</p>
+      <div className="containerUpdate__legend">
+        <p>{informationToUpdatePassword}</p>
+      </div>
       <form onSubmit={handleSubmit} className="containerUpdate__form">
         <Input
           handleOnChange={setPassword}

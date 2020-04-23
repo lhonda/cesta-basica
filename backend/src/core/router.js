@@ -238,11 +238,11 @@ router.post('/reports/voucher' /* authRequired('admin') */, (req, res, next) =>
     .catch())
 
 router.post('/reports/users' /* authRequired('admin') */, (req, res, next) =>
-  createReport('users', req.body)
+  createReport('user', req.body)
     .then(result => res.status(result.status).send())
     .catch())
 
 router.post('/reports/sites' /* authRequired('admin') */, (req, res, next) =>
-  createReport('sites', req.body)
+  createReport('site', req.body)
     .then(result => res.status(result.status).send())
     .catch())

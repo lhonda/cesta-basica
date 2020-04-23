@@ -1,3 +1,5 @@
+import * as Request from 'axios'
+
 import { statusesReport } from '../enums'
 import { Report } from '../repositories'
 
@@ -14,16 +16,20 @@ export async function listReports () {
   ))
 }
 
-export async function createReport (entity, body) {
+export async function createReport (entity, filters) {
+  try {
+    const response = await Request.post(process.env.GATEWAY_URL, {
+      entity,
+      filters
+    })
 
-  /**
-   * entity = (voucher, donation, users, sites)
-   * Filtros
-   */
-
-  /**
-    * 201 = Created (se processo foi inidicado)
-    * 409 = Conflict (se existe um processo sendo processado)
-    */
-
+    if ([202, 409].includes(response.status)) return response
+    return {
+      status: 502
+    }
+  } catch (error) {
+    return {
+      status: 502
+    }
+  }
 }

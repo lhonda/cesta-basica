@@ -3,13 +3,14 @@ import PropTypes from 'prop-types'
 import './style.scss'
 
 import { formatDate } from '../../../../utils/formatDateToptbr'
+import { handleRedirectSymptoms } from '../../../../services/handles'
 
 const ReportItem = ({ details, statusText, timestamp, url }) => (
-  <div className="reportItem">
+  <div className="reportItem" onClick={() => url && handleRedirectSymptoms(url)}>
     <span>{details}</span>
     <div className="reportItem__details">
       <span>{statusText}</span>
-      <span>{formatDate(timestamp)}</span>
+      <span className="reportItem__details__date">{formatDate(timestamp)}</span>
     </div>
   </div>
 )

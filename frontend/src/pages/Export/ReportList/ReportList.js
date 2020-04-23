@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import './style.scss'
 
-import { exportListTitle } from '../../../utils/strings'
+import { exportListTitle, newExport } from '../../../utils/strings'
 
 import { Header } from '../../../components/Header/Header'
 import { Loader } from '../../../components/Loader'
+import { BottomMenu } from '../../../components/BottomMenu'
+import { Button, ButtonTypes } from '../../../components/Button'
 
 import { ReportItem } from './ReportItem'
 
@@ -22,21 +24,28 @@ function ReportList({ store: { reportList }, dispatch }) {
     }
     setLoading(false)
   }
-  const reportListComponent = (
-    <div className="containerExportList__reportList">
-      {reportList.map(({ details, statusText, timestamp, url }) => (
-        <ReportItem key={`${Math.random()}`} {...{ details, statusText, timestamp, url }} />
-      ))}
-    </div>
-  )
   useEffect(() => getReports(), [])
   return (
     <>
       {loading && <Loader />}
       <div className="containerExportList">
-        <Header title={exportListTitle} />
-        {!loading ? reportListComponent : <div>vazoio</div>}
+        <div className="containerExportList__title">
+          <Header title={exportListTitle} />
+        </div>
+        <div className="containerExportList__reportList">
+          {!loading ? (
+            reportList.map(({ details, statusText, timestamp, url }) => (
+              <ReportItem key={`${Math.random()}`} {...{ details, statusText, timestamp, url }} />
+            ))
+          ) : (
+              <div>vazoio</div>
+            )}
+        </div>
+        <div className="containerExportList__button">
+          <Button size={ButtonTypes.LARGE} typeButton="button" message={newExport} handleClick={() => { }} />
+        </div>
       </div>
+      <BottomMenu isAdmin />
     </>
   )
 }

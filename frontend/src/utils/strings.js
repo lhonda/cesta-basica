@@ -108,6 +108,8 @@ export const deliveredDate = 'Data de envio'
 export const cardsQuantity = 'Quantidade de cartoes'
 export const receivedData = 'Data de recebimento'
 export const deadlineDate = 'Prazo final para entrega'
+export const failedDonation = 'Verifique, se sua localização esta ativa e tente novamente.'
+export const successDonation = 'Doação realizada com sucesso'
 
 // Donation Prof screen
 export const titleDonationProf = 'Evidência de Recebimento'

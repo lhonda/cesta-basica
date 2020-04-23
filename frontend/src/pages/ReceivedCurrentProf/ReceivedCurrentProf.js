@@ -15,6 +15,8 @@ import { ButtonIcon } from '../../components/ButtonIcon'
 import { Loader } from '../../components/Loader'
 import { Select } from '../../components/Select'
 
+import { alertTypes } from '../../components/Alert'
+
 import './ReceivedCurrentProf.scss'
 import { DonationVoucher } from '../../services/API/donationList'
 import {
@@ -26,6 +28,8 @@ import {
   legendInputAddPic,
   legendInputFullName,
   placeholderCPF,
+  failedDonation,
+  successDonation,
 } from '../../utils/strings'
 
 import * as analytics from '../../services/analytics'
@@ -49,7 +53,8 @@ function ReceivedCurrentProfPage({ store, dispatch }) {
       setCPF(receivedCpf || '')
       setPhoneNumber(receivedContactNumber || '')
       return setDelivered('true')
-    } else if (status === 3) {
+    }
+    if (status === 3) {
       setComment(leaderComment)
       setDelivered('false')
     } else {
@@ -110,7 +115,22 @@ function ReceivedCurrentProfPage({ store, dispatch }) {
     }
     const updateDonate = await DonationVoucher(data, store)
     if (updateDonate) {
+      dispatch({
+        type: types.SHOW_ALERT,
+        payload: {
+          message: successDonation,
+          type: alertTypes.SUCCESS,
+        },
+      })
       goBack()
+    } else {
+      dispatch({
+        type: types.SHOW_ALERT,
+        payload: {
+          message: failedDonation,
+          type: alertTypes.FAILURE,
+        },
+      })
     }
 
     const deliveryStatus = optionsList.find((option) => `${option.value}` === delivered)
@@ -192,14 +212,14 @@ function ReceivedCurrentProfPage({ store, dispatch }) {
                 />
               </>
             ) : (
-              <Input
-                placeholder="Comentário sobre a não entrega"
-                inputType={inputTypes.TEXT}
-                value={comment}
-                isRequired={true}
-                handleOnChange={setComment}
-              />
-            )}
+                <Input
+                  placeholder="Comentário sobre a não entrega"
+                  inputType={inputTypes.TEXT}
+                  value={comment}
+                  isRequired
+                  handleOnChange={setComment}
+                />
+              )}
           </div>
         </div>
 

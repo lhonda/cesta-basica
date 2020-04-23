@@ -222,27 +222,27 @@ router.get('/filter/donation', authRequired('admin'), (req, res, next) =>
     .then(processResult => res.status(200).json(processResult))
     .catch(next))
 
-router.get('/reports' /* authRequired('admin') */, (req, res, next) =>
+router.get('/reports', authRequired('admin'), (req, res, next) =>
   listReports()
     .then(processResult => res.status(200).json(processResult))
     .catch(next))
 
-router.post('/reports/donation' /* authRequired('admin') */, (req, res, next) =>
+router.post('/reports/donation',authRequired('admin'), (req, res, next) =>
   createReport('donation', req.body)
     .then(result => res.status(result.status).send())
     .catch())
 
-router.post('/reports/voucher' /* authRequired('admin') */, (req, res, next) =>
+router.post('/reports/voucher', authRequired('admin'), (req, res, next) =>
   createReport('voucher', req.body)
     .then(result => res.status(result.status).send())
     .catch())
 
-router.post('/reports/users' /* authRequired('admin') */, (req, res, next) =>
+router.post('/reports/users', authRequired('admin'), (req, res, next) =>
   createReport('user', req.body)
     .then(result => res.status(result.status).send())
     .catch())
 
-router.post('/reports/sites' /* authRequired('admin') */, (req, res, next) =>
+router.post('/reports/sites', authRequired('admin'), (req, res, next) =>
   createReport('site', req.body)
     .then(result => res.status(result.status).send())
     .catch())

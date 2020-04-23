@@ -28,6 +28,7 @@ export async function createReport (entity, filters) {
       status: 502
     }
   } catch (error) {
+    console.log(`Error on GATEWAY Request: ${error.message}`)
     return {
       status: 502
     }

@@ -3,10 +3,10 @@ import PropTypes from 'prop-types'
 import './style.scss'
 
 import { Switch, Route, useLocation } from 'react-router-dom'
-import { HeaderWithGoBack } from '../../components/Header'
-import { Loader } from '../../components/Loader'
+import { HeaderWithGoBack } from '../../../components/Header'
+import { Loader } from '../../../components/Loader'
 
-import { titleUpdateEmail, titleUpdatePassword } from '../../utils/strings'
+import { titleUpdateEmail, titleUpdatePassword } from '../../../utils/strings'
 
 import { UpdateEmail } from './UpdateEmail'
 import { UpdatePassword } from './UpdatePassword'
@@ -28,8 +28,8 @@ function UpdateProfile({ history, match }) {
       <div className="containerUpdate">
         <HeaderWithGoBack title={titles[pathname]} onGoBackClick={goBack} />
         <Switch>
-          <Route path={`${path}/email`} component={() => <UpdateEmail setLoading={setLoading} />} />
-          <Route path={`${path}/password`} component={() => <UpdatePassword setLoading={setLoading} />} />
+          <Route path={titles.titleUpdateEmail} component={() => <UpdateEmail setLoading={setLoading} />} />
+          <Route path={titles.titleUpdatePassword} component={() => <UpdatePassword setLoading={setLoading} />} />
         </Switch>
       </div>
     </>

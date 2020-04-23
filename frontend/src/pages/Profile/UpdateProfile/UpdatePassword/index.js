@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { useHistory } from 'react-router-dom'
 
-import { Input, inputTypes } from '../../../components/Input'
-import { Button } from '../../../components/Button'
+import { Input, inputTypes } from '../../../../components/Input'
+import { Button } from '../../../../components/Button'
 
-import { updatePassword } from '../../../services/API/updateDataUser'
+import { updatePassword } from '../../../../services/API/updateDataUser'
 
 import {
   update,
@@ -13,7 +13,7 @@ import {
   typeNewPassword,
   typePasswordToCheck,
   passwordsNotSame,
-} from '../../../utils/strings'
+} from '../../../../utils/strings'
 
 function UpdatePassword({ setLoading }) {
   const { push } = useHistory()
@@ -39,7 +39,6 @@ function UpdatePassword({ setLoading }) {
     setLoading(true)
     const { status } = await updatePassword(password, confirmPassword)
     setLoading(false)
-    // an error message or success
     push('/profile')
   }
 

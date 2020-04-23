@@ -5,7 +5,7 @@ import { Title } from '../Title'
 
 import './styles.scss'
 
-function Header({ title, message, onMessageClick }) {
+export function Header({ title, message, onMessageClick }) {
   return (
     <div className="header-container">
       <div className="header-title">
@@ -30,5 +30,3 @@ Header.defaultProps = {
   message: '',
   onMessageClick: () => {},
 }
-
-export { Header }

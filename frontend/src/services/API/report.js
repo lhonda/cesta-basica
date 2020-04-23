@@ -12,10 +12,9 @@ export async function getReportList() {
 
 export async function postReport(dispatch, request, type) {
   try {
-    const response = await Api.post(`${rootRoute}/${type}`, request)
-    console.log('response: ', response)
-    return null
-  } catch ({ response }) {
-    return response
+    await Api.post(`${rootRoute}/${type}`, request)
+    return
+  } catch (err) {
+    console.log('err: ', err)
   }
 }

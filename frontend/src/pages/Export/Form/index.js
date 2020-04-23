@@ -163,10 +163,37 @@ function ExportForm({ store, dispatch }) {
     history.push('/export')
   }
 
+  function setRequest() {
+    let request = {}
+    if (leader) {
+      request = { ...request, leaderName: leader }
+    }
+    if (site) {
+      request = { ...request, siteId: site }
+    }
+    if (status) {
+      request = { ...request, status }
+    }
+    if (borderos && borderos.length > 0) {
+      request = { ...request, listDonationId: borderos }
+    }
+    if (countryState) {
+      request = { ...request, state: countryState }
+    }
+    if (city) {
+      request = { ...request, city }
+    }
+    if (initialDate) {
+      request = { ...request, dateFrom: initialDate }
+    }
+    if (finalDate) {
+      request = { ...request, dateTo: finalDate }
+    }
+    return request
+  }
+
   function handleSubmit() {
-    const request = { leader, site, status, borderos, countryState, city, initialDate, finalDate }
-    postReport(dispatch, request, setType())
-    console.log('request: ', request)
+    postReport(dispatch, setRequest(), setType())
     navigateToExportList()
   }
 

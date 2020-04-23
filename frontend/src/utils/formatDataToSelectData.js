@@ -44,7 +44,7 @@ export function formatStatus() {
 export function formatSites(data) {
   const formatedState = data
     .map((item) => ({
-      value: item.id,
+      value: item.siteId,
       string: item.name,
     }))
     .sort((a, b) => {

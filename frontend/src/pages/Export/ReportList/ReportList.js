@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
+import { useHistory, useRouteMatch } from 'react-router-dom'
 import './style.scss'
 
 import { exportListTitle, newExport } from '../../../utils/strings'
@@ -10,11 +11,14 @@ import { BottomMenu } from '../../../components/BottomMenu'
 import { Button, ButtonTypes } from '../../../components/Button'
 
 import { ReportItem } from './ReportItem'
+import { ReportIsVoid } from './ReportIsVoid'
 
 import { connect, types } from '../../../store'
 import { getReportList } from '../../../services/API/report'
 
 function ReportList({ store: { reportList }, dispatch }) {
+  const { push } = useHistory()
+  const { path } = useRouteMatch()
   const [loading, setLoading] = useState(true)
   async function getReports() {
     setLoading(true)
@@ -24,6 +28,8 @@ function ReportList({ store: { reportList }, dispatch }) {
     }
     setLoading(false)
   }
+
+  const handleClick = () => push(`${path}/types`)
   useEffect(() => getReports(), [])
   return (
     <>
@@ -38,11 +44,11 @@ function ReportList({ store: { reportList }, dispatch }) {
               <ReportItem key={`${Math.random()}`} {...{ details, statusText, timestamp, url }} />
             ))
           ) : (
-              <div>vazoio</div>
-            )}
+            <ReportIsVoid />
+          )}
         </div>
         <div className="containerExportList__button">
-          <Button size={ButtonTypes.LARGE} typeButton="button" message={newExport} handleClick={() => { }} />
+          <Button size={ButtonTypes.LARGE} typeButton="button" message={newExport} handleClick={handleClick} />
         </div>
       </div>
       <BottomMenu isAdmin />

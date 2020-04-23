@@ -232,3 +232,4 @@ export const youCanChooseOneOrMoreFiltersForExport =
 // export List
 export const exportListTitle = 'Lista de Exportação'
 export const newExport = 'Nova Exportação'
+export const reportIsVoid = 'Nenhum exportação encontrada'

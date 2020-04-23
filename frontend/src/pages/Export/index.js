@@ -10,7 +10,7 @@ function Export() {
   return (
     <Switch>
       <Route path={path} exact component={ReportList} />
-      <Route path={`${path}/types`} component={ExportType} />
+      <Route path={`${path}/types`} exact component={ExportType} />
       <Route path={`${path}/filters`} component={ExportForm} />
     </Switch>
   )

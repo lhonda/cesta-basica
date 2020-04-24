@@ -178,16 +178,32 @@ export const messageUpdatePasswordFailure = 'Ocorreu um erro ao atualizar o E-ma
 // Filter Form
 export const filter = 'Filtro'
 export const cleanFilter = 'Limpar filtro'
+export const filterFirstLetterCapitalized = 'Filtrar'
 export const youCanChooseOneOrMoreFilters = 'Voce pode escolher um ou mais campos para criar um filtro'
 
 // Generic
+export const CPF = 'CPF'
 export const WORD_NO = 'Não'
 export const WORD_YES = 'Sim'
 export const leader = 'Lider'
 export const unit = 'Unidade'
+export const update = 'Atualizar'
+export const maxSentDate = '9999-12-31'
+export const chooseLeader = 'Escolher lider'
+export const chooseCity = 'Selecione a cidade'
+export const chooseSite = 'Selecione a unidade'
+export const chooseState = 'Selecione o estado'
+export const chooseStatus = 'Selecione o status'
+export const cityFirstLetterCapitalized = 'Cidade'
+export const cardsFirstLetterCapitalized = 'Cartões'
+export const statusFirstLetterCapitalized = 'Status'
+export const borderoFirstLetterCapitalized = 'Pacote'
+export const continueFirstLetterCapitalized = 'Continuar'
 export const deliveredFirstLetterCapitalized = 'Entregue'
+export const countryStateFirstLetterCapitalized = 'Estado'
+export const finalDateFirstLetterCapitalized = 'Data final'
+export const initialDateFirstLetterCapitalized = 'Data inicial'
 export const notDeliveredFirstLetterCapitalized = 'Não entregue'
-export const CPF = 'CPF'
 
 // Profile
 export const signOut = 'Sair da conta'
@@ -200,7 +216,6 @@ export const passwordCharacters = 'Sua senha deve conter no mínimo 8 caracteres
 export const newPassword = 'Digitar nova senha'
 export const confirmPassword = 'Confirmar senha'
 export const areYouSureSignOut = 'Tem certeza que deseja sair ?'
-export const update = 'Atualizar'
 
 // Bottom Menu Icon Legends
 export const basketIconLegend = 'Doações'
@@ -208,16 +223,13 @@ export const chargeIconLegend = 'Cargas'
 export const exportIconLegend = 'Exportar'
 export const profileIconLegend = 'Perfil'
 
-export const statusFirstLetterCapitalized = 'Status'
-export const countryStateFirstLetterCapitalized = 'Estado'
-export const cityFirstLetterCapitalized = 'Cidade'
-export const initialDateFirstLetterCapitalized = 'Data inicial'
-export const finalDateFirstLetterCapitalized = 'Data final'
-export const filterFirstLetterCapitalized = 'Filtrar'
-export const chooseState = 'Selecione o estado'
-export const chooseCity = 'Selecione a cidade'
-export const chooseStatus = 'Selecione o status'
-export const chooseLeader = 'Escolher lider'
-export const borderoFirstLetterCapitalized = 'Pacote'
-export const maxSentDate = '9999-12-31'
+// Export
+export const exportType = 'Tipo de exportaçao'
+export const exportFirstLetterCapitalized = 'Exportar'
+export const youCanChooseOneOrMoreFiltersForExport =
+  'Você pode utilizar o filtro para fazer a exportação dos arquivos da forma que você precisa.'
 
+// export List
+export const exportListTitle = 'Lista de Exportação'
+export const newExport = 'Nova Exportação'
+export const reportIsVoid = 'Nenhum exportação encontrada'

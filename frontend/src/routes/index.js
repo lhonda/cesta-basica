@@ -11,21 +11,20 @@ import { Register } from '../pages/Register'
 import { Terms } from '../pages/Terms'
 import { Checklist } from '../pages/Checklist'
 
-import { DonationList } from '../pages/DonationList'
+import { Charge } from '../pages/Charge'
 import { Donation } from '../pages/Donation'
-import { DonationProf } from '../pages/DonationProf'
 import { Received } from '../pages/Received'
+import { FilterScreen } from '../pages/Filter'
+import { Profile } from '../pages/Profile/index'
+import { Export } from '../pages/Export'
+import { DonationProf } from '../pages/DonationProf'
+import { DonationList } from '../pages/DonationList'
 import { ReceivedCurrent } from '../pages/ReceivedCurrent'
-import { ReceivedCurrentProf } from '../pages/ReceivedCurrentProf'
 import { DonationDetails } from '../pages/DonationDetails'
 import { DeliveredDetail } from '../pages/DeliveredDetail'
-import { FilterScreen } from '../pages/Filter'
-
-import { Charge } from '../pages/Charge'
 import { DonationRegister } from '../pages/DonationRegister'
-import { Profile } from '../pages/Profile/index'
-
 import { UpdateProfile } from '../pages/Profile/UpdateProfile'
+import { ReceivedCurrentProf } from '../pages/ReceivedCurrentProf'
 
 export const Routes = () => (
   <BrowserRouter>
@@ -49,6 +48,7 @@ export const Routes = () => (
       <Route path="/profile" exact component={Profile} isPrivate />
       <Route path="/profile/update" component={UpdateProfile} isPrivate />
       <Route path="/filter" exact component={FilterScreen} isPrivate />
+      <Route path="/export" component={Export} isPrivate />
     </Switch>
   </BrowserRouter>
 )

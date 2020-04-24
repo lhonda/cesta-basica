@@ -1,0 +1,23 @@
+.exportType-container {
+  margin: 16px;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 32px);
+}
+.exportType-header {
+  padding-bottom: 40px;
+}
+.exportType-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.exportType-radioBtn {
+  display: flex;
+  flex-direction: column;
+}
+.exportType-footer {
+  bottom: 0;
+  width: -webkit-fill-available;
+}

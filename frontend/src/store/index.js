@@ -17,15 +17,16 @@ const cleanState = {
   userLocation: {},
   cardList: [],
   leaderList: null,
-  siteList: null,
   notification: {
     message: '',
     type: '',
   },
+  siteList: [],
   chargeList: [],
   cities: [],
   states: [],
   filters: {},
+  reportList: [],
 }
 
 function saveState(newState) {
@@ -63,6 +64,7 @@ const actionMap = {
   [types.SET_CITIES]: (state, payload) => saveState({ ...state, cities: payload }),
   [types.SET_STATES]: (state, payload) => saveState({ ...state, states: payload }),
   [types.SET_FILTERS]: (state, payload) => saveState({ ...state, filters: payload }),
+  [types.SET_REPORT_LIST]: (state, payload) => saveState({ ...state, reportList: payload }),
 }
 
 export function reducer(state, action) {

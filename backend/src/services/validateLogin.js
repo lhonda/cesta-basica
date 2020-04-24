@@ -5,7 +5,7 @@ const joiCpfCnpjValidator = Joi.extend(joiCpfCnpj)
 
 export async function validateLogin (cpf) {
   const schema = Joi.object({
-    cpf: joiCpfCnpjValidator()
+    cpf: joiCpfCnpjValidator
   })
 
   const { error, value } = schema.validate({ cpf }, {

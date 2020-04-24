@@ -163,6 +163,8 @@ export const deliveredCellphone = 'DDD + Telefone'
 export const titleUpdateEmail = 'Atualizar E-mail'
 export const emailRegistered = 'E-mail cadastrado'
 export const registerNewEmail = 'Novo e-mail'
+export const messageUpdateEmailSuccess = 'E-mail atualizado com sucesso!'
+export const messageUpdateEmailFailure = 'Ocorreu um erro ao atualizar o E-mail. Tente novamente.'
 
 // updatePassword
 export const titleUpdatePassword = 'Definir nova senha'
@@ -170,6 +172,9 @@ export const informationToUpdatePassword = 'Sua senha deve conter no mínimo 8 c
 export const typeNewPassword = 'Digitar nova senha'
 export const typePasswordToCheck = 'Confirmar senha'
 export const passwordsNotSame = 'As senhas precisam ser iguais'
+export const messageUpdatePasswordSuccess = 'E-mail atualizado com sucesso!'
+export const messageUpdatePasswordFailure = 'Ocorreu um erro ao atualizar o E-mail. Tente novamente.'
+
 // Filter Form
 export const filter = 'Filtro'
 export const cleanFilter = 'Limpar filtro'

@@ -100,10 +100,7 @@ async function donationData ({
   if (status) {
     filterDonation.status = status
   }
-  if (listDonationId) {
-    if (!Array.isArray(listDonationId)) {
-      throw new Error('listDonationId must be an Array')
-    }
+  if (listDonationId && Array.isArray(listDonationId) && listDonationId.length > 0) {
     const listDonationIdResolved = listDonationId.map(donation => regexp(donation, 'i'))
     filterDonation.donationId = { $in: listDonationIdResolved }
   }
@@ -135,11 +132,6 @@ async function donationData ({
 }
 
 async function userData ({ name, siteName, state, city }) {
-  console.log({name, siteName, state, city})
-  if (name.toString() !== new RegExp('^').toString()) {
-    return User.find({ name })
-  }
-
   const sites = await Site.aggregate([
     {
       $match: {
@@ -159,7 +151,7 @@ async function userData ({ name, siteName, state, city }) {
   ])
   let users = []
   sites.map(s => users = users.concat(s.users))
-  return users
+  return name ? users.filter(u => new RegExp(`^.*${name}.*`, 'i').test(u.name)) : users
 }
 
 async function siteData (filter) {

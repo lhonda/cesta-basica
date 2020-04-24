@@ -15,7 +15,7 @@
       margin: 0 1rem 0.4rem 0;
     }
     &__chargeType {
-      margin: 0 0.4rem 0.4rem;
+      margin: 0 0 0.4rem;
       color: #909090;
       font-size: 12px;
       width: auto;
@@ -33,7 +33,7 @@
     }
     &__date {
       font-size: 12px;
-      
+      margin-top: 2px;
       color: #909090;
     }
   }

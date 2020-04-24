@@ -204,6 +204,8 @@ export const countryStateFirstLetterCapitalized = 'Estado'
 export const finalDateFirstLetterCapitalized = 'Data final'
 export const initialDateFirstLetterCapitalized = 'Data inicial'
 export const notDeliveredFirstLetterCapitalized = 'Não entregue'
+export const donationRegisterSuccessMessage = 'Doação cadastrada com sucesso'
+export const donationFilterSuccessMessage = 'Doações filtradas com sucesso'
 
 // Profile
 export const signOut = 'Sair da conta'

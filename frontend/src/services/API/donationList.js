@@ -1,6 +1,8 @@
 import { Api } from './index'
 import { types } from '../../store'
 import { compressImageFile } from '../../utils/compressFile'
+import { donationRegisterSuccessMessage } from '../../utils/strings'
+import { showFailureAlert, showSuccessAlert } from '../../utils/showAlert'
 
 const route = '/donations'
 const routeFilter = '/filter/donation'
@@ -15,15 +17,17 @@ export async function DonationsList(dispatch) {
   }
 }
 
-export async function DonationRegister(request) {
+export async function DonationRegister(dispatch, request) {
   try {
     await Api.post(route, request, {
       headers: {
         'Content-Type': 'application/json',
       },
     })
+    showSuccessAlert(dispatch, donationRegisterSuccessMessage)
     return true
   } catch (error) {
+    showFailureAlert(dispatch, error.response.data.message)
     return false
   }
 }
@@ -95,6 +99,6 @@ export async function FilteredDonationList(dispatch, filters = {}) {
 
     dispatch({ type: types.SET_DONATION_LIST, payload: response })
   } catch (err) {
-    return 'failed'
+    showFailureAlert(dispatch, err.response.data.message)
   }
 }

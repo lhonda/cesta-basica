@@ -24,6 +24,7 @@ import {
   maxSentDate,
   chooseLeader,
   cityFirstLetterCapitalized,
+  donationFilterSuccessMessage,
   youCanChooseOneOrMoreFilters,
   statusFirstLetterCapitalized,
   filterFirstLetterCapitalized,
@@ -32,6 +33,8 @@ import {
   initialDateFirstLetterCapitalized,
   countryStateFirstLetterCapitalized,
 } from '../../utils/strings'
+
+import { showSuccessAlert } from '../../utils/showAlert'
 
 import './styles.scss'
 
@@ -86,6 +89,7 @@ function FilterContainer({ store, dispatch }) {
     }
 
     setFilters(dispatch, request)
+    showSuccessAlert(dispatch, donationFilterSuccessMessage)
     navigateToDonationList()
   }
 

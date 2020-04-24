@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 
-import { Input, InputSelectSearch, inputTypes } from '../../../components/Input'
-import { ConfirmButton } from '../../../components/Button/ConfirmButton'
 import { Loader } from '../../../components/Loader'
+import { ConfirmButton } from '../../../components/Button/ConfirmButton'
+import { Input, InputSelectSearch, inputTypes } from '../../../components/Input'
 
+import { SiteList } from '../../../services/API/siteList'
 import { LeadersList } from '../../../services/API/leaderList'
 import { DonationRegister } from '../../../services/API/donationList'
-import { SiteList } from '../../../services/API/siteList'
 
 import './Form.scss'
 
@@ -49,8 +49,9 @@ function RegisterForm({ leaderList, siteList, dispatch, history }) {
     if (leader) {
       return leader
     }
-    return ''
+    return { login: '' }
   }
+
   function findSiteByName() {
     const site = siteList.find((element) => element.name === siteId)
     if (site) {
@@ -58,13 +59,14 @@ function RegisterForm({ leaderList, siteList, dispatch, history }) {
     }
     return ''
   }
+
   async function handleSubmit(e) {
     e.preventDefault()
     setLoading(true)
     const { login: leaderLogin } = findLeaderByName()
     const { siteId: findSiteId } = findSiteByName()
     const data = { siteId: findSiteId, leaderLogin, donationId, quantity, sentDate }
-    await DonationRegister(data)
+    await DonationRegister(dispatch, data)
     setLoading(false)
     history.push('/donation-list')
   }

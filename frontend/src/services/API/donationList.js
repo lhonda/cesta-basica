@@ -99,6 +99,6 @@ export async function FilteredDonationList(dispatch, filters = {}) {
 
     dispatch({ type: types.SET_DONATION_LIST, payload: response })
   } catch (err) {
-    return 'failed'
+    showFailureAlert(dispatch, err.response.data.message)
   }
 }

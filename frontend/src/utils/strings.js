@@ -172,8 +172,8 @@ export const informationToUpdatePassword = 'Sua senha deve conter no mínimo 8 c
 export const typeNewPassword = 'Digitar nova senha'
 export const typePasswordToCheck = 'Confirmar senha'
 export const passwordsNotSame = 'As senhas precisam ser iguais'
-export const messageUpdatePasswordSuccess = 'E-mail atualizado com sucesso!'
-export const messageUpdatePasswordFailure = 'Ocorreu um erro ao atualizar o E-mail. Tente novamente.'
+export const messageUpdatePasswordSuccess = 'Senha atualizada com sucesso!'
+export const messageUpdatePasswordFailure = 'Ocorreu um erro ao atualizar a senha. Tente novamente.'
 
 // Filter Form
 export const filter = 'Filtro'

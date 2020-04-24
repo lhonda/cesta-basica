@@ -5,10 +5,11 @@ import { connect, types } from '../../store'
 
 import { Loader } from '../../components/Loader'
 
-import { DonationHeader, DonationIsEmpty, DonationItem, BottomMenu } from './CommonComponents'
+import { DonationHeader, DonationIsEmpty, DonationItem } from './CommonComponents'
 import { Button, ButtonTypes } from '../../components/Button'
+import { BottomMenu } from '../../components/BottomMenu'
 
-import { DonationsList } from '../../services/API/donationList'
+import { FilteredDonationList, DonationsList } from '../../services/API/donationList'
 import { CommitmentCheck } from '../../services/API/terms'
 
 import { registerNewDonation } from '../../utils/strings'
@@ -18,6 +19,7 @@ function DonationList({ store, dispatch, history }) {
   const {
     donationList,
     user: { role },
+    filters,
   } = store
 
   function getGeoLocation() {
@@ -37,7 +39,11 @@ function DonationList({ store, dispatch, history }) {
 
   async function getDonationList() {
     setLoading(true)
-    await DonationsList(dispatch)
+    if (isAdmin()) {
+      await FilteredDonationList(dispatch, filters)
+    } else {
+      await DonationsList(dispatch)
+    }
     await CommitmentCheck(history)
     setLoading(false)
   }
@@ -47,17 +53,17 @@ function DonationList({ store, dispatch, history }) {
     getDonationList()
   }, [])
 
-  const isAdmin = _ => role === 'admin'
+  const isAdmin = () => role === 'admin'
 
   return (
     <div className="containerDonation">
       {loading && !donationList && <Loader />}
-      <DonationHeader />
+      <DonationHeader isAdmin={isAdmin()} qntd={filters.filterQnt} />
 
       {donationList.length > 0 ? (
         <div className={`containerDonation__list containerDonation__list--${role}`}>
           {donationList.map((item) => {
-            const { quantity, status, donationId, statusText } = item
+            const { quantity, status, donationId } = item
             return (
               <DonationItem
                 title={donationId}

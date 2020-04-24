@@ -1,0 +1,27 @@
+.filterForm-subtitle {
+  padding-bottom: 20px;
+}
+
+.filterForm-content {
+  div {
+    margin-bottom: 20px;
+  }
+  select {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}
+
+.filterForm-dates {
+  display: flex;
+  justify-content: space-between;
+}
+
+.filterForm-initialDate {
+  max-width: 48%;
+}
+
+.filterForm-finalDate {
+  max-width: 48%;
+}
+

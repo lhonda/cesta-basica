@@ -17,7 +17,17 @@ import {
   createDonation,
   listLeaders,
   listSites,
-  insertDataFromFile
+  insertDataFromFile,
+  findCities,
+  findStates,
+  fileSave,
+  fileUpdate,
+  fileError,
+  fileFind,
+  updateUser,
+  filterDonation,
+  listReports,
+  createReport
 } from '../rules'
 
 export const router = Router()
@@ -151,12 +161,88 @@ router.get('/leaders', authRequired('admin'), (req, res, next) =>
 
 // listar todos os sites(locais)
 router.get('/sites', authRequired('admin'), (req, res, next) =>
-  listSites()
+  listSites({ city: req.query.city })
     .then((data) => res.status(200).json(data))
     .catch(next))
 
-// Inclusão de dados via arquivo;
+// Inclusão de dados via arquivo
 router.post('/load/:type', authRequired('admin'), (req, res, next) =>
-  insertDataFromFile({ file: req.files.file, type: req.params.type })
+  fileSave({ file: req.files.file, type: req.params.type, admin: req.auth.id })
+    .then(
+      ({ file, type, fileId }) => insertDataFromFile({ file, type })
+        .then(message => fileUpdate({ fileId, message }))
+        .then(message => res.status(200).json(message))
+        .catch(err => fileError(err, fileId, next)))
+    .catch(next))
+
+// Consulta de arquivos inseridos
+router.get('/load', authRequired('admin'), (req, res, next) =>
+  fileFind(req.query)
+    .then((data) => res.status(200).json(data))
+    .catch(next))
+
+// Alteração de e-mail e senha
+router.patch('/users', authRequired(), (req, res, next) =>
+  updateUser({
+    login: req.auth.login,
+    email: req.body.email,
+    password: req.body.password,
+    confirmPassword: req.body.confirmPassword
+  })
+    .then((data) => res.status(200).json(data))
+    .catch(next))
+
+// Find all cities from one state
+router.get('/cities/:state', authRequired('admin'), (req, res, next) =>
+  findCities({
+    state: req.params.state,
+    city: req.query.city
+  })
+    .then(data => res.status(200).json(data))
+    .catch(next))
+
+// Find all states on Site
+router.get('/states', authRequired('admin'), (req, res, next) =>
+  findStates()
+    .then(data => res.status(200).json(data))
+    .catch(next))
+
+// Inclusão de dados via arquivo;
+router.get('/filter/donation', authRequired('admin'), (req, res, next) =>
+  filterDonation({
+    leaderName: req.query.leaderName,
+    siteId: req.query.siteId,
+    status: req.query.status,
+    listDonationId: req.query.listDonationId,
+    state: req.query.state,
+    city: req.query.city,
+    dateTo: req.query.dateTo,
+    dateFrom: req.query.dateFrom
+  })
     .then(processResult => res.status(200).json(processResult))
     .catch(next))
+
+router.get('/reports', authRequired('admin'), (req, res, next) =>
+  listReports()
+    .then(processResult => res.status(200).json(processResult))
+    .catch(next))
+
+router.post('/reports/donation',authRequired('admin'), (req, res, next) =>
+  createReport('donation', req.body)
+    .then(result => res.status(result.status).send())
+    .catch())
+
+router.post('/reports/voucher', authRequired('admin'), (req, res, next) =>
+  createReport('voucher', req.body)
+    .then(result => res.status(result.status).send())
+    .catch())
+
+router.post('/reports/users', authRequired('admin'), (req, res, next) =>
+  createReport('user', req.body)
+    .then(result => res.status(result.status).send())
+    .catch())
+
+router.post('/reports/sites', authRequired('admin'), (req, res, next) =>
+  createReport('site', req.body)
+    .then(result => res.status(result.status).send())
+    .catch())

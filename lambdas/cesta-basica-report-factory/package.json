@@ -1,0 +1,16 @@
+{
+  "name": "lambda-cesta-basica-factory",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "zip": "./build.sh"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.661.0",
+    "mongoose": "^5.9.10"
+  }
+}

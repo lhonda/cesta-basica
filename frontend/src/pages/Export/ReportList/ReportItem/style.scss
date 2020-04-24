@@ -1,0 +1,20 @@
+.reportItem {
+  padding: 0.7rem;
+  box-sizing: border-box;
+  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  margin: 0 0 0.5rem;
+  font-size: 14px;
+
+  &__details {
+    margin: 0.5rem 0 0;
+    display: flex;
+    justify-content: space-between;
+    color: #919090;
+
+    &__date {
+      color: #C7C7C7;
+      font-size: 12px;
+    }
+  }
+}

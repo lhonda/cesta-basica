@@ -3,11 +3,11 @@ import { statuses } from '../enums'
 
 export async function findDonationsByParam (donationId) {
   if (!donationId) {
-    throw new Error('donationId is required')
+    throw new Error('A variável donationId deve ser preenchida')
   }
 
   if (donationId.toString().length < 3) {
-    throw new Error('The donationId must have at least 3 chars')
+    throw new Error('A variável donationId deve conter pelo menos três caracteres')
   }
 
   console.log({

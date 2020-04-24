@@ -1,7 +1,15 @@
-.chargeList {
+.containerCharge {
   box-sizing: border-box;
   height: 100vh;
-  overflow: hidden;;
+  overflow: hidden;
+
+  &__list {
+     overflow-y: auto;
+     &--admin {
+       padding: 1rem 1rem;
+       height: calc(100vh - 12.8rem - 2.4rem);
+     }
+   }
 
   &__button {
     bottom: 5rem;

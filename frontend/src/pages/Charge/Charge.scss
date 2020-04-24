@@ -1,0 +1,23 @@
+.chargeHeader {
+  padding: 0.8rem 1.2rem 0px 1.2rem;
+}
+
+.chargeList {
+  box-sizing: border-box;
+  height: 100vh;
+  overflow: hidden;
+
+  .backContainer {
+    display: flex;
+    padding: 1rem 1rem 0;
+  }
+
+  &__button {
+    box-sizing: border-box;
+    padding: 1.4rem;
+    position: fixed;
+    width: 100%;
+  }
+}
+
+

@@ -11,6 +11,7 @@ export const placeholderCPF = 'Digite seu CPF'
 export const typeYourPassword = 'Digite sua senha'
 export const errorMessageInvalidLogin = 'CPF ou Senha incorretos. Tente novamente.'
 export const textButtonForLogin = 'Entrar'
+export const exitText = 'Sair'
 
 // Terms screen
 export const locationPermission =
@@ -54,6 +55,22 @@ export const confirm = 'Confirmar'
 export const back = 'Voltar'
 export const titleTerms = 'Termo de compromisso'
 
+// Charge list
+export const chargeListVoidText = 'Você ainda não possui <br/> cargas realizadas'
+export const chargeTitlePage = 'Carga de Cartões'
+
+// Charge Screen
+export const chargeTypeVoucher = 'Cartão'
+export const chargeTypeDonation = 'Pacote'
+export const chargeTypeUser = 'Líder'
+export const chargeTypeTransfer = 'Transferência'
+export const chargeTypeSite = 'Unidade'
+export const buttonAddChargeText = 'Adicionar Carga'
+export const legendInputAddfile = 'adicionar arquivo'
+export const legendInputChargeType = 'Tipo de Carga'
+export const legendSheetCharge = 'Carga da Planilha'
+export const legendEmptyBasket = 'Imagem que representa uma cesta vazia, sem conteúdo'
+
 // Checklist screen
 export const titleChecklist = 'Checklist de Saúde'
 export const descriptionChecklist = 'Sintomas do Coronavirus (COVID-19)'
@@ -64,7 +81,6 @@ export const linkChecklist = 'Estou com sintomas, o que fazer?'
 // Donation list
 export const donationListVoidText = 'Você está sem pedidos <br/>de doações no momento.'
 export const donationTitlePage = 'Lista de entregas'
-export const exitText = 'Sair'
 
 // Donation screen
 export const titleDonation = 'Doação'
@@ -92,6 +108,8 @@ export const deliveredDate = 'Data de envio'
 export const cardsQuantity = 'Quantidade de cartoes'
 export const receivedData = 'Data de recebimento'
 export const deadlineDate = 'Prazo final para entrega'
+export const failedDonation = 'Verifique, se sua localização esta ativa e tente novamente.'
+export const successDonation = 'Doação realizada com sucesso'
 
 // Donation Prof screen
 export const titleDonationProf = 'Evidência de Recebimento'
@@ -141,11 +159,79 @@ export const deliveredPhoto = 'Foto<br/> da entrega'
 export const commentLeader = 'Comentário do lider'
 export const deliveredCellphone = 'DDD + Telefone'
 
+// updateEmail
+export const titleUpdateEmail = 'Atualizar E-mail'
+export const emailRegistered = 'E-mail cadastrado'
+export const registerNewEmail = 'Novo e-mail'
+export const messageUpdateEmailSuccess = 'E-mail atualizado com sucesso!'
+export const messageUpdateEmailFailure = 'Ocorreu um erro ao atualizar o E-mail. Tente novamente.'
+
+// updatePassword
+export const titleUpdatePassword = 'Definir nova senha'
+export const informationToUpdatePassword = 'Sua senha deve conter no mínimo 8 caracteres.'
+export const typeNewPassword = 'Digitar nova senha'
+export const typePasswordToCheck = 'Confirmar senha'
+export const passwordsNotSame = 'As senhas precisam ser iguais'
+export const messageUpdatePasswordSuccess = 'Senha atualizada com sucesso!'
+export const messageUpdatePasswordFailure = 'Ocorreu um erro ao atualizar a senha. Tente novamente.'
+
+// Filter Form
+export const filter = 'Filtro'
+export const cleanFilter = 'Limpar filtro'
+export const filterFirstLetterCapitalized = 'Filtrar'
+export const youCanChooseOneOrMoreFilters = 'Voce pode escolher um ou mais campos para criar um filtro'
+
 // Generic
+export const CPF = 'CPF'
 export const WORD_NO = 'Não'
 export const WORD_YES = 'Sim'
 export const leader = 'Lider'
 export const unit = 'Unidade'
+export const update = 'Atualizar'
+export const maxSentDate = '9999-12-31'
+export const chooseLeader = 'Escolher lider'
+export const chooseCity = 'Selecione a cidade'
+export const chooseSite = 'Selecione a unidade'
+export const chooseState = 'Selecione o estado'
+export const chooseStatus = 'Selecione o status'
+export const cityFirstLetterCapitalized = 'Cidade'
+export const cardsFirstLetterCapitalized = 'Cartões'
+export const statusFirstLetterCapitalized = 'Status'
+export const borderoFirstLetterCapitalized = 'Pacote'
+export const continueFirstLetterCapitalized = 'Continuar'
 export const deliveredFirstLetterCapitalized = 'Entregue'
+export const countryStateFirstLetterCapitalized = 'Estado'
+export const finalDateFirstLetterCapitalized = 'Data final'
+export const initialDateFirstLetterCapitalized = 'Data inicial'
 export const notDeliveredFirstLetterCapitalized = 'Não entregue'
-export const CPF = 'CPF'
+export const donationRegisterSuccessMessage = 'Doação cadastrada com sucesso'
+export const donationFilterSuccessMessage = 'Doações filtradas com sucesso'
+
+// Profile
+export const signOut = 'Sair da conta'
+export const changePassword = 'Alterar senha'
+export const changeEmail = 'Alterar E-mail'
+export const settings = 'Configurações'
+export const profile = 'Perfil'
+export const setNewPassword = 'Definir nova senha'
+export const passwordCharacters = 'Sua senha deve conter no mínimo 8 caracteres'
+export const newPassword = 'Digitar nova senha'
+export const confirmPassword = 'Confirmar senha'
+export const areYouSureSignOut = 'Tem certeza que deseja sair ?'
+
+// Bottom Menu Icon Legends
+export const basketIconLegend = 'Doações'
+export const chargeIconLegend = 'Cargas'
+export const exportIconLegend = 'Exportar'
+export const profileIconLegend = 'Perfil'
+
+// Export
+export const exportType = 'Tipo de exportaçao'
+export const exportFirstLetterCapitalized = 'Exportar'
+export const youCanChooseOneOrMoreFiltersForExport =
+  'Você pode utilizar o filtro para fazer a exportação dos arquivos da forma que você precisa.'
+
+// export List
+export const exportListTitle = 'Lista de Exportação'
+export const newExport = 'Nova Exportação'
+export const reportIsVoid = 'Nenhum exportação encontrada'

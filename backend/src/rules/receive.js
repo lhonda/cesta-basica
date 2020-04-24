@@ -1,5 +1,5 @@
-import AWS from 'aws-sdk'
 import { Donation } from '../repositories/donation'
+import { S3 } from '../services'
 
 export async function receive ({
   login,
@@ -12,33 +12,33 @@ export async function receive ({
   console.log(arguments)
 
   if (!login) {
-    throw new Error('login is required')
+    throw new Error('A variável login deve ser preenchida')
   }
 
   if (!donationId) {
-    throw new Error('donationId is required')
+    throw new Error('A variável donationId deve ser preenchida')
   }
 
   if (!lat) {
-    throw new Error('lat is required')
+    throw new Error('A variável lat deve ser preenchida')
   }
 
   if (!lon) {
-    throw new Error('lon is required')
+    throw new Error('A variável lon deve ser preenchida')
   }
 
   if (!receiveDonationFile) {
-    throw new Error('receiveDonationFile is required')
+    throw new Error('A variável receiveDonationFile deve ser preenchida')
   }
 
   const donation = await Donation.findOne({ donationId: donationId })
 
   if (!donation) {
-    throw new Error(`Could not find the Donation with id: ${donationId}`)
+    throw new Error(`Não foi possível achar nenhuma doaçao com o id: ${donationId}`)
   }
 
   if (donation.leaderLogin !== login) {
-    throw new Error('The leaderLogin of the donation is not the same of the auth token')
+    throw new Error('O líder associoado à essa doação não corresponde com o token autenticado')
   }
 
   if (donation) {
@@ -46,20 +46,7 @@ export async function receive ({
     const [, ext] = receiveDonationFile.mimetype.split('/')
     const key = `provas/recebimentos/recebimento-doacao-${login}-${donationId}-${timestamp.toISOString()}.${ext}`
 
-    const params = {
-      Bucket: process.env.BUCKET_NAME,
-      Key: key,
-      Body: receiveDonationFile.data
-    }
-
-    const s3 = new AWS.S3()
-
-    s3.upload(params, function (err, data) {
-      if (err) {
-        throw err
-      }
-      console.log(`File uploaded successfully.Key:${key}`)
-    })
+    await S3.upload(key, receiveDonationFile.data)
 
     const point = {
       type: 'Point',

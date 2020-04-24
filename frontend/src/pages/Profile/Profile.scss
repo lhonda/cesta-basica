@@ -1,0 +1,42 @@
+.profileHeader {
+  padding: 0.8rem 1.2rem 0px 1.2rem;
+}
+
+.containerUser {
+  height: 36vh;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  font-family: Rubik;
+
+  h2 {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 20px;
+    margin: 0;
+  }
+
+  p {
+    font-family: Rubik;
+    color: #909090;
+    font-size: 16px;
+    line-height: 18px;
+  }
+}
+
+.containerSetup {
+  height: 46vh;
+  background: #f5f5f5;
+  display: flex;
+  flex-direction: column;
+  padding: 30px 0 0 30px;
+
+  h3 {
+    font-family: Rubik;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    margin-top: 0;
+  }
+}

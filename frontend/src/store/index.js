@@ -16,8 +16,17 @@ const cleanState = {
   photoReceived: null,
   userLocation: {},
   cardList: [],
-  leaderList: null,
-  siteList: null,
+  leaderList: [],
+  notification: {
+    message: '',
+    type: '',
+  },
+  siteList: [],
+  chargeList: [],
+  cities: [],
+  states: [],
+  filters: {},
+  reportList: [],
 }
 
 function saveState(newState) {
@@ -41,6 +50,7 @@ const actionMap = {
   [types.SET_DECLARATION]: (state, payload) => saveState({ ...state, declaration: payload }),
   [types.SET_HEALTHCHECK]: (state, payload) => saveState({ ...state, doneHealthCheck: payload }),
   [types.SET_SITE_LIST]: (state, payload) => saveState({ ...state, siteList: payload }),
+  [types.SET_CHARGE_LIST]: (state, payload) => saveState({ ...state, chargeList: payload }),
   [types.SET_LOGOUT]: () => logout(),
   [types.SET_DONATION_LIST]: (state, payload) => saveState({ ...state, donationList: payload }),
   [types.SET_LEADER_LIST]: (state, payload) => saveState({ ...state, leaderList: payload }),
@@ -49,6 +59,12 @@ const actionMap = {
   [types.CLEAN_CARD_LIST]: (state) => saveState({ ...state, cardList: [] }),
   [types.SET_DONATION_DETAILS]: (state, payload) => saveState({ ...state, donation: payload }),
   [types.CLEAN_DONATION_DETAILS]: (state) => saveState({ ...state, donation: null }),
+  [types.SHOW_ALERT]: (state, payload) => ({ ...state, notification: payload }),
+  [types.HIDE_ALERT]: (state) => ({ ...state, notification: { message: '', type: '' } }),
+  [types.SET_CITIES]: (state, payload) => saveState({ ...state, cities: payload }),
+  [types.SET_STATES]: (state, payload) => saveState({ ...state, states: payload }),
+  [types.SET_FILTERS]: (state, payload) => saveState({ ...state, filters: payload }),
+  [types.SET_REPORT_LIST]: (state, payload) => saveState({ ...state, reportList: payload }),
 }
 
 export function reducer(state, action) {

@@ -24,10 +24,12 @@
     "transfer-donation-to-another-leader": "node -r esm src/load-data/transfer-donation-to-another-leader.js",
     "generate-site-collection-by-donation": "node -r esm src/load-data/generate-site-collection-by-donation.js",
     "generate-site-collection-by-user": "node -r esm src/load-data/generate-site-collection-by-user.js",
+    "validate-login": "node -r esm src/load-data/validate-login.js",
     "build": ""
   },
   "dependencies": {
     "aws-sdk": "^2.643.0",
+    "axios": "^0.19.2",
     "cors": "^2.8.5",
     "csvtojson": "^2.0.10",
     "dotenv": "^8.2.0",

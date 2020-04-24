@@ -3,20 +3,6 @@ import { encrypt } from '../services'
 import { User } from '../repositories'
 
 export async function signin ({ login, password }) {
-  // const login = await validateLogin(login)
-
-  // We're having some problems with login with incorrect encrypted password
-  // Added this to help us to debug with heorku logs
-  await User.findOne({ login }).then(user => {
-    console.log({
-      ReceivedLogin: login,
-      ReceivedPassword: password,
-      EncryptedReceivedPassword: encrypt(password),
-      CurrentUserEncryptedPassword: user.password,
-      User: user
-    })
-  })
-
   const user = await User.findOne({ login, password: encrypt(password) })
 
   if (user) {

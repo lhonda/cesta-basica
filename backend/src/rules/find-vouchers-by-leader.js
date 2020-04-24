@@ -3,7 +3,7 @@ import { statusesVoucher } from '../enums'
 
 export async function findVouchersByLeader (login, donationId) {
   if (!donationId) {
-    throw new Error('donationId is required')
+    throw new Error('A variável donationId deve ser preenchida')
   }
 
   console.log(login, donationId)

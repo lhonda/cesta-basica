@@ -32,7 +32,7 @@ if (require.main === module) {
 
         if (existing) {
           if (!Number.isInteger(existing.siteId)) {
-            throw new Error('The site name: ', existing.name, ' already has a crud but does not has and siteId')
+            throw new Error('A unidade: ', existing.name, 'já está cadastrada, mas não tem um siteId')
           }
         } else {
           console.log('the site does not exists: ', site)

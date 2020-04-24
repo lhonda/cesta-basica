@@ -4,21 +4,16 @@ import './RadioButton.scss'
 
 function RadioButton({ name, options, handleChecked }) {
   return (
-    <>
-    {options.map( option =>
-      <label htmlFor={option} key={option}>
-        <input
-          name={name}
-          onChange={handleChecked}
-          value={option}
-          type="radio"
-          id={option}
-        />
-
-        {option}
-      </label>
-      )}
-    </>
+    <div className="radioButton-container">
+      {options.map((option) => (
+        <div className="radioButton-content">
+          <input name={name} onChange={handleChecked} value={option} type="radio" id={option} />
+          <label htmlFor={option} key={option}>
+            {option}
+          </label>
+        </div>
+      ))}
+    </div>
   )
 }
 RadioButton.propTypes = {

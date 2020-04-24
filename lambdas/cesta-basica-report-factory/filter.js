@@ -37,6 +37,7 @@ function Donation ({
   dateTo,
   dateFrom
 }) {
+
   return {
     leaderName,
     siteId,
@@ -51,7 +52,7 @@ function Donation ({
 
 function User ({ name, siteName, state, city }) {
   return {
-    name: verifyField(name),
+    name: name ? verifyField(name) : null,
     siteName: verifyField(siteName),
     state: verifyField(state),
     city: verifyField(city)

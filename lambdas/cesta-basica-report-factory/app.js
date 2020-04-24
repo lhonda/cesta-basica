@@ -41,7 +41,7 @@ exports.handler = async (event) => {
     console.error(error)
     await Report.updateOne({_id: report._id}, {
       status: 3,
-      details: `Ocorreu um erro na geração do arquivo: ${error.message}`
+      details: `Ocorreu um erro na geração do arquivo`
     })
     return {
       statusCode: 500

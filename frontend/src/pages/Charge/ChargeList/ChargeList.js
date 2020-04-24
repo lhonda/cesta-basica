@@ -28,6 +28,10 @@ function ChargeList({ store, match, dispatch }) {
 
   const matchTypeName = (type) => chargeTypesList.find((e) => e.value === type).string
 
+  const matchProcessStatus = (value) => {
+    return value === 'Processado com sucesso' ? 'Processado' : 'Erro'
+  }
+
   useEffect(() => {
     getChargeList()
   }, [])
@@ -42,9 +46,15 @@ function ChargeList({ store, match, dispatch }) {
     return chargeList?.length > 0 ? (
       <div className={`containerCharge__list containerCharge__list--${role}`}>
         {chargeList.map((item) => {
-          const { _id, fileName, createdAt, type } = item
+          const { _id, fileName, createdAt, type, status } = item
           return (
-            <ChargeItem key={_id} fileName={fileName} date={formatDate(createdAt)} chargeType={matchTypeName(type)} />
+            <ChargeItem
+              key={_id}
+              fileName={fileName}
+              date={formatDate(createdAt)}
+              chargeType={matchTypeName(type)}
+              status={matchProcessStatus(status)}
+            />
           )
         })}
       </div>

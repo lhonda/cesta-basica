@@ -16,7 +16,7 @@ const cleanState = {
   photoReceived: null,
   userLocation: {},
   cardList: [],
-  leaderList: null,
+  leaderList: [],
   notification: {
     message: '',
     type: '',

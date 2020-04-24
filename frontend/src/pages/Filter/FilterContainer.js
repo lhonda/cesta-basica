@@ -6,23 +6,25 @@ import { connect } from '../../store'
 import { getCities } from '../../services/API/city'
 import { getStates } from '../../services/API/state'
 import { setFilters } from '../../services/API/filters'
+import { SiteList } from '../../services/API/siteList'
+import { LeadersList } from '../../services/API/leaderList'
 
 import { Loader } from '../../components/Loader'
 import { Select } from '../../components/Select'
 import { HeaderWithGoBack } from '../../components/Header'
 import { Button, ButtonTypes } from '../../components/Button'
 import { SubTitle, SubTitleTypes } from '../../components/SubTitle'
-import { Input, inputTypes, InputWithMultiSelect } from '../../components/Input'
+import { Input, inputTypes, InputWithMultiSelect, InputSelectSearch } from '../../components/Input'
 
-import { formatCities, formatStates, formatStatus } from '../../utils/formatDataToSelectData'
+import { formatCities, formatStates, formatStatus, formatSites } from '../../utils/formatDataToSelectData'
 import {
   unit,
   filter,
+  chooseLeader,
   cleanFilter,
   chooseCity,
   chooseState,
   maxSentDate,
-  chooseLeader,
   cityFirstLetterCapitalized,
   donationFilterSuccessMessage,
   youCanChooseOneOrMoreFilters,
@@ -32,6 +34,7 @@ import {
   finalDateFirstLetterCapitalized,
   initialDateFirstLetterCapitalized,
   countryStateFirstLetterCapitalized,
+  chooseSite,
 } from '../../utils/strings'
 
 import { showSuccessAlert } from '../../utils/showAlert'
@@ -40,7 +43,7 @@ import './styles.scss'
 
 function FilterContainer({ store, dispatch }) {
   const history = useHistory()
-  const { donationList, cities, states, filters } = store
+  const { donationList, cities, states, filters, siteList, leaderList } = store
 
   const [isLoading, setIsLoading] = useState(false)
   const [city, setCity] = useState(filters.city ? filters.city : '')
@@ -51,6 +54,22 @@ function FilterContainer({ store, dispatch }) {
   const [initialDate, setInitialDate] = useState(filters.dateTo ? filters.dateTo : '')
   const [leader, setLeader] = useState(filters.leaderName ? filters.leaderName : '')
   const [borderos, setBorderos] = useState(filters.listDonationId ? filters.listDonationId : [])
+
+  async function getLeaderList() {
+    await LeadersList(dispatch, leader)
+  }
+
+  useEffect(() => {
+    if (leader.length >= 3) {
+      getLeaderList()
+    }
+  }, [leader])
+
+  async function getSitesList() {
+    setIsLoading(true)
+    await SiteList(dispatch)
+    setIsLoading(false)
+  }
 
   async function getCitiesList() {
     setIsLoading(true)
@@ -66,6 +85,7 @@ function FilterContainer({ store, dispatch }) {
 
   useEffect(() => {
     getStatesList()
+    getSitesList()
   }, [])
 
   useEffect(() => {
@@ -94,7 +114,10 @@ function FilterContainer({ store, dispatch }) {
   }
 
   function disabledStateCity() {
-    return site !== ''
+    return site === chooseSite || site === ''
+  }
+  function disableCity() {
+    return countryState === '' || countryState === chooseState
   }
 
   function verifyRequest() {
@@ -139,6 +162,8 @@ function FilterContainer({ store, dispatch }) {
     history.push('/donation-list')
   }
 
+  const convertListLeader = leaderList.map(({ name, login }) => ({ value: login, label: name }))
+
   return (
     <>
       {isLoading && <Loader />}
@@ -158,20 +183,14 @@ function FilterContainer({ store, dispatch }) {
             />
           </div>
           <div className="formFilter-content">
-            <Input
+            <InputSelectSearch
+              data={convertListLeader}
               value={leader}
-              isRequired={false}
               placeholder={chooseLeader}
               inputType={inputTypes.TEXT}
-              handleOnChange={setLeader}
+              handleChange={setLeader}
             />
-            <Input
-              value={site}
-              placeholder={unit}
-              isRequired={false}
-              handleOnChange={setSite}
-              inputType={inputTypes.TEXT}
-            />
+            <Select value={site} getValue={setSite} optionsList={formatSites(siteList)} placeholder={unit} />
             <Select
               value={status}
               getValue={setStatus}
@@ -195,7 +214,7 @@ function FilterContainer({ store, dispatch }) {
               value={city}
               isRequired={false}
               getValue={setCity}
-              disabled={disabledStateCity()}
+              disabled={disableCity()}
               optionsList={formatCities(cities)}
               placeholder={cityFirstLetterCapitalized}
             />

@@ -8,6 +8,6 @@ export async function findDonationsByUser (user, donationId) {
   } else if (user.role === 'leader') {
     return findDonationsByLeader(user)
   } else {
-    throw new Error('Only leaders and admins is allowed on this route')
+    throw new Error('Apenas líderes e administradores possuem acesso à essa rota')
   }
 }

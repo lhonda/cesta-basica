@@ -24,7 +24,7 @@ export async function filterDonation ({
   }
   if (listDonationId) {
     if (!Array.isArray(listDonationId)) {
-      throw new Error('listDonationId must be an Array')
+      throw new Error('A variável listDonationId deve ser uma lista')
     }
     const listDonationIdResolved = listDonationId.map(donation => regexp(donation, 'i'))
     filterDonation.donationId = { $in: listDonationIdResolved }

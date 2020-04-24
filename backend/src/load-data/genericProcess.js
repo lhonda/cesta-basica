@@ -11,7 +11,7 @@ export async function genericProcess (schema, csvName, idCols, csvMap, keepCols)
 
     // eslint-disable-next-line node/no-deprecated-api
     if (!fs.existsSync(csvPath)) {
-      throw new Error(`The data must on /data-to-load/${csvName}`)
+      throw new Error(`Os dados devem estar nesta pasta /data-to-load/${csvName}`)
     }
 
     const rows = (await csvtojson().fromFile(csvPath)).map(csvMap)

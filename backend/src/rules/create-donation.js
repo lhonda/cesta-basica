@@ -9,29 +9,29 @@ export async function createDonation ({
   sentDate
 }) {
   if (!leaderLogin) {
-    throw new Error('leaderLogin is required')
+    throw new Error('A variável leaderLogin deve ser preenchida')
   }
 
   if (!siteId) {
-    throw new Error('siteId is required')
+    throw new Error('A variável siteId deve ser preenchida')
   }
 
   if (!donationId) {
-    throw new Error('donationId is required')
+    throw new Error('A variável donationId deve ser preenchida')
   }
 
   if (!quantity) {
-    throw new Error('quantity is required')
+    throw new Error('A variável quantity deve ser preenchida')
   }
 
   if (!sentDate) {
-    throw new Error('sentDate is required')
+    throw new Error('A variável sentDate deve ser preenchida')
   }
 
   const donation = await Donation.findOne({ donationId })
 
   if (donation) {
-    throw new Error(`donationId ${donationId} is already registered`)
+    throw new Error(`A variável donationId ${donationId} já está cadastrada`)
   }
 
   return Donation.create({

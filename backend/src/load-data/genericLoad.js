@@ -4,19 +4,19 @@ function compareStringArrays (a, b) {
 
 export async function genericLoad (schema, rows, idCols, keepCols = []) {
   if (!schema) {
-    throw new Error('schema is required')
+    throw new Error('A variável schema deve ser preenchida')
   }
 
   const schemaKeys = Object.keys(schema.schema.paths).filter(key => !key.startsWith('_'))
 
   if (rows.length === 0) {
-    throw new Error('rows must contain at least one row')
+    throw new Error('A variável rows deve conter pelo menos uma linha')
   }
 
   const keys = Object.keys(rows[0])
 
   if (!compareStringArrays(schemaKeys, keys)) {
-    throw new Error(`Columns names must be at this order: ${schemaKeys.join(', ')}`)
+    throw new Error(`Os nomes das colunas devem ser nesta ordem: ${schemaKeys.join(', ')}`)
   }
 
   idCols = [].concat(idCols)

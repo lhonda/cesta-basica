@@ -22,39 +22,39 @@ export async function donate ({
    * Validations
    */
   if (!donationId) {
-    throw new Error('donationId is required')
+    throw new Error('A variável donationId deve ser preenchida')
   }
 
   if (!voucherId) {
-    throw new Error('voucherId is required')
+    throw new Error('A variável voucherId deve ser preenchida')
   }
 
   if (!lat) {
-    throw new Error('lat is required')
+    throw new Error('A variável lat deve ser preenchida')
   }
 
   if (!lon) {
-    throw new Error('lon is required')
+    throw new Error('A variável lon deve ser preenchida')
   }
 
   if (delivered === undefined) {
-    throw new Error('delivered is required')
+    throw new Error('A variável delivered deve ser preenchida')
   }
 
   const donation = await Donation.findOne({ donationId: donationId })
 
   if (!donation) {
-    throw new Error(`Could not find the Donation with id: ${donationId}`)
+    throw new Error(`Não foi possível achar a doação com o id: ${donationId}`)
   }
 
   const voucher = await Voucher.findOne({ voucherId })
 
   if (!voucher) {
-    throw new Error(`Could not find the Voucher with id: ${voucherId}`)
+    throw new Error(`Não foi possível achar o cartão com o id: ${voucherId}`)
   }
 
   if (donation.leaderLogin !== login) {
-    throw new Error('The owner of this donation is not the same of the token')
+    throw new Error('O líder associoado à essa doação não corresponde com o token autenticado')
   }
 
   /**
@@ -62,7 +62,7 @@ export async function donate ({
    */
   if (delivered === false || delivered === 'false') {
     if (!leaderComment) {
-      throw new Error('leaderComment is required')
+      throw new Error('A variável leaderComment deve ser preenchida')
     }
     voucher.status = 3
     voucher.leaderComment = leaderComment
@@ -75,18 +75,18 @@ export async function donate ({
     await voucher.save()
     return
   } else if (delivered !== true && delivered !== 'true') {
-    throw new Error('delivered must be a boolean value')
+    throw new Error('A variável delivered deve ser um valor boolean')
   }
 
   /**
    * More validations when delivered = true
    */
   if (!receivedName) {
-    throw new Error('receivedName is required when delivered = true')
+    throw new Error("A variável receivedName é obrigatória quando a variável delivered tem o valor 'true'")
   }
 
   if (!donateDonationFile) {
-    throw new Error('donateDonationFile is required when delivered = true')
+    throw new Error("A variável donateDonationFile é obrigatória quando a variável delivered tem o valor 'true'")
   }
 
   /**
@@ -95,11 +95,7 @@ export async function donate ({
   const [, ext] = donateDonationFile.mimetype.split('/')
   const key = `provas/entregas/entrega-doacao-${login}-${donationId}-${timestamp.toISOString()}.${ext}`
 
-  try {
-    await S3.upload(key, donateDonationFile.data)
-  } catch (error) {
-    throw error
-  }
+  await S3.upload(key, donateDonationFile.data)
 
   /**
    * Persisting information do mongodb

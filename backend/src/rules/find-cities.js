@@ -5,7 +5,7 @@ export async function findCities ({
   city
 }) {
   if (!state) {
-    throw new Error('state is required')
+    throw new Error('A variável state deve ser preenchida')
   }
 
   const filter = { state: new RegExp(`^${state}`, 'i') }

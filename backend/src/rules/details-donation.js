@@ -3,13 +3,13 @@ import { statuses } from '../enums'
 
 export async function detailsDonation ({ donationId }) {
   if (!donationId) {
-    throw new Error('donationId is required')
+    throw new Error('A variável donationId deve ser preenchida')
   }
 
   const donation = await Donation.findOne({ donationId })
 
   if (!donation) {
-    throw new Error(`Does not exists donation with donationId ${donationId}`)
+    throw new Error(`Não existe nenhuma doação com o donationId ${donationId}`)
   }
 
   const {
@@ -33,13 +33,13 @@ export async function detailsDonation ({ donationId }) {
   const leader = await User.findOne({ login: leaderLogin }, { name: 1 })
 
   if (!leader) {
-    throw new Error('Could not find the leader associate with this donation')
+    throw new Error('Não foi possivel encontrar um líder associado à esta doação')
   }
 
   const site = await Site.findOne({ siteId }, { name: 1, city: 1, state: 1 })
 
   if (!site) {
-    throw new Error('Could not find the site associate with this donation')
+    throw new Error('Não foi possível achar uma unidade associada à esta doação')
   }
 
   const publicPhotoUrl = receivedCardsS3Key ? `https://${process.env.BUCKET_NAME}.s3.amazonaws.com/${receivedCardsS3Key}` : null

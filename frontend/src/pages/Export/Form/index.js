@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { func, array } from 'prop-types'
 import { useHistory } from 'react-router-dom'
 import { connect } from '../../../store'
 
@@ -226,6 +227,11 @@ function ExportForm({ store, dispatch }) {
       </div>
     </div>
   )
+}
+
+ExportForm.propTypes = {
+  store: array.isRequired,
+  dispatch: func.isRequired,
 }
 
 export default connect(ExportForm)

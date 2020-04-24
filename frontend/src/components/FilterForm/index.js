@@ -1,4 +1,5 @@
 import React from 'react'
+import { string, array, func, bool } from 'prop-types'
 
 import { Loader } from '../Loader'
 import { Select } from '../Select'
@@ -114,6 +115,32 @@ function FilterForm({
       </form>
     </>
   )
+}
+FilterForm.propTypes = {
+  leader: string.isRequired,
+  site: string.isRequired,
+  city: string.isRequired,
+  sites: array.isRequired,
+  states: array.isRequired,
+  cities: array.isRequired,
+  status: string.isRequired,
+  setSite: func.isRequired,
+  setCity: func.isRequired,
+  borderos: array.isRequired,
+  setLeader: func.isRequired,
+  setStatus: func.isRequired,
+  finalDate: string.isRequired,
+  isLoading: bool.isRequired,
+  statusList: array.isRequired,
+  setBorderos: func.isRequired,
+  initialDate: string.isRequired,
+  borderoList: array.isRequired,
+  handleSubmit: func.isRequired,
+  countryState: string.isRequired,
+  setFinalDate: func.isRequired,
+  setInitialDate: func.isRequired,
+  setCountryState: func.isRequired,
+  subttitleMessage: string.isRequired,
 }
 
 export { FilterForm }

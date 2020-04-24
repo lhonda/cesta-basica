@@ -48,6 +48,7 @@ function LeaderFilter({
 
 LeaderFilter.propTypes = {
   site: string.isRequired,
+  sites: array.isRequired,
   cities: array.isRequired,
   states: array.isRequired,
   setSite: func.isRequired,

@@ -5,10 +5,19 @@ import { useHistory } from 'react-router-dom'
 import { Input, inputTypes } from '../../../../components/Input'
 import { Button } from '../../../../components/Button'
 
-import { emailRegistered, registerNewEmail, update } from '../../../../utils/strings'
+import {
+  emailRegistered,
+  registerNewEmail,
+  update,
+  messageUpdateEmailSuccess,
+  messageUpdateEmailFailure,
+} from '../../../../utils/strings'
 import { updateEmail } from '../../../../services/API/updateDataUser'
 
 import { connect, types } from '../../../../store'
+
+import { showSuccessAlert, showFailureAlert } from '../../../../utils/showAlert'
+import { alertTypes } from '../../../../components/Alert'
 
 function UpdateEmail({ setLoading, store, dispatch }) {
   const [newEmail, setNewEmail] = useState()
@@ -22,8 +31,10 @@ function UpdateEmail({ setLoading, store, dispatch }) {
     if (status === 200) {
       const payload = { ...user, email: newEmail }
       dispatch({ type: types.SET_USER, payload })
+      showSuccessAlert(dispatch, messageUpdateEmailSuccess)
+    } else {
+      showFailureAlert(dispatch, messageUpdateEmailFailure)
     }
-    // an error message
     push('/profile')
   }
 

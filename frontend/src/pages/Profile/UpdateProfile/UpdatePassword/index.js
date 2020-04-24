@@ -13,9 +13,15 @@ import {
   typeNewPassword,
   typePasswordToCheck,
   passwordsNotSame,
+  messageUpdatePasswordSuccess,
+  messageUpdatePasswordFailure,
 } from '../../../../utils/strings'
 
-function UpdatePassword({ setLoading }) {
+import { showSuccessAlert, showFailureAlert } from '../../../../utils/showAlert'
+
+import { connect } from '../../../../store'
+
+function UpdatePassword({ setLoading, dispatch }) {
   const { push } = useHistory()
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
@@ -39,6 +45,11 @@ function UpdatePassword({ setLoading }) {
     setLoading(true)
     const { status } = await updatePassword(password, confirmPassword)
     setLoading(false)
+    if (status === 200) {
+      showSuccessAlert(dispatch, messageUpdatePasswordSuccess)
+    } else {
+      showFailureAlert(dispatch, messageUpdatePasswordFailure)
+    }
     push('/profile')
   }
 
@@ -85,6 +96,9 @@ function UpdatePassword({ setLoading }) {
 
 UpdatePassword.propTypes = {
   setLoading: PropTypes.func.isRequired,
+  dispatch: PropTypes.func.isRequired,
 }
 
-export { UpdatePassword }
+const UpdatePasswordConnected = connect(UpdatePassword)
+
+export { UpdatePasswordConnected as UpdatePassword }

@@ -45,7 +45,7 @@ function ExportForm({ store, dispatch }) {
   const [isLoading, setIsLoading] = useState(false)
   const [city, setCity] = useState('')
   const [status, setStatus] = useState('')
-  const [site, setSite] = useState('')
+  const [site, setSite] = useState(chooseSite)
   const [finalDate, setFinalDate] = useState('')
   const [countryState, setCountryState] = useState('')
   const [initialDate, setInitialDate] = useState('')
@@ -81,12 +81,26 @@ function ExportForm({ store, dispatch }) {
     }
   }, [countryState])
 
+  useEffect(() => {
+    if (site !== chooseSite) {
+      setCountryState('')
+      setCity('')
+    }
+  }, [site])
+
   function handleGoBack() {
     history.push('/export/types')
   }
 
   function getDonationIds() {
     return donationList.map((donation) => donation.donationId)
+  }
+
+  function disableCity() {
+    return countryState === '' || countryState === chooseState || disableState()
+  }
+  function disableState() {
+    return site !== chooseSite
   }
 
   function renderFilterComponent() {
@@ -99,6 +113,8 @@ function ExportForm({ store, dispatch }) {
           states={formatStates(states)}
           cities={formatCities(cities)}
           setSelectedState={setCountryState}
+          disableCity={disableCity}
+          disableState={disableState}
         />
       )
     }
@@ -110,7 +126,10 @@ function ExportForm({ store, dispatch }) {
           setSite={setSite}
           selectedCity={city}
           setLeader={setLeader}
+          leaderList={leaderList}
           setSelectedCity={setCity}
+          disableCity={disableCity}
+          disableState={disableState}
           selectedState={countryState}
           sites={formatSites(siteList)}
           states={formatStates(states)}

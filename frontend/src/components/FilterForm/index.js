@@ -10,6 +10,7 @@ import {
   unit,
   maxSentDate,
   chooseLeader,
+  chooseSite,
   cityFirstLetterCapitalized,
   statusFirstLetterCapitalized,
   borderoFirstLetterCapitalized,
@@ -52,6 +53,9 @@ function FilterForm({
   function disableCity() {
     return countryState === '' || countryState === chooseState
   }
+  function disableState() {
+    return site !== chooseSite
+  }
   return (
     <>
       {isLoading && <Loader />}
@@ -81,9 +85,9 @@ function FilterForm({
             placeholder={borderoFirstLetterCapitalized}
           />
           <Select
-            disabled={false}
             optionsList={states}
             value={countryState}
+            disabled={disableState()}
             getValue={setCountryState}
             placeholder={countryStateFirstLetterCapitalized}
           />

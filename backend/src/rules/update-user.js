@@ -21,7 +21,7 @@ export async function updateUser (params) {
     })
     const result = Joi.validate({ email }, emailSchema)
     if (result.error) {
-      throw new Error('Digite um e-mail válido')
+      throw new Error('Email must be valid')
     }
 
     const newEmail = { $set: { email: email } }

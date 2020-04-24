@@ -15,6 +15,7 @@ import { HeaderWithGoBack } from '../../../components/Header'
 import { Button, ButtonTypes } from '../../../components/Button'
 
 import { postReport } from '../../../services/API/report'
+import { LeadersList } from '../../../services/API/leaderList'
 
 import { formatCities, formatStates, formatStatus, formatSites } from '../../../utils/formatDataToSelectData'
 import {
@@ -34,7 +35,7 @@ import './styles.scss'
 
 function ExportForm({ store, dispatch }) {
   const history = useHistory()
-  const { states, cities, donationList, siteList } = store
+  const { states, cities, donationList, siteList, leaderList } = store
   const {
     location: {
       state: { selected },
@@ -144,9 +145,20 @@ function ExportForm({ store, dispatch }) {
         setInitialDate={setInitialDate}
         setCountryState={setCountryState}
         subttitleMessage={youCanChooseOneOrMoreFiltersForExport}
+        leaderList={leaderList}
       />
     )
   }
+
+  async function getLeaderList() {
+    await LeadersList(dispatch, leader)
+  }
+
+  useEffect(() => {
+    if (leader.length >= 3) {
+      getLeaderList()
+    }
+  }, [leader])
 
   function setType() {
     let type = 'sites'

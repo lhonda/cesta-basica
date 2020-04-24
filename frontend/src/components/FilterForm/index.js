@@ -1,10 +1,10 @@
 import React from 'react'
-import { string, array, func, bool } from 'prop-types'
+import { string, array, func, bool, object } from 'prop-types'
 
 import { Loader } from '../Loader'
 import { Select } from '../Select'
 import { SubTitle, SubTitleTypes } from '../SubTitle'
-import { Input, inputTypes, InputWithMultiSelect } from '../Input'
+import { Input, inputTypes, InputWithMultiSelect, InputSelectSearch } from '../Input'
 
 import {
   unit,
@@ -16,6 +16,7 @@ import {
   finalDateFirstLetterCapitalized,
   initialDateFirstLetterCapitalized,
   countryStateFirstLetterCapitalized,
+  chooseState,
 } from '../../utils/strings'
 
 import './styles.scss'
@@ -45,7 +46,12 @@ function FilterForm({
   setInitialDate,
   setCountryState,
   subttitleMessage,
+  leaderList,
 }) {
+  const convertListLeader = leaderList.map(({ name, login }) => ({ value: login, label: name }))
+  function disableCity() {
+    return countryState === '' || countryState === chooseState
+  }
   return (
     <>
       {isLoading && <Loader />}
@@ -54,12 +60,12 @@ function FilterForm({
           <SubTitle type={SubTitleTypes.LIGHT} width={SubTitleTypes.SIZE_LARGE} message={subttitleMessage} />
         </div>
         <div className="filterForm-content">
-          <Input
+          <InputSelectSearch
+            data={convertListLeader}
             value={leader}
-            isRequired={false}
             placeholder={chooseLeader}
             inputType={inputTypes.TEXT}
-            handleOnChange={setLeader}
+            handleChange={setLeader}
           />
           <Select value={site} getValue={setSite} optionsList={sites} placeholder={unit} />
           <Select
@@ -85,7 +91,7 @@ function FilterForm({
             value={city}
             isRequired={false}
             getValue={setCity}
-            disabled={false}
+            disabled={disableCity()}
             optionsList={cities}
             placeholder={cityFirstLetterCapitalized}
           />
@@ -141,6 +147,7 @@ FilterForm.propTypes = {
   setInitialDate: func.isRequired,
   setCountryState: func.isRequired,
   subttitleMessage: string.isRequired,
+  leaderList: array.isRequired,
 }
 
 export { FilterForm }

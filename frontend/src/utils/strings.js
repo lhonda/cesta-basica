@@ -241,3 +241,6 @@ export const placeHolderLeaderChoice = 'Escolher lider'
 export const placeHolderSite = 'Unidade'
 export const placeHolderDonation = 'Pacote'
 export const placeHolderCardsQty = `Quantidade de ${cardsFirstLetterCapitalized}`
+export const placeHolderCardDeliveryStatus = 'Status da entrega do cartão'
+export const placeHolderDigitYourNumberPhone = 'Digite telefone'
+export const placeHolderNotDeliveredComment = 'Comentário sobre a não entrega'

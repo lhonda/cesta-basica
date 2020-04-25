@@ -9,6 +9,13 @@ import { SiteList } from '../../../services/API/siteList'
 import { LeadersList } from '../../../services/API/leaderList'
 import { DonationRegister } from '../../../services/API/donationList'
 
+import {
+  placeHolderLeaderChoice,
+  placeHolderSite,
+  placeHolderDonation,
+  placeHolderCardsQty,
+} from '../../../utils/strings'
+
 import './Form.scss'
 
 function RegisterForm({ leaderList, siteList, dispatch, history }) {
@@ -78,31 +85,30 @@ function RegisterForm({ leaderList, siteList, dispatch, history }) {
         <InputSelectSearch
           data={convertListLeader}
           value={leaderLogin}
-          placeholder="Escolher lider"
+          placeholder={placeHolderLeaderChoice}
           inputType={inputTypes.TEXT}
           handleChange={setLeaderLogin}
         />
         <InputSelectSearch
           data={convertSiteList}
           value={siteId}
-          placeholder="Unidade"
+          placeholder={placeHolderSite}
           inputType={inputTypes.TEXT}
           handleChange={setSiteId}
         />
-        <Input value={donationId} placeholder="Bordero" handleOnChange={setDonationId} inputType={inputTypes.TEXT} />
+        <Input
+          value={donationId}
+          placeholder={placeHolderDonation}
+          handleOnChange={setDonationId}
+          inputType={inputTypes.TEXT}
+        />
         <Input
           value={quantity}
-          placeholder="Quantidade de cartoes"
+          placeholder={placeHolderCardsQty}
           inputType={inputTypes.TEXT}
           handleOnChange={setQuantity}
         />
-        <Input
-          value={sentDate}
-          placeholder="Data de envio"
-          inputType={inputTypes.DATE}
-          handleOnChange={setSentDate}
-          maxsentDate="9999-12-31"
-        />
+        <Input value={sentDate} inputType={inputTypes.DATE} handleOnChange={setSentDate} maxsentDate="9999-12-31" />
         <div className="component-footer">
           <ConfirmButton disable={verifyRequest()} />
         </div>
@@ -112,7 +118,10 @@ function RegisterForm({ leaderList, siteList, dispatch, history }) {
 }
 
 RegisterForm.propTypes = {
-  handleSubmit: PropTypes.func.isRequired,
+  leaderList: PropTypes.object.isRequired,
+  siteList: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
+  history: PropTypes.func.isRequired,
 }
 
 export { RegisterForm }

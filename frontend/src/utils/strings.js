@@ -235,3 +235,10 @@ export const youCanChooseOneOrMoreFiltersForExport =
 export const exportListTitle = 'Lista de Exportação'
 export const newExport = 'Nova Exportação'
 export const reportIsVoid = 'Nenhum exportação encontrada'
+
+// Form Placeholders
+export const placeHolderLeaderChoice = 'Escolher lider'
+export const placeHolderSite = 'Unidade'
+export const placeHolderDonation = 'Pacote'
+export const placeHolderCardsQty = `Quantidade de ${cardsFirstLetterCapitalized}`
+// export const placeHolderSentDate = 'Data de Envio'

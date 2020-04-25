@@ -200,7 +200,7 @@ function ExportForm({ store, dispatch }) {
     if (leader) {
       request = { ...request, leaderName: leader }
     }
-    if (site) {
+    if (site && site !== chooseSite) {
       request = { ...request, siteId: site }
     }
     if (status) {

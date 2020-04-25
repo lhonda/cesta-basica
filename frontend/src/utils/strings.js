@@ -241,4 +241,3 @@ export const placeHolderLeaderChoice = 'Escolher lider'
 export const placeHolderSite = 'Unidade'
 export const placeHolderDonation = 'Pacote'
 export const placeHolderCardsQty = `Quantidade de ${cardsFirstLetterCapitalized}`
-// export const placeHolderSentDate = 'Data de Envio'

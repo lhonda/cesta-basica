@@ -130,7 +130,7 @@ function FilterContainer({ store, dispatch }) {
   function verifyRequest() {
     return !!(
       leader === '' &&
-      site === '' &&
+      (site === chooseSite || site === '') &&
       status === '' &&
       donations.length === 0 &&
       (countryState === '' || countryState === chooseState) &&

@@ -9,12 +9,7 @@ import { SiteList } from '../../../services/API/siteList'
 import { LeadersList } from '../../../services/API/leaderList'
 import { DonationRegister } from '../../../services/API/donationList'
 
-import {
-  placeHolderLeaderChoice,
-  placeHolderSite,
-  placeHolderDonation,
-  placeHolderCardsQty,
-} from '../../../utils/strings'
+import { chooseLeader, chooseSite, donationFirstLetterCapitalized, cardsQuantity } from '../../../utils/strings'
 
 import './Form.scss'
 
@@ -85,29 +80,24 @@ function RegisterForm({ leaderList, siteList, dispatch, history }) {
         <InputSelectSearch
           data={convertListLeader}
           value={leaderLogin}
-          placeholder={placeHolderLeaderChoice}
+          placeholder={chooseLeader}
           inputType={inputTypes.TEXT}
           handleChange={setLeaderLogin}
         />
         <InputSelectSearch
           data={convertSiteList}
           value={siteId}
-          placeholder={placeHolderSite}
+          placeholder={chooseSite}
           inputType={inputTypes.TEXT}
           handleChange={setSiteId}
         />
         <Input
           value={donationId}
-          placeholder={placeHolderDonation}
+          placeholder={donationFirstLetterCapitalized}
           handleOnChange={setDonationId}
           inputType={inputTypes.TEXT}
         />
-        <Input
-          value={quantity}
-          placeholder={placeHolderCardsQty}
-          inputType={inputTypes.TEXT}
-          handleOnChange={setQuantity}
-        />
+        <Input value={quantity} placeholder={cardsQuantity} inputType={inputTypes.TEXT} handleOnChange={setQuantity} />
         <Input value={sentDate} inputType={inputTypes.DATE} handleOnChange={setSentDate} maxsentDate="9999-12-31" />
         <div className="component-footer">
           <ConfirmButton disable={verifyRequest()} />

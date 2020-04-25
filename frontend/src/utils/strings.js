@@ -189,7 +189,7 @@ export const leader = 'Lider'
 export const unit = 'Unidade'
 export const update = 'Atualizar'
 export const maxSentDate = '9999-12-31'
-export const chooseLeader = 'Escolher lider'
+export const chooseLeader = 'Escolher líder'
 export const chooseCity = 'Selecione a cidade'
 export const chooseSite = 'Selecione a unidade'
 export const chooseState = 'Selecione o estado'
@@ -206,6 +206,8 @@ export const initialDateFirstLetterCapitalized = 'Data inicial'
 export const notDeliveredFirstLetterCapitalized = 'Não entregue'
 export const donationRegisterSuccessMessage = 'Doação cadastrada com sucesso'
 export const donationFilterSuccessMessage = 'Doações filtradas com sucesso'
+export const placeHolderDigitYourNumberPhone = 'Digite telefone'
+export const placeHolderNotDeliveredComment = 'Comentário sobre a não entrega'
 
 // Profile
 export const signOut = 'Sair da conta'
@@ -235,12 +237,3 @@ export const youCanChooseOneOrMoreFiltersForExport =
 export const exportListTitle = 'Lista de Exportação'
 export const newExport = 'Nova Exportação'
 export const reportIsVoid = 'Nenhum exportação encontrada'
-
-// Form Placeholders
-export const placeHolderLeaderChoice = 'Escolher lider'
-export const placeHolderSite = 'Unidade'
-export const placeHolderDonation = 'Pacote'
-export const placeHolderCardsQty = `Quantidade de ${cardsFirstLetterCapitalized}`
-export const placeHolderCardDeliveryStatus = 'Status da entrega do cartão'
-export const placeHolderDigitYourNumberPhone = 'Digite telefone'
-export const placeHolderNotDeliveredComment = 'Comentário sobre a não entrega'

@@ -23,14 +23,13 @@ import {
   confirm,
   back,
   titleReceivedProf,
-  legendAddPicPersonReceiveCard,
   legendPhotoDeliveredDone,
   legendInputAddPic,
   legendInputFullName,
   placeholderCPF,
   failedDonation,
   successDonation,
-  placeHolderCardDeliveryStatus,
+  legendInputCardDeliveryStatus,
   placeHolderDigitYourNumberPhone,
   placeHolderNotDeliveredComment,
 } from '../../utils/strings'
@@ -178,7 +177,7 @@ function ReceivedCurrentProfPage({ store, dispatch }) {
 
             <Select
               value={delivered}
-              placeholder={placeHolderCardDeliveryStatus}
+              placeholder={legendInputCardDeliveryStatus}
               getValue={handleOnchangeSelect}
               optionsList={optionsList}
             />

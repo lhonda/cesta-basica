@@ -160,7 +160,7 @@ function ExportForm({ store, dispatch }) {
         sites={formatSites(siteList)}
         cities={formatCities(cities)}
         states={formatStates(states)}
-        borderoList={getDonationIds()}
+        donationsList={getDonationIds()}
         setInitialDate={setInitialDate}
         setCountryState={setCountryState}
         subttitleMessage={youCanChooseOneOrMoreFiltersForExport}

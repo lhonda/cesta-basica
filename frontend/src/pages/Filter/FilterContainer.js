@@ -48,7 +48,7 @@ function FilterContainer({ store, dispatch }) {
   const [isLoading, setIsLoading] = useState(false)
   const [city, setCity] = useState(filters.city ? filters.city : '')
   const [status, setStatus] = useState(filters.status ? filters.status : '')
-  const [site, setSite] = useState(filters.siteId ? filters.siteId : '')
+  const [site, setSite] = useState(filters.siteId ? filters.siteId : chooseSite)
   const [finalDate, setFinalDate] = useState(filters.dateFrom ? filters.dateFrom : '')
   const [countryState, setCountryState] = useState(filters.state ? filters.state : '')
   const [initialDate, setInitialDate] = useState(filters.dateTo ? filters.dateTo : '')
@@ -64,6 +64,13 @@ function FilterContainer({ store, dispatch }) {
       getLeaderList()
     }
   }, [leader])
+
+  useEffect(() => {
+    if (site !== chooseSite) {
+      setCountryState('')
+      setCity('')
+    }
+  }, [site])
 
   async function getSitesList() {
     setIsLoading(true)
@@ -99,7 +106,7 @@ function FilterContainer({ store, dispatch }) {
 
     const request = {
       leaderName: leader,
-      siteId: site,
+      siteId: site !== chooseSite ? site : '',
       status,
       listDonationId: borderos,
       state: countryState,
@@ -113,11 +120,11 @@ function FilterContainer({ store, dispatch }) {
     navigateToDonationList()
   }
 
-  function disabledStateCity() {
-    return site === chooseSite || site === ''
-  }
   function disableCity() {
-    return countryState === '' || countryState === chooseState
+    return countryState === '' || countryState === chooseState || disableState()
+  }
+  function disableState() {
+    return site !== chooseSite
   }
 
   function verifyRequest() {
@@ -207,7 +214,7 @@ function FilterContainer({ store, dispatch }) {
               optionsList={formatStates(states)}
               value={countryState}
               getValue={setCountryState}
-              disabled={disabledStateCity()}
+              disabled={disableState()}
               placeholder={countryStateFirstLetterCapitalized}
             />
             <Select

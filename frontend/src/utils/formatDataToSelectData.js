@@ -38,6 +38,7 @@ export function formatStatus() {
   formatedStatus.push({ value: status.ESPERANDO_RECEBIMENTO.id, string: status.ESPERANDO_RECEBIMENTO.status })
   formatedStatus.push({ value: status.ENTREGUE_LIDER.id, string: status.ENTREGUE_LIDER.status })
   formatedStatus.push({ value: status.ENTREGANDO.id, string: status.ENTREGANDO.status })
+  formatedStatus.push({ value: status.COMPLETO.id, string: status.COMPLETO.status })
   return formatedStatus
 }
 

@@ -142,7 +142,7 @@ function FilterContainer({ store, dispatch }) {
 
   function handleCleanFilter() {
     setLeader('')
-    setSite('')
+    setSite(chooseSite)
     setStatus('')
     setDonations([])
     setCountryState('')

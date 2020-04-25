@@ -30,7 +30,7 @@ import {
   youCanChooseOneOrMoreFilters,
   statusFirstLetterCapitalized,
   filterFirstLetterCapitalized,
-  borderoFirstLetterCapitalized,
+  donationFirstLetterCapitalized,
   finalDateFirstLetterCapitalized,
   initialDateFirstLetterCapitalized,
   countryStateFirstLetterCapitalized,
@@ -48,12 +48,12 @@ function FilterContainer({ store, dispatch }) {
   const [isLoading, setIsLoading] = useState(false)
   const [city, setCity] = useState(filters.city ? filters.city : '')
   const [status, setStatus] = useState(filters.status ? filters.status : '')
-  const [site, setSite] = useState(filters.siteId ? filters.siteId : '')
+  const [site, setSite] = useState(filters.siteId ? filters.siteId : chooseSite)
   const [finalDate, setFinalDate] = useState(filters.dateFrom ? filters.dateFrom : '')
   const [countryState, setCountryState] = useState(filters.state ? filters.state : '')
   const [initialDate, setInitialDate] = useState(filters.dateTo ? filters.dateTo : '')
   const [leader, setLeader] = useState(filters.leaderName ? filters.leaderName : '')
-  const [borderos, setBorderos] = useState(filters.listDonationId ? filters.listDonationId : [])
+  const [donations, setDonations] = useState(filters.listDonationId ? filters.listDonationId : [])
 
   async function getLeaderList() {
     await LeadersList(dispatch, leader)
@@ -64,6 +64,13 @@ function FilterContainer({ store, dispatch }) {
       getLeaderList()
     }
   }, [leader])
+
+  useEffect(() => {
+    if (site !== chooseSite) {
+      setCountryState('')
+      setCity('')
+    }
+  }, [site])
 
   async function getSitesList() {
     setIsLoading(true)
@@ -99,9 +106,9 @@ function FilterContainer({ store, dispatch }) {
 
     const request = {
       leaderName: leader,
-      siteId: site,
+      siteId: site !== chooseSite ? site : '',
       status,
-      listDonationId: borderos,
+      listDonationId: donations,
       state: countryState,
       city,
       dateTo: finalDate,
@@ -113,19 +120,19 @@ function FilterContainer({ store, dispatch }) {
     navigateToDonationList()
   }
 
-  function disabledStateCity() {
-    return site === chooseSite || site === ''
-  }
   function disableCity() {
-    return countryState === '' || countryState === chooseState
+    return countryState === '' || countryState === chooseState || disableState()
+  }
+  function disableState() {
+    return site !== chooseSite
   }
 
   function verifyRequest() {
     return !!(
       leader === '' &&
-      site === '' &&
+      (site === chooseSite || site === '') &&
       status === '' &&
-      borderos.length === 0 &&
+      donations.length === 0 &&
       (countryState === '' || countryState === chooseState) &&
       (city === '' || city === chooseCity) &&
       initialDate === '' &&
@@ -137,7 +144,7 @@ function FilterContainer({ store, dispatch }) {
     setLeader('')
     setSite('')
     setStatus('')
-    setBorderos([])
+    setDonations([])
     setCountryState('')
     setInitialDate('')
     setFinalDate('')
@@ -198,16 +205,16 @@ function FilterContainer({ store, dispatch }) {
               placeholder={statusFirstLetterCapitalized}
             />
             <InputWithMultiSelect
-              selected={borderos}
-              getSelected={setBorderos}
+              selected={donations}
+              getSelected={setDonations}
               optionData={getDonationIds()}
-              placeholder={borderoFirstLetterCapitalized}
+              placeholder={donationFirstLetterCapitalized}
             />
             <Select
               optionsList={formatStates(states)}
               value={countryState}
               getValue={setCountryState}
-              disabled={disabledStateCity()}
+              disabled={disableState()}
               placeholder={countryStateFirstLetterCapitalized}
             />
             <Select

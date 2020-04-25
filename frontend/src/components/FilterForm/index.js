@@ -1,5 +1,5 @@
 import React from 'react'
-import { string, array, func, bool, object } from 'prop-types'
+import { string, array, func, bool } from 'prop-types'
 
 import { Loader } from '../Loader'
 import { Select } from '../Select'
@@ -13,7 +13,7 @@ import {
   chooseSite,
   cityFirstLetterCapitalized,
   statusFirstLetterCapitalized,
-  borderoFirstLetterCapitalized,
+  donationFirstLetterCapitalized,
   finalDateFirstLetterCapitalized,
   initialDateFirstLetterCapitalized,
   countryStateFirstLetterCapitalized,
@@ -32,15 +32,15 @@ function FilterForm({
   status,
   setSite,
   setCity,
-  borderos,
+  donations,
   setLeader,
   setStatus,
   finalDate,
   isLoading,
   statusList,
-  setBorderos,
+  setDonations,
   initialDate,
-  borderoList,
+  donationsList,
   handleSubmit,
   countryState,
   setFinalDate,
@@ -79,10 +79,10 @@ function FilterForm({
             placeholder={statusFirstLetterCapitalized}
           />
           <InputWithMultiSelect
-            selected={borderos}
-            getSelected={setBorderos}
-            optionData={borderoList}
-            placeholder={borderoFirstLetterCapitalized}
+            selected={donations}
+            getSelected={setDonations}
+            optionData={donationsList}
+            placeholder={donationFirstLetterCapitalized}
           />
           <Select
             optionsList={states}
@@ -136,15 +136,15 @@ FilterForm.propTypes = {
   status: string.isRequired,
   setSite: func.isRequired,
   setCity: func.isRequired,
-  borderos: array.isRequired,
+  donations: array.isRequired,
   setLeader: func.isRequired,
   setStatus: func.isRequired,
   finalDate: string.isRequired,
   isLoading: bool.isRequired,
   statusList: array.isRequired,
-  setBorderos: func.isRequired,
+  setDonations: func.isRequired,
   initialDate: string.isRequired,
-  borderoList: array.isRequired,
+  donationsList: array.isRequired,
   handleSubmit: func.isRequired,
   countryState: string.isRequired,
   setFinalDate: func.isRequired,

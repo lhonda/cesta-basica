@@ -23,13 +23,15 @@ import {
   confirm,
   back,
   titleReceivedProf,
-  legendAddPicPersonReceiveCard,
   legendPhotoDeliveredDone,
   legendInputAddPic,
   legendInputFullName,
   placeholderCPF,
   failedDonation,
   successDonation,
+  legendInputCardDeliveryStatus,
+  placeHolderDigitYourNumberPhone,
+  placeHolderNotDeliveredComment,
 } from '../../utils/strings'
 
 import * as analytics from '../../services/analytics'
@@ -175,7 +177,7 @@ function ReceivedCurrentProfPage({ store, dispatch }) {
 
             <Select
               value={delivered}
-              placeholder="Status da entrega do cartão"
+              placeholder={legendInputCardDeliveryStatus}
               getValue={handleOnchangeSelect}
               optionsList={optionsList}
             />
@@ -192,7 +194,7 @@ function ReceivedCurrentProfPage({ store, dispatch }) {
                 />
 
                 <Input
-                  placeholder="Digite telefone"
+                  placeholder={placeHolderDigitYourNumberPhone}
                   inputType={inputTypes.CELPHONE}
                   minLength="2"
                   maxLength="15"
@@ -212,14 +214,14 @@ function ReceivedCurrentProfPage({ store, dispatch }) {
                 />
               </>
             ) : (
-                <Input
-                  placeholder="Comentário sobre a não entrega"
-                  inputType={inputTypes.TEXT}
-                  value={comment}
-                  isRequired
-                  handleOnChange={setComment}
-                />
-              )}
+              <Input
+                placeholder={placeHolderNotDeliveredComment}
+                inputType={inputTypes.TEXT}
+                value={comment}
+                isRequired
+                handleOnChange={setComment}
+              />
+            )}
           </div>
         </div>
 

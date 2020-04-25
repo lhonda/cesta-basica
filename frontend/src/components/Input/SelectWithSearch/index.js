@@ -12,6 +12,7 @@ function InputSelectSearch({ value, handleChange, placeholder, data }) {
         listName={value}
         name="data-list-choice"
         handleOnChange={handleChange}
+        isRequired={false}
       />
 
       <datalist id={value}>

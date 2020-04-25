@@ -10,7 +10,7 @@ import {
   leader,
   exportType,
   cardsFirstLetterCapitalized,
-  borderoFirstLetterCapitalized,
+  donationFirstLetterCapitalized,
   continueFirstLetterCapitalized,
 } from '../../../utils/strings'
 
@@ -46,7 +46,7 @@ function ExportType() {
         <div className="exportType-radioBtn">
           <RadioButton
             handleChecked={handleRadioChange}
-            options={[unit, leader, borderoFirstLetterCapitalized, cardsFirstLetterCapitalized]}
+            options={[unit, leader, donationFirstLetterCapitalized, cardsFirstLetterCapitalized]}
           />
         </div>
         <div className="exportType-footer">

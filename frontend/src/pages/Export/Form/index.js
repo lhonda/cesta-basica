@@ -27,7 +27,7 @@ import {
   leader as leaderStr,
   cardsFirstLetterCapitalized,
   exportFirstLetterCapitalized,
-  borderoFirstLetterCapitalized,
+  donationFirstLetterCapitalized,
   youCanChooseOneOrMoreFiltersForExport,
 } from '../../../utils/strings'
 
@@ -50,7 +50,7 @@ function ExportForm({ store, dispatch }) {
   const [countryState, setCountryState] = useState('')
   const [initialDate, setInitialDate] = useState('')
   const [leader, setLeader] = useState('')
-  const [borderos, setBorderos] = useState([])
+  const [donations, setDonations] = useState([])
 
   async function getSitesList() {
     setIsLoading(true)
@@ -146,13 +146,13 @@ function ExportForm({ store, dispatch }) {
         status={status}
         setSite={setSite}
         setCity={setCity}
-        borderos={borderos}
+        donations={donations}
         isLoading={isLoading}
         setLeader={setLeader}
         setStatus={setStatus}
         finalDate={finalDate}
-        handleSubmit={() => { }}
-        setBorderos={setBorderos}
+        handleSubmit={() => {}}
+        setDonations={setDonations}
         initialDate={initialDate}
         statusList={formatStatus()}
         countryState={countryState}
@@ -160,7 +160,7 @@ function ExportForm({ store, dispatch }) {
         sites={formatSites(siteList)}
         cities={formatCities(cities)}
         states={formatStates(states)}
-        borderoList={getDonationIds()}
+        donationsList={getDonationIds()}
         setInitialDate={setInitialDate}
         setCountryState={setCountryState}
         subttitleMessage={youCanChooseOneOrMoreFiltersForExport}
@@ -183,7 +183,7 @@ function ExportForm({ store, dispatch }) {
     let type = 'sites'
     if (selected === leaderStr) {
       type = 'users'
-    } else if (selected === borderoFirstLetterCapitalized) {
+    } else if (selected === donationFirstLetterCapitalized) {
       type = 'donation'
     } else if (selected === cardsFirstLetterCapitalized) {
       type = 'voucher'
@@ -206,8 +206,8 @@ function ExportForm({ store, dispatch }) {
     if (status) {
       request = { ...request, status }
     }
-    if (borderos && borderos.length > 0) {
-      request = { ...request, listDonationId: borderos }
+    if (donations && donations.length > 0) {
+      request = { ...request, listDonationId: donations }
     }
     if (countryState) {
       request = { ...request, state: countryState }
@@ -234,7 +234,7 @@ function ExportForm({ store, dispatch }) {
       leader === '' &&
       (site === '' || site === chooseSite) &&
       status === '' &&
-      borderos.length === 0 &&
+      donations.length === 0 &&
       (countryState === '' || countryState === chooseState) &&
       (city === '' || city === chooseCity) &&
       initialDate === '' &&

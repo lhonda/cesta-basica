@@ -30,7 +30,7 @@ import {
   youCanChooseOneOrMoreFilters,
   statusFirstLetterCapitalized,
   filterFirstLetterCapitalized,
-  borderoFirstLetterCapitalized,
+  donationFirstLetterCapitalized,
   finalDateFirstLetterCapitalized,
   initialDateFirstLetterCapitalized,
   countryStateFirstLetterCapitalized,
@@ -53,7 +53,7 @@ function FilterContainer({ store, dispatch }) {
   const [countryState, setCountryState] = useState(filters.state ? filters.state : '')
   const [initialDate, setInitialDate] = useState(filters.dateTo ? filters.dateTo : '')
   const [leader, setLeader] = useState(filters.leaderName ? filters.leaderName : '')
-  const [borderos, setBorderos] = useState(filters.listDonationId ? filters.listDonationId : [])
+  const [donations, setDonations] = useState(filters.listDonationId ? filters.listDonationId : [])
 
   async function getLeaderList() {
     await LeadersList(dispatch, leader)
@@ -108,7 +108,7 @@ function FilterContainer({ store, dispatch }) {
       leaderName: leader,
       siteId: site !== chooseSite ? site : '',
       status,
-      listDonationId: borderos,
+      listDonationId: donations,
       state: countryState,
       city,
       dateTo: finalDate,
@@ -132,7 +132,7 @@ function FilterContainer({ store, dispatch }) {
       leader === '' &&
       site === '' &&
       status === '' &&
-      borderos.length === 0 &&
+      donations.length === 0 &&
       (countryState === '' || countryState === chooseState) &&
       (city === '' || city === chooseCity) &&
       initialDate === '' &&
@@ -144,7 +144,7 @@ function FilterContainer({ store, dispatch }) {
     setLeader('')
     setSite('')
     setStatus('')
-    setBorderos([])
+    setDonations([])
     setCountryState('')
     setInitialDate('')
     setFinalDate('')
@@ -205,10 +205,10 @@ function FilterContainer({ store, dispatch }) {
               placeholder={statusFirstLetterCapitalized}
             />
             <InputWithMultiSelect
-              selected={borderos}
-              getSelected={setBorderos}
+              selected={donations}
+              getSelected={setDonations}
               optionData={getDonationIds()}
-              placeholder={borderoFirstLetterCapitalized}
+              placeholder={donationFirstLetterCapitalized}
             />
             <Select
               optionsList={formatStates(states)}

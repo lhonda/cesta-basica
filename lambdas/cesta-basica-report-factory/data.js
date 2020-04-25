@@ -21,59 +21,105 @@ async function voucherData ({
   dateTo,
   dateFrom
 }) {
-  const filterVoucher = {}
-  const filterDonation = {}
-  const filterSite = {}
+  const matchVoucher = []
+  const matchDonation = {}
+  const matchSite = {}
   if (leaderName) {
-    const user = await User.findOne({ name: leaderName }, { _id: 0, login: 1 })
-    user ? filterDonation.leaderLogin = user.login : filterDonation.leaderLogin = undefined
+    const user = await User.findOne({ name: new RegExp(`^.*${leaderName}.*`, 'i') }, { _id: 0, login: 1 })
+    user ? matchDonation.leaderLogin = user.login : matchDonation.leaderLogin = undefined
   }
   if (siteId) {
-    filterDonation.siteId = siteId
+    matchDonation.siteId = siteId
   }
   if (status) {
-    filterVoucher.status = status
+    matchVoucher.push({ $eq: [ "$status", status ] })
   }
   if (listDonationId) {
     if (!Array.isArray(listDonationId)) {
       throw new Error('listDonationId must be an Array')
     }
     const listDonationIdResolved = listDonationId.map(donation => regexp(donation, 'i'))
-    filterDonation.donationId = { $in: listDonationIdResolved }
+    matchDonation.donationId = { $in: listDonationIdResolved }
   }
   if (state) {
-    filterSite.state = regexp(state, 'i')
+    matchSite.state = regexp(state, 'i')
   }
   if (city) {
-    filterSite.city = regexp(city, 'i')
+    matchSite.city = regexp(city, 'i')
   }
   if (dateTo || dateFrom) {
-    filterVoucher.created = {}
+    matchVoucher.created = {}
   }
   if (dateTo) {
-    filterVoucher.created.$lte = dateTo
+    matchVoucher.push({ $lte: [ "$created", dateTo ] })
   }
   if (dateFrom) {
-    filterVoucher.created.$gte = dateFrom
+    matchVoucher.push({ $gte: [ "$created", dateFrom ] })
   }
 
   if ((state || city) && !siteId) {
-    const listSiteId = (await Site.find(filterSite, { _id: 0, siteId: 1 }))
+    const listSiteId = (await Site.find(matchSite, { _id: 0, siteId: 1 }))
       .map(({ siteId }) => (siteId))
-    filterDonation.siteId = { $in: listSiteId }
+    matchDonation.siteId = { $in: listSiteId }
   }
 
-  const voucherList = await Donation.find(filterDonation).distinct('donationId')
+  matchVoucher.push({ $eq: ["$donationId", "$$donId"] })
+  console.log(matchVoucher)
+
+  const vouchers = await Donation.aggregate([
+    {
+      $match: matchDonation
+    },
+    {
+      $lookup: {
+        from: 'users',
+        let: { login: "$leaderLogin" },
+        pipeline: [
+          { $match: { $expr: { $eq: ["$login", "$$login" ] } } },
+          { $project: { name: "$name",  } }
+        ],
+        as: 'leader'
+      }
+    },
+    {
+      $lookup: {
+        from: 'sites',
+        localField: 'siteId',
+        foreignField: 'siteId',
+        as: 'sites'
+      }
+    },
+    {
+      $lookup: {
+        from: "vouchers",
+        let: { donId: "$donationId" },
+        pipeline: [
+          { $match: { $expr: { $and: matchVoucher } } },
+        ],
+        as: "vouchers"
+      }
+    },
+    {
+      $project: {
+        vouchers: "$vouchers",
+        sites: "$sites",
+        leader: "$leader.name"
+      }
+    }
+  ]).exec()
 
   let response = []
-  const vouchers = await Promise.all(
-    voucherList.map(async (donationId) => {
-      filterVoucher.donationId = donationId
-      const voucher = await Voucher.find(filterVoucher)
-      return voucher
+  vouchers.forEach(project => {
+    site = project.sites[0]
+    leader = project.leader[0]
+    response = response.concat(project.vouchers.map(v => {
+      return {
+        ...v,
+        site,
+        leader
+      }
     }))
-
-  vouchers.map(voucherArray => {response = response.concat(voucherArray)})
+  });
 
   return response
 }

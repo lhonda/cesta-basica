@@ -1,5 +1,5 @@
 import React from 'react'
-import { string, array, func, bool, object } from 'prop-types'
+import { string, array, func, bool } from 'prop-types'
 
 import { Loader } from '../Loader'
 import { Select } from '../Select'
@@ -13,7 +13,7 @@ import {
   chooseSite,
   cityFirstLetterCapitalized,
   statusFirstLetterCapitalized,
-  borderoFirstLetterCapitalized,
+  donationFirstLetterCapitalized,
   finalDateFirstLetterCapitalized,
   initialDateFirstLetterCapitalized,
   countryStateFirstLetterCapitalized,
@@ -82,7 +82,7 @@ function FilterForm({
             selected={borderos}
             getSelected={setBorderos}
             optionData={borderoList}
-            placeholder={borderoFirstLetterCapitalized}
+            placeholder={donationFirstLetterCapitalized}
           />
           <Select
             optionsList={states}

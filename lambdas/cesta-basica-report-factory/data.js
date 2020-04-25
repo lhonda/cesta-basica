@@ -178,26 +178,47 @@ async function donationData ({
 }
 
 async function userData ({ name, siteName, state, city }) {
-  const sites = await Site.aggregate([
-    {
-      $match: {
-        name: siteName,
-        state,
-        city
+  const nameReg = (name ? new RegExp(`^.*${name}.*`, 'i') : /^/)
+    const sites = await Site.aggregate([
+      {
+        $match: {
+          name: siteName,
+          state,
+          city
+        }
+      },
+      {
+        $lookup: {
+          from: 'users',
+          let: { siteId: "$siteId" },
+          pipeline: [
+            {
+              $match: {
+                name: nameReg,
+                $expr:{
+                  $and: [
+                    { $eq: ["$siteId", "$$siteId"] },
+                  ]
+                }
+              }
+            }
+          ],
+          as: 'users'
+        }
+      },
+      {
+        $project: {
+          city: "$city",
+          state: "$state",
+          siteName: "$name",
+          users: "$users"
+        }
       }
-    },
-    {
-      $lookup: {
-        from: 'vouchers',
-        localField: 'donationId',
-        foreignField: 'donationId',
-        as: 'vouchers'
-      }
-    }
-  ])
-  let users = []
-  sites.map(s => users = users.concat(s.users))
-  return name ? users.filter(u => new RegExp(`^.*${name}.*`, 'i').test(u.name)) : users
+    ])
+
+    let users = []
+    sites.map(s => users = users.concat(s.users.map(u => ({ ...u, city: s.city, state: s.state, siteName: s.siteName }))))
+    return users
 }
 
 async function siteData (filter) {

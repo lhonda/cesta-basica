@@ -142,10 +142,10 @@ async function userData ({ name, siteName, state, city }) {
     },
     {
       $lookup: {
-        from: 'users',
-        localField: 'siteId',
-        foreignField: 'siteId',
-        as: 'users'
+        from: 'vouchers',
+        localField: 'donationId',
+        foreignField: 'donationId',
+        as: 'vouchers'
       }
     }
   ])

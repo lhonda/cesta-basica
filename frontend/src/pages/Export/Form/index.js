@@ -27,7 +27,7 @@ import {
   leader as leaderStr,
   cardsFirstLetterCapitalized,
   exportFirstLetterCapitalized,
-  borderoFirstLetterCapitalized,
+  donationFirstLetterCapitalized,
   youCanChooseOneOrMoreFiltersForExport,
 } from '../../../utils/strings'
 
@@ -183,7 +183,7 @@ function ExportForm({ store, dispatch }) {
     let type = 'sites'
     if (selected === leaderStr) {
       type = 'users'
-    } else if (selected === borderoFirstLetterCapitalized) {
+    } else if (selected === donationFirstLetterCapitalized) {
       type = 'donation'
     } else if (selected === cardsFirstLetterCapitalized) {
       type = 'voucher'

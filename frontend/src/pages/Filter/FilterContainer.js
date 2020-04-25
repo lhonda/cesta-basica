@@ -30,7 +30,7 @@ import {
   youCanChooseOneOrMoreFilters,
   statusFirstLetterCapitalized,
   filterFirstLetterCapitalized,
-  borderoFirstLetterCapitalized,
+  donationFirstLetterCapitalized,
   finalDateFirstLetterCapitalized,
   initialDateFirstLetterCapitalized,
   countryStateFirstLetterCapitalized,
@@ -201,7 +201,7 @@ function FilterContainer({ store, dispatch }) {
               selected={borderos}
               getSelected={setBorderos}
               optionData={getDonationIds()}
-              placeholder={borderoFirstLetterCapitalized}
+              placeholder={donationFirstLetterCapitalized}
             />
             <Select
               optionsList={formatStates(states)}

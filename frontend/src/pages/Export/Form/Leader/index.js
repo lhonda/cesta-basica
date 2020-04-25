@@ -5,7 +5,7 @@ import { UnitFilter } from '../Unit'
 import { Select } from '../../../../components/Select'
 import { inputTypes, InputSelectSearch } from '../../../../components/Input'
 
-import { chooseLeader, unit, chooseSite } from '../../../../utils/strings'
+import { chooseLeader, unit } from '../../../../utils/strings'
 
 import './styles.scss'
 

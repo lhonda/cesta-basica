@@ -5,6 +5,13 @@ const getFilter = require('./filter')
 const dataFilter = require('./data')
 const transform = require('./transform')
 
+const entityMapper = {
+  voucher: "Cartão",
+  user: "Líder",
+  site: "Entidade",
+  donation: "Borderô"
+}
+
 exports.handler = async (event) => {
   console.log(event, typeof event)
   const { entity, filters } = JSON.parse(event)
@@ -14,7 +21,7 @@ exports.handler = async (event) => {
 
     report = await Report.create({
       status: 1,
-      details: `Relatório da entidade: ${entity}`
+      details: `Relatório da entidade: ${entityMapper[entity]}`
     })
 
     const parsedFilters = getFilter(entity, filters)

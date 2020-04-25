@@ -134,47 +134,119 @@ async function donationData ({
   dateTo,
   dateFrom
 }) {
-  const filterDonation = {}
-  const filterSite = {}
+  const matchDonation = {}
+  const matchSite = {}
   if (leaderName) {
-    const user = await User.findOne({ name: leaderName }, { _id: 0, login: 1 })
-    user ? filterDonation.leaderLogin = user.login : filterDonation.leaderLogin = undefined
+    const user = await User.findOne({ name: new RegExp(`^.*${leaderName}.*`, 'i') }, { _id: 0, login: 1 })
+    user ? matchDonation.leaderLogin = user.login : matchDonation.leaderLogin = undefined
   }
   if (siteId) {
-    filterDonation.siteId = siteId
+    matchDonation.siteId = siteId
   }
   if (status) {
-    filterDonation.status = status
+    matchDonation.status = status
   }
   if (listDonationId && Array.isArray(listDonationId) && listDonationId.length > 0) {
     const listDonationIdResolved = listDonationId.map(donation => regexp(donation, 'i'))
-    filterDonation.donationId = { $in: listDonationIdResolved }
+    matchDonation.donationId = { $in: listDonationIdResolved }
   }
   if (state) {
-    filterSite.state = regexp(state, 'i')
+    matchSite.state = regexp(state, 'i')
   }
   if (city) {
-    filterSite.city = regexp(city, 'i')
+    matchSite.city = regexp(city, 'i')
   }
   if (dateTo || dateFrom) {
-    filterDonation.created = {}
+    matchDonation.created = {}
   }
   if (dateTo) {
-    filterDonation.created.$lte = dateTo
+    matchDonation.created.$lte = [ "$created", dateTo ]
   }
   if (dateFrom) {
-    filterDonation.created.$gte = dateFrom
+    matchDonation.created.$gte = [ "$created", dateFrom ]
   }
 
   if ((state || city) && !siteId) {
-    const listSiteId = (await Site.find(filterSite, { _id: 0, siteId: 1 }))
+    const listSiteId = (await Site.find(matchSite, { _id: 0, siteId: 1 }))
       .map(({ siteId }) => (siteId))
-    filterDonation.siteId = { $in: listSiteId }
+    matchDonation.siteId = { $in: listSiteId }
   }
 
-  const donations = await Donation.find(filterDonation)
+  const donations = await Donation.aggregate([
+    {
+      $match: matchDonation
+    },
+    {
+      $lookup: {
+        from: 'users',
+        let: { login: "$leaderLogin" },
+        pipeline: [
+          { $match: { $expr: { $eq: ["$login", "$$login" ] } } },
+          { $project: { name: "$name" } }
+        ],
+        as: 'leader'
+      }
+    },
+    {
+      $lookup: {
+        from: 'sites',
+        localField: 'siteId',
+        foreignField: 'siteId',
+        as: 'sites'
+      }
+    },
+    {
+      $lookup: {
+        from: "vouchers",
+        let: { donId: "$donationId" },
+        pipeline: [
+          { $match: { $expr: { $and: [ { $eq: ["$donationId", "$$donId"] }] } } },
+        ],
+        as: "vouchers"
+      }
+    },
+    {
+      $project: {
+        vouchers: "$vouchers",
+        site: { $arrayElemAt: ["$sites", 0] },
+        donationId: "$donationId",
+        leaderLogin: "$leaderLogin",
+        receivedDate: "$received",
+        quantity: "$quantity",
+        leaderName: {$arrayElemAt: ["$leader.name", 0]},
+      }
+    }
+  ]).exec()
 
-  return donations
+  let response = []
+  donations.forEach(project => {
+    let delivered = 0
+    let received = 0
+    let notDelivered = 0
+    project.vouchers.map(v => {
+      switch (v.status) {
+        case 1:
+          received++
+          break;
+        case 2:
+          delivered++
+          break;
+        case 3:
+          notDelivered++
+          break;
+      }
+    })
+    response.push({
+      ...project,
+      vouchers: {
+        delivered,
+        notDelivered,
+        received
+      }
+    })
+  })
+
+  return response
 }
 
 async function userData ({ name, siteName, state, city }) {

@@ -4,7 +4,7 @@ import { statusesReport } from '../enums'
 import { Report } from '../repositories'
 
 export async function listReports () {
-  const reports = await Report.find({})
+  const reports = await Report.find({}).sort({ timestamp: -1 }).exec()
   return reports.map(r => (
     {
       status: r.status,

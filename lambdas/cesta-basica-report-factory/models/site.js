@@ -1,4 +1,4 @@
-const { model, modelNames, Schema } = require('mongoose')
+const { model, models, Schema } = require('mongoose')
 
 const schema = new Schema({
   siteId: {
@@ -21,4 +21,4 @@ const schema = new Schema({
   }
 })
 
-module.exports = !modelNames().includes('Site') ? model('Site', schema) : model('Site')
+module.exports =  models.Site || model('Site', schema)

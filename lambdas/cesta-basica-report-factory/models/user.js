@@ -1,4 +1,4 @@
-const { model, modelNames, Schema } = require('mongoose')
+const { model, models, Schema } = require('mongoose')
 
 const schema = new Schema({
   login: {
@@ -54,4 +54,4 @@ const schema = new Schema({
   }
 })
 
-module.exports = !modelNames().includes('User') ? model('User', schema) : model('User')
+module.exports = models.User || model('User', schema)

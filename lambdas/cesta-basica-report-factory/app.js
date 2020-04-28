@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const { Report } = require('./models')
 const { uploadReport } = require('./s3')
+const { getConnection } = require('./utils')
 const getFilter = require('./filter')
 const dataFilter = require('./data')
 const transform = require('./transform')
@@ -12,12 +13,13 @@ const entityMapper = {
   donation: "Borderô"
 }
 
-exports.handler = async (event) => {
-  console.log(event, typeof event)
+let conn;
+
+exports.handler = async (event, context) => {
   const { entity, filters } = JSON.parse(event)
   let report;
   try {
-    await mongoose.connect(process.env.DB_URL, { useNewUrlParser: true , useUnifiedTopology: true })
+    conn = await getConnection(conn, context)
 
     report = await Report.create({
       status: 1,

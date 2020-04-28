@@ -1,6 +1,6 @@
-const mongoose = require('mongoose')
+const { models, model, Schema } = require('mongoose')
 
-const schema = new mongoose.Schema({
+const schema = new Schema({
   status: {
     type: Number,
     enum: [1, 2, 3], // 1 processando 2 processado 3 erro
@@ -14,4 +14,4 @@ const schema = new mongoose.Schema({
   url: String
 })
 
-module.exports = !mongoose.modelNames().includes('Report') ? mongoose.model('Report', schema) : mongoose.model('Report')
+module.exports = models.Report || model('Report', schema)

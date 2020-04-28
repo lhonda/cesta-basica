@@ -1,4 +1,4 @@
-const { model, modelNames, Schema } = require('mongoose')
+const { model, models, Schema } = require('mongoose')
 const pointSchema = new Schema({
   type: {
     type: String,
@@ -57,4 +57,4 @@ const schema = new Schema({
   point: pointSchema
 })
 
-module.exports = !modelNames().includes('Donation') ? model('Donation', schema) : model('Donation')
+module.exports = models.Donation || model('Donation', schema)

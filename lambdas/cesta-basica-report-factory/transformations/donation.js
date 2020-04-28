@@ -1,4 +1,4 @@
-const parseDate = require('../utils/parseDate')
+const { parseDate } = require('../utils')
 
 module.exports = data => {
   const header = 'Pacote;Usuário;Nome;Quantidade;Cartões Recebidos;Cartões Entregues;Cartões Não Entregues;Entidade;Cidade;UF;Data/Hora Recebimento pelo Líder\n'

@@ -7,6 +7,7 @@ export async function listReports () {
   const reports = await Report.find({}).sort({ timestamp: -1 }).exec()
   return reports.map(r => (
     {
+      id: r._id,
       status: r.status,
       statusText: statusesReport[r.status],
       timestamp: r.timestamp,

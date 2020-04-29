@@ -23,7 +23,7 @@ exports.handler = async (event, context) => {
 
     report = await Report.create({
       status: 1,
-      details: `Relatório da entidade: ${entityMapper[entity]}`
+      details: `Relatório de ${entityMapper[entity]}`
     })
 
     const parsedFilters = getFilter(entity, filters)

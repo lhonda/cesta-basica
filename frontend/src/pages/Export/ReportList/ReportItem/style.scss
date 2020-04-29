@@ -3,13 +3,25 @@
   box-sizing: border-box;
   box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.15);
   border-radius: 4px;
-  margin: 0 0 0.5rem;
+  margin: 0.5rem 0.5rem;
   font-size: 14px;
 
-  &__details {
+  &__detailsRow1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &__icon {
+      height: 1rem;
+      width: 1rem;
+    }
+  }
+
+  &__detailsRow2 {
     margin: 0.5rem 0 0;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     color: #919090;
 
     &__date {

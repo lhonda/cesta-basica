@@ -18,3 +18,11 @@ export async function postReport(dispatch, request, type) {
     console.log('err: ', err)
   }
 }
+
+export async function deleteReport(id) {
+  try {
+    return await Api.delete(`report/${id}`)
+  } catch ({ response }) {
+    return response
+  }
+}

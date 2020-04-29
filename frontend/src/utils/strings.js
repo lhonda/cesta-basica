@@ -232,6 +232,8 @@ export const exportType = 'Tipo de exportaçao'
 export const exportFirstLetterCapitalized = 'Exportar'
 export const youCanChooseOneOrMoreFiltersForExport =
   'Você pode utilizar o filtro para fazer a exportação dos arquivos da forma que você precisa.'
+export const messageDeleteItemSuccess = 'Item excluído com sucesso'
+export const messageDeleteItemFailure = 'Ocorreu um erro ao excluir o item. Tente novamente.'
 
 // export List
 export const exportListTitle = 'Lista de Exportação'

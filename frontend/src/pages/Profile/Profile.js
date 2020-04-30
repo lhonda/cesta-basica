@@ -23,7 +23,8 @@ function Profile({ dispatch, store, history }) {
         <Header title={profile} />
       </div>
       <div className="containerUser">
-        <h2>{user.login}</h2>
+        <h2>Fulano Admin da Silva</h2>
+        <p>{user.login}</p>
         <p>{user.email}</p>
       </div>
 

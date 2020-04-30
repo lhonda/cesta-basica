@@ -29,10 +29,10 @@ async function voucherData ({
     user ? matchDonation.leaderLogin = user.login : matchDonation.leaderLogin = undefined
   }
   if (siteId) {
-    matchDonation.siteId = siteId
+    matchDonation.siteId = Numner(siteId)
   }
   if (status) {
-    matchDonation.status = status
+    matchDonation.status = Numner(status)
   }
   if (listDonationId) {
     if (!Array.isArray(listDonationId)) {
@@ -141,10 +141,10 @@ async function donationData ({
     user ? matchDonation.leaderLogin = user.login : matchDonation.leaderLogin = undefined
   }
   if (siteId) {
-    matchDonation.siteId = siteId
+    matchDonation.siteId = Number(siteId)
   }
   if (status) {
-    matchDonation.status = status
+    matchDonation.status = Number(status)
   }
   if (listDonationId && Array.isArray(listDonationId) && listDonationId.length > 0) {
     const listDonationIdResolved = listDonationId.map(donation => regexp(donation, 'i'))

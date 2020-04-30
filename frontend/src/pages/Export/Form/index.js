@@ -13,6 +13,7 @@ import { LeaderFilter } from './Leader'
 import { FilterForm } from '../../../components/FilterForm'
 import { HeaderWithGoBack } from '../../../components/Header'
 import { Button, ButtonTypes } from '../../../components/Button'
+import { Loader } from '../../../components/Loader'
 
 import { postReport } from '../../../services/API/report'
 import { LeadersList } from '../../../services/API/leaderList'
@@ -51,6 +52,7 @@ function ExportForm({ store, dispatch }) {
   const [initialDate, setInitialDate] = useState('')
   const [leader, setLeader] = useState('')
   const [donations, setDonations] = useState([])
+  const [loading, setLoading] = useState(false)
 
   async function getSitesList() {
     setIsLoading(true)
@@ -224,8 +226,10 @@ function ExportForm({ store, dispatch }) {
     return request
   }
 
-  function handleSubmit() {
-    postReport(dispatch, setRequest(), setType())
+  async function handleSubmit() {
+    setLoading(true)
+    await postReport(dispatch, setRequest(), setType())
+    setLoading(false)
     navigateToExportList()
   }
 
@@ -243,20 +247,23 @@ function ExportForm({ store, dispatch }) {
   }
 
   return (
-    <div className="exportForm-container">
-      <div>
-        <HeaderWithGoBack onGoBackClick={handleGoBack} title={filter} message={selected} />
-        {renderFilterComponent()}
+    <>
+      {loading && <Loader />}
+      <div className="exportForm-container">
+        <div>
+          <HeaderWithGoBack onGoBackClick={handleGoBack} title={filter} message={selected} />
+          {renderFilterComponent()}
+        </div>
+        <div className="exportForm-footer">
+          <Button
+            size={ButtonTypes.LARGE}
+            message={exportFirstLetterCapitalized}
+            handleClick={handleSubmit}
+            disable={selected === unit || selected === leaderStr ? false : enableButton()}
+          />
+        </div>
       </div>
-      <div className="exportForm-footer">
-        <Button
-          size={ButtonTypes.LARGE}
-          message={exportFirstLetterCapitalized}
-          handleClick={handleSubmit}
-          disable={selected === unit || selected === leaderStr ? false : enableButton()}
-        />
-      </div>
-    </div>
+    </>
   )
 }
 

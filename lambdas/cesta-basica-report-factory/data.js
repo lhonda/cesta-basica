@@ -29,10 +29,10 @@ async function voucherData ({
     user ? matchDonation.leaderLogin = user.login : matchDonation.leaderLogin = undefined
   }
   if (siteId) {
-    matchDonation.siteId = Numner(siteId)
+    matchDonation.siteId = Number(siteId)
   }
   if (status) {
-    matchDonation.status = Numner(status)
+    matchDonation.status = Number(status)
   }
   if (listDonationId) {
     if (!Array.isArray(listDonationId)) {

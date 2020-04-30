@@ -11,6 +11,7 @@ const schema = new Schema({
     default: new Date()
   },
   details: String,
+  owner: String,
   url: String
 })
 

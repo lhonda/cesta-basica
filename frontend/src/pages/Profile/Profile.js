@@ -14,16 +14,14 @@ function Profile({ dispatch, store, history }) {
     history.push('/login')
   }
   const { user } = store
-
   const isAdmin = () => user.role === 'admin'
-
   return (
     <>
       <div className="profileHeader">
         <Header title={profile} />
       </div>
       <div className="containerUser">
-        <h2>Fulano Admin da Silva</h2>
+        <h2>{user.name}</h2>
         <p>{user.login}</p>
         <p>{user.email}</p>
       </div>
@@ -52,6 +50,7 @@ Profile.propTypes = {
   store: PropTypes.shape({
     user: PropTypes.shape({
       id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
       login: PropTypes.string.isRequired,
       role: PropTypes.string.isRequired,
       email: PropTypes.string.isRequired,

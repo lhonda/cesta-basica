@@ -16,14 +16,15 @@ const entityMapper = {
 let conn;
 
 exports.handler = async (event, context) => {
-  const { entity, filters } = JSON.parse(event)
+  const { entity, filters, name } = JSON.parse(event)
   let report;
   try {
     conn = await getConnection(conn, context)
 
     report = await Report.create({
       status: 1,
-      details: `Relatório de ${entityMapper[entity]}`
+      details: `Relatório de ${entityMapper[entity]}`,
+      owner: name
     })
 
     const parsedFilters = getFilter(entity, filters)

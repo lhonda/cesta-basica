@@ -11,6 +11,10 @@
     justify-content: space-between;
     align-items: center;
 
+    span {
+      width: 20rem;
+    }
+
     &__icon {
       height: 1rem;
       width: 1rem;
@@ -18,11 +22,11 @@
   }
 
   &__detailsRow2 {
-    margin: 0.5rem 0 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
     color: #919090;
+    margin: 0.5rem 0 0;
 
     &__date {
       color: #C7C7C7;

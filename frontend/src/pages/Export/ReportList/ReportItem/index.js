@@ -10,10 +10,11 @@ import './style.scss'
 import { icDelete } from '../../../../assets/icons'
 
 const ReportItem = ({ id, details, statusText, timestamp, url, deleteItem }) => {
+  const openItem = () => url && handleRedirectSymptoms(url)
   return (
-    <div className="reportItem" onClick={() => url && handleRedirectSymptoms(url)}>
+    <div className="reportItem">
       <div className="reportItem__detailsRow1">
-        <span>{details}</span>
+        <span onClick={() => openItem()}>{details}</span>
         <img
           className="reportItem__detailsRow1__icon"
           src={icDelete}
@@ -22,7 +23,7 @@ const ReportItem = ({ id, details, statusText, timestamp, url, deleteItem }) => 
           onClick={() => deleteItem(id)}
         />
       </div>
-      <div className="reportItem__detailsRow2">
+      <div className="reportItem__detailsRow2" onClick={() => openItem()}>
         <span>{statusText}</span>
         <span className="reportItem__detailsRow2__date">{formatDate(timestamp)}</span>
       </div>
@@ -36,6 +37,7 @@ ReportItem.propTypes = {
   statusText: PropTypes.string.isRequired,
   timestamp: PropTypes.string.isRequired,
   url: PropTypes.string,
+  deleteItem: PropTypes.func.isRequired,
 }
 
 ReportItem.defaultProps = {

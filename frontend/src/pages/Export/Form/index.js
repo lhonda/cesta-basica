@@ -248,12 +248,12 @@ function ExportForm({ store, dispatch }) {
         <HeaderWithGoBack onGoBackClick={handleGoBack} title={filter} message={selected} />
         {renderFilterComponent()}
       </div>
-      <div>
+      <div className="exportForm-footer">
         <Button
           size={ButtonTypes.LARGE}
           message={exportFirstLetterCapitalized}
           handleClick={handleSubmit}
-          disable={enableButton()}
+          disable={selected === unit || selected === leaderStr ? false : enableButton()}
         />
       </div>
     </div>

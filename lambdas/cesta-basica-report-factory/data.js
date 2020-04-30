@@ -32,7 +32,7 @@ async function voucherData ({
     matchDonation.siteId = siteId
   }
   if (status) {
-    matchVoucher.push({ $eq: [ "$status", status ] })
+    matchDonation.status = status
   }
   if (listDonationId) {
     if (!Array.isArray(listDonationId)) {

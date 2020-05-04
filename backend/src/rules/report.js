@@ -12,6 +12,7 @@ export async function listReports () {
       statusText: statusesReport[r.status],
       timestamp: r.timestamp,
       details: r.details,
+      owner: r.owner,
       url: r.url
     }
   ))

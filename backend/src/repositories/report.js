@@ -7,12 +7,16 @@ const schema = new Schema({
     required: true
   },
   timestamp: {
-    type: Date,
-    default: new Date()
+    type: Date
   },
   details: String,
   owner: String,
   url: String
+})
+
+schema.pre('save', function (next) {
+  this.timestamp = new Date()
+  next()
 })
 
 export const Report = model('Report', schema)

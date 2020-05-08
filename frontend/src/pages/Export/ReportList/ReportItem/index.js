@@ -5,11 +5,16 @@ import { connect } from '../../../../store'
 import { formatDate } from '../../../../utils/formatDateToptbr'
 import { handleRedirectSymptoms } from '../../../../services/handles'
 
-import './style.scss'
-
 import { icDelete } from '../../../../assets/icons'
 
-const ReportItem = ({ id, details, statusText, timestamp, url, deleteItem }) => {
+import { formatHour } from '../../../../utils/formatHour'
+
+import './style.scss'
+
+const ReportItem = ({ id, details, statusText, timestamp, url, owner, deleteItem }) => {
+  if (owner) {
+    var firstName = owner.split(' ', 1)
+  }
   const openItem = () => url && handleRedirectSymptoms(url)
   return (
     <div className="reportItem">
@@ -26,6 +31,15 @@ const ReportItem = ({ id, details, statusText, timestamp, url, deleteItem }) => 
       <div className="reportItem__detailsRow2" onClick={() => openItem()}>
         <span>{statusText}</span>
         <span className="reportItem__detailsRow2__date">{formatDate(timestamp)}</span>
+      </div>
+      <div className="reportItem__detailsRow3" onClick={() => openItem()}>
+        {owner && (
+          <>
+            <span>Gerado por: {firstName}</span>
+          </>
+        )}
+        <span></span>
+        <span>{formatHour(timestamp)}</span>
       </div>
     </div>
   )

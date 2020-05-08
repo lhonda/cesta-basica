@@ -3,18 +3,20 @@ import PropTypes from 'prop-types'
 import { useHistory, useRouteMatch } from 'react-router-dom'
 import './style.scss'
 
-import { exportListTitle, newExport } from '../../../utils/strings'
+import { exportListTitle, newExport, messageDeleteItemSuccess, messageDeleteItemFailure } from '../../../utils/strings'
+
+import { showSuccessAlert, showFailureAlert } from '../../../utils/showAlert'
 
 import { Header } from '../../../components/Header/Header'
 import { Loader } from '../../../components/Loader'
 import { BottomMenu } from '../../../components/BottomMenu'
 import { Button, ButtonTypes } from '../../../components/Button'
 
-import { ReportItem } from './ReportItem'
+import ReportItem from './ReportItem'
 import { ReportIsVoid } from './ReportIsVoid'
 
 import { connect, types } from '../../../store'
-import { getReportList } from '../../../services/API/report'
+import { getReportList, deleteReport } from '../../../services/API/report'
 
 function ReportList({ store: { reportList }, dispatch }) {
   const { push } = useHistory()
@@ -23,6 +25,7 @@ function ReportList({ store: { reportList }, dispatch }) {
   async function getReports() {
     setLoading(true)
     const { status, data } = await getReportList()
+
     if (status === 200) {
       dispatch({ type: types.SET_REPORT_LIST, payload: data })
     }
@@ -33,6 +36,20 @@ function ReportList({ store: { reportList }, dispatch }) {
   useEffect(() => {
     getReports()
   }, [])
+
+  async function deleteItem(id) {
+    const { status } = await deleteReport(id)
+    if (status === 204) {
+      showSuccessAlert(dispatch, messageDeleteItemSuccess)
+      const { data } = await getReportList()
+      dispatch({ type: types.SET_REPORT_LIST, payload: data })
+    } else {
+      showFailureAlert(dispatch, messageDeleteItemFailure)
+    }
+  }
+
+  console.log(reportList)
+
   return (
     <>
       {loading && <Loader />}
@@ -41,9 +58,9 @@ function ReportList({ store: { reportList }, dispatch }) {
           <Header title={exportListTitle} />
         </div>
         <div className="containerExportList__reportList">
-          {!loading ? (
-            reportList.map(({ details, statusText, timestamp, url }) => (
-              <ReportItem key={`${Math.random()}`} {...{ details, statusText, timestamp, url }} />
+          {!loading && reportList.length > 0 ? (
+            reportList.map(({ id, details, statusText, timestamp, url, owner }) => (
+              <ReportItem key={id} {...{ id, details, statusText, timestamp, url, owner }} deleteItem={deleteItem} />
             ))
           ) : (
             <ReportIsVoid />

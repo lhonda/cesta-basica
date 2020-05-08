@@ -1,8 +1,12 @@
 const mongoose = require('mongoose')
 const AWS = require('aws-sdk')
+
+const { getConnection } = require('./repository_handler')
+
 AWS.config.region = 'us-east-1'
 const lambda = new AWS.Lambda()
 
+let conn;
 const ReportModel = require('./report_model')
 
 async function hasProcessingReports(Report) {
@@ -18,14 +22,15 @@ function validateEvent(event) {
   return body && body.filters && ['voucher', 'user', 'donation', 'site'].includes(body.entity)
 }
 
-exports.handler = async event => {
+exports.handler = async (event, context) => {
   if (!validateEvent(event)) {
     console.error(new Error(`Bad Request: ${JSON.stringify(event.body)}`))
     return { statusCode: 400 }
   }
   const { body } = event
+
   try {
-    await mongoose.connect(process.env.DB_URL, { useNewUrlParser: true , useUnifiedTopology: true })
+    conn = await getConnection(conn, context)
 
     if (await hasProcessingReports(ReportModel)) return { statusCode: 409 }
 

@@ -2,17 +2,22 @@
   font-family: Rubik;
   height: calc(100vh - 12.8rem);
   &__title {
-    padding: 2.12rem 1rem 1rem;
+    padding: 0.8rem 1.2rem 0px;
   }
 
   &__reportList {
     overflow: scroll;
-    padding: 0.5rem 1rem 0;
-    height: calc(100vh - 12.8rem - 1rem);
+    padding: 1rem 1rem 0;
+    height: calc(100vh - 12.8rem - 0.4rem);
     width: 100%;
     box-sizing: border-box;
   }
+
   &__button {
-    padding: 0.5rem 1rem;
+    bottom: 5rem;
+    box-sizing: border-box;
+    padding: 0 1.4rem;
+    position: fixed;
+    width: 100%;
   }
 }

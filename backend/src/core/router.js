@@ -27,7 +27,8 @@ import {
   updateUser,
   filterDonation,
   listReports,
-  createReport
+  createReport,
+  deleteReport
 } from '../rules'
 
 export const router = Router()
@@ -227,22 +228,27 @@ router.get('/reports', authRequired('admin'), (req, res, next) =>
     .then(processResult => res.status(200).json(processResult))
     .catch(next))
 
-router.post('/reports/donation',authRequired('admin'), (req, res, next) =>
-  createReport('donation', req.body)
+router.post('/reports/donation', authRequired('admin'), (req, res, next) =>
+  createReport('donation', req.body, req.auth.login)
     .then(result => res.status(result.status).send())
     .catch())
 
 router.post('/reports/voucher', authRequired('admin'), (req, res, next) =>
-  createReport('voucher', req.body)
+  createReport('voucher', req.body, req.auth.login)
     .then(result => res.status(result.status).send())
     .catch())
 
 router.post('/reports/users', authRequired('admin'), (req, res, next) =>
-  createReport('user', req.body)
+  createReport('user', req.body, req.auth.login)
     .then(result => res.status(result.status).send())
     .catch())
 
 router.post('/reports/sites', authRequired('admin'), (req, res, next) =>
-  createReport('site', req.body)
+  createReport('site', req.body, req.auth.login)
     .then(result => res.status(result.status).send())
     .catch())
+
+router.delete('/report/:id', authRequired('admin'), (req, res, next) =>
+  deleteReport(req.params.id)
+    .then(() => res.status(204).send())
+    .catch(next))

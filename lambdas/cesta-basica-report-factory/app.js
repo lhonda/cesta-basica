@@ -1,20 +1,30 @@
 const mongoose = require('mongoose')
 const { Report } = require('./models')
 const { uploadReport } = require('./s3')
+const { getConnection } = require('./utils')
 const getFilter = require('./filter')
 const dataFilter = require('./data')
 const transform = require('./transform')
 
-exports.handler = async (event) => {
-  console.log(event, typeof event)
-  const { entity, filters } = JSON.parse(event)
+const entityMapper = {
+  voucher: "Cartão",
+  user: "Líder",
+  site: "Entidade",
+  donation: "Borderô"
+}
+
+let conn;
+
+exports.handler = async (event, context) => {
+  const { entity, filters, name } = JSON.parse(event)
   let report;
   try {
-    await mongoose.connect(process.env.DB_URL, { useNewUrlParser: true , useUnifiedTopology: true })
+    conn = await getConnection(conn, context)
 
     report = await Report.create({
       status: 1,
-      details: `Relatório da entidade: ${entity}`
+      details: `Relatório de ${entityMapper[entity]}`,
+      owner: name
     })
 
     const parsedFilters = getFilter(entity, filters)

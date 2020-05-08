@@ -1,4 +1,4 @@
-const { model, modelNames, Schema } = require('mongoose')
+const { model, models, Schema } = require('mongoose')
 
 const schema = new Schema({
   status: {
@@ -7,11 +7,16 @@ const schema = new Schema({
     required: true
   },
   timestamp: {
-    type: Date,
-    default: new Date()
+    type: Date
   },
   details: String,
+  owner: String,
   url: String
 })
 
-module.exports =!modelNames().includes('Report') ? model('Report', schema) : model('Report')
+schema.pre('save', function (next) {
+  this.timestamp = new Date()
+  next()
+})
+
+module.exports = models.Report || model('Report', schema)

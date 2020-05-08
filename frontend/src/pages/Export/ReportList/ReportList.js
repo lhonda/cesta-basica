@@ -48,6 +48,8 @@ function ReportList({ store: { reportList }, dispatch }) {
     }
   }
 
+  console.log(reportList)
+
   return (
     <>
       {loading && <Loader />}
@@ -57,8 +59,8 @@ function ReportList({ store: { reportList }, dispatch }) {
         </div>
         <div className="containerExportList__reportList">
           {!loading && reportList.length > 0 ? (
-            reportList.map(({ id, details, statusText, timestamp, url }) => (
-              <ReportItem key={id} {...{ id, details, statusText, timestamp, url }} deleteItem={deleteItem} />
+            reportList.map(({ id, details, statusText, timestamp, url, owner }) => (
+              <ReportItem key={id} {...{ id, details, statusText, timestamp, url, owner }} deleteItem={deleteItem} />
             ))
           ) : (
             <ReportIsVoid />

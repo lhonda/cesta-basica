@@ -9,8 +9,8 @@ const transform = require('./transform')
 const entityMapper = {
   voucher: "Cartão",
   user: "Líder",
-  site: "Entidade",
-  donation: "Borderô"
+  site: "Unidade",
+  donation: "Pacote"
 }
 
 let conn;

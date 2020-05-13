@@ -11,7 +11,8 @@ const schema = new Schema({
   },
   details: String,
   owner: String,
-  url: String
+  url: String,
+  key: String
 })
 
 schema.pre('save', function (next) {

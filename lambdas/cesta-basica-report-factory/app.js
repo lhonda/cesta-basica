@@ -9,8 +9,8 @@ const transform = require('./transform')
 const entityMapper = {
   voucher: "Cartão",
   user: "Líder",
-  site: "Entidade",
-  donation: "Borderô"
+  site: "Unidade",
+  donation: "Pacote"
 }
 
 let conn;
@@ -34,7 +34,7 @@ exports.handler = async (event, context) => {
       const response = await uploadReport(entity, transform(data, entity))
       await Report.updateOne({ _id: report._id }, {
         status: 2,
-        url: response.Location
+        url: response.Location.replace(/%3A/g, ":")
       })
     } else {
       console.error(new Error(`Data from ${entity} report returned ${data.length} results. Filters: ${JSON.stringify(filters)}`))

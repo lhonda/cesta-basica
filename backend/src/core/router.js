@@ -28,7 +28,8 @@ import {
   filterDonation,
   listReports,
   createReport,
-  deleteReport
+  deleteReport,
+  getReport
 } from '../rules'
 
 export const router = Router()
@@ -251,4 +252,9 @@ router.post('/reports/sites', authRequired('admin'), (req, res, next) =>
 router.delete('/report/:id', authRequired('admin'), (req, res, next) =>
   deleteReport(req.params.id)
     .then(() => res.status(204).send())
+    .catch(next))
+
+router.get('/reports/:id', authRequired('admin'), (req, res, next) =>
+  getReport(req.params)
+    .then(result => res.status(result.status).send(result))
     .catch(next))

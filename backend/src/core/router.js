@@ -254,17 +254,17 @@ router.delete('/report/:id', authRequired('admin'), (req, res, next) =>
     .then(() => res.status(204).send())
     .catch(next))
 
-router.post('/report/:id/url', authRequired('admin'), (req, res, next) =>
+router.get('/report/:id/url', authRequired('admin'), (req, res, next) =>
   createSignedUrl('report', req.params.id)
     .then((data) => res.status(200).json(data))
     .catch(next))
 
-router.post('/donation/:id/url', authRequired('admin'), (req, res, next) =>
+router.get('/donation/:id/url', authRequired('admin'), (req, res, next) =>
   createSignedUrl('donation', req.params.id)
     .then((data) => res.status(200).json(data))
     .catch(next))
 
-router.post('/voucher/:id/url', authRequired('admin'), (req, res, next) =>
+router.get('/voucher/:id/url', authRequired('admin'), (req, res, next) =>
   createSignedUrl('voucher', req.params.id)
     .then((data) => res.status(200).json(data))
     .catch(next))

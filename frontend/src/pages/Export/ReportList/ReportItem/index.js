@@ -4,6 +4,7 @@ import { connect } from '../../../../store'
 
 import { formatDate } from '../../../../utils/formatDateToptbr'
 import { handleRedirectSymptoms } from '../../../../services/handles'
+import { openUrlReportById } from '../../../../services/API/report'
 
 import { icDelete } from '../../../../assets/icons'
 
@@ -15,7 +16,7 @@ const ReportItem = ({ id, details, statusText, timestamp, url, owner, deleteItem
   if (owner) {
     var firstName = owner.split(' ', 1)
   }
-  const openItem = () => url && handleRedirectSymptoms(url)
+  const openItem = () => url && openUrlReportById(id)
   return (
     <div className="reportItem">
       <div className="reportItem__detailsRow1">

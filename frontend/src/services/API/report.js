@@ -10,6 +10,15 @@ export async function getReportList() {
   }
 }
 
+export async function openUrlReportById(id) {
+  try {
+    const { data } = await Api.get(`report/${id}/url`)
+    window.open(data.url, '_blank')
+  } catch (err) {
+    console.log('err: ', err)
+  }
+}
+
 export async function postReport(dispatch, request, type) {
   try {
     await Api.post(`${rootRoute}/${type}`, request)

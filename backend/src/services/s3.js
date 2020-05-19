@@ -14,3 +14,11 @@ export function remove (Key) {
     Key
   }).promise()
 }
+
+export function signInUrl (Key) {
+  return new S3().getSignedUrl('getObject', {
+    Bucket: process.env.BUCKET_NAME,
+    Key,
+    Expires: 60 * 60 * 24
+  })
+}

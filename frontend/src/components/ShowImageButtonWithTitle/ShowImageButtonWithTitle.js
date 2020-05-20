@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Switch, useLocation, useRouteMatch, useHistory } from 'react-router-dom'
+import { useRouteMatch } from 'react-router-dom'
 
 import PropTypes from 'prop-types'
 import { openUrlDonationById, openUrlVoucherById } from '../../services/API/donationList'

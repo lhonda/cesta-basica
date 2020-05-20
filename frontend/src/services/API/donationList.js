@@ -102,3 +102,21 @@ export async function FilteredDonationList(dispatch, filters = {}) {
     showFailureAlert(dispatch, err.response.data.message)
   }
 }
+
+export async function openUrlDonationById(id) {
+  try {
+    const { data } = await Api.get(`donation/${id}/url`)
+    window.open(data.url, '_blank')
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+export async function openUrlVoucherById(id) {
+  try {
+    const { data } = await Api.get(`voucher/${id}/url`)
+    window.open(data.url, '_blank')
+  } catch (err) {
+    console.log(err)
+  }
+}

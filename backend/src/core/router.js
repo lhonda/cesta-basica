@@ -28,7 +28,8 @@ import {
   filterDonation,
   listReports,
   createReport,
-  deleteReport
+  deleteReport,
+  createSignedUrl
 } from '../rules'
 
 export const router = Router()
@@ -251,4 +252,19 @@ router.post('/reports/sites', authRequired('admin'), (req, res, next) =>
 router.delete('/report/:id', authRequired('admin'), (req, res, next) =>
   deleteReport(req.params.id)
     .then(() => res.status(204).send())
+    .catch(next))
+
+router.get('/report/:id/url', authRequired('admin'), (req, res, next) =>
+  createSignedUrl('report', req.params.id)
+    .then((data) => res.status(200).json(data))
+    .catch(next))
+
+router.get('/donation/:id/url', authRequired('admin'), (req, res, next) =>
+  createSignedUrl('donation', req.params.id)
+    .then((data) => res.status(200).json(data))
+    .catch(next))
+
+router.get('/voucher/:id/url', authRequired('admin'), (req, res, next) =>
+  createSignedUrl('voucher', req.params.id)
+    .then((data) => res.status(200).json(data))
     .catch(next))

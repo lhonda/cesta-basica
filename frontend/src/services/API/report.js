@@ -15,7 +15,7 @@ export async function openUrlReportById(id) {
     const { data } = await Api.get(`report/${id}/url`)
     window.open(data.url, '_blank')
   } catch (err) {
-    console.log('err: ', err)
+    console.log(err)
   }
 }
 

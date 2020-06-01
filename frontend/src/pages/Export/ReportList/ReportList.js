@@ -48,8 +48,6 @@ function ReportList({ store: { reportList }, dispatch }) {
     }
   }
 
-  console.log(reportList)
-
   return (
     <>
       {loading && <Loader />}

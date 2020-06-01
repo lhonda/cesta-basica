@@ -35,7 +35,8 @@ function DeliveredDetail({ store, history, match }) {
     leaderComment,
     receivedContactNumber,
   } = getDataByVoucher(cardList)
-  const { publicPhotoUrl } = getDataByVoucher(vouchers)
+
+  const { voucherId } = getDataByVoucher(vouchers)
   return (
     <div className="containerDonationDetails">
       <HeaderWithGoBack title={voucher} onGoBackClick={goBack} />
@@ -44,7 +45,7 @@ function DeliveredDetail({ store, history, match }) {
         <Delivered
           recipientName={receivedName}
           recipientCPF={receivedCpf}
-          linkToImage={publicPhotoUrl}
+          linkToImage={voucherId}
           receivedContactNumber={receivedContactNumber}
         />
       ) : (

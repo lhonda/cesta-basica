@@ -19,6 +19,7 @@
     "load-data-mock-leader-only": "node -r esm src/load-data/mock-leader-only.js",
     "load-data-mock-leader-plus-donation-no-voucher": "node -r esm src/load-data/mock-leader-plus-donation-no-voucher.js",
     "load-data-mock-admin": "node -r esm src/load-data/mock-admin.js",
+    "load-data-new-admin": "node -r esm src/load-data/new-admin.js",
     "data-sanitize-missing-leading-zeros": "node -r esm src/load-data/sanitize-missing-leading-zeros.js",
     "data-sanitize-trailling-spaces": "node -r esm src/load-data/sanitize-trailling-spaces.js",
     "transfer-donation-to-another-leader": "node -r esm src/load-data/transfer-donation-to-another-leader.js",

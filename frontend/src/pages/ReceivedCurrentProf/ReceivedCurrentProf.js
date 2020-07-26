@@ -32,6 +32,7 @@ import {
   legendInputCardDeliveryStatus,
   placeHolderDigitYourNumberPhone,
   placeHolderNotDeliveredComment,
+  placeHolderDigitYourEmail,
 } from '../../utils/strings'
 
 import * as analytics from '../../services/analytics'
@@ -42,6 +43,7 @@ function ReceivedCurrentProfPage({ store, dispatch }) {
   const [fullName, setFullName] = useState('')
   const [comment, setComment] = useState('')
   const [phoneNumber, setPhoneNumber] = useState('')
+  const [email, setEmail] = useState('')
   const [CPF, setCPF] = useState('')
   const [image, setImage] = useState()
   const [delivered, setDelivered] = useState(false)
@@ -49,11 +51,12 @@ function ReceivedCurrentProfPage({ store, dispatch }) {
   const donationInfo = store.cardList.find((item) => item.voucherId === voucher)
 
   function isDelivered() {
-    const { status, receivedName, receivedCpf, receivedContactNumber, leaderComment } = donationInfo
+    const { status, receivedName, receivedCpf, receivedContactNumber, leaderComment, receivedEmail } = donationInfo
     if (status === 2) {
       setFullName(receivedName || '')
       setCPF(receivedCpf || '')
       setPhoneNumber(receivedContactNumber || '')
+      setEmail(receivedEmail || '')
       return setDelivered('true')
     }
     if (status === 3) {
@@ -73,6 +76,8 @@ function ReceivedCurrentProfPage({ store, dispatch }) {
     if (value === 'false') {
       setFullName('')
       setCPF('')
+      setPhoneNumber('')
+      setEmail('')
     }
   }
 
@@ -101,13 +106,15 @@ function ReceivedCurrentProfPage({ store, dispatch }) {
     e.preventDefault()
     setLoading(true)
     const clearCpf = CPF.replace(/\./g, '').replace(/-/g, '')
-    const data = { id, voucher, delivered, CPF: clearCpf, fullName, image, comment, phoneNumber }
+    const data = { id, voucher, delivered, CPF: clearCpf, fullName, image, comment, phoneNumber, email }
 
     if (delivered === 'false') {
       const cleanDataUserDonation = { ...donationInfo }
       cleanDataUserDonation.receivedCpf = ''
       cleanDataUserDonation.delivered = ''
       cleanDataUserDonation.receivedName = ''
+      cleanDataUserDonation.receivedContactNumber = ''
+      cleanDataUserDonation.receivedEmail = ''
 
       const cleanCard = store.cardList.filter((card) => card.voucherId !== donationInfo.voucherId)
 
@@ -115,6 +122,7 @@ function ReceivedCurrentProfPage({ store, dispatch }) {
 
       dispatch({ type: types.SET_CARD_LIST, payload: newCardList })
     }
+
     const updateDonate = await DonationVoucher(data, store)
     if (updateDonate) {
       dispatch({
@@ -201,6 +209,16 @@ function ReceivedCurrentProfPage({ store, dispatch }) {
                   value={phoneNumber}
                   isRequired={false}
                   handleOnChange={setPhoneNumber}
+                />
+
+                <Input
+                  placeholder={placeHolderDigitYourEmail}
+                  inputType={inputTypes.EMAIL}
+                  minLength="5"
+                  maxLength="120"
+                  value={email}
+                  isRequired={false}
+                  handleOnChange={setEmail}
                 />
 
                 <Input

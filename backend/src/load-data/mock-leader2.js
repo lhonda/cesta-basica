@@ -2,6 +2,7 @@ import { config } from 'dotenv'
 import { connect, disconnect } from '../core/database'
 import { User, Donation, Voucher } from '../repositories'
 import { random } from '../services'
+import { encrypt } from '../services/encrypt';
 
 if (require.main === module) {
   (async function () {
@@ -12,7 +13,7 @@ if (require.main === module) {
       const timestamp = new Date()
 
       const login = process.argv.pop()
-      const password = '12345678'
+      const password = encrypt('12345678')
       const email = `mock-${login}@teste.com`
       const role = 'leader'
 

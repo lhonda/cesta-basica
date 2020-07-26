@@ -53,6 +53,7 @@ export async function detailsDonation ({ donationId }) {
     receivedCpf,
     receivedName,
     receivedContactNumber,
+    receivedEmail,
     leaderComment,
     cardDonatedS3Key
   }) => {
@@ -61,6 +62,7 @@ export async function detailsDonation ({ donationId }) {
       receivedCpf,
       receivedName,
       receivedContactNumber,
+      receivedEmail,
       leaderComment,
       publicPhotoUrl: cardDonatedS3Key ? `https://${process.env.BUCKET_NAME}.s3.amazonaws.com/${cardDonatedS3Key}` : null
     }

@@ -21,6 +21,7 @@ export async function findVouchersByLeader (login, donationId) {
     receivedCpf,
     receivedName,
     receivedContactNumber,
+    receivedEmail,
     point,
     status
   }) => ({
@@ -34,6 +35,7 @@ export async function findVouchersByLeader (login, donationId) {
     receivedCpf,
     receivedName,
     receivedContactNumber,
+    receivedEmail,
     point,
     status,
     statusText: statusesVoucher[status]

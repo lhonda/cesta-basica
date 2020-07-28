@@ -34,6 +34,9 @@ const voucherSchema = new Schema({
   receivedContactNumber: {
     type: String
   },
+  receivedEmail: {
+    type: String
+  },
   cardDonatedS3Key: {
     type: String
   },

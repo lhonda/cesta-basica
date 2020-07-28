@@ -158,6 +158,7 @@ export const completeName = 'Nome<br/> Completo'
 export const deliveredPhoto = 'Foto<br/> da entrega'
 export const commentLeader = 'Comentário do lider'
 export const deliveredCellphone = 'DDD + Telefone'
+export const deliveredEmail = 'Email'
 
 // updateEmail
 export const titleUpdateEmail = 'Atualizar E-mail'
@@ -207,6 +208,7 @@ export const notDeliveredFirstLetterCapitalized = 'Não entregue'
 export const donationRegisterSuccessMessage = 'Doação cadastrada com sucesso'
 export const donationFilterSuccessMessage = 'Doações filtradas com sucesso'
 export const placeHolderDigitYourNumberPhone = 'Digite telefone'
+export const placeHolderDigitYourEmail = 'Digite seu e-mail'
 export const placeHolderNotDeliveredComment = 'Comentário sobre a não entrega'
 
 // Profile

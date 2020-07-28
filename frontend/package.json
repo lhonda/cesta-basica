@@ -16,6 +16,7 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1"
   },
+  "proxy": "http://localhost:3333/",
   "scripts": {
     "start": "react-scripts start",
     "dev": "react-scripts start --env.REACT_APP_APIHOST=https://dev-cesta-basica-covid.herokuapp.com/",

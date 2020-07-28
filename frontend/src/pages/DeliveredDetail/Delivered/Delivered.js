@@ -1,12 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { completeName, CPF, deliveredPhoto, deliveredCellphone } from '../../../utils/strings'
+import { completeName, CPF, deliveredPhoto, deliveredCellphone, deliveredEmail } from '../../../utils/strings'
 
 import { maskToCpf, maskToTelephone } from '../../../utils/masksInput'
 import { ShowImageButtonWithTitle } from '../../../components/ShowImageButtonWithTitle'
 
-export const Delivered = ({ recipientName, recipientCPF, linkToImage, receivedContactNumber }) => (
+export const Delivered = ({ recipientName, recipientCPF, linkToImage, receivedContactNumber, receivedEmail }) => (
   <>
     <div className="containerDonationDetails__delivered--mt containerDonationDetails__delivered--left">
       <div className="containerDonationDetails__delivered__title" dangerouslySetInnerHTML={{ __html: completeName }} />
@@ -24,6 +24,13 @@ export const Delivered = ({ recipientName, recipientCPF, linkToImage, receivedCo
       <div className="containerDonationDetails__delivered--mt containerDonationDetails__delivered--left">
         <div className="containerDonationDetails__delivered__title">{deliveredCellphone}</div>
         <div className="containerDonationDetails__delivered__value">{maskToTelephone(receivedContactNumber)}</div>
+      </div>
+    )}
+
+    {receivedEmail && (
+      <div className="containerDonationDetails__delivered--mt containerDonationDetails__delivered--left">
+        <div className="containerDonationDetails__delivered__title">{deliveredEmail}</div>
+        <div className="containerDonationDetails__delivered__value">{receivedEmail}</div>
       </div>
     )}
 

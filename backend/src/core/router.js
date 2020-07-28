@@ -107,6 +107,7 @@ router.post('/donations/:donationId/donate', authRequired('leader'), (req, res, 
     receivedCpf: req.body.receivedCpf,
     receivedName: req.body.receivedName,
     receivedContactNumber: req.body.receivedContactNumber,
+    receivedEmail: req.body.receivedEmail,
     donateDonationFile: req.files ? req.files.donateDonationFile : undefined
   })
     .then(() => res.status(204).end())

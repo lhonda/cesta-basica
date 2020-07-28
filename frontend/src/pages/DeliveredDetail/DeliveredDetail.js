@@ -34,6 +34,7 @@ function DeliveredDetail({ store, history, match }) {
     status,
     leaderComment,
     receivedContactNumber,
+    receivedEmail
   } = getDataByVoucher(cardList)
 
   const { voucherId } = getDataByVoucher(vouchers)
@@ -47,6 +48,7 @@ function DeliveredDetail({ store, history, match }) {
           recipientCPF={receivedCpf}
           linkToImage={voucherId}
           receivedContactNumber={receivedContactNumber}
+          receivedEmail={receivedEmail}
         />
       ) : (
         <Undeliverable comment={leaderComment} />

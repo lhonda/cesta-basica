@@ -1,5 +1,6 @@
 import * as random from './random'
-export * from './s3'
+import * as S3 from './s3'
+export { S3 }
 export { encrypt } from './encrypt'
 export { validateLogin } from './validateLogin'
 export { random }

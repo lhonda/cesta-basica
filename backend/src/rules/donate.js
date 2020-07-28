@@ -11,6 +11,7 @@ export async function donate ({
   receivedCpf,
   receivedName,
   receivedContactNumber,
+  receivedEmail,
   leaderComment,
   donateDonationFile
 }) {
@@ -107,6 +108,7 @@ export async function donate ({
   voucher.status = 2
   voucher.receivedName = receivedName
   voucher.receivedContactNumber = receivedContactNumber
+  voucher.receivedEmail = receivedEmail
   voucher.delivered = timestamp
   voucher.cardDonatedS3Key = key
   voucher.point = {

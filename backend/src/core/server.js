@@ -6,6 +6,7 @@ import morgan from 'morgan'
 import { genericErrorHanlder } from '../middlewares'
 import { router } from './router'
 
+const serverless = require('serverless-http');
 export const app = express()
 
 app.use(express.json())
@@ -17,5 +18,7 @@ app.use(cors())
 app.use(router)
 app.use(genericErrorHanlder)
 
-export const start = () =>
-  new Promise(resolve => app.listen(process.env.PORT, () => resolve(app)))
+// export const start = () =>
+//   new Promise(resolve => app.listen(process.env.PORT, () => resolve(app)))
+
+module.exports.handler = serverless(app);

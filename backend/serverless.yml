@@ -1,0 +1,142 @@
+provider:
+  name: aws
+  runtime: nodejs12.x
+  memorySize: 512
+  stage: ${opt:stage, 'dev'}
+  region: us-east-1
+  environment:
+    DBURL: ${${self:provider.stage}_DBURL}
+
+  arn: "arn:aws:lambda:us-east-1:069300125612:function:cesta-basica-api"
+
+service: cesta-basica-api
+functions:
+  handler:
+
+  healthCheck:
+    events:
+      - http: get /health-check
+
+  createUser:
+    events:
+      - http: post /users
+
+  signIn:
+    events:
+      - http: post /sign-in
+
+  adminSignIn:
+    events:
+      - http: post /admin/sign-in
+
+  listVouchers:
+    events:
+      - http: get /vouchers
+
+  listDonations:
+    events:
+      - http: get /donations
+
+  receiveDonations:
+    events:
+      - http: post /donations/{donationId}/receive
+
+  donateDonations:
+    events:
+      - http: post /donations/{donationId}/donate
+
+  endDonation:
+    events:
+      - http: post /donations/:donationId/end
+
+  donationDetails:
+    events:
+      - http: get /donations/{donationId}/details
+
+  commitment:
+    events:
+      - http: post /commitment
+
+  deleteEvents:
+    events:
+      - http: delete /events
+
+  checkCommitment:
+    events:
+      - http: get /commitment/check
+
+  checklist:
+    events:
+      - http: get /checklist
+
+  createDonations:
+    events:
+      - http: post /donations
+
+  getLeaders:
+    events:
+      - http: get /leaders
+
+  getSites:
+    events:
+      - http: get /sites
+
+  loadType:
+    events:
+      - http: post /load/{type}
+
+  getLoad:
+    events:
+      - http: get /load
+
+  patchUsers:
+    events:
+      - http: patch /users
+
+  getCityState:
+    events:
+      - http: get /cities/{state}
+
+  getStates:
+    events:
+      - http: get /states
+
+  filterDonation:
+    events:
+      - http: get /filter/donation
+
+  getReports:
+    events:
+      - http: get /reports
+
+  getDonationReports:
+    events:
+      - http: get /reports/donation
+
+  getVouchersReport:
+    events:
+      - http: get /reports/voucher
+
+  getUsersReport:
+    events:
+      - http: get /reports/users
+
+  getSitesReeport:
+    events:
+      - http: get /reports/sites
+
+  deleteReport:
+    events:
+      - http: delete /report/{id}
+
+  getReportURL:
+    events:
+      - http: get /report/{id}/url
+
+  getDonationURL:
+    events:
+      - http: get /donation/{id}/url
+
+  getVoucherURL:
+    events:
+      - http: get /voucher/{id}/url
